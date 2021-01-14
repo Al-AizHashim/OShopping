@@ -28,7 +28,7 @@ class FetchData {
             RetrofitClient().oshoppingApi.fetchProductById(product_id)
         NewsRequest.enqueue(object : Callback<SingleProductResponse> {
             override fun onFailure(call: Call<SingleProductResponse>, t: Throwable) {
-                Log.e("fetchDetailsNews", "Failed to fetch   Details", t)
+                Log.e("fetch Product details", "Failed to fetch product details", t)
             }
 
             override fun onResponse(
@@ -38,8 +38,8 @@ class FetchData {
                 Log.d(TAG, "Response received successfully")
 
                 val singleProductResponse: SingleProductResponse? = response.body()
-                val categoryItems: ProductItem? = singleProductResponse?.productItem
-                responseLiveData.value = categoryItems
+                val productItem: ProductItem? = singleProductResponse?.productItem
+                responseLiveData.value = productItem
 
             }
         })
