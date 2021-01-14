@@ -6,10 +6,18 @@ import android.util.Log
 import com.yemen.oshopping.ui.AddCategoryFragment
 
 private const val TAG = "MainActivity"
-class MainActivity : AppCompatActivity(),AdminScreen.Callbacks {
+class MainActivity : AppCompatActivity(), AdminScreen.Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val fragment = AdminScreen()
+
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
 
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         if (currentFragment == null) {
@@ -21,7 +29,7 @@ class MainActivity : AppCompatActivity(),AdminScreen.Callbacks {
     }
 }
 
-    override fun onCategorySelected(categoryId: Int?) {
+        override fun onCategorySelected(categoryId: Int?) {
         val fragment = AddCategoryFragment()
         supportFragmentManager
             .beginTransaction()

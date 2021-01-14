@@ -21,7 +21,17 @@
         tools:targetApi="n">
 
 
-        <activity android:name=".MainScreen"></activity>
+        <activity android:name=".MainScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".uploadImage.UploadImageActivity">
+
+        </activity>
 
 
         <provider
@@ -35,23 +45,11 @@
         </provider>
 
 
-        <activity android:name=".addProduct" />
+        <activity android:name=".AddProduct" />
         <activity android:name=".MainActivity">
 
         </activity>
 
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".captureImage"
-            android:icon="@drawable/back"
-            android:label="@string/AddNewProduct" />
 
         <activity android:name=".SignUpOptions" />
         <activity android:name=".LoginScreen" />
@@ -59,9 +57,8 @@
         <activity android:name=".SignUp" />
 
         <activity android:name=".SplashScreen" />
-
-
-
     </application>
 
-</manifest>
+
+    </manifest>
+

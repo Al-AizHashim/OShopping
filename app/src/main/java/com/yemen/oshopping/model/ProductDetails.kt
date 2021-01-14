@@ -10,8 +10,8 @@ data class  ProductDetails(
     var vendor_id:Int,
     var cat_id:Int,
     var product_details: String,
-    var product_img: String,
+    var product_img: String?=null,
     var product_date: String?=null,
     var product_quantity: Int,
-    var product_discount: Int
+    var product_discount: Int=0
 )

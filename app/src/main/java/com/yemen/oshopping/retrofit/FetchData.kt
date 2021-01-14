@@ -30,6 +30,7 @@ class FetchData {
             override fun onFailure(call: Call<SingleProductResponse>, t: Throwable) {
                 Log.e("fetchDetailsNews", "Failed to fetch   Details", t)
             }
+
             override fun onResponse(
                 call: Call<SingleProductResponse>,
                 response: Response<SingleProductResponse>
@@ -38,11 +39,8 @@ class FetchData {
 
                 val singleProductResponse: SingleProductResponse? = response.body()
                 val categoryItems: ProductItem? = singleProductResponse?.productItem
+                responseLiveData.value = categoryItems
 
-                val productResponse: ProductResponse? = response.body()
-                val productItems: List<ProductItem> = productResponse?.productItem
-                    ?: mutableListOf()
-                responseLiveData.value = productItems
             }
         })
 
@@ -50,6 +48,7 @@ class FetchData {
     }
 
 
+/*
     fun fetchCategory(): LiveData<List<Category>> {
         val responseLiveData: MutableLiveData<List<Category>> = MutableLiveData()
         var categoryRequest: Call<CategoryResponse> = RetrofitClient().oshoppingApi.fetchCategory()
@@ -73,64 +72,65 @@ class FetchData {
     })
         return responseLiveData
 }
+ */
 
 
-fun fetchProductByCategory(category_id: Int): LiveData<List<ProductItem>> {
-    return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByCategory(category_id))
-}
+    fun fetchProductByCategory(category_id: Int): LiveData<List<ProductItem>> {
+        return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByCategory(category_id))
+    }
 
-fun searchProduct(query: String): LiveData<List<ProductItem>> {
-    return fetchProductMetaData(RetrofitClient().oshoppingApi.searchProduct(query))
-}
+    fun searchProduct(query: String): LiveData<List<ProductItem>> {
+        return fetchProductMetaData(RetrofitClient().oshoppingApi.searchProduct(query))
+    }
 
-fun fetchProductMetaData(productRequest: Call<ProductResponse>): LiveData<List<ProductItem>> {
+    fun fetchProductMetaData(productRequest: Call<ProductResponse>): LiveData<List<ProductItem>> {
 
-    val responseLiveData: MutableLiveData<List<ProductItem>> = MutableLiveData()
+        val responseLiveData: MutableLiveData<List<ProductItem>> = MutableLiveData()
 
-    productRequest.enqueue(object : Callback<ProductResponse> {
+        productRequest.enqueue(object : Callback<ProductResponse> {
 
-        override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
-            Log.d(TAG, "Failed to fetch Product", t)
-        }
+            override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
+                Log.d(TAG, "Failed to fetch Product", t)
+            }
 
-        override fun onResponse(
-            call: Call<ProductResponse>,
-            response: Response<ProductResponse>
-        ) {
-            Log.d(TAG, "Response received successfully")
-            val productResponse: ProductResponse? = response.body()
-            val productItems: List<ProductItem> = productResponse?.productItem
-                ?: mutableListOf()
-            responseLiveData.value = productItems
-            Log.d("onResponse", "onResponse: $productItems")
-        }
-    })
+            override fun onResponse(
+                call: Call<ProductResponse>,
+                response: Response<ProductResponse>
+            ) {
+                Log.d(TAG, "Response received successfully")
+                val productResponse: ProductResponse? = response.body()
+                val productItems: List<ProductItem> = productResponse?.productItem
+                    ?: mutableListOf()
+                responseLiveData.value = productItems
+                Log.d("onResponse", "onResponse: $productItems")
+            }
+        })
 
-    return responseLiveData
-}
+        return responseLiveData
+    }
 
 
-fun fetchCategory(): LiveData<List<Category>> {
-    val responseLiveData: MutableLiveData<List<Category>> = MutableLiveData()
-    var categoryRequest: Call<CategoryResponse> = RetrofitClient().oshoppingApi.fetchCategory()
-    categoryRequest.enqueue(object : Callback<CategoryResponse> {
+    fun fetchCategory(): LiveData<List<Category>> {
+        val responseLiveData: MutableLiveData<List<Category>> = MutableLiveData()
+        var categoryRequest: Call<CategoryResponse> = RetrofitClient().oshoppingApi.fetchCategory()
+        categoryRequest.enqueue(object : Callback<CategoryResponse> {
 
-        override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
-            Log.d(TAG, "Failed to fetch Category", t)
-        }
+            override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
+                Log.d(TAG, "Failed to fetch Category", t)
+            }
 
-        override fun onResponse(
-            call: Call<CategoryResponse>,
-            response: Response<CategoryResponse>
-        ) {
-            Log.d(TAG, "Response received successfully")
-            val categoryResponse: CategoryResponse? = response.body()
-            val categoryItems: List<Category> = categoryResponse?.categoryItem
-                ?: mutableListOf()
-            responseLiveData.value = categoryItems
-        }
-    })
+            override fun onResponse(
+                call: Call<CategoryResponse>,
+                response: Response<CategoryResponse>
+            ) {
+                Log.d(TAG, "Response received successfully")
+                val categoryResponse: CategoryResponse? = response.body()
+                val categoryItems: List<Category> = categoryResponse?.categoryItem
+                    ?: mutableListOf()
+                responseLiveData.value = categoryItems
+            }
+        })
 
-    return responseLiveData
-}
+        return responseLiveData
+    }
 }

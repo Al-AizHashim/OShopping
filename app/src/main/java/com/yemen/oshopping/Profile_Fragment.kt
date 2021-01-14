@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -42,6 +41,9 @@ class Profile_Fragment:Fragment(),View.OnClickListener {
         contactUs=view.findViewById(R.id.contact_us)
         logOut=view.findViewById(R.id.log_out)
         myProduct.setOnClickListener(this)
+        myAccount.setOnClickListener {
+
+        }
 
         return view
     }
@@ -53,7 +55,7 @@ class Profile_Fragment:Fragment(),View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        val intent = Intent(activity, addProduct::class.java)
+        val intent = Intent(activity, AddProduct::class.java)
 
         startActivity(intent)
     }

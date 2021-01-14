@@ -12,6 +12,19 @@ interface OshoppingApi {
     @POST("oshopping_api/api/category_api.php")
     fun postCategory(@Field("cat_name") cat_name: String): Call<DefaultResponse>
 
+    /*
+product_id
+product_name
+yrial_price
+dollar_price
+vendor_id
+cat_id
+product_details
+product_img
+product_date
+product_quantity
+product_discount
+ */
     @FormUrlEncoded
     @POST("oshopping_api/api/product_api.php")
     fun pushProduct(
@@ -22,9 +35,9 @@ interface OshoppingApi {
         @Field("vendor_id") vendor_id: Int,
         @Field("cat_id") cat_id: Int,
         @Field("product_details") product_details: String,
-        @Field("product_img") product_img: String,
+        @Field("product_img") product_img: String?,
         @Field("product_date") product_date: String?,
-        @Field("proudct_quantity") product_quantity: Int,
+        @Field("product_quantity") product_quantity: Int,
         @Field("product_discount") product_discount: Int
 
     ): Call<DefaultResponse>

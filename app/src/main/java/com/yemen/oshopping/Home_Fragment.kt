@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.ui.ShowProductFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -23,7 +24,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class Home_Fragment: Fragment(){
-
+    var url: String = "http://192.168.1.4/oshopping_api/"
     interface Callbacks {
         fun onProductSelected(product_id: Int)
     }
@@ -102,6 +103,10 @@ class Home_Fragment: Fragment(){
 
 
         fun bind(productItems: ProductItem) {
+            var compositeNewsUrl = url + productItems.product_img
+            var conditionString = "string" +productItems.product_img
+            if (!conditionString.equals("stringnull"))
+                Picasso.get().load(compositeNewsUrl).into(productImage)
             productItemss=productItems
             productName.text = productItems.product_name
             productDate.text =productItems.product_date

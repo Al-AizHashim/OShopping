@@ -21,7 +21,7 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 class AdminScreen:Fragment()  {
 
     private lateinit var fab: FloatingActionButton
-    private lateinit var delete_button:ImageView
+    //private lateinit var delete_button:ImageView
     lateinit var addCategoryBtn: Button
     lateinit var updateCategoryBtn: Button
     lateinit var addCategoryEditText: EditText
@@ -55,7 +55,7 @@ class AdminScreen:Fragment()  {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.admin_screen, container, false)
-
+        //delete_button=view.findViewById(R.id.delete_button)
         categoryRecyclerView = view.findViewById(R.id.recyclerview_admin)
         categoryRecyclerView.layoutManager = LinearLayoutManager(context)
 //        addCategoryEditText=view.findViewById(R.id.category) as EditText
@@ -68,9 +68,9 @@ class AdminScreen:Fragment()  {
             callbacks?.onCategorySelected(cat.cat_id)
         }
 
-        delete_button.setOnClickListener{
-          //  oshoppingViewModel.deleteCategory()
-        }
+        //delete_button.setOnClickListener{
+           // oshoppingViewModel.deleteCategory()
+       // }
 
 
 
@@ -93,7 +93,11 @@ class AdminScreen:Fragment()  {
     }
 
     private inner class CategoryHolder(itemTextView: View)
-        : RecyclerView.ViewHolder(itemTextView) {
+        : RecyclerView.ViewHolder(itemTextView), View.OnClickListener  {
+        init {
+            itemTextView.setOnClickListener(this)
+
+        }
         private lateinit var category: Category
         val addCategoryEditText = itemTextView.findViewById(R.id.category) as EditText
 
@@ -102,7 +106,7 @@ class AdminScreen:Fragment()  {
         }
 
        // override
-        fun onClick(v: View?) {
+        override fun onClick(v: View?) {
 
             callbacks?.onCategorySelected(category.cat_id)
         }

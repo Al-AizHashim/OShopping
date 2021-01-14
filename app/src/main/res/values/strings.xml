@@ -45,6 +45,7 @@
     <string name="add">Add</string>
 
     <string name="fab">fab</string>
+    <string name="close">close</string>
 
     <string name="newPassword">New Password</string>
     <string name="confirm">Confirm Password</string>

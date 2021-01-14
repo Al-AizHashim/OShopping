@@ -9,7 +9,6 @@
 
     <ScrollView
         android:id="@+id/root_layout"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
@@ -21,7 +20,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryLight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +28,7 @@
 
             <EditText
 
-                android:id="@+id/NameProduct"
+                android:id="@+id/name_product_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -50,7 +48,6 @@
             </EditText>
 
             <EditText
-
                 android:id="@+id/DetailsProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,6 +166,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="400dp"
                 android:layout_marginRight="40dp"
+                android:backgroundTint="@color/colorPrimaryLight"
 
                 android:background="@drawable/button_shap_white"
                 android:clickable="true"
@@ -178,7 +176,7 @@
                 android:focusableInTouchMode="false"
                 android:text="@string/selectImage"
                 android:textAllCaps="false"
-                android:textColor="#000"
+                android:textColor="#FFF"
                 android:textSize="15sp" />
 
             <LinearLayout

@@ -5,7 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.yemen.oshopping.R
+import com.yemen.oshopping.model.Category
+import com.yemen.oshopping.ui.ShowProductFragment
 import kotlinx.android.synthetic.main.activity_upload_image.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -18,7 +23,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 class UploadImageActivity : AppCompatActivity() , UploadRequestBody.UploadCallback {
-
+    var imageName:String?=null;
     private var selectedImageUri: Uri? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +96,14 @@ class UploadImageActivity : AppCompatActivity() , UploadRequestBody.UploadCallba
                     layout_root.snackbar(it.message)
                     progress_bar.progress = 100
                 }
+                imageName=response.body()?.image
+                val intent=Intent()
+                intent.putExtra("image_name",imageName)
+                setResult(0,intent)
+
             }
         })
+
 
     }
 
