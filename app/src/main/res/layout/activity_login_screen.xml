@@ -87,10 +87,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="290dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="200dp"
             android:text="@string/forgetPass"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="15sp" />
+        <CheckBox
+            android:id="@+id/rememberMe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="285dp"
+            android:layout_marginLeft="50dp"
+            android:textColorHighlight="@color/colorPrimaryLight"
+            android:shadowColor="@color/colorPrimaryLight"
+
+            android:text="@string/remeberMe"
+            android:textColor="@color/colorPrimaryLight"
+            />
         <Button
 
             android:id="@+id/login_button"
@@ -108,17 +120,22 @@
             android:textAllCaps="false"
             android:background="@drawable/button_shap"
             android:enabled="true"/>
-        <TextView
+        <Button
             android:id="@+id/signUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_height="45dp"
             android:layout_marginTop="390dp"
-            android:layout_marginLeft="180dp"
-            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:text="@string/SignUP"
-            android:textStyle="normal"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="15sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:background="@drawable/button_shap"
+            android:enabled="true" />
 
 
     </RelativeLayout>

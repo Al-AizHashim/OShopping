@@ -50,6 +50,7 @@
     <string name="newPassword">New Password</string>
     <string name="confirm">Confirm Password</string>
     <string name="changePassword">Change Password</string>
+    <string name="remeberMe">Remember Me</string>
     <string name="admin">Admin</string>
 
 
