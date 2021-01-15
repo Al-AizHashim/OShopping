@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.yemen.oshopping.sharedPreferences.SharedPreference
 import kotlinx.android.synthetic.main.activity_login_screen.*
 
 class LoginScreen : AppCompatActivity() , View.OnClickListener{
@@ -20,7 +21,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
-
+        val sharedPreference: SharedPreference =SharedPreference(this)
         skip = findViewById(R.id.skip_text_view)
         supportActionBar?.hide()
         login_button.setOnClickListener(this)
@@ -31,6 +32,18 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
         skip.setOnClickListener {
             val intent = Intent(this, MainScreen::class.java)
             startActivity(intent)
+        }
+        rememberMe.setOnCheckedChangeListener{buttonView, isChecked ->
+            if(isChecked)
+            {
+               // Toast.makeText(this, mAuth!!.currentUser.toString(),Toast.LENGTH_LONG).show()
+                sharedPreference.save("rememberMe",true)
+              //  sharedPreference.save("email",mAuth.currentUser.)
+            }
+            else
+            {
+                sharedPreference.save("rememberMe",false)
+            }
         }
 
     }
@@ -66,6 +79,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
 
 
     private fun signIn(email: String, password: String) {
+        val sharedPreference: SharedPreference =SharedPreference(this)
         Log.e(TAG, "signIn:" + email)
         if (!validateForm(email, password)) {
             return
@@ -75,7 +89,12 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.e(TAG, "signIn: Success!")
+                    if(email=="yemenoshopping@gmail.com ")
+                        sharedPreference.save("userType","Admin")
+                    else
+                        sharedPreference.save("userType","Customer")
 
+                    sharedPreference.save("userEmail",email)
 
                     //val user = mAuth!!.currentUser
             val intent = Intent(this, MainScreen::class.java)
