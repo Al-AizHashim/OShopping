@@ -29,7 +29,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
         mAuth = FirebaseAuth.getInstance()
 
         skip.setOnClickListener {
-            var intent = Intent(this, MainScreen::class.java)
+            val intent = Intent(this, MainScreen::class.java)
             startActivity(intent)
         }
 
@@ -37,7 +37,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
     override fun onStart() {
         super.onStart()
 
-        val currentUser = mAuth!!.currentUser
+        //val currentUser = mAuth!!.currentUser
 
     }
 
@@ -77,7 +77,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
                     Log.e(TAG, "signIn: Success!")
 
 
-                    val user = mAuth!!.currentUser
+                    //val user = mAuth!!.currentUser
             val intent = Intent(this, MainScreen::class.java)
                 //    val intent = Intent(this, ChangePassword::class.java)
                     startActivity(intent)
