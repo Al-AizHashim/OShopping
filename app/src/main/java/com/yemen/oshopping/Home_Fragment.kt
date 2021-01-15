@@ -158,7 +158,7 @@ class Home_Fragment: Fragment(){
         }
         fun newInstance(productCategory: String) = Home_Fragment().apply {
             arguments = Bundle().apply {
-                putString(com.yemen.oshopping.ARG_PARAM1, productCategory)
+                putString(ARG_PARAM1, productCategory)
 
             }
         }
