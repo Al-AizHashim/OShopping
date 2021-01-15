@@ -1,5 +1,6 @@
 package com.yemen.oshopping
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -58,20 +59,21 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
 
                 R.id.navigation_Cart -> {
                     title = resources.getString(R.string.Cart)
-                   // loadFragment(Cart_Fragment())
-                    loadFragment(AddUserFragment())
+                    loadFragment(Cart_Fragment())
+                    //loadFragment(AddUserFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_Purchases -> {
                     title = resources.getString(R.string.Purchases)
-                    //loadFragment(Purchases_Fragment())
+                    loadFragment(Purchases_Fragment())
                     loadFragment(AddCategoryFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.navigation_Profile -> {
+                R.id.navigation_settings -> {
                     title = resources.getString(R.string.Profile)
-                    loadFragment(Profile_Fragment())
+                    val intent= Intent(this,SettingActivity::class.java)
+                    startActivity(intent)
                     return@setOnNavigationItemSelectedListener true
                 }
             }

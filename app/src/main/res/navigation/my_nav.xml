@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/myProductFragment">
+
+    <fragment
+        android:id="@+id/myProductFragment"
+        android:name="com.yemen.oshopping.setting.MyProductFragment"
+        android:label="fragment_my_product"
+        tools:layout="@layout/fragment_my_product" >
+        <action
+            android:id="@+id/action_myProductFragment_to_addProduct3"
+            app:destination="@id/addProduct3" />
+        <action
+            android:id="@+id/action_myProductFragment_to_updateProductFragment"
+            app:destination="@id/updateProductFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/addProduct3"
+        android:name="com.yemen.oshopping.AddProduct"
+        android:label="AddProduct" />
+    <fragment
+        android:id="@+id/updateProductFragment"
+        android:name="com.yemen.oshopping.UpdateProductFragment"
+        android:label="fragment_update_product"
+        tools:layout="@layout/fragment_update_product" >
+        <action
+            android:id="@+id/action_updateProductFragment_to_myProductFragment"
+            app:destination="@id/myProductFragment" />
+    </fragment>
+</navigation>
