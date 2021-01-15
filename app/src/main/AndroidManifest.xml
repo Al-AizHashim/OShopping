@@ -21,7 +21,7 @@
         tools:targetApi="n">
 
 
-        <activity android:name=".MainScreen">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,8 +55,9 @@
         <activity android:name=".LoginScreen" />
         <activity android:name=".ResetPassword" />
         <activity android:name=".SignUp" />
+        <activity android:name=".ChangePassword"/>
 
-        <activity android:name=".SplashScreen" />
+        <activity android:name=".MainScreen" />
     </application>
 
 

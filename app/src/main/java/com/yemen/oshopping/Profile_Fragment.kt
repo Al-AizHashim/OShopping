@@ -9,7 +9,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-
+import com.google.firebase.auth.FirebaseAuth
+import com.yemen.oshopping.sharedPreferences.SharedPreference
 
 
 class Profile_Fragment:Fragment(),View.OnClickListener {
@@ -41,6 +42,7 @@ class Profile_Fragment:Fragment(),View.OnClickListener {
         contactUs=view.findViewById(R.id.contact_us)
         logOut=view.findViewById(R.id.log_out)
         myProduct.setOnClickListener(this)
+        logOut.setOnClickListener(this)
         myAccount.setOnClickListener {
 
         }
@@ -55,9 +57,21 @@ class Profile_Fragment:Fragment(),View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        val intent = Intent(activity, AddProduct::class.java)
+        val sharedPreference: SharedPreference = SharedPreference(context)
+        val i = v!!.id
+            if(i==R.id.log_out)
+            {
+                FirebaseAuth.getInstance().signOut()
+                sharedPreference.clearSharedPreference()
+                val intent = Intent(activity, LoginScreen::class.java)
 
-        startActivity(intent)
+                startActivity(intent)
+            }
+        else if(i==R.id.my_products)
+      {
+          val intent = Intent(activity, AddProduct::class.java)
+
+        startActivity(intent)}
     }
 }
 

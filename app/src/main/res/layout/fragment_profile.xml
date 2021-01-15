@@ -157,7 +157,7 @@
         android:id="@+id/log_out"
         android:layout_width="284dp"
         android:layout_height="53dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="48dp"
         android:background="@drawable/button_shap"
         android:text="@string/log_out"
@@ -166,10 +166,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contact_us"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
