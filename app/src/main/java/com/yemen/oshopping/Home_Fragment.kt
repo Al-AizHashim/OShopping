@@ -103,16 +103,13 @@ class Home_Fragment: Fragment(){
 
 
         fun bind(productItems: ProductItem) {
-            var compositeNewsUrl = url + productItems.product_img
+            var compositeProductUrl = url + productItems.product_img
             var conditionString = "string" +productItems.product_img
             if (!conditionString.equals("stringnull"))
-                Picasso.get().load(compositeNewsUrl).into(productImage)
+                Picasso.get().load(compositeProductUrl).into(productImage)
             productItemss=productItems
             productName.text = productItems.product_name
             productDate.text =productItems.product_date
-            productImage.apply {
-
-            }
 
         }
 

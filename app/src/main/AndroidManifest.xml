@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme"
         tools:targetApi="n">
         <activity android:name=".setting.MyProductActivity"></activity>
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".setting.SettingActivity"></activity>
         <activity android:name=".MainScreen">
         </activity>
         <activity android:name=".SplashScreen">
