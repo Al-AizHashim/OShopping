@@ -2,18 +2,33 @@ package com.yemen.oshopping
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yemen.oshopping.ui.AddCategoryFragment
 import com.yemen.oshopping.ui.AddUserFragment
 import com.yemen.oshopping.ui.ProductDetailsFragment
-import com.yemen.oshopping.ui.ShowProductFragment
-import kotlinx.android.synthetic.main.activity_main_screen.*
+
 
 class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Callbacks {
+    lateinit var navigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
+        val nested_content =findViewById<View>(R.id.nested_scroll_view) as NestedScrollView
+        navigation = findViewById<View>(R.id.navigationView) as BottomNavigationView
 
+        nested_content.setOnScrollChangeListener() { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY < oldScrollY) { // up
+                animateNavigation(false)
+
+            }
+            if (scrollY > oldScrollY) { // down
+                animateNavigation(true)
+
+            }
+        }
         supportActionBar?.hide()
 
 
@@ -22,12 +37,12 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, fragment)
+            .replace(R.id.nested_scroll_view, fragment)
             .addToBackStack(null)
             .commit()
         title = resources.getString(R.string.add_category)
         //loadFragment(Category_Fragment())
-        navigationView.setOnNavigationItemSelectedListener {
+        navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_Home -> {
                     title = resources.getString(R.string.Home)
@@ -69,7 +84,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
     private fun loadFragment(fragment: Fragment) {
         // load fragment
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
+        transaction.replace(R.id.nested_scroll_view, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
 
@@ -80,7 +95,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
         val fragment = ProductDetailsFragment.newInstance(product_id)
         supportFragmentManager
             .beginTransaction()
-           .replace(R.id.container, fragment)
+           .replace(R.id.nested_scroll_view, fragment)
             .addToBackStack(null)
             .commit()
     }
@@ -89,8 +104,18 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
         val fragment = AddCategoryFragment()
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .replace(R.id.nested_scroll_view, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    var isNavigationHide = false
+
+    private fun animateNavigation(hide: Boolean) {
+        if (isNavigationHide && hide || !isNavigationHide && !hide) return
+        isNavigationHide = hide
+        val moveY = if (hide) 2 * navigation!!.height else 0
+        navigation!!.animate().translationY(moveY.toFloat()).setStartDelay(100).setDuration(300)
+            .start()
     }
 }
