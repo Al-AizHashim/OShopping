@@ -43,6 +43,13 @@ class OshoppingViewModel : ViewModel() {
         Transformations.switchMap(productLiveData) { product_id ->
             FetchData().fetchProductById(product_id)
         }
+    var productItemLiveDataByVendorID: LiveData<List<ProductItem>> =
+        Transformations.switchMap(productLiveData) { vendor_id ->
+            FetchData().fetchProductByVendorId (vendor_id)
+        }
+    fun getProductByVendorId(vendor_id: Int) {
+        productLiveData.value = vendor_id
+    }
 
     fun getProductById(product_id: Int) {
         productLiveData.value = product_id

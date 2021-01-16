@@ -78,6 +78,9 @@ class FetchData {
     fun fetchProductByCategory(category_id: Int): LiveData<List<ProductItem>> {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByCategory(category_id))
     }
+    fun fetchProductByVendorId(vendorId: Int): LiveData<List<ProductItem>> {
+        return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByVendorId(vendorId))
+    }
 
     fun searchProduct(query: String): LiveData<List<ProductItem>> {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.searchProduct(query))
