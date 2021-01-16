@@ -1,4 +1,4 @@
-package com.yemen.oshopping.ui
+package com.yemen.oshopping.admin
 
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.fragment_add_category.*
 
 
 class AddCategoryFragment : Fragment() {

@@ -52,6 +52,9 @@
     <string name="changePassword">Change Password</string>
     <string name="remeberMe">Remember Me</string>
     <string name="admin">Admin</string>
+    <string name="add_report">Add report</string>
+    <string name="show_categories">Show Categories</string>
+    <string name="show_reports">Show reports</string>
 
 
 </resources>

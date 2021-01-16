@@ -8,7 +8,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yemen.oshopping.setting.SettingActivity
-import com.yemen.oshopping.ui.AddCategoryFragment
+import com.yemen.oshopping.admin.AddCategoryFragment
 import com.yemen.oshopping.ui.ProductDetailsFragment
 
 

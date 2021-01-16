@@ -2,8 +2,7 @@ package com.yemen.oshopping
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.yemen.oshopping.ui.AddCategoryFragment
+import com.yemen.oshopping.admin.AddCategoryFragment
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(), AdminScreen.Callbacks {

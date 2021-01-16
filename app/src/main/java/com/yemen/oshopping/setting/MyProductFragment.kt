@@ -42,9 +42,9 @@ class MyProductFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_my_product, container, false)
-        showProductRecyclerView = view.findViewById(R.id.my_product_recycler_view)
+        showProductRecyclerView = view.findViewById(R.id.category_recycler_view)
         showProductRecyclerView.layoutManager = GridLayoutManager(context, 1)
-        fab = view.findViewById(R.id.floatingActionButton)
+        fab = view.findViewById(R.id.add_product_fab)
         noDataImageView=view.findViewById(R.id.no_data_imageView)
         noDataTextView=view.findViewById(R.id.no_data_textView)
         fab.setOnClickListener {

@@ -14,8 +14,9 @@ class SettingFragment : Fragment() {
     lateinit var adminTV: TextView
     lateinit var contactUsTV: TextView
     lateinit var aboutUsTV: TextView
-    lateinit var myProductV: TextView
+    lateinit var myProductTV: TextView
     lateinit var myAccountTV: TextView
+    lateinit var signOutTV: TextView
 
 
     override fun onCreateView(
@@ -25,13 +26,14 @@ class SettingFragment : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_setting, container, false)
         myAccountTV=view.findViewById(R.id.my_account)
-        myProductV=view.findViewById(R.id.my_products)
+        myProductTV=view.findViewById(R.id.my_products)
         aboutUsTV=view.findViewById(R.id.about_us)
         contactUsTV=view.findViewById(R.id.contact_us)
+        signOutTV=view.findViewById(R.id.sign_out)
         adminTV=view.findViewById(R.id.admin_page)
         adminTV.visibility = View.VISIBLE
 
-        myProductV.setOnClickListener {
+        myProductTV.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_myProductFragment)
         }
         adminTV.setOnClickListener {
@@ -45,6 +47,10 @@ class SettingFragment : Fragment() {
         }
         contactUsTV.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_contactUsFragment)
+        }
+        signOutTV.setOnClickListener {
+           //write here the sign out code
+
         }
 
 

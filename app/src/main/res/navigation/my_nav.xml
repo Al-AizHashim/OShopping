@@ -96,10 +96,61 @@
         android:id="@+id/adminFragment"
         android:name="com.yemen.oshopping.setting.AdminFragment"
         android:label="fragment_admin"
-        tools:layout="@layout/fragment_admin" />
+        tools:layout="@layout/fragment_admin" >
+        <action
+            android:id="@+id/action_adminFragment_to_showCategoryFragment"
+            app:destination="@id/showCategoryFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
+        <action
+            android:id="@+id/action_adminFragment_to_showReportFragment"
+            app:destination="@id/showReportFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
+    </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
         android:name="com.yemen.oshopping.setting.ContactUsFragment"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/addCategoryFragment"
+        android:name="com.yemen.oshopping.admin.AddCategoryFragment"
+        android:label="fragment_add_category"
+        tools:layout="@layout/fragment_add_category" />
+    <fragment
+        android:id="@+id/addReportFragment"
+        android:name="com.yemen.oshopping.admin.AddReportFragment"
+        android:label="fragment_add_report"
+        tools:layout="@layout/fragment_add_report" />
+    <fragment
+        android:id="@+id/showCategoryFragment"
+        android:name="com.yemen.oshopping.admin.ShowCategoryFragment"
+        android:label="fragment_show_category"
+        tools:layout="@layout/fragment_show_category" >
+        <action
+            android:id="@+id/action_showCategoryFragment_to_addCategoryFragment"
+            app:destination="@id/addCategoryFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/showReportFragment"
+        android:name="com.yemen.oshopping.admin.ShowReportFragment"
+        android:label="fragment_show_report"
+        tools:layout="@layout/fragment_show_report" >
+        <action
+            android:id="@+id/action_showReportFragment_to_addReportFragment"
+            app:destination="@id/addReportFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
+    </fragment>
 </navigation>
