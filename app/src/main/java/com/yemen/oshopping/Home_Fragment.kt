@@ -24,7 +24,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class Home_Fragment: Fragment(){
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
     interface Callbacks {
         fun onProductSelected(product_id: Int)
     }
@@ -97,8 +97,8 @@ class Home_Fragment: Fragment(){
         @SuppressLint("SimpleDateFormat")
         var timeFormatter: SimpleDateFormat = SimpleDateFormat("hh:mm a")
 
-        private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
-        private val productDate = itemView.findViewById(R.id.product_detailsTv) as TextView
+        private val productName = itemView.findViewById(R.id.product_name) as TextView
+        private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
 
 

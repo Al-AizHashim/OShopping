@@ -8,5 +8,6 @@
     <color name="colorPrimary">#736C5F</color>
     <color name="colorAccent">#D93425</color>
     <color name="colorBrown">#8C877D</color>
+    <color name="colorGray">#646464</color>
 
 </resources>

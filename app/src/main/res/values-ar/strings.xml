@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="hello">مرحبا</string>
+    <string name="welcome">ما الذي تود شراءه</string>
+    <string name="Trend">الأكثر شراء</string>
+    <string name="category">الأقسام</string>
+    <string name="color">الألوان</string>
+    <string name="vendor">البائع</string>
+
     <string name="app_name">تسوق إلكتروني</string>
     <string name="skip">تخطي</string>
     <string name="createNewAccount">إنشاء حساب جديد</string>

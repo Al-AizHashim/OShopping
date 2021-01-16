@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">FurnitureStore</string>
 
+    <string name="hello">Hello</string>
+    <string name="welcome">What would you like to buy ? </string>
+    <string name="Trend">Trend</string>
+    <string name="category">Category</string>
+    <string name="color">Color</string>
+    <string name="vendor">Vendor</string>
+
     <string name="skip">Skip</string>
     <string name="createNewAccount">Create New Account</string>
     <string name="or">Or</string>
@@ -34,7 +41,7 @@
     <string name="MyAccount">My Account</string>
     <string name="log_out">log Out</string>
     <string name="contact_us">Contact Us</string>
-    <string name="about_us">About</string>
+    <string name="about_us">About Us</string>
     <string name="Delivery_Addresses">Delivery_Addresses</string>
     <string name="my_Balance">My Balance</string>
     <string name="my_products">My Products</string>
@@ -50,14 +57,16 @@
     <string name="newPassword">New Password</string>
     <string name="confirm">Confirm Password</string>
     <string name="changePassword">Change Password</string>
-    <string name="remeberMe">Remember Me</string>
-    <string name="admin">Admin</string>
-    <string name="add_report">Add report</string>
-    <string name="show_categories">Show Categories</string>
+    <string name="CategoryProduct">Product Category</string>
+    <string name="PriceProduct">Price</string>
+    <string name="AddToCart">Add to Cart</string>
+    <string name="VendorProduct">Product Vendor</string>
+    <string name="PriceD">0.00 $</string>
+    <string name="PriceR">0.00 RY</string>
+    <string name="remeberMe">remeber me</string>
+    <string name="log_in">Log in</string>
+    <string name="show_categories">show categories</string>
     <string name="show_reports">Show reports</string>
-
-    <string name="log_in">LOG IN</string>
-
-
+    <string name="admin">Admin</string>
 
 </resources>

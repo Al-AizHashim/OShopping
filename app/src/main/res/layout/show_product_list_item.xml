@@ -4,48 +4,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_marginStart="4dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="4dp"
+    android:layout_height="wrap_content"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
+    android:layout_marginBottom="32dp">
 
-    <TextView
-        android:id="@+id/product_nameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:text="Name"
-        android:textColor="#000"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/product_img"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28" />
 
-    <TextView
-        android:id="@+id/product_detailsTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toEndOf="@+id/product_img"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        android:background="@color/colorWhite"
+        android:layout_marginRight="40dp"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/product_nameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/NameProduct"
+            android:textSize="16sp"
+            android:textColor="@color/colorBlack"
+            />
+        <TextView
+            android:id="@+id/product_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/CategoryProduct"
+            android:layout_marginBottom="16dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorGray"/>
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/PriceProduct"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"/>
+        <Button
+            android:id="@+id/product_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_shopping_cart"
+            android:text="    Add "
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:textSize="12sp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/button_shap"/>
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/product_img"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:contentDescription="Image"
-        android:src="@drawable/sofa"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/logobrown"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.506"
+        tools:ignore="MissingConstraints" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
