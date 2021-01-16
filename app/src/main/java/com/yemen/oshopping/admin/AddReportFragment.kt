@@ -1,24 +1,22 @@
 package com.yemen.oshopping.admin
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.yemen.oshopping.R
-import com.yemen.oshopping.model.Category
+import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
-class AddCategoryFragment : Fragment() {
+class AddReportFragment : Fragment() {
 
-    lateinit var addCategoryBtn: Button
-    lateinit var addCategoryEditText: EditText
+    lateinit var addReportBtn: Button
+    lateinit var addReportEditText: EditText
     lateinit var oshoppingViewModel: OshoppingViewModel
 
 
@@ -32,22 +30,17 @@ class AddCategoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view=inflater.inflate(R.layout.fragment_add_category, container, false)
-        addCategoryBtn=view.findViewById(R.id.add_cat_btn)
-        addCategoryEditText=view.findViewById(R.id.add_cat_editText)
-        addCategoryBtn.setOnClickListener {
-            val cat= Category(cat_name=addCategoryEditText.text.toString())
-            oshoppingViewModel.pushcat(cat)
+        // Inflate the layout for this fragment
+        val view=inflater.inflate(R.layout.fragment_add_report, container, false)
+        addReportBtn=view.findViewById(R.id.add_report_btn)
+        addReportEditText=view.findViewById(R.id.add_report_et)
+        addReportBtn.setOnClickListener {
+            val report= Report(report_name= addReportEditText.text.toString())
+            oshoppingViewModel.pushReport(report)
 
         }
-
         return view
     }
 
-    companion object {
 
-        @JvmStatic
-        fun newInstance() =
-            AddCategoryFragment()
-    }
 }

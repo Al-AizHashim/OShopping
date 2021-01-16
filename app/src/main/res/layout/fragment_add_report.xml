@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp"
-    tools:context=".admin.AddCategoryFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".admin.AddReportFragment">
+
 
     <LinearLayout
         android:layout_width="315dp"
@@ -18,11 +18,11 @@
         app:layout_constraintVertical_bias="0.188" />
 
     <EditText
-        android:id="@+id/add_cat_editText"
+        android:id="@+id/add_report_et"
         android:layout_width="242dp"
         android:layout_height="54dp"
         android:layout_marginTop="124dp"
-        android:hint="@string/add_category"
+        android:hint="Add report"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,21 +30,17 @@
 
     <Button
         style="@style/CustomTextView"
-        android:id="@+id/add_cat_btn"
+        android:id="@+id/add_report_btn"
         android:layout_width="242dp"
         android:layout_height="54dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/button_shap"
-        android:text="@string/add_category"
+        android:text="Add report"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_cat_editText" />
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/add_report_et" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

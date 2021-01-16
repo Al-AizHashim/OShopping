@@ -11,6 +11,9 @@ interface OshoppingApi {
     @FormUrlEncoded
     @POST("oshopping_api/api/category_api.php")
     fun postCategory(@Field("cat_name") cat_name: String): Call<DefaultResponse>
+    @FormUrlEncoded
+    @POST("oshopping_api/api/category_api.php")
+    fun postReport(@Field("report_name") report_name: String): Call<DefaultResponse>
 
     /*
 product_id
@@ -79,6 +82,10 @@ product_discount
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUser(@Query("user_id") user_id: Int): Call<UserResponse>
+
+    @GET("oshopping_api/api/report_api.php")
+    fun fetchReport(): Call<ReportResponse>
+
 
 
     //put

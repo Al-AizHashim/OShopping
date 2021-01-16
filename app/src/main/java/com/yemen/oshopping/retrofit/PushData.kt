@@ -1,10 +1,7 @@
 package com.yemen.oshopping.retrofit
 
 import android.util.Log
-import com.yemen.oshopping.model.Category
-import com.yemen.oshopping.model.DefaultResponse
-import com.yemen.oshopping.model.ProductDetails
-import com.yemen.oshopping.model.User
+import com.yemen.oshopping.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +24,28 @@ class PushData {
                 response: Response<DefaultResponse>
             ) {
                 Log.d("pushCategory", "Category pushed successfully")
+
+            }
+        })
+
+
+    }
+    fun pushReport(report: Report) {
+        val pushReportRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi
+            .postReport(report.report_name)
+
+        pushReportRequest.enqueue(object : Callback<DefaultResponse> {
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.e("pushReport", "Failed to push Report", t)
+
+            }
+
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushReport", "Report pushed successfully")
 
             }
         })

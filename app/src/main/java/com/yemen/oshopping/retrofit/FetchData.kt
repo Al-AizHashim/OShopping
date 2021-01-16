@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yemen.oshopping.api.CategoryResponse
 import com.yemen.oshopping.api.ProductResponse
+import com.yemen.oshopping.api.ReportResponse
 import com.yemen.oshopping.api.SingleProductResponse
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.model.ProductItem
+import com.yemen.oshopping.model.Report
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -131,6 +133,30 @@ class FetchData {
                 val categoryItems: List<Category> = categoryResponse?.categoryItem
                     ?: mutableListOf()
                 responseLiveData.value = categoryItems
+            }
+        })
+
+        return responseLiveData
+    }
+
+    fun fetchReport(): LiveData<List<Report>> {
+        val responseLiveData: MutableLiveData<List<Report>> = MutableLiveData()
+        val reportRequest: Call<ReportResponse> = RetrofitClient().oshoppingApi.fetchReport()
+        reportRequest.enqueue(object : Callback<ReportResponse> {
+
+            override fun onFailure(call: Call<ReportResponse>, t: Throwable) {
+                Log.d("fetchReport", "Failed to fetch Reports", t)
+            }
+
+            override fun onResponse(
+                call: Call<ReportResponse>,
+                response: Response<ReportResponse>
+            ) {
+                Log.d("fetchReport", "Reports received successfully")
+                val reportResponse: ReportResponse? = response.body()
+                val reportItems: List<Report> = reportResponse?.reportItem
+                    ?: mutableListOf()
+                responseLiveData.value = reportItems
             }
         })
 

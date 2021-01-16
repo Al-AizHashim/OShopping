@@ -5,11 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.yemen.oshopping.model.Category
-import com.yemen.oshopping.model.ProductDetails
-import com.yemen.oshopping.model.ProductItem
-
-import com.yemen.oshopping.model.User
+import com.yemen.oshopping.model.*
 
 import com.yemen.oshopping.retrofit.DeleteData
 
@@ -24,10 +20,12 @@ class OshoppingViewModel : ViewModel() {
     val categoryItemLiveData: LiveData<List<Category>>
     var productLiveData = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
+    val reportItemLiveData: LiveData<List<Report>>
 
     init {
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
+        reportItemLiveData=FetchData().fetchReport()
     }
 
     var productItemLiveDataByCategory: LiveData<List<ProductItem>> =
@@ -67,6 +65,7 @@ class OshoppingViewModel : ViewModel() {
     fun pushcat(category: Category) = PushData().pushCategory(category)
     fun pushProduct(product: ProductDetails) = PushData().pushProduct(product)
     fun pushUser(user: User) = PushData().pushUser(user)
+    fun pushReport(report: Report) = PushData().pushReport(report)
 
 
     //update data in database

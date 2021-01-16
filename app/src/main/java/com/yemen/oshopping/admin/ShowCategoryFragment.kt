@@ -53,7 +53,7 @@ class ShowCategoryFragment : Fragment() {
         categoryViewModel.categoryItemLiveData.observe(
             viewLifecycleOwner,
             Observer { categorys ->
-                Log.d("fetchCategory", "Category fetched successfully ${categorys}")
+                Log.d("fetchCategory", "Category fetched successfully ${categorys.size}")
                 categoryRecyclerView.adapter = CategoryAdapter(categorys)
 
             })
