@@ -23,7 +23,7 @@ tools:context=".uploadImage.UploadImageActivity">
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_margin="24dp"
-        app:srcCompat="@drawable/ic_picture" />
+        app:srcCompat="@mipmap/select_image" />
 
     <TextView
         android:id="@+id/textView"

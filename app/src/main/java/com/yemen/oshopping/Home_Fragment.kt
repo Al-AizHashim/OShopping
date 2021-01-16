@@ -97,7 +97,7 @@ class Home_Fragment: Fragment(){
         @SuppressLint("SimpleDateFormat")
         var timeFormatter: SimpleDateFormat = SimpleDateFormat("hh:mm a")
 
-        private val productName = itemView.findViewById(R.id.product_name) as TextView
+        private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
 

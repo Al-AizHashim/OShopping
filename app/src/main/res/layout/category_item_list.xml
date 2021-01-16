@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/custom_shape"
     android:layout_margin="12dp"
-    tools:context=".AdminScreen">
+    tools:context=".AdminScreen"
+    >
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -40,17 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.097" />
-
-    <ImageView
-        android:id="@+id/delete_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_baseline_delete_outline_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
