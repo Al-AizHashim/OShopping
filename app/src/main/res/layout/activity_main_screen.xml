@@ -12,10 +12,6 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:scrollingCache="true"
@@ -23,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
     </androidx.core.widget.NestedScrollView>
 
 
