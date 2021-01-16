@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#D5F4F2F2"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".Category_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,7 +15,7 @@
         android:id="@+id/category"
         android:layout_width="259dp"
         android:layout_height="64dp"
-        android:background="@drawable/shape_navagitionbar"
+        android:background="@drawable/layout_shape"
         android:gravity="center"
         android:padding="16dp"
         android:text="living room"
@@ -24,10 +24,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintHorizontal_bias="0.585"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.097" />
 
     <ImageView
         android:layout_width="66dp"

@@ -15,14 +15,14 @@ import com.yemen.oshopping.sharedPreferences.SharedPreference
 
 class Profile_Fragment:Fragment(),View.OnClickListener {
 
-    lateinit var goBack: ImageView
     lateinit var myAccount: TextView
     lateinit var myProduct: TextView
     lateinit var myBalance: TextView
     lateinit var aboutUs: TextView
     lateinit var deliveryAddresses: TextView
     lateinit var contactUs: TextView
-    lateinit var logOut: Button
+    lateinit var logOut: TextView
+    lateinit var skip: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class Profile_Fragment:Fragment(),View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val view=inflater.inflate(R.layout.fragment_profile, container, false)
-        goBack=view.findViewById(R.id.go_back)
+        skip=view.findViewById(R.id.go_back)
         myAccount=view.findViewById(R.id.my_account)
         myProduct=view.findViewById(R.id.my_products)
         myBalance=view.findViewById(R.id.my_Balance)
@@ -46,6 +46,7 @@ class Profile_Fragment:Fragment(),View.OnClickListener {
         myAccount.setOnClickListener {
 
         }
+
 
         return view
     }
@@ -72,6 +73,7 @@ class Profile_Fragment:Fragment(),View.OnClickListener {
           val intent = Intent(activity, AddProduct::class.java)
 
         startActivity(intent)}
+
     }
 }
 

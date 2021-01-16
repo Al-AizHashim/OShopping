@@ -44,8 +44,7 @@
     <string name="newPassword">كلمة السر الجديدة</string>
     <string name="confirm">تأكيد كلمة السر</string>
     <string name="changePassword">تغيير كلمة السر</string>
-    <string name="fab">fab</string>
-
+    <string name="fab">اضافة</string>
     <string name="remeberMe">تذكرني</string>
 
 

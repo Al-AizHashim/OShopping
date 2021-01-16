@@ -30,7 +30,7 @@
 
         <Button
             android:id="@+id/btnChoose"
-            android:layout_width="0dp"
+            android:layout_width="20dp"
             android:layout_height="45dp"
             android:layout_marginTop="10dp"
             android:layout_weight="0.5"
@@ -48,10 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
         android:background="@drawable/button_shap"
         android:padding="5dp"
-
         android:text="@string/close"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"

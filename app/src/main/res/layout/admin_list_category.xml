@@ -15,7 +15,7 @@
         android:id="@+id/category"
         android:layout_width="329dp"
         android:layout_height="82dp"
-        android:background="@drawable/shape_navagitionbar"
+        android:background="@drawable/side_nav_bar"
         android:gravity="center"
         android:padding="16dp"
         android:text="living room"

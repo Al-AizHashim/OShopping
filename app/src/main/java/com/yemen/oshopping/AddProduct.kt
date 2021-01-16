@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.multidex.BuildConfig
 import com.yemen.oshopping.model.ProductDetails
 import com.yemen.oshopping.uploadImage.UploadImageActivity
 import com.yemen.oshopping.viewmodel.OshoppingViewModel

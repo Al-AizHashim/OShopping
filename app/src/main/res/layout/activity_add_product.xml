@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:verticalScrollbarPosition="right">
 
     <ScrollView
@@ -12,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,33 +19,26 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
             <EditText
-
                 android:id="@+id/name_product_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="80dp"
                 android:layout_marginRight="20dp"
-
                 android:drawablePadding="10dp"
                 android:hint="@string/NameProduct"
                 android:inputType="text"
-
                 android:padding="10dp"
                 android:paddingBottom="20dp"
-                android:textColor="#000"
-                android:textColorHint="#000">
-
-
-            </EditText>
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"/>
 
             <EditText
                 android:id="@+id/DetailsProduct"
@@ -54,60 +47,43 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="140dp"
                 android:layout_marginRight="20dp"
-
                 android:drawablePadding="10dp"
                 android:hint="@string/productDetails"
                 android:inputType="text"
-
                 android:padding="10dp"
                 android:paddingBottom="20dp"
-                android:textColor="#000"
-                android:textColorHint="#000">
-
-
-            </EditText>
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"/>
 
             <EditText
-
                 android:id="@+id/PriceInDolar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="200dp"
                 android:layout_marginRight="20dp"
-
                 android:drawablePadding="10dp"
                 android:hint="@string/PriceProductDolar"
                 android:inputType="numberDecimal"
-
                 android:padding="10dp"
                 android:paddingBottom="20dp"
-                android:textColor="#000"
-                android:textColorHint="#000">
-
-
-            </EditText>
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack"/>
 
             <EditText
-
                 android:id="@+id/PriceInRial"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="260dp"
                 android:layout_marginRight="20dp"
-
                 android:drawablePadding="10dp"
                 android:hint="@string/PriceProductRial"
                 android:inputType="numberDecimal"
-
                 android:padding="10dp"
                 android:paddingBottom="20dp"
-                android:textColor="#000"
-                android:textColorHint="#000">
-
-
-            </EditText>
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorBlack" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,10 +92,8 @@
                 android:layout_marginLeft="328dp"
                 android:layout_marginTop="335dp"
                 android:text="@string/Quantity"
-                android:textColor="#000"
-                android:textSize="17sp"
-
-                />
+                android:textColor="@color/colorBlack"
+                android:textSize="17sp" />
 
             <ImageView
                 android:id="@+id/plus"
@@ -128,10 +102,7 @@
                 android:layout_marginStart="100dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="335dp"
-                android:src="@drawable/ic_baseline_add_24"
-
-
-                />
+                android:src="@drawable/ic_baseline_add_24" />
 
             <TextView
                 android:id="@+id/Quantity"
@@ -141,10 +112,8 @@
                 android:layout_marginLeft="70dp"
                 android:layout_marginTop="335dp"
                 android:text="0"
-                android:textColor="#000"
-                android:textSize="20sp"
-
-                />
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/minus"
@@ -153,28 +122,22 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="329dp"
-                android:src="@drawable/ic_baseline_minimize_24"
-
-
-                />
+                android:src="@drawable/ic_baseline_minimize_24" />
 
             <Button
-
                 android:id="@+id/addImage"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="400dp"
                 android:layout_marginRight="40dp"
-                android:backgroundTint="@color/colorPrimaryLight"
-
-                android:background="@drawable/button_shap_white"
+                android:background="@drawable/shape_nav"
                 android:clickable="true"
                 android:enabled="true"
                 android:focusable="false"
-
                 android:focusableInTouchMode="false"
                 android:text="@string/selectImage"
+                android:fontFamily="@font/roboto_regular"
                 android:textAllCaps="false"
                 android:textColor="#FFF"
                 android:textSize="15sp" />
@@ -182,8 +145,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
                 android:layout_marginTop="450dp"
-                 android:layout_marginLeft="150dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -196,26 +159,23 @@
             </LinearLayout>
 
             <Button
-
                 android:id="@+id/addProduct"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="570dp"
                 android:layout_marginRight="40dp"
-
-                android:background="@drawable/button_shap"
+                android:background="@drawable/shape_nav"
                 android:clickable="true"
                 android:enabled="true"
                 android:focusable="false"
-
                 android:focusableInTouchMode="false"
                 android:text="@string/Add"
                 android:textAllCaps="false"
-
                 android:textColor="#fff"
                 android:textSize="15sp" />
         </RelativeLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

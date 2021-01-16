@@ -93,12 +93,12 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
                         sharedPreference.save("userType","Admin")
                     else
                         sharedPreference.save("userType","Customer")
-
                     sharedPreference.save("userEmail",email)
 
                     //val user = mAuth!!.currentUser
             val intent = Intent(this, MainScreen::class.java)
                 //    val intent = Intent(this, ChangePassword::class.java)
+
                     startActivity(intent)
 
 

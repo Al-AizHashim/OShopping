@@ -34,7 +34,7 @@
     <string name="MyAccount">My Account</string>
     <string name="log_out">log Out</string>
     <string name="contact_us">Contact Us</string>
-    <string name="about_us">About Us</string>
+    <string name="about_us">About</string>
     <string name="Delivery_Addresses">Delivery_Addresses</string>
     <string name="my_Balance">My Balance</string>
     <string name="my_products">My Products</string>
@@ -55,6 +55,9 @@
     <string name="add_report">Add report</string>
     <string name="show_categories">Show Categories</string>
     <string name="show_reports">Show reports</string>
+
+    <string name="log_in">LOG IN</string>
+
 
 
 </resources>
