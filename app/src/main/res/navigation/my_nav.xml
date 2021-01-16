@@ -11,16 +11,39 @@
         tools:layout="@layout/fragment_setting" >
         <action
             android:id="@+id/action_settingFragment_to_aboutUsFragment"
-            app:destination="@id/aboutUsFragment" />
+            app:destination="@id/aboutUsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_settingFragment_to_myAccountFragment"
-            app:destination="@id/myAccountFragment" />
+            app:destination="@id/myAccountFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
         <action
             android:id="@+id/action_settingFragment_to_myProductFragment"
-            app:destination="@id/myProductFragment" />
+            app:destination="@id/myProductFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
         <action
             android:id="@+id/action_settingFragment_to_adminFragment"
-            app:destination="@id/adminFragment" />
+            app:destination="@id/adminFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
+        <action
+            android:id="@+id/action_settingFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -47,10 +70,18 @@
         tools:layout="@layout/fragment_my_product" >
         <action
             android:id="@+id/action_myProductFragment_to_updateProductFragment"
-            app:destination="@id/updateProductFragment" />
+            app:destination="@id/updateProductFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_myProductFragment_to_addProduct2"
-            app:destination="@id/addProduct2" />
+            app:destination="@id/addProduct2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
     </fragment>
     <fragment
         android:id="@+id/updateProductFragment"
@@ -66,4 +97,9 @@
         android:name="com.yemen.oshopping.setting.AdminFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.yemen.oshopping.setting.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
 </navigation>
