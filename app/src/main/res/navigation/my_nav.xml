@@ -121,12 +121,28 @@
         android:id="@+id/addCategoryFragment"
         android:name="com.yemen.oshopping.admin.AddCategoryFragment"
         android:label="fragment_add_category"
-        tools:layout="@layout/fragment_add_category" />
+        tools:layout="@layout/fragment_add_category" >
+        <action
+            android:id="@+id/action_addCategoryFragment_to_showCategoryFragment"
+            app:destination="@id/showCategoryFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
     <fragment
         android:id="@+id/addReportFragment"
         android:name="com.yemen.oshopping.admin.AddReportFragment"
         android:label="fragment_add_report"
-        tools:layout="@layout/fragment_add_report" />
+        tools:layout="@layout/fragment_add_report" >
+        <action
+            android:id="@+id/action_addReportFragment_to_showReportFragment"
+            app:destination="@id/showReportFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
     <fragment
         android:id="@+id/showCategoryFragment"
         android:name="com.yemen.oshopping.admin.ShowCategoryFragment"

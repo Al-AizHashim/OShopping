@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -38,6 +39,8 @@ class AddCategoryFragment : Fragment() {
         addCategoryBtn.setOnClickListener {
             val cat= Category(cat_name=addCategoryEditText.text.toString())
             oshoppingViewModel.pushcat(cat)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_addCategoryFragment_to_showCategoryFragment)
 
         }
 

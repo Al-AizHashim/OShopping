@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -37,6 +38,8 @@ class AddReportFragment : Fragment() {
         addReportBtn.setOnClickListener {
             val report= Report(report_name= addReportEditText.text.toString())
             oshoppingViewModel.pushReport(report)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_addReportFragment_to_showReportFragment)
 
         }
         return view
