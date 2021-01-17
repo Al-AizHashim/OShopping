@@ -66,7 +66,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
                 R.id.navigation_Purchases -> {
                     title = resources.getString(R.string.Purchases)
                     loadFragment(Purchases_Fragment())
-                    loadFragment(AddCategoryFragment())
+                   // loadFragment(AddCategoryFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
