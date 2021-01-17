@@ -30,7 +30,7 @@ class ProductDetailsFragment : Fragment() {
     //lateinit var productDetails: TextView
     lateinit var productItem: ProductItem
 
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.1.4/oshopping_api/"
     private var param1: Int = 1
     lateinit var oshoppingViewModel: OshoppingViewModel
 
@@ -84,10 +84,10 @@ class ProductDetailsFragment : Fragment() {
         //productQuantity.text = "Quantity: " + productItem.product_quantity.toString()
         //productDiscount.text = "discount: " + productItem.product_discount.toString()
         //productDetails.text = "product details: " + productItem.product_details
-        var compositeNewsUrl = url + productItem.product_img
+        var compositeProductUrl = url + productItem.product_img
         var conditionString = "string" + productItem.product_img
         if (!conditionString.equals("stringnull"))
-            Picasso.get().load(compositeNewsUrl).into(productImage)
+            Picasso.get().load(compositeProductUrl).into(productImage)
 
     }
 

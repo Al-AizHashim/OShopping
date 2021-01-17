@@ -66,11 +66,11 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
                 R.id.navigation_Purchases -> {
                     title = resources.getString(R.string.Purchases)
                     loadFragment(Purchases_Fragment())
-                    loadFragment(AddCategoryFragment())
+                    //loadFragment(AddCategoryFragment())
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.navigation_settings -> {
+                R.id.navigation_dash_board -> {
                     title = resources.getString(R.string.Profile)
                     val intent= Intent(this,
                         SettingActivity::class.java)

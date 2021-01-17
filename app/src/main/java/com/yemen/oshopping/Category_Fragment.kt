@@ -35,8 +35,8 @@ class Category_Fragment: Fragment()  {
         savedInstanceState: Bundle?
     ): View {
 
-        val view = inflater.inflate(R.layout.category_recycler, container, false)
-        categoryRecyclerView = view.findViewById(R.id.category_recycler_view)
+        val view = inflater.inflate(R.layout.catagory_fragment, container, false)
+        categoryRecyclerView = view.findViewById(R.id.category_recycler_view22)
         categoryRecyclerView.layoutManager = GridLayoutManager(context, 1)
         return view
     }
@@ -69,7 +69,7 @@ class Category_Fragment: Fragment()  {
             parent: ViewGroup,
             viewType: Int
         ): CategoryHolder {
-            val View = LayoutInflater.from(parent.context).inflate(R.layout.catagory_fragment,parent,false)
+            val View = LayoutInflater.from(parent.context).inflate(R.layout.category_recycler,parent,false)
             return CategoryHolder(View)
         }
         override fun getItemCount(): Int = categorys.size

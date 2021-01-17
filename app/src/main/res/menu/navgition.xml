@@ -22,9 +22,9 @@
         android:title="Purchases"/>
 
     <item
-        android:id="@+id/navigation_settings"
+        android:id="@+id/navigation_dash_board"
         android:icon="@drawable/ic_settings"
-        android:title="Settings"/>
+        android:title="DashBoard"/>
 
 
 </menu>
