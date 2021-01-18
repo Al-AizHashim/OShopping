@@ -17,7 +17,7 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 class UpdateReportFragment : Fragment() {
     private lateinit var reportViewModel: OshoppingViewModel
-    val reportArg:UpdateReportFragmentArgs by navArgs ()
+    val reportArg: UpdateReportFragmentArgs by navArgs()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reportViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -29,17 +29,19 @@ class UpdateReportFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_update_report, container, false)
-        val reportId=reportArg.reportIdArg
-        val reportName=reportArg.reportNameArg
+        val reportId = reportArg.reportIdArg
+        val reportName = reportArg.reportNameArg
         val updateReportTextView = view.findViewById(R.id.update_report_et) as TextView
         updateReportTextView.setText(reportName)
         val updateReportBtn = view.findViewById(R.id.update_report_btn) as Button
         updateReportBtn.setOnClickListener {
-            val report=Report(report_id = reportId,report_name =updateReportTextView.text.toString())
+            val report =
+                Report(report_id = reportId, report_name = updateReportTextView.text.toString())
             reportViewModel.updateReport(report)
             updateReportTextView.setText("")
             updateReportTextView.clearFocus()
-            Navigation.findNavController(view).navigate(R.id.action_updateReportFragment_to_showReportFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_updateReportFragment_to_showReportFragment)
         }
 
         return view

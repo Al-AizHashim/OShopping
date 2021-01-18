@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Category
+import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
@@ -60,12 +61,33 @@ class ShowCategoryFragment : Fragment() {
     }
 
     private class CategoryHolder(itemTextView: View)
-        : RecyclerView.ViewHolder(itemTextView) {
+        : RecyclerView.ViewHolder(itemTextView) ,View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
 
+        }
+        lateinit var catergoryInstance: Category
         val catrgoryTextView = itemTextView.findViewById(R.id.category) as TextView
 
         fun bind(cate: Category){
+            catergoryInstance=cate
             catrgoryTextView.text=cate.cat_name
+        }
+
+
+        override fun onClick(view: View?) {
+            if (view != null) {
+                val action= catergoryInstance.cat_id?.let {
+                    ShowCategoryFragmentDirections
+                        .actionShowCategoryFragmentToUpdateCategoryFragment(
+                            categoryIdArg = it,
+                            categoryNameArg = catergoryInstance.cat_name)
+                }
+                if (action != null) {
+                    Navigation.findNavController(view)
+                        .navigate(action)
+                }
+            }
         }
     }
 

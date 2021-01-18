@@ -155,6 +155,13 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left"/>
+        <action
+            android:id="@+id/action_showCategoryFragment_to_updateCategoryFragment"
+            app:destination="@id/updateCategoryFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/showReportFragment"
@@ -185,6 +192,25 @@
             app:argType="integer" />
         <argument
             android:name="reportNameArg"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCategoryFragment"
+        android:name="com.yemen.oshopping.admin.UpdateCategoryFragment"
+        android:label="fragment_update_category"
+        tools:layout="@layout/fragment_update_category" >
+        <action
+            android:id="@+id/action_updateCategoryFragment_to_showCategoryFragment"
+            app:destination="@id/showCategoryFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+        <argument
+            android:name="categoryIdArg"
+            app:argType="integer" />
+        <argument
+            android:name="categoryNameArg"
             app:argType="string" />
     </fragment>
 </navigation>
