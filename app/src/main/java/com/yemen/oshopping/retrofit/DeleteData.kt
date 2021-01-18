@@ -13,33 +13,14 @@ class DeleteData {
 
 
     fun deleteCategory(category: Category){
-
-        val deleteCategoryRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi
-            .deleteCategory(category.cat_id)
-
-        deleteCategoryRequest.enqueue(object : Callback<DefaultResponse> {
-
-            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                Log.e("deleteCategory", "Failed to delete Category", t)
-
-            }
-
-            override fun onResponse(
-                call: Call<DefaultResponse>,
-                response: Response<DefaultResponse>
-            ) {
-                Log.d("deleteCategory", "Category deleted successfully")
-
-            }
-        })
-
+        return deleteMetaData(RetrofitClient().oshoppingApi.deleteCategory(category.cat_id))
     }
+
     fun deleteReport(report: Report) {
         return deleteMetaData(RetrofitClient().oshoppingApi.deleteReport(report.report_id))
     }
+
     fun deleteMetaData(deleteRequest: Call<DefaultResponse>){
-
-
 
         deleteRequest.enqueue(object : Callback<DefaultResponse> {
 

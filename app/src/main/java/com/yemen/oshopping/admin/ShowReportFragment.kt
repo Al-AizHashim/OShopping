@@ -1,5 +1,6 @@
 package com.yemen.oshopping.admin
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -63,8 +65,21 @@ class ShowReportFragment : Fragment() {
                 Log.d("fetchReport", "Reports fetched successfully ${listOfReports}")
                 reportRecyclerView.adapter = ReportAdapter(listOfReports)
 
+
             })
 
+    }
+
+    private fun restoreDeletedData(view: View, deletedItem: Report) {
+        val snackBar = Snackbar.make(
+            view, "Deleted '${deletedItem.report_name}'",
+            Snackbar.LENGTH_LONG
+        )
+        snackBar.setAction("Undo") {
+            reportViewModel.pushReport(deletedItem)
+            updateUi()
+        }
+        snackBar.show()
     }
 
     private inner class ReportHolder(itemTextView: View)
@@ -77,8 +92,10 @@ class ShowReportFragment : Fragment() {
 
             reportTextView.text=report.report_name
             reportDeleteBtn.setOnClickListener {
+
                 reportViewModel.deleteReport(report)
                 updateUi()
+                restoreDeletedData(ReportHolder(requireView()).itemView,report)
 
             }
         }

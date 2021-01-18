@@ -75,7 +75,9 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun pushcat(category: Category) = PushData().pushCategory(category)
     fun pushProduct(product: ProductDetails) = PushData().pushProduct(product)
     fun pushUser(user: User) = PushData().pushUser(user)
-    fun pushReport(report: Report) = PushData().pushReport(report)
+    fun pushReport(report: Report) { PushData().pushReport(report)
+        reportItemLiveData=FetchData().fetchReport()
+    }
 
 
     //update data in database
