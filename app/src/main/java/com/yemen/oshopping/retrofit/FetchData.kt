@@ -3,13 +3,11 @@ package com.yemen.oshopping.retrofit
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.yemen.oshopping.api.CategoryResponse
-import com.yemen.oshopping.api.ProductResponse
-import com.yemen.oshopping.api.ReportResponse
-import com.yemen.oshopping.api.SingleProductResponse
+import com.yemen.oshopping.api.*
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.model.Report
+import com.yemen.oshopping.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -157,6 +155,37 @@ class FetchData {
                 val reportItems: List<Report> = reportResponse?.reportItem
                     ?: mutableListOf()
                 responseLiveData.value = reportItems
+            }
+        })
+
+        return responseLiveData
+    }
+
+    //fetch users
+    fun fetchUsers(): LiveData<List<User>> {
+        return fetchUserMetaData(RetrofitClient().oshoppingApi.fetchUsers())
+    }
+    fun fetchUserByEmail(email:String): LiveData<List<User>> {
+        return fetchUserMetaData(RetrofitClient().oshoppingApi.fetchUserByEmail(email))
+    }
+    fun fetchUserMetaData(userRequest: Call<UserResponse>): LiveData<List<User>> {
+        val responseLiveData: MutableLiveData<List<User>> = MutableLiveData()
+
+        userRequest.enqueue(object : Callback<UserResponse> {
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.d("fetchReport", "Failed to fetch Reports", t)
+            }
+
+            override fun onResponse(
+                call: Call<UserResponse>,
+                response: Response<UserResponse>
+            ) {
+                Log.d("fetchReport", "Reports received successfully")
+                val userResponse: UserResponse? = response.body()
+                val userItems: List<User> = userResponse?.userItem
+                    ?: mutableListOf()
+                responseLiveData.value = userItems
             }
         })
 

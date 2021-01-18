@@ -2,15 +2,20 @@ package com.yemen.oshopping
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.MenuRes
+import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,8 +28,18 @@ import java.text.SimpleDateFormat
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Home_Fragment: Fragment(){
+class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     var url: String = "http://192.168.1.4/oshopping_api/"
+    private lateinit var trendBtn:Button
+    private lateinit var categoryBtn:Button
+    private lateinit var colorBtn:Button
+    private lateinit var vendorBtn:Button
+    private lateinit var highestRateBtn:Button
+    private lateinit var popupMenu:PopupMenu
+    private lateinit var   searchView :SearchView
+
+
+
     interface Callbacks {
         fun onProductSelected(product_id: Int)
     }
@@ -59,26 +74,165 @@ class Home_Fragment: Fragment(){
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         showProductRecyclerView = view.findViewById(R.id.show_product_recycler_view)
         showProductRecyclerView.layoutManager = GridLayoutManager(context, 1)
+        trendBtn=view.findViewById(R.id.trend_btn)
+        categoryBtn=view.findViewById(R.id.category_btn)
+        colorBtn=view.findViewById(R.id.color_btn)
+        vendorBtn=view.findViewById(R.id.vendor_btn)
+        highestRateBtn=view.findViewById(R.id.highest_rate_btn)
+        searchView = view.findViewById(R.id.search_view)
+        //searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+        popupMenu= PopupMenu(requireContext(),categoryBtn)
+        oshoppingViewModel.categoryItemLiveData.observe(
+            viewLifecycleOwner,
+            Observer { categories ->
+                Log.d("fetchCategoryMenu", "Category fetched successfully ${categories}")
+                var count=0
+                for(i  in categories ){
+
+                    categories[count].cat_id?.let {
+                        popupMenu.menu.add(Menu.NONE,
+                            it,count,categories[count].cat_name)
+                    }
+
+                    count++
+
+                }
+
+            })
+
+
+
+        val popupColorMenuBtn = view.findViewById<Button>(R.id.menu_button)
+
+        popupColorMenuBtn.setOnClickListener { v: View ->
+            popupColorMenuBtn.isSelected=true
+            showMenu(v, R.menu.popup_color_menu)
+        }
+
+
+
 
         return view
     }
 
+
+
+
+
+private fun showMenu(v: View, @MenuRes menuRes: Int) {
+    val popup = PopupMenu(requireContext(), v)
+    popup.menuInflater.inflate(menuRes, popup.menu)
+
+    popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+        // Respond to menu item click.
+        when(menuItem.itemId){
+            R.id.option_1 -> {
+                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
+
+            }
+            R.id.option_2 -> {
+                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
+
+            }
+            R.id.option_3 -> {
+                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
+
+            }
+
+        }
+        return@setOnMenuItemClickListener true
+
+    }
+    popup.setOnDismissListener {
+        // Respond to popup being dismissed.
+    }
+    // Show the popup menu.
+    popup.show()
+}
+
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        trendBtn.isSelected=true
         oshoppingViewModel.productItemLiveData.observe(
             viewLifecycleOwner, androidx.lifecycle.Observer
             { productItems ->
                 Log.d("productItemLiveData", "product Item Live Data")
                 updateui(productItems)
             })
+        //trend is the default
+        trendBtn.setOnClickListener {
+            vendorBtn.isSelected = false
+            categoryBtn.isSelected=false
+            trendBtn.isSelected=true
+            colorBtn.isSelected=false
+            highestRateBtn.isSelected=false
+            oshoppingViewModel.productItemLiveData.observe(
+                viewLifecycleOwner, androidx.lifecycle.Observer
+                { productItems ->
+                    Log.d("productItemLiveData", "product Item Live Data")
+                    updateui(productItems)
+                })
+        }
+        vendorBtn.setOnClickListener {
+            vendorBtn.isSelected = true
+            categoryBtn.isSelected=false
+            trendBtn.isSelected=false
+            colorBtn.isSelected=false
+            highestRateBtn.isSelected=false
 
+            oshoppingViewModel.getProductByVendorId(2)
+            oshoppingViewModel.productItemLiveDataByVendorID.observe(
+                viewLifecycleOwner, androidx.lifecycle.Observer
+                { productItems ->
+                    Log.d("productItemLiveData", "product Item Live Data")
+                    updateui(productItems)
+                })
 
+        }
+        categoryBtn.setOnClickListener {
+            categoryBtn.isSelected=true
+            vendorBtn.isSelected=false
+            trendBtn.isSelected=false
+            colorBtn.isSelected=false
+            highestRateBtn.isSelected=false
+            popupMenu.show()
+            popupMenu.setOnMenuItemClickListener {menuItem: MenuItem? ->
+                if (menuItem != null) {
+                    oshoppingViewModel.loadProductByCategory(menuItem.itemId)
+                }
+                oshoppingViewModel.productItemLiveDataByCategory.observe(
+                    viewLifecycleOwner, androidx.lifecycle.Observer
+                    { productItemsByCategory ->
+                        Log.d("productItemLiveData", "product Item Live Data")
+                        updateui(productItemsByCategory)
+                    }
+                )
+                return@setOnMenuItemClickListener true
 
+            }
 
-
+        }
+        colorBtn.setOnClickListener {
+            categoryBtn.isSelected=false
+            vendorBtn.isSelected=false
+            trendBtn.isSelected=false
+            colorBtn.isSelected=true
+            highestRateBtn.isSelected=false
+        }
+        highestRateBtn.setOnClickListener {
+            categoryBtn.isSelected=false
+            vendorBtn.isSelected=false
+            trendBtn.isSelected=false
+            colorBtn.isSelected=false
+            highestRateBtn.isSelected=true
+        }
 
     }
+
 
     private fun updateui(productItems: List<ProductItem>) {
         showProductRecyclerView.adapter = ShowProductAdapter(productItems)
@@ -91,12 +245,6 @@ class Home_Fragment: Fragment(){
 
         }
         private lateinit var productItemss: ProductItem
-        @SuppressLint("SimpleDateFormat")
-        var dateFormatter: SimpleDateFormat = SimpleDateFormat("EE, MM d, yyyy")
-
-        @SuppressLint("SimpleDateFormat")
-        var timeFormatter: SimpleDateFormat = SimpleDateFormat("hh:mm a")
-
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
@@ -162,5 +310,31 @@ class Home_Fragment: Fragment(){
 
             }
         }
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query != null) {
+            searchThroughDatabase(query)
+        }
+       searchView.clearFocus()
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText != null) {
+            searchThroughDatabase(newText)
+        }
+
+        return true
+    }
+    private fun searchThroughDatabase(query: String) {
+        oshoppingViewModel.search(query)
+        oshoppingViewModel.searchLiveData.observe(
+            viewLifecycleOwner, androidx.lifecycle.Observer
+            { searchResultItems ->
+                Log.d("searchResultItems", "search result is received")
+                updateui(searchResultItems)
+            })
+
     }
 }

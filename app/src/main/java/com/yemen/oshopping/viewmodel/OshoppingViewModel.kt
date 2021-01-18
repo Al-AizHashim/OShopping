@@ -1,10 +1,8 @@
 package com.yemen.oshopping.viewmodel
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.yemen.oshopping.model.*
 
 import com.yemen.oshopping.retrofit.DeleteData
@@ -12,20 +10,24 @@ import com.yemen.oshopping.retrofit.DeleteData
 import com.yemen.oshopping.retrofit.FetchData
 import com.yemen.oshopping.retrofit.PushData
 import com.yemen.oshopping.retrofit.UpdateData
+import com.yemen.oshopping.sharedPreferences.UserSharedPreferences
 
 
-class OshoppingViewModel : ViewModel() {
+class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) {
 
     val productItemLiveData: LiveData<List<ProductItem>>
     val categoryItemLiveData: LiveData<List<Category>>
     var productLiveData = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
     val reportItemLiveData: LiveData<List<Report>>
+    val userLiveData= MutableLiveData <String> ()
+    val userItemLiveData:LiveData<List<User>>
 
     init {
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
         reportItemLiveData=FetchData().fetchReport()
+        userItemLiveData=FetchData().fetchUsers()
     }
 
     var productItemLiveDataByCategory: LiveData<List<ProductItem>> =
@@ -45,6 +47,14 @@ class OshoppingViewModel : ViewModel() {
         Transformations.switchMap(productLiveData) { vendor_id ->
             FetchData().fetchProductByVendorId (vendor_id)
         }
+
+    var userItemLiveDataByEmail: LiveData<List<User>> =
+        Transformations.switchMap(userLiveData) { email ->
+            FetchData().fetchUserByEmail(email)
+        }
+    fun getUserByEmail(email: String) {
+        userLiveData.value = email
+    }
     fun getProductByVendorId(vendor_id: Int) {
         productLiveData.value = vendor_id
     }
@@ -76,5 +86,22 @@ class OshoppingViewModel : ViewModel() {
 
     fun deleteCategory(category: Category) = DeleteData().deleteCategory(category)
 
+
+
+    ////////
+    //shared preferences
+    fun setUserId(userId: Int=-1) {
+        UserSharedPreferences.setStoredUserId(app, userId)
+    }
+    fun getstoredUserId():Int {
+       return UserSharedPreferences.getStoredUserId(app)
+    }
+
+    fun setUserEmail(userEmail: String="none") {
+        UserSharedPreferences.setStoredEmail(app, userEmail)
+    }
+    fun getStoredEmail():String? {
+        return UserSharedPreferences.getStoredUserEmail(app)
+    }
 
 }

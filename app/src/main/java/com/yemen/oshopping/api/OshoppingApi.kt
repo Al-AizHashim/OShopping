@@ -86,6 +86,9 @@ product_discount
     @GET("oshopping_api/api/report_api.php")
     fun fetchReport(): Call<ReportResponse>
 
+    @GET("oshopping_api/api/user_api.php")
+    fun fetchUserByEmail(@Query("email") email: String): Call<UserResponse>
+
 
 
     //put

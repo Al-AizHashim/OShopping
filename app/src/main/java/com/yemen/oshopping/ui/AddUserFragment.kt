@@ -55,6 +55,7 @@ class AddUserFragment : Fragment() {
             )
             oshoppingViewModel.pushUser(user)
 
+
         }
         return view
     }
