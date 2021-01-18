@@ -39,6 +39,8 @@ class AddCategoryFragment : Fragment() {
         addCategoryBtn.setOnClickListener {
             val cat= Category(cat_name=addCategoryEditText.text.toString())
             oshoppingViewModel.pushcat(cat)
+            addCategoryBtn.clearFocus()
+            addCategoryEditText.setText("")
             Navigation.findNavController(view)
                 .navigate(R.id.action_addCategoryFragment_to_showCategoryFragment)
 

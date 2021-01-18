@@ -16,7 +16,7 @@ import com.yemen.oshopping.sharedPreferences.UserSharedPreferences
 class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) {
 
     val productItemLiveData: LiveData<List<ProductItem>>
-    val categoryItemLiveData: LiveData<List<Category>>
+    var categoryItemLiveData: LiveData<List<Category>>
     var productLiveData = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
     var reportItemLiveData: LiveData<List<Report>>
@@ -72,7 +72,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         mutableSearchTerm.value = query
     }
 
-    fun pushcat(category: Category) = PushData().pushCategory(category)
+    fun pushcat(category: Category) {
+        PushData().pushCategory(category)
+        categoryItemLiveData=FetchData().fetchCategory()
+    }
     fun pushProduct(product: ProductDetails) = PushData().pushProduct(product)
     fun pushUser(user: User) = PushData().pushUser(user)
     fun pushReport(report: Report) { PushData().pushReport(report)
@@ -90,7 +93,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     }
     //delete functions
-    fun deleteCategory(category: Category) = DeleteData().deleteCategory(category)
+    fun deleteCategory(category: Category) {
+        DeleteData().deleteCategory(category)
+        categoryItemLiveData=FetchData().fetchCategory()
+    }
     fun deleteReport(report: Report) {
         DeleteData().deleteReport(report)
         reportItemLiveData=FetchData().fetchReport()
