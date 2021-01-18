@@ -83,8 +83,12 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     //update data in database
     fun updateCategory(category: Category) = UpdateData().updateCategory(category)
 
-    fun updatUser(user: User) = UpdateData().updateUser(user)
+    fun updateUser(user: User) = UpdateData().updateUser(user)
+    fun updateReport(report: Report){
+        UpdateData().updateReport(report)
+        reportItemLiveData=FetchData().fetchReport()
 
+    }
     //delete functions
     fun deleteCategory(category: Category) = DeleteData().deleteCategory(category)
     fun deleteReport(report: Report) {

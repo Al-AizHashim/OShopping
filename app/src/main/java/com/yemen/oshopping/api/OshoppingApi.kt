@@ -99,6 +99,12 @@ product_discount
     ): Call<DefaultResponse>
 
     @FormUrlEncoded
+    @PUT("oshopping_api/api/report_api.php")
+    fun updateReport(
+        @Field("report_id") report_id: Int?, @Field("report_name") report_name: String
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
     @PUT("oshopping_api/api/user_api.php")
     fun updateUser(
         @Field("user_id") user_id: Int?,

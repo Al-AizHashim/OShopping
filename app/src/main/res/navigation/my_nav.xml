@@ -168,5 +168,23 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left"/>
+        <action
+            android:id="@+id/action_showReportFragment_to_updateReportFragment"
+            app:destination="@id/updateReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateReportFragment"
+        android:name="com.yemen.oshopping.admin.UpdateReportFragment"
+        android:label="fragment_update_report"
+        tools:layout="@layout/fragment_update_report" >
+        <action
+            android:id="@+id/action_updateReportFragment_to_showReportFragment"
+            app:destination="@id/showReportFragment" />
+        <argument
+            android:name="reportIdArg"
+            app:argType="integer" />
+        <argument
+            android:name="reportNameArg"
+            app:argType="string" />
     </fragment>
 </navigation>

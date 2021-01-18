@@ -1,13 +1,11 @@
 package com.yemen.oshopping.admin
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -28,7 +26,6 @@ class ShowReportFragment : Fragment() {
     private lateinit var noDataTextView: TextView
     lateinit var fab: FloatingActionButton
     private lateinit var reportRecyclerView: RecyclerView
-    private lateinit var reports: List<Report>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +44,7 @@ class ShowReportFragment : Fragment() {
         noDataImageView=view.findViewById(R.id.report_no_data_imageView)
         noDataTextView=view.findViewById(R.id.no_data_textView)
         fab.setOnClickListener {
+
             Navigation.findNavController(view)
                 .navigate(R.id.action_showReportFragment_to_addReportFragment)
         }
@@ -83,13 +81,18 @@ class ShowReportFragment : Fragment() {
     }
 
     private inner class ReportHolder(itemTextView: View)
-        : RecyclerView.ViewHolder(itemTextView) {
+        : RecyclerView.ViewHolder(itemTextView),View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+
+        }
+        lateinit var reportIns:Report
 
         val reportTextView = itemTextView.findViewById(R.id.report_text_view) as TextView
         val reportDeleteBtn=itemTextView.findViewById(R.id.delete_image_view) as ImageView
 
         fun bind(report: Report){
-
+            reportIns=report
             reportTextView.text=report.report_name
             reportDeleteBtn.setOnClickListener {
 
@@ -97,6 +100,19 @@ class ShowReportFragment : Fragment() {
                 updateUi()
                 restoreDeletedData(ReportHolder(requireView()).itemView,report)
 
+            }
+        }
+
+        override fun onClick(view: View?) {
+            if (view != null) {
+                val action= reportIns.report_id?.let {
+                    ShowReportFragmentDirections
+                        .actionShowReportFragmentToUpdateReportFragment(reportIdArg = it, reportNameArg = reportIns.report_name)
+                }
+                if (action != null) {
+                    Navigation.findNavController(view)
+                        .navigate(action)
+                }
             }
         }
     }
