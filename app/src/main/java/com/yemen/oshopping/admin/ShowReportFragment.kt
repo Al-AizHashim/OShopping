@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -25,6 +26,7 @@ class ShowReportFragment : Fragment() {
     private lateinit var noDataTextView: TextView
     lateinit var fab: FloatingActionButton
     private lateinit var reportRecyclerView: RecyclerView
+    private lateinit var reports: List<Report>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,22 +53,34 @@ class ShowReportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateUi()
+
+    }
+    fun updateUi(){
         reportViewModel.reportItemLiveData.observe(
             viewLifecycleOwner,
-            Observer { Reports ->
-                Log.d("fetchReport", "Reports fetched successfully ${Reports}")
-                reportRecyclerView.adapter = ReportAdapter(Reports)
+            Observer { listOfReports ->
+                Log.d("fetchReport", "Reports fetched successfully ${listOfReports}")
+                reportRecyclerView.adapter = ReportAdapter(listOfReports)
 
             })
+
     }
 
-    private class ReportHolder(itemTextView: View)
+    private inner class ReportHolder(itemTextView: View)
         : RecyclerView.ViewHolder(itemTextView) {
 
         val reportTextView = itemTextView.findViewById(R.id.report_text_view) as TextView
+        val reportDeleteBtn=itemTextView.findViewById(R.id.delete_image_view) as ImageView
 
         fun bind(report: Report){
+
             reportTextView.text=report.report_name
+            reportDeleteBtn.setOnClickListener {
+                reportViewModel.deleteReport(report)
+                updateUi()
+
+            }
         }
     }
 

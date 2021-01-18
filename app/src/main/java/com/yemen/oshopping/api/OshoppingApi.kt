@@ -122,7 +122,11 @@ product_discount
 
 
     @DELETE("oshopping_api/api/category_api.php")
-    fun deleteCategory(@Field("cat_id") cat_id: Int?,@Field("cat_name") cat_name: String
+    fun deleteCategory(@Query("cat_id") cat_id: Int?
+    ): Call<DefaultResponse>
+
+    @DELETE("oshopping_api/api/report_api.php")
+    fun deleteReport(@Query("report_id") report_id: Int?
     ): Call<DefaultResponse>
 
 }
