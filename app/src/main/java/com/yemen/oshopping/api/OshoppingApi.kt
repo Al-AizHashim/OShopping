@@ -60,6 +60,14 @@ product_discount
         @Field("create_at") create_at: String?
     ): Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @POST("oshopping_api/api/rating_api.php")
+    fun pushRating(
+        @Field("product_id") product_id: Int,
+        @Field("user_id") user_id: Int,
+        @Field("rating") rating: Int
+    ): Call<DefaultResponse>
+
     //get
     @GET("oshopping_api/api/product_api.php")
     fun fetchProduct(): Call<ProductResponse>

@@ -30,6 +30,7 @@ class PushData {
 
 
     }
+
     fun pushReport(report: Report) {
         val pushReportRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi
             .postReport(report.report_name)
@@ -53,6 +54,31 @@ class PushData {
 
     }
 
+    fun pushRating(rating: Rating) {
+        val pushRatingRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi
+            .pushRating(
+                rating.product_id,
+                rating.user_id, rating.rating
+            )
+
+        pushRatingRequest.enqueue(object : Callback<DefaultResponse> {
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.e("pushReport", "Failed to push rating", t)
+
+            }
+
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushReport", "rating pushed successfully")
+
+            }
+        })
+
+
+    }
 
     fun pushProduct(p: ProductDetails) {
         val pushProductRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushProduct(
@@ -89,7 +115,7 @@ class PushData {
     }
 
     fun pushUser(user: User) {
-        Log.d("pushUser", "pushUser:${user.toString()} ")
+        Log.d("pushUser", "pushUser:$user ")
         val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushUser(
             user.user_id,
             user.first_name,

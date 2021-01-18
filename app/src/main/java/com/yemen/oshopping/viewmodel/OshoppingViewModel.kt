@@ -1,5 +1,6 @@
 package com.yemen.oshopping.viewmodel
 
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -65,6 +66,7 @@ class OshoppingViewModel : ViewModel() {
     fun pushcat(category: Category) = PushData().pushCategory(category)
     fun pushProduct(product: ProductDetails) = PushData().pushProduct(product)
     fun pushUser(user: User) = PushData().pushUser(user)
+    fun pushRating(rating: Rating) = PushData().pushRating(rating)
     fun pushReport(report: Report) = PushData().pushReport(report)
 
 

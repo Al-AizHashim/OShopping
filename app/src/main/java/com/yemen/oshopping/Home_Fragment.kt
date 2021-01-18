@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,18 +17,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.model.ProductItem
-import com.yemen.oshopping.ui.ShowProductFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import java.text.SimpleDateFormat
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Home_Fragment: Fragment(){
+class Home_Fragment : Fragment() {
     var url: String = "http://192.168.1.4/oshopping_api/"
+
     interface Callbacks {
         fun onProductSelected(product_id: Int)
     }
+
     private var callbacks: Callbacks? = null
 
     private lateinit var oshoppingViewModel: OshoppingViewModel
@@ -74,10 +76,6 @@ class Home_Fragment: Fragment(){
             })
 
 
-
-
-
-
     }
 
     private fun updateui(productItems: List<ProductItem>) {
@@ -85,12 +83,14 @@ class Home_Fragment: Fragment(){
     }
 
     private inner class ShowProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener  {
+        View.OnClickListener {
         init {
             itemView.setOnClickListener(this)
 
         }
+
         private lateinit var productItemss: ProductItem
+
         @SuppressLint("SimpleDateFormat")
         var dateFormatter: SimpleDateFormat = SimpleDateFormat("EE, MM d, yyyy")
 
@@ -100,23 +100,29 @@ class Home_Fragment: Fragment(){
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
+        private val productRatingNo = itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
+        private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product)  as RatingBar
 
 
         fun bind(productItems: ProductItem) {
             var compositeProductUrl = url + productItems.product_img
-            var conditionString = "string" +productItems.product_img
+            var conditionString = "string" + productItems.product_img
             if (!conditionString.equals("stringnull"))
                 Picasso.get().load(compositeProductUrl).into(productImage)
-            productItemss=productItems
+            productItemss = productItems
             productName.text = productItems.product_name
-            productDate.text =productItems.product_date
-
+            productDate.text = productItems.product_date
+            productRatingNo.setText(productItems.number_of_ratings.toString()+" votes")
+            productRating.rating=productItems.rating_average
         }
 
 
         override fun onClick(v: View?) {
-            Toast.makeText(requireContext(),"The id: ${productItemss.product_id} and title ${productItemss.product_name} is clicked",
-                Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "The id: ${productItemss.product_id} and title ${productItemss.product_name} is clicked",
+                Toast.LENGTH_LONG
+            ).show()
             callbacks?.onProductSelected(productItemss.product_id)
         }
 
@@ -132,7 +138,8 @@ class Home_Fragment: Fragment(){
             viewType: Int
         ): ShowProductHolder {
             val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.show_product_list_item, parent, false)
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.show_product_list_item, parent, false)
             return ShowProductHolder(view)
         }
 
@@ -144,6 +151,7 @@ class Home_Fragment: Fragment(){
 
         }
     }
+
     override fun onDetach() {
         super.onDetach()
         callbacks = null
@@ -156,6 +164,7 @@ class Home_Fragment: Fragment(){
 
             }
         }
+
         fun newInstance(productCategory: String) = Home_Fragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_PARAM1, productCategory)

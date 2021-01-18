@@ -132,6 +132,7 @@ class FetchData {
                 val categoryResponse: CategoryResponse? = response.body()
                 val categoryItems: List<Category> = categoryResponse?.categoryItem
                     ?: mutableListOf()
+
                 responseLiveData.value = categoryItems
             }
         })

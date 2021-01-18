@@ -5,69 +5,113 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="32dp"
+    android:background="@color/colorPrimaryDark"
     android:clickable="true"
     android:focusable="true"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
-    android:layout_marginBottom="32dp">
-
+    android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints"
         android:background="@color/colorWhite"
-        android:layout_marginRight="40dp"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/product_nameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/NameProduct"
-            android:textSize="16sp"
             android:textColor="@color/colorBlack"
-            />
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/product_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/CategoryProduct"
             android:layout_marginBottom="16dp"
-            android:textSize="12sp"
-            android:textColor="@color/colorGray"/>
+            android:text="@string/CategoryProduct"
+            android:textColor="@color/colorGray"
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/PriceProduct"
             android:layout_marginBottom="8dp"
+            android:text="@string/PriceProduct"
+            android:textColor="@color/colorAccent"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"/>
-        <Button
-            android:id="@+id/product_add_btn"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:id="@+id/rating_linear_layout_show_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_shopping_cart"
-            android:text="    Add "
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:textSize="12sp"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/button_shap"/>
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/product_add_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_shap"
+                android:drawableLeft="@drawable/ic_shopping_cart"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="    Add "
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="33dp"
+                android:layout_gravity="center_horizontal">
+
+                <RatingBar
+                    android:id="@+id/rating_Bar_Show_product"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:background="#FFFFFF"
+                    android:isIndicator="true"
+                    android:longClickable="false"
+                    android:numStars="5"
+                    android:progressTint="@android:color/holo_orange_light"
+                    android:rating="0"
+                    android:stepSize="1"
+                    android:theme="@style/Widget.AppCompat.RatingBar.Small" />
+
+                <TextView
+                    android:id="@+id/rating_bar_text_view_show_prodcut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="21dp"
+                    android:textColor="@android:color/holo_orange_light"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
 
     <ImageView
         android:id="@+id/product_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/logobrown"
         android:scaleType="centerCrop"
+        android:src="@drawable/logobrown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
