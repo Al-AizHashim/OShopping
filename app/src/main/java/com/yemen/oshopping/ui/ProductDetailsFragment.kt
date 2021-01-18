@@ -5,15 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.ProductItem
+import com.yemen.oshopping.model.Rating
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 private const val ARG_PARAM1 = "product_id"
@@ -25,10 +24,15 @@ class ProductDetailsFragment : Fragment() {
     lateinit var rialProductPrice: TextView
     lateinit var dollarProductPrice: TextView
     lateinit var addToCart: Button
-   // lateinit var productQuantity: TextView
+    lateinit var ratingBarTexView: TextView
+
+    // lateinit var productQuantity: TextView
     //lateinit var productDiscount: TextView
     //lateinit var productDetails: TextView
     lateinit var productItem: ProductItem
+    lateinit var ratingBar: RatingBar
+    lateinit var ratingBar2: RatingBar
+    lateinit var submitRatingBTN: Button
 
     var url: String = "http://192.168.1.4/oshopping_api/"
     private var param1: Int = 1
@@ -56,9 +60,30 @@ class ProductDetailsFragment : Fragment() {
         rialProductPrice = view.findViewById(R.id.product_price_r)
         dollarProductPrice = view.findViewById(R.id.product_price_d)
         addToCart = view.findViewById(R.id.product_add_btn)
+        ratingBar = view.findViewById(R.id.rating_Bar_product_details)
+        ratingBarTexView = view.findViewById(R.id.rating_bar_text_view_prodcut_details)
+        ratingBar2 = view.findViewById(R.id.rating_Bar_2_product_details)
+        submitRatingBTN = view.findViewById(R.id.submit_rating_button)
+        if (ratingBar2 != null) {
+            submitRatingBTN.setOnClickListener {
+                val ratingBarValue = ratingBar2.rating.toString()
+                Toast.makeText(
+                    this@ProductDetailsFragment.context,
+                    "Rating is: " + ratingBarValue, Toast.LENGTH_SHORT
+                ).show()
+                var rating = Rating(
+                    product_id = productItem.product_id,
+                    user_id = 7,
+                    rating = ratingBar2.rating.toInt()
+                )
+                oshoppingViewModel.pushRating(rating)
+
+            }
+        }
+
         //productQuantity = view.findViewById(R.id.prodcut_quantity_text_view)
         //productDiscount = view.findViewById(R.id.prodcut_discount_text_view)
-       // productDetails = view.findViewById(R.id.product_details_text_view)
+        // productDetails = view.findViewById(R.id.product_details_text_view)
 
         return view
     }
@@ -78,9 +103,10 @@ class ProductDetailsFragment : Fragment() {
 
     fun updateUI() {
         productName.text = productItem.product_name
-        rialProductPrice.text =
-             productItem.yrial_price.toString() + "RY"
-        dollarProductPrice.text =  productItem.dollar_price.toString() + "$"
+        rialProductPrice.text = productItem.yrial_price.toString() + "RY"
+        dollarProductPrice.text = productItem.dollar_price.toString() + "$"
+        ratingBar.rating = productItem.rating_average
+        ratingBarTexView.text = productItem.number_of_ratings.toString() + " votes"
         //productQuantity.text = "Quantity: " + productItem.product_quantity.toString()
         //productDiscount.text = "discount: " + productItem.product_discount.toString()
         //productDetails.text = "product details: " + productItem.product_details

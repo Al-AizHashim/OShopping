@@ -22,7 +22,6 @@ class AddUserFragment : Fragment() {
     lateinit var longitudeEditText: EditText
     lateinit var detailsEditText: EditText
     lateinit var saveProfileBTN: Button
-
     lateinit var oshoppingViewModel: OshoppingViewModel
 
 
