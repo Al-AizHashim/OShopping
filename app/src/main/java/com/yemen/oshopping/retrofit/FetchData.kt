@@ -37,7 +37,7 @@ class FetchData {
             ) {
                 Log.d(TAG, "Response received successfully")
                 val userResponse: UserResponse? = response.body()
-                val user: List<User> = userResponse?.user
+                val user: List<User> = userResponse?.userItem
                     ?: mutableListOf()
                 responseLiveData.value = user
                 Log.d("onResponse", "onResponse: $user")
@@ -95,31 +95,6 @@ class FetchData {
         return responseLiveData
     }
 
-/*
-    fun fetchCategory(): LiveData<List<Category>> {
-        val responseLiveData: MutableLiveData<List<Category>> = MutableLiveData()
-        var categoryRequest: Call<CategoryResponse> = RetrofitClient().oshoppingApi.fetchCategory()
-        categoryRequest.enqueue(object : Callback<CategoryResponse> {
-
-            override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
-                Log.d(TAG, "Failed to fetch Product", t)
-            }
-
-            override fun onResponse(
-                call: Call<CategoryResponse>,
-                response: Response<CategoryResponse>
-            ) {
-                Log.d(TAG, "Response received successfully")
-                val categoryResponse: CategoryResponse? = response.body()
-                val categoryItems: List<Category> = categoryResponse?.categoryItem
-                    ?: mutableListOf()
-
-                responseLiveData.value = categoryItems
-            }
-    })
-        return responseLiveData
-}
- */
 
 
     fun fetchProductByCategory(category_id: Int): LiveData<List<ProductItem>> {

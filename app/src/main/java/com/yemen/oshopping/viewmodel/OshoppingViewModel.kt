@@ -1,5 +1,6 @@
 package com.yemen.oshopping.viewmodel
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.yemen.oshopping.model.*
@@ -17,7 +18,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     val productItemLiveData: LiveData<List<ProductItem>>
     var categoryItemLiveData: LiveData<List<Category>>
     var productLiveData = MutableLiveData<Int>()
-    var userLiveData_yassen = MutableLiveData<Int>()
+    var userLiveDataById = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
     var reportItemLiveData: LiveData<List<Report>>
     val userLiveData= MutableLiveData <String> ()
@@ -44,7 +45,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
             FetchData().fetchProductById(product_id)
         }
     var userLiveDataByID: LiveData<User> =
-        Transformations.switchMap(userLiveData) { user_id ->
+        Transformations.switchMap(userLiveDataById) { user_id ->
             FetchData().fetchUserById(user_id)
         }
     var productItemLiveDataByVendorID: LiveData<List<ProductItem>> =
@@ -67,7 +68,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         productLiveData.value = product_id
     }
     fun getUserById(user_id: Int) {
-        userLiveData.value = user_id
+        userLiveDataById.value = user_id
     }
 
 
@@ -117,7 +118,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun setUserId(userId: Int=-1) {
         UserSharedPreferences.setStoredUserId(app, userId)
     }
-    fun getstoredUserId():Int {
+    fun getStoredUserId():Int {
        return UserSharedPreferences.getStoredUserId(app)
     }
 

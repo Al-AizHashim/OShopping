@@ -40,168 +40,118 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:background="@drawable/layoutback_ground"
-        android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <EditText
-            android:id="@+id/first_name_edit_text"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/custom_shape"
-            android:hint="First name"
-            android:padding="15dp"
-            android:paddingStart="20dp"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="500dp"
+            android:background="@drawable/layoutback_ground"
+            android:padding="12dp"
 
-        <EditText
-            android:id="@+id/last_name_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_shape"
-            android:padding="15dp"
-            android:paddingStart="20dp"
-            android:hint="Last name"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/first_name_edit_text" />
-
-        <EditText
-            android:id="@+id/phone_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_shape"
-            android:padding="15dp"
-            android:paddingStart="20dp"
-            android:hint="Phone"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/last_name_edit_text" />
-
-        <EditText
-            android:id="@+id/location_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_shape"
-            android:hint="Location"
-            android:padding="15dp"
-            android:paddingStart="20dp"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone_edit_text" />
-
-        <EditText
-            android:id="@+id/details_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/custom_shape"
-            android:hint="Details"
-            android:padding="15dp"
-            android:inputType="textMultiLine"
-            android:paddingStart="20dp"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location_edit_text" />
-
-        <Button
-            android:id="@+id/save_profile_btn"
-            android:layout_width="150dp"
-            android:layout_height="45dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/shape_nav"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:text="Create"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"
+            android:paddingBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+>
+
+            <EditText
+                android:id="@+id/first_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/custom_shape"
+                android:hint="First name"
+                android:padding="15dp"
+                android:paddingStart="20dp"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/last_name_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_shape"
+                android:hint="Last name"
+                android:padding="15dp"
+                android:paddingStart="20dp"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/first_name_edit_text" />
+
+            <EditText
+                android:id="@+id/phone_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_shape"
+                android:hint="Phone"
+                android:padding="15dp"
+                android:paddingStart="20dp"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/last_name_edit_text" />
+
+            <EditText
+                android:id="@+id/address_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_shape"
+                android:hint="Address"
+                android:padding="15dp"
+                android:paddingStart="20dp"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone_edit_text" />
+
+            <EditText
+                android:id="@+id/details_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/custom_shape"
+                android:hint="Details"
+                android:inputType="textMultiLine"
+                android:padding="15dp"
+                android:paddingStart="20dp"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_edit_text" />
+
+            <Button
+                android:id="@+id/save_profile_btn"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/shape_nav"
+                android:clickable="true"
+                android:enabled="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:text="Create"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/details_edit_text" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--
-
-
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:text="latitude"/>
-    <EditText
-        android:id="@+id/latitude_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your latitude"
-        android:textColor="@android:color/black"/>
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:text="longitude"/>
-        <EditText
-            android:id="@+id/longitude_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your longitude"
-            android:textColor="@android:color/black"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:text="details"/>
-        <EditText
-            android:id="@+id/details_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your details"
-            android:textColor="@android:color/black"/>
-    </LinearLayout>
-
-
-    </Button> -->

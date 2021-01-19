@@ -17,7 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
-        <activity android:name=".sharedPreferences.TestActivity"></activity>
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
