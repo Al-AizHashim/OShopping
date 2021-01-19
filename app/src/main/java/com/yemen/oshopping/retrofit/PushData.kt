@@ -116,17 +116,15 @@ class PushData {
 
     fun pushUser(user: User) {
         Log.d("pushUser", "pushUser:$user ")
-        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushUser(
-            user.user_id,
+        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.
+        pushUser(
             user.first_name,
             user.last_name,
             user.email,
-            user.latitude,
-            user.longitude,
+            user.phone_number,
             user.details,
-            user.is_vendor,
-            user.block,
-            user.create_at
+            user.address,
+            "default image link"
         )
 
         pushUserRequest.enqueue(object : Callback<DefaultResponse> {
