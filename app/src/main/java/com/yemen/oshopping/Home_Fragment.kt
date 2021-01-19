@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.MenuRes
@@ -30,6 +31,7 @@ private const val ARG_PARAM2 = "param2"
 
 class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     var url: String = "http://192.168.1.4/oshopping_api/"
+
     private lateinit var trendBtn:Button
     private lateinit var categoryBtn:Button
     private lateinit var colorBtn:Button
@@ -43,6 +45,7 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     interface Callbacks {
         fun onProductSelected(product_id: Int)
     }
+
     private var callbacks: Callbacks? = null
 
     private lateinit var oshoppingViewModel: OshoppingViewModel
@@ -192,6 +195,7 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
                     updateui(productItems)
                 })
 
+
         }
         categoryBtn.setOnClickListener {
             categoryBtn.isSelected=true
@@ -244,27 +248,34 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             itemView.setOnClickListener(this)
 
         }
+
         private lateinit var productItemss: ProductItem
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
+        private val productRatingNo = itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
+        private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product)  as RatingBar
 
 
         fun bind(productItems: ProductItem) {
             var compositeProductUrl = url + productItems.product_img
-            var conditionString = "string" +productItems.product_img
+            var conditionString = "string" + productItems.product_img
             if (!conditionString.equals("stringnull"))
                 Picasso.get().load(compositeProductUrl).into(productImage)
-            productItemss=productItems
+            productItemss = productItems
             productName.text = productItems.product_name
-            productDate.text =productItems.product_date
-
+            productDate.text = productItems.product_date
+            productRatingNo.setText(productItems.number_of_ratings.toString()+" votes")
+            productRating.rating=productItems.rating_average
         }
 
 
         override fun onClick(v: View?) {
-            Toast.makeText(requireContext(),"The id: ${productItemss.product_id} and title ${productItemss.product_name} is clicked",
-                Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "The id: ${productItemss.product_id} and title ${productItemss.product_name} is clicked",
+                Toast.LENGTH_LONG
+            ).show()
             callbacks?.onProductSelected(productItemss.product_id)
         }
 
@@ -280,7 +291,8 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             viewType: Int
         ): ShowProductHolder {
             val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.show_product_list_item, parent, false)
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.show_product_list_item, parent, false)
             return ShowProductHolder(view)
         }
 
@@ -292,6 +304,7 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
 
         }
     }
+
     override fun onDetach() {
         super.onDetach()
         callbacks = null
@@ -304,6 +317,7 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
 
             }
         }
+
         fun newInstance(productCategory: String) = Home_Fragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_PARAM1, productCategory)
