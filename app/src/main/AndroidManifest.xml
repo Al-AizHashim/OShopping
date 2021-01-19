@@ -47,7 +47,7 @@
         <activity android:name=".SignUp" />
 
 
-        <activity android:name=".MainScreen" />
+        <activity android:name=".MainScreen" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".splashScreen2"></activity>
 
     </application>
