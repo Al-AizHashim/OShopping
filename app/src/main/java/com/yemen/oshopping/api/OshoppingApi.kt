@@ -15,19 +15,6 @@ interface OshoppingApi {
     @POST("oshopping_api/api/report_api.php")
     fun postReport(@Field("report_name") report_name: String): Call<DefaultResponse>
 
-    /*
-product_id
-product_name
-yrial_price
-dollar_price
-vendor_id
-cat_id
-product_details
-product_img
-product_date
-product_quantity
-product_discount
- */
     @FormUrlEncoded
     @POST("oshopping_api/api/product_api.php")
     fun pushProduct(
@@ -48,16 +35,13 @@ product_discount
     @FormUrlEncoded
     @POST("oshopping_api/api/user_api.php")
     fun pushUser(
-        @Field("user_id") user_id: Int?,
         @Field("first_name") first_name: String,
         @Field("last_name") last_name: String,
         @Field("email") email: String,
-        @Field("latitude") latitude: Double,
-        @Field("longitude") longitude: Double,
+        @Field("phone_number") phone_number: String,
         @Field("details") details: String,
-        @Field("is_vendor") is_vendor: Int,
-        @Field("block") block: Int,
-        @Field("create_at") create_at: String?
+        @Field("address") address: String,
+        @Field("image") image: String?
     ): Call<DefaultResponse>
 
     @FormUrlEncoded
@@ -72,13 +56,17 @@ product_discount
     @GET("oshopping_api/api/product_api.php")
     fun fetchProduct(): Call<ProductResponse>
 
+    @GET("oshopping_api/api/user_api.php")
+    fun fetchUser(): Call<UserResponse>
+
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByCategory(@Query("cat_id") category_id: Int): Call<ProductResponse>
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByVendorId(@Query("vendor_id") vendor_id: Int): Call<ProductResponse>
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductById(@Query("product_id") product_id: Int): Call<SingleProductResponse>
-
+    @GET("oshopping_api/api/user_api.php")
+    fun fetchUserById(@Query("user_id") user_id: Int): Call<SingleUserResponse>
     @GET("oshopping_api/api/product_api.php")
     fun searchProduct(@Query("query") query: String): Call<ProductResponse>
 
@@ -109,13 +97,9 @@ product_discount
         @Field("user_id") user_id: Int?,
         @Field("first_name") first_name: String,
         @Field("last_name") last_name: String,
-        @Field("email") email: String,
-        @Field("latitude") latitude: Double,
-        @Field("longitude") longitude: Double,
+        @Field("phone_number") phone_number: String,
         @Field("details") details: String,
-        @Field("is_vendor") is_vendor: Int,
-        @Field("block") block: Int,
-        @Field("create_at") create_at: String?
+        @Field("address") address: String
     ): Call<DefaultResponse>
 
 

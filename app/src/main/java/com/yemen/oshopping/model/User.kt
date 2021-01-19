@@ -5,10 +5,12 @@ data class User(
     val first_name: String,
     val last_name: String,
     val email: String,
-    val latitude: Double,
-    val longitude: Double,
+    val phone_number:String,
     val details: String,
-    val is_vendor: Int=0, // ( 0 -> user ) ( 1 -> vendor)
+    val address: String,
+    val vendor: Int=0, // ( 0 -> user ) ( 1 -> vendor)
     val block: Int =0, // ( 0 -> active ) ( 1 -> blocked)
-    val create_at: String?=null
+    val admin: Int=0,
+    val image: String?=null,
+    val created_at: String?=null
 )

@@ -20,6 +20,7 @@ class OshoppingViewModel : ViewModel() {
     val productItemLiveData: LiveData<List<ProductItem>>
     val categoryItemLiveData: LiveData<List<Category>>
     var productLiveData = MutableLiveData<Int>()
+    var userLiveData = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
     val reportItemLiveData: LiveData<List<Report>>
 
@@ -42,6 +43,10 @@ class OshoppingViewModel : ViewModel() {
         Transformations.switchMap(productLiveData) { product_id ->
             FetchData().fetchProductById(product_id)
         }
+    var userLiveDataByID: LiveData<User> =
+        Transformations.switchMap(userLiveData) { user_id ->
+            FetchData().fetchUserById(user_id)
+        }
     var productItemLiveDataByVendorID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { vendor_id ->
             FetchData().fetchProductByVendorId (vendor_id)
@@ -53,6 +58,10 @@ class OshoppingViewModel : ViewModel() {
     fun getProductById(product_id: Int) {
         productLiveData.value = product_id
     }
+    fun getUserById(user_id: Int) {
+        userLiveData.value = user_id
+    }
+
 
     var searchLiveData: LiveData<List<ProductItem>> =
         Transformations.switchMap(mutableSearchTerm) { query ->

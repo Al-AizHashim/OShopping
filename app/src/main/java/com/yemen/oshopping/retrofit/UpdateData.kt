@@ -37,13 +37,9 @@ class UpdateData {
                 user.user_id,
                 user.first_name,
                 user.last_name,
-                user.email,
-                user.latitude,
-                user.longitude,
+                user.phone_number,
                 user.details,
-                user.is_vendor,
-                user.block,
-                user.create_at
+                user.address
             )
 
         updateUserRequest.enqueue(object : Callback<DefaultResponse> {
