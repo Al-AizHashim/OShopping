@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yemen.oshopping.setting.SettingActivity
 import com.yemen.oshopping.admin.AddCategoryFragment
+import com.yemen.oshopping.ui.AddUserFragment
 import com.yemen.oshopping.ui.ProductDetailsFragment
 
 
@@ -65,7 +66,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
                 }
                 R.id.navigation_Purchases -> {
                     title = resources.getString(R.string.Purchases)
-                    loadFragment(Purchases_Fragment())
+                    loadFragment(AddUserFragment())
                     //loadFragment(AddCategoryFragment())
                     return@setOnNavigationItemSelectedListener true
                 }

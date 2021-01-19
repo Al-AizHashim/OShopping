@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -16,13 +17,14 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.GoogleAccount
 import kotlinx.android.synthetic.main.activity_sign_up.emailUse
 import kotlinx.android.synthetic.main.activity_sign_up_options.*
 
 class SignUp : AppCompatActivity(), View.OnClickListener{
-
+    private lateinit var oShoppingViewModel: OshoppingViewModel
     private lateinit var skip: TextView
     private val TAG = "FirebaseEmailPassword"
     val RC_SIGN_IN: Int = 1
@@ -33,7 +35,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
+        oShoppingViewModel= ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
         skip = findViewById(R.id.skip_text_view)
         supportActionBar?.hide()
         initializeUI()
@@ -63,6 +65,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.e(TAG, "createAccount: Success!")
+                    oShoppingViewModel.setUserEmail(email)
                     val intent = Intent(this, LoginScreen::class.java)
                     startActivity(intent)
                     Toast.makeText(applicationContext, "Success!", Toast.LENGTH_SHORT).show()
