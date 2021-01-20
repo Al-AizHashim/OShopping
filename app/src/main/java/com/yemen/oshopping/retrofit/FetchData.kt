@@ -3,10 +3,8 @@ package com.yemen.oshopping.retrofit
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.yemen.oshopping.api.CategoryResponse
-import com.yemen.oshopping.api.ProductResponse
-import com.yemen.oshopping.api.ReportResponse
-import com.yemen.oshopping.api.SingleProductResponse
+import com.yemen.oshopping.api.*
+import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.model.Report
@@ -23,12 +21,15 @@ class FetchData {
     fun fetchProduct(): LiveData<List<ProductItem>> {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProduct())
     }
-
-    fun fetchProductById(product_id: Int): LiveData<ProductItem> {
+    fun fetchProductById(product_id: Int): LiveData<List<ProductItem>> {
+        return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductById(product_id))
+    }
+/*
+    fun fetchProductById2(product_id: Int): LiveData<ProductItem> {
         val responseLiveData: MutableLiveData<ProductItem> = MutableLiveData()
         val NewsRequest =
             RetrofitClient().oshoppingApi.fetchProductById(product_id)
-        NewsRequest.enqueue(object : Callback<SingleProductResponse> {
+        NewsRequest.enqueue(object : Callback<ProductResponse> {
             override fun onFailure(call: Call<SingleProductResponse>, t: Throwable) {
                 Log.e("fetch Product details", "Failed to fetch product details", t)
             }
@@ -42,6 +43,33 @@ class FetchData {
                 val singleProductResponse: SingleProductResponse? = response.body()
                 val productItem: ProductItem? = singleProductResponse?.productItem
                 responseLiveData.value = productItem
+
+            }
+        })
+
+        return responseLiveData
+    }
+
+ */
+
+    fun fetchCart(user_id:Int): LiveData<List<Cart>> {
+        val responseLiveData: MutableLiveData<List<Cart>> = MutableLiveData()
+        val NewsRequest =
+            RetrofitClient().oshoppingApi.fetchCart(user_id)
+        NewsRequest.enqueue(object : Callback<CartResponse> {
+            override fun onFailure(call: Call<CartResponse>, t: Throwable) {
+                Log.e("fetch cart ", "Failed to fetch cart", t)
+            }
+
+            override fun onResponse(
+                call: Call<CartResponse>,
+                response: Response<CartResponse>
+            ) {
+                Log.d(TAG, "Response received successfully")
+
+                val cartResponse: CartResponse? = response.body()
+                val cart: List<Cart> = cartResponse?.cartItem ?: mutableListOf()
+                responseLiveData.value = cart
 
             }
         })
@@ -162,4 +190,6 @@ class FetchData {
 
         return responseLiveData
     }
+
+
 }

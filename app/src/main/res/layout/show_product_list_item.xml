@@ -47,6 +47,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/colorAccent"/>
+
         <Button
             android:id="@+id/product_add_btn"
             android:layout_width="wrap_content"

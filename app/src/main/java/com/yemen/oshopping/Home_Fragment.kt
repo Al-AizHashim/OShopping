@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.ui.ShowProductFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -24,7 +26,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class Home_Fragment: Fragment(){
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.191.1/oshopping_api/"
     interface Callbacks {
         fun onProductSelected(product_id: Int)
     }
@@ -33,6 +35,7 @@ class Home_Fragment: Fragment(){
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
     private var showProductByCategory: String? = null
+
 
 
     override fun onAttach(context: Context) {
@@ -100,6 +103,8 @@ class Home_Fragment: Fragment(){
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
+        private val addToCart =itemView.findViewById(R.id.product_add_btn) as Button
+
 
 
         fun bind(productItems: ProductItem) {
@@ -110,6 +115,11 @@ class Home_Fragment: Fragment(){
             productItemss=productItems
             productName.text = productItems.product_name
             productDate.text =productItems.product_date
+
+            addToCart.setOnClickListener {
+                val cart= Cart(fk_user_id=1,fk_product_id =9,cart_statuse =0)
+                oshoppingViewModel.pushCart(cart)
+            }
 
         }
 
@@ -134,6 +144,8 @@ class Home_Fragment: Fragment(){
             val view =
                 LayoutInflater.from(parent.context).inflate(R.layout.show_product_list_item, parent, false)
             return ShowProductHolder(view)
+
+
         }
 
         override fun getItemCount(): Int = productItems.size

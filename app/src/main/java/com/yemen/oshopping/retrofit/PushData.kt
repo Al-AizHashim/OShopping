@@ -121,5 +121,31 @@ class PushData {
 
 
     }
+    fun pushCart(cart: Cart) {
+        Log.d("pushCart", "pushCart:${cart.toString()} ")
+        val pushCartRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushCart(
+            cart.cart_id,
+            cart.fk_product_id,
+            cart.fk_user_id,
+            cart.cart_statuse
+        )
+
+        pushCartRequest.enqueue(object : Callback<DefaultResponse> {
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.d("pushCart", "Failed to push cart", t)
+            }
+
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushcart", "Cart pushed successfully")
+
+            }
+        })
+
+
+    }
 
 }

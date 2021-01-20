@@ -51,8 +51,21 @@
     <string name="newPassword">كلمة السر الجديدة</string>
     <string name="confirm">تأكيد كلمة السر</string>
     <string name="changePassword">تغيير كلمة السر</string>
+    <string name="CategoryProduct">اصناف المنتجات</string>
+    <string name="PriceProduct">السعر</string>
+    <string name="AddToCart">إضافة الى السلة</string>
+    <string name="VendorProduct">منتج ابائع</string>
+    <string name="PriceD">0.00 $</string>
+    <string name="PriceR">0.00 RY</string>
     <string name="fab">اضافة</string>
     <string name="remeberMe">تذكرني</string>
+    <string name="log_in">دخول</string>
+    <string name="show_categories">عرض الاصناف</string>
+    <string name="show_reports">عرض التقارير</string>
+    <string name="admin">ادمن</string>
+    <string name="save">حفظ</string>
+    <string name="confirm_cart">تأكيد</string>
+    <string name="delete">حذف</string>
 
 
 </resources>

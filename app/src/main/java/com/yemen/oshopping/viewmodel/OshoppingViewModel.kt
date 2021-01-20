@@ -21,11 +21,15 @@ class OshoppingViewModel : ViewModel() {
     var productLiveData = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
     val reportItemLiveData: LiveData<List<Report>>
+    var cartLiveData = MutableLiveData<Int>()
+
+
 
     init {
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
         reportItemLiveData=FetchData().fetchReport()
+       // cartLiveData=FetchData().fetchCart()
     }
 
     var productItemLiveDataByCategory: LiveData<List<ProductItem>> =
@@ -33,11 +37,20 @@ class OshoppingViewModel : ViewModel() {
             FetchData().fetchProductByCategory(category_id)
         }
 
+    var cartItemLiveData: LiveData<List<Cart>> =
+        Transformations.switchMap(cartLiveData) { user_id ->
+            FetchData().fetchCart(user_id)
+        }
+
+    fun loadCart(user_id: Int) {
+        cartLiveData.value = user_id
+    }
+
     fun loadProductByCategory(category_id: Int) {
         productLiveData.value = category_id
     }
 
-    var productItemLiveDataByID: LiveData<ProductItem> =
+    var productItemLiveDataByID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { product_id ->
             FetchData().fetchProductById(product_id)
         }
@@ -66,6 +79,8 @@ class OshoppingViewModel : ViewModel() {
     fun pushProduct(product: ProductDetails) = PushData().pushProduct(product)
     fun pushUser(user: User) = PushData().pushUser(user)
     fun pushReport(report: Report) = PushData().pushReport(report)
+    fun pushCart(cart: Cart) = PushData().pushCart(cart)
+
 
 
     //update data in database
@@ -77,4 +92,14 @@ class OshoppingViewModel : ViewModel() {
     fun deleteCategory(category: Category) = DeleteData().deleteCategory(category)
 
 
+    fun deleteCart(cart: Cart) {
+        DeleteData().deleteCart(cart)
+       // cartItemLiveData=FetchData().fetchCart()
+    }
+
+    fun updateCart(cart: Cart){
+        UpdateData().updateCart(cart)
+      //  cartItemLiveData=FetchData().fetchCart()
+
+    }
 }

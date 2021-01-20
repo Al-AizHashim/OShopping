@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.R
+import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
+import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 private const val ARG_PARAM1 = "product_id"
@@ -30,7 +34,7 @@ class ProductDetailsFragment : Fragment() {
     //lateinit var productDetails: TextView
     lateinit var productItem: ProductItem
 
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.191.1/oshopping_api/"
     private var param1: Int = 1
     lateinit var oshoppingViewModel: OshoppingViewModel
 
@@ -56,6 +60,11 @@ class ProductDetailsFragment : Fragment() {
         rialProductPrice = view.findViewById(R.id.product_price_r)
         dollarProductPrice = view.findViewById(R.id.product_price_d)
         addToCart = view.findViewById(R.id.product_add_btn)
+
+        addToCart.setOnClickListener {
+            val cart= Cart(fk_user_id=1,fk_product_id =9,cart_statuse =0)
+            oshoppingViewModel.pushCart(cart)
+        }
         //productQuantity = view.findViewById(R.id.prodcut_quantity_text_view)
         //productDiscount = view.findViewById(R.id.prodcut_discount_text_view)
        // productDetails = view.findViewById(R.id.product_details_text_view)
@@ -70,7 +79,7 @@ class ProductDetailsFragment : Fragment() {
             Observer { productDetails ->
                 productDetails?.let {
                     Log.d("FromObserver", "$it")
-                    this.productItem = productDetails
+                    this.productItem = productDetails[0]
                     updateUI()
                 }
             })

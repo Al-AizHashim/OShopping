@@ -62,21 +62,21 @@
             android:textColor="@android:color/black"/>
     </LinearLayout>
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:text="latitude"/>
-    <EditText
-        android:id="@+id/latitude_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter your latitude"
-        android:textColor="@android:color/black"/>
-</LinearLayout>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="latitude"/>
+        <EditText
+            android:id="@+id/latitude_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your latitude"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
