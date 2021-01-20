@@ -131,15 +131,15 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
         // Respond to menu item click.
         when(menuItem.itemId){
             R.id.option_1 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
 
             }
             R.id.option_2 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
 
             }
             R.id.option_3 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
 
             }
 

@@ -1,5 +1,6 @@
 package com.yemen.oshopping.setting
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
+import com.yemen.oshopping.LoginScreen
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -25,7 +27,7 @@ class MyProductFragment : Fragment() {
     var url: String = "http://192.168.1.4/oshopping_api/"
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
-    private lateinit var noDataImageView:ImageView
+    private lateinit var noDataImageView: ImageView
     private lateinit var noDataTextView: TextView
     lateinit var fab: FloatingActionButton
 
@@ -33,7 +35,10 @@ class MyProductFragment : Fragment() {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
         //the id of vendor should be passed from shared preferences
-        oshoppingViewModel.getProductByVendorId(1)
+        if (oshoppingViewModel.getStoredUserId() != -1)
+            oshoppingViewModel.apply {
+                getProductByVendorId(getStoredUserId())
+            }
     }
 
     override fun onCreateView(
@@ -45,9 +50,23 @@ class MyProductFragment : Fragment() {
         showProductRecyclerView = view.findViewById(R.id.category_recycler_view)
         showProductRecyclerView.layoutManager = GridLayoutManager(context, 1)
         fab = view.findViewById(R.id.add_product_fab)
-        noDataImageView=view.findViewById(R.id.no_data_imageView)
-        noDataTextView=view.findViewById(R.id.no_data_textView)
+        noDataImageView = view.findViewById(R.id.no_data_imageView)
+        noDataTextView = view.findViewById(R.id.no_data_textView)
+        if (oshoppingViewModel.getStoredUserId()==-1){
+            noDataImageView.visibility=View.VISIBLE
+            noDataTextView.visibility=View.VISIBLE
+        }
         fab.setOnClickListener {
+            if (oshoppingViewModel.getStoredUserId() == -1) {
+                Toast.makeText(
+                    requireContext(),
+                    "You should log in to add product",
+                    Toast.LENGTH_LONG
+                ).show()
+                val intent = Intent(requireContext(), LoginScreen::class.java)
+                startActivity(intent)
+            }
+            else
             Navigation.findNavController(view)
                 .navigate(R.id.action_myProductFragment_to_addProduct2)
         }
@@ -126,10 +145,10 @@ class MyProductFragment : Fragment() {
         }
 
         override fun getItemCount(): Int {
-             val numberOfProduct=productItems.size
-            if (numberOfProduct<1){
-                noDataTextView.visibility=View.VISIBLE
-                noDataImageView.visibility=View.VISIBLE
+            val numberOfProduct = productItems.size
+            if (numberOfProduct < 1) {
+                noDataTextView.visibility = View.VISIBLE
+                noDataImageView.visibility = View.VISIBLE
             }
             return numberOfProduct
         }
