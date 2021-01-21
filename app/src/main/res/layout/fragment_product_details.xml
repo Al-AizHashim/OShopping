@@ -89,7 +89,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button_shap"
+        android:background="@drawable/shape_nav"
         android:text="@string/AddToCart"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

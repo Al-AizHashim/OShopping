@@ -6,6 +6,9 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -21,6 +24,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.ui.ShowProductFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -28,6 +32,7 @@ import java.text.SimpleDateFormat
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
 
 class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     var url: String = "http://192.168.1.4/oshopping_api/"
@@ -51,6 +56,7 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
     private var showProductByCategory: String? = null
+
 
 
     override fun onAttach(context: Context) {
@@ -253,8 +259,10 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
+        private val addToCart =itemView.findViewById(R.id.product_add_btn) as Button
         private val productRatingNo = itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
         private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product)  as RatingBar
+
 
 
         fun bind(productItems: ProductItem) {
@@ -264,9 +272,16 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
                 Picasso.get().load(compositeProductUrl).into(productImage)
             productItemss = productItems
             productName.text = productItems.product_name
+          
+            addToCart.setOnClickListener {
+                val cart= Cart(fk_user_id=1,fk_product_id =9,cart_statuse =0)
+                oshoppingViewModel.pushCart(cart)
+            }
+
             productDate.text = productItems.product_date
             productRatingNo.setText(productItems.number_of_ratings.toString()+" votes")
             productRating.rating=productItems.rating_average
+
         }
 
 
@@ -294,6 +309,8 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.show_product_list_item, parent, false)
             return ShowProductHolder(view)
+
+
         }
 
         override fun getItemCount(): Int = productItems.size

@@ -17,6 +17,7 @@ class RetrofitClient {
             .baseUrl("http://10.0.2.2/")
 
 
+
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 

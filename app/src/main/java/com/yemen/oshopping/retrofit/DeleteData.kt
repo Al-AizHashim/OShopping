@@ -2,6 +2,7 @@ package com.yemen.oshopping.retrofit
 
 import android.app.Application
 import android.util.Log
+import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.model.DefaultResponse
 import com.yemen.oshopping.model.Report
@@ -40,5 +41,9 @@ class DeleteData {
 
     }
 
+
+    fun deleteCart(cart: Cart) {
+       // return deleteMetaData(RetrofitClient().oshoppingApi.deleteCart(cart.cart_id))
+    }
 
 }
