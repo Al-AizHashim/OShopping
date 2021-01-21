@@ -14,5 +14,7 @@ data class ProductItem(
     var product_img: String,
     var product_date: String,
     var product_quantity: Int,
-    var product_discount: Int
+    var product_discount: Int,
+    var rating_average:Float,
+    var number_of_ratings:Int
 )

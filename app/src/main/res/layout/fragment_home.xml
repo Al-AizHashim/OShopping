@@ -1,107 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
+    android:layout_margin="12dp"
     tools:context=".Home_Fragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="24dp">
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hello"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hello"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/welcome"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorGray"/>
-            </LinearLayout>
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:src="@drawable/search"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:layout_marginTop="16dp"
-               />
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_notifications_24px"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:layout_marginTop="16dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@string/welcome"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorGray"/>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:textColor="@color/colorGray"
+                android:textSize="10sp"
+                app:defaultQueryHint="Search"
                 />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:src="@drawable/ic_notifications_24px" />
+
         </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
+            android:orientation="horizontal">
+
             <Button
+                android:id="@+id/trend_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/custom_button_color"
                 android:text="@string/Trend"
-                android:textSize="12sp"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/button_shap"
-                />
+                android:textColor="@color/custom_button_text_color"
+                android:background="@drawable/button_shap_white"
+                android:textSize="12sp" />
+
             <Button
+                android:id="@+id/category_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/category"
-                android:textSize="12sp"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:background="@drawable/button_shap_white"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
-                />
+                android:background="@drawable/button_shap_white"
+                android:backgroundTint="@color/custom_button_color"
+                android:textColor="@color/custom_button_text_color"
+                android:text="@string/category"
+                android:textSize="12sp" />
+
             <Button
+                android:id="@+id/color_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/color"
-                android:textSize="12sp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginLeft="4dp"
-                android:backgroundTint="@color/colorPrimaryDark"
                 android:background="@drawable/button_shap_white"
-                />
+                android:backgroundTint="@color/custom_button_color"
+                android:textColor="@color/custom_button_text_color"
+                android:text="@string/color"
+                android:textSize="12sp" />
+
             <Button
+                android:id="@+id/vendor_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/vendor"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:layout_marginStart="4dp"
                 android:background="@drawable/button_shap_white"
-                android:textSize="12sp"
+                android:backgroundTint="@color/custom_button_color"
+                android:textColor="@color/custom_button_text_color"
+                android:text="@string/vendor"
+                android:textSize="12sp" />
+
+            <!--
+             <Button
+                android:id="@+id/hot_sale_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                />
+                android:background="@drawable/button_shap_white"
+                android:backgroundTint="@color/custom_button_color"
+                android:textColor="@color/custom_button_text_color"
+                android:text="hot sale"
+                android:textSize="12sp" />
+             -->
+
+            <Button
+                android:id="@+id/menu_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:textSize="12sp"
+                android:background="@drawable/button_shap_white"
+                android:backgroundTint="@color/custom_button_color"
+                android:textColor="@color/custom_button_text_color"
+                android:text="show color"/>
+
+            <Button
+                android:id="@+id/highest_rate_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/button_shap_white"
+                android:backgroundTint="@color/custom_button_color"
+                android:textColor="@color/custom_button_text_color"
+                android:text="Highest rate"
+                android:textSize="12sp" />
         </LinearLayout>
+    </HorizontalScrollView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/show_product_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="60dp"/>
-    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/show_product_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

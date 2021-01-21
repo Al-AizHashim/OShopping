@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yemen.oshopping.setting.SettingActivity
 import com.yemen.oshopping.admin.AddCategoryFragment
+import com.yemen.oshopping.ui.AddUserFragment
 import com.yemen.oshopping.ui.ProductDetailsFragment
+import com.yemen.oshopping.ui.ShowUserFragment
 
 
 class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Callbacks {
@@ -53,7 +55,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
 
                 R.id.navigation_Category -> {
                     title = resources.getString(R.string.Category)
-                    loadFragment(Category_Fragment())
+                    loadFragment(ShowUserFragment.newInstance())
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -67,10 +69,11 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
                     title = resources.getString(R.string.Purchases)
                     loadFragment(Purchases_Fragment())
                    // loadFragment(AddCategoryFragment())
+
                     return@setOnNavigationItemSelectedListener true
                 }
 
-                R.id.navigation_settings -> {
+                R.id.navigation_dash_board -> {
                     title = resources.getString(R.string.Profile)
                     val intent= Intent(this,
                         SettingActivity::class.java)

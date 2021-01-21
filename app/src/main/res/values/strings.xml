@@ -2,7 +2,7 @@
     <string name="app_name">FurnitureStore</string>
 
     <string name="hello">Hello</string>
-    <string name="welcome">What would you like to buy ? </string>
+    <string name="welcome">What would you like to buy?</string>
     <string name="Trend">Trend</string>
     <string name="category">Category</string>
     <string name="color">Color</string>

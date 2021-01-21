@@ -9,6 +9,43 @@
     android:background="@color/colorWhite"
     android:layout_marginTop="-13dp">
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="459dp"
+        android:layout_height="93dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/product_add_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_img"
+        app:layout_constraintVertical_bias="0.161">
+
+
+        <RatingBar
+            android:id="@+id/rating_Bar_product_details"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="#FFFFFF"
+            android:isIndicator="true"
+            android:longClickable="false"
+            android:numStars="5"
+            android:progressTint="@android:color/holo_orange_light"
+            android:rating="0"
+            android:stepSize="1"
+            android:theme="@style/Widget.AppCompat.RatingBar.Small" />
+
+        <TextView
+            android:id="@+id/rating_bar_text_view_prodcut_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -35,35 +72,29 @@
 
     <ImageView
         android:id="@+id/product_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="70dp"
-        android:layout_marginBottom="300dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/logobrown"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
         android:id="@+id/product_add_btn"
         android:layout_width="288dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="100dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/shape_nav"
         android:text="@string/AddToCart"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_img"
-        app:layout_constraintVertical_bias="0.791" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/product_vendor"
@@ -87,7 +118,8 @@
         android:textColor="@color/colorBlack"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/product_vendor"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <TextView
         android:id="@+id/product_price_d"
@@ -113,6 +145,42 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/product_price_d"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/product_add_btn"
+        app:layout_constraintEnd_toStartOf="@+id/product_price_r"
+        app:layout_constraintStart_toEndOf="@+id/product_name">
+
+        <RatingBar
+            android:id="@+id/rating_Bar_2_product_details"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:background="#FFFFFF"
+            android:isIndicator="false"
+            android:longClickable="true"
+            android:numStars="5"
+            android:progressTint="@android:color/holo_orange_light"
+            android:rating="0"
+            android:stepSize="1"
+            android:theme="@style/Widget.AppCompat.RatingBar.Small" />
+
+        <Button
+            android:id="@+id/submit_rating_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit Rating" />
+    </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
