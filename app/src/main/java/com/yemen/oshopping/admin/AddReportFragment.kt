@@ -38,6 +38,8 @@ class AddReportFragment : Fragment() {
         addReportBtn.setOnClickListener {
             val report= Report(report_name= addReportEditText.text.toString())
             oshoppingViewModel.pushReport(report)
+            addReportEditText.setText("")
+            addReportEditText.clearFocus()
             Navigation.findNavController(view)
                 .navigate(R.id.action_addReportFragment_to_showReportFragment)
 

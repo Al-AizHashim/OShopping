@@ -116,17 +116,15 @@ class PushData {
 
     fun pushUser(user: User) {
         Log.d("pushUser", "pushUser:$user ")
-        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushUser(
-            user.user_id,
+        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.
+        pushUser(
             user.first_name,
             user.last_name,
             user.email,
-            user.latitude,
-            user.longitude,
+            user.phone_number,
             user.details,
-            user.is_vendor,
-            user.block,
-            user.create_at
+            user.address,
+            "default image link"
         )
 
         pushUserRequest.enqueue(object : Callback<DefaultResponse> {
@@ -141,6 +139,32 @@ class PushData {
                 response: Response<DefaultResponse>
             ) {
                 Log.d("pushUser", "User pushed successfully")
+
+            }
+        })
+
+
+    }
+    fun pushCart(cart: Cart) {
+        Log.d("pushCart", "pushCart:${cart.toString()} ")
+        val pushCartRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushCart(
+            cart.cart_id,
+            cart.fk_product_id,
+            cart.fk_user_id,
+            cart.cart_statuse
+        )
+
+        pushCartRequest.enqueue(object : Callback<DefaultResponse> {
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.d("pushCart", "Failed to push cart", t)
+            }
+
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushcart", "Cart pushed successfully")
 
             }
         })

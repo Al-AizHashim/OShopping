@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -14,18 +15,20 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 class ShowCategoryFragment : Fragment() {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
     private lateinit var categoryViewModel: OshoppingViewModel
     private lateinit var noDataImageView: ImageView
     private lateinit var noDataTextView: TextView
     lateinit var fab: FloatingActionButton
     private lateinit var categoryRecyclerView: RecyclerView
+    private lateinit var delete_button: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +49,18 @@ class ShowCategoryFragment : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_showCategoryFragment_to_addCategoryFragment)
         }
+
+
         return view
     }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateUi()
+    }
+
+    fun updateUi(){
         categoryViewModel.categoryItemLiveData.observe(
             viewLifecycleOwner,
             Observer { categorys ->
@@ -59,13 +70,41 @@ class ShowCategoryFragment : Fragment() {
             })
     }
 
-    private class CategoryHolder(itemTextView: View)
-        : RecyclerView.ViewHolder(itemTextView) {
+    private inner class CategoryHolder(itemTextView: View)
+        : RecyclerView.ViewHolder(itemTextView) ,View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
 
+        }
+        lateinit var catergoryInstance: Category
         val catrgoryTextView = itemTextView.findViewById(R.id.category) as TextView
-
+        val catrgoryDeleteBtn = itemTextView.findViewById(R.id.delete_category_btn) as ImageView
         fun bind(cate: Category){
+            catergoryInstance=cate
             catrgoryTextView.text=cate.cat_name
+            catrgoryDeleteBtn.setOnClickListener {
+
+                categoryViewModel.deleteCategory(cate)
+                updateUi()
+                restoreDeletedData(CategoryHolder(requireView()).itemView,cate)
+
+            }
+        }
+
+
+        override fun onClick(view: View?) {
+            if (view != null) {
+                val action= catergoryInstance.cat_id?.let {
+                    ShowCategoryFragmentDirections
+                        .actionShowCategoryFragmentToUpdateCategoryFragment(
+                            categoryIdArg = it,
+                            categoryNameArg = catergoryInstance.cat_name)
+                }
+                if (action != null) {
+                    Navigation.findNavController(view)
+                        .navigate(action)
+                }
+            }
         }
     }
 
@@ -94,6 +133,20 @@ class ShowCategoryFragment : Fragment() {
         }
     }
 
+    private fun restoreDeletedData(view: View, deletedItem: Category) {
+        val snackBar = Snackbar.make(
+            view, "Deleted '${deletedItem.cat_name}'",
+            Snackbar.LENGTH_LONG
+        )
+        snackBar.setAction("Undo") {
+            categoryViewModel.pushcat(deletedItem)
+            updateUi()
+        }
+        snackBar.show()
+    }
+
 
 
 }
+
+

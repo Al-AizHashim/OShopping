@@ -6,5 +6,5 @@ import com.yemen.oshopping.model.User
 
 data class UserResponse (
     @SerializedName("listOfUsers")
-    var user: List<User>
+    var userItem: List<User>
 )

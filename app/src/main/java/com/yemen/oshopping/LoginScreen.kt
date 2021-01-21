@@ -8,18 +8,21 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
 import com.yemen.oshopping.sharedPreferences.SharedPreference
+import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_login_screen.*
 
 class LoginScreen : AppCompatActivity() , View.OnClickListener{
     private val TAG = "FirebaseEmailPassword"
-
+    private lateinit var oShoppingViewModel:OshoppingViewModel
     private lateinit var skip: TextView
     private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        oShoppingViewModel= ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
         setContentView(R.layout.activity_login_screen)
         val sharedPreference: SharedPreference =SharedPreference(this)
         skip = findViewById(R.id.skip_text_view)
@@ -94,7 +97,7 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
                     else
                         sharedPreference.save("userType","Customer")
                     sharedPreference.save("userEmail",email)
-
+                    oShoppingViewModel.setUserEmail(email)
                     //val user = mAuth!!.currentUser
             val intent = Intent(this, MainScreen::class.java)
                 //    val intent = Intent(this, ChangePassword::class.java)

@@ -254,7 +254,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="68dp"
                 android:layout_marginBottom="48dp"
-                android:background="@drawable/button_shap"
+
                 android:fontFamily="@font/frabk"
                 android:text="@string/log_out"
                 android:textColor="@color/colorBlack"

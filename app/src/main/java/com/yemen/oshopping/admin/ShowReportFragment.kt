@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -43,6 +44,7 @@ class ShowReportFragment : Fragment() {
         noDataImageView=view.findViewById(R.id.report_no_data_imageView)
         noDataTextView=view.findViewById(R.id.no_data_textView)
         fab.setOnClickListener {
+
             Navigation.findNavController(view)
                 .navigate(R.id.action_showReportFragment_to_addReportFragment)
         }
@@ -51,22 +53,67 @@ class ShowReportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateUi()
+
+    }
+    fun updateUi(){
         reportViewModel.reportItemLiveData.observe(
             viewLifecycleOwner,
-            Observer { Reports ->
-                Log.d("fetchReport", "Reports fetched successfully ${Reports}")
-                reportRecyclerView.adapter = ReportAdapter(Reports)
+            Observer { listOfReports ->
+                Log.d("fetchReport", "Reports fetched successfully ${listOfReports}")
+                reportRecyclerView.adapter = ReportAdapter(listOfReports)
+
 
             })
+
     }
 
-    private class ReportHolder(itemTextView: View)
-        : RecyclerView.ViewHolder(itemTextView) {
+    private fun restoreDeletedData(view: View, deletedItem: Report) {
+        val snackBar = Snackbar.make(
+            view, "Deleted '${deletedItem.report_name}'",
+            Snackbar.LENGTH_LONG
+        )
+        snackBar.setAction("Undo") {
+            reportViewModel.pushReport(deletedItem)
+            updateUi()
+        }
+        snackBar.show()
+    }
+
+    private inner class ReportHolder(itemTextView: View)
+        : RecyclerView.ViewHolder(itemTextView),View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+
+        }
+        lateinit var reportIns:Report
 
         val reportTextView = itemTextView.findViewById(R.id.report_text_view) as TextView
+        val reportDeleteBtn=itemTextView.findViewById(R.id.delete_image_view) as ImageView
 
         fun bind(report: Report){
+            reportIns=report
             reportTextView.text=report.report_name
+            reportDeleteBtn.setOnClickListener {
+
+                reportViewModel.deleteReport(report)
+                updateUi()
+                restoreDeletedData(ReportHolder(requireView()).itemView,report)
+
+            }
+        }
+
+        override fun onClick(view: View?) {
+            if (view != null) {
+                val action= reportIns.report_id?.let {
+                    ShowReportFragmentDirections
+                        .actionShowReportFragmentToUpdateReportFragment(reportIdArg = it, reportNameArg = reportIns.report_name)
+                }
+                if (action != null) {
+                    Navigation.findNavController(view)
+                        .navigate(action)
+                }
+            }
         }
     }
 
