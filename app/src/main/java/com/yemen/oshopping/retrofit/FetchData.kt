@@ -163,7 +163,8 @@ class FetchData {
 
     fun fetchReport(): LiveData<List<Report>> {
         val responseLiveData: MutableLiveData<List<Report>> = MutableLiveData()
-        val reportRequest: Call<ReportResponse> = RetrofitClient().oshoppingApi.fetchReport()
+        val reportRequest: Call<ReportResponse> = RetrofitClient().oshoppingApi.
+        fetchReport()
         reportRequest.enqueue(object : Callback<ReportResponse> {
 
             override fun onFailure(call: Call<ReportResponse>, t: Throwable) {

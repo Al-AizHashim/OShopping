@@ -50,9 +50,10 @@ class AddUserFragment : Fragment() {
                 phone_number = phoneNumberEditText.text.toString(),
                 details = detailsEditText.text.toString()
             )
-            oshoppingViewModel.pushUser(user)
-
-
+            ReportsDialog.newInstance().apply {
+                setTargetFragment(this@AddUserFragment, 0)
+                show(this@AddUserFragment.requireFragmentManager(), "Input")
+            oshoppingViewModel.pushUser(user)}
         }
         return view
     }
