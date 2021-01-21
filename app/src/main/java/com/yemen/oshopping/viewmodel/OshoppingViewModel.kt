@@ -20,7 +20,6 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var productLiveData = MutableLiveData<Int>()
     var userLiveDataById = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
-    val reportItemLiveData: LiveData<List<Report>>
     val activityItemLiveData: LiveData<List<ActivityItem>>
     var cartLiveData = MutableLiveData<Int>()
     var reportItemLiveData: LiveData<List<Report>>
