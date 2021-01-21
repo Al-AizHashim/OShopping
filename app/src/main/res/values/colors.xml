@@ -7,6 +7,8 @@
     <color name="colorPrimaryDark">#F8F8F9</color>
     <color name="colorPrimary">#736C5F</color>
     <color name="colorAccent">#D93425</color>
+    <color name="colorAccentSecondary">#F27D72</color>
+    <color name="colorAccentSecondaryLight">#E8CCC9</color>
     <color name="colorBrown">#8C877D</color>
     <color name="colorGray">#646464</color>
 

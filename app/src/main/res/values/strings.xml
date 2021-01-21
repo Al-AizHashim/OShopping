@@ -66,8 +66,11 @@
     <string name="show_categories">show categories</string>
     <string name="show_reports">Show reports</string>
     <string name="admin">Admin</string>
+    <string name="activ">Selling and Purchase Operations</string>
+    <string name="quantity">1</string>
     <string name="save">save</string>
     <string name="confirm_cart">Confirm</string>
     <string name="delete">delete</string>
+
 
 </resources>

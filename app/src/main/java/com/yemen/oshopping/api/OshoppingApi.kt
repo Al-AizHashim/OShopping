@@ -98,6 +98,8 @@ interface OshoppingApi {
     @GET("oshopping_api/api/report_api.php")
     fun fetchReport(): Call<ReportResponse>
 
+    @GET("oshopping_api/api/activity_api.php")
+    fun fetchActivities(@Query("fk_user_id") fk_user_id: Int): Call<ActivityResponse>
 
     @GET("oshopping_api/api/cart_api.php")
     fun fetchCart(@Query("user_id")user_id: Int): Call<CartResponse>

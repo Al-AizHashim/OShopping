@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yemen.oshopping.api.*
+import com.yemen.oshopping.model.ActivityItem
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.model.ProductItem
@@ -232,6 +233,34 @@ class FetchData {
     }
 
 
+    fun fetchActivitiesMetaData(activityRequest: Call<ActivityResponse>): LiveData<List<ActivityItem>> {
+
+        val responseLiveData: MutableLiveData<List<ActivityItem>> = MutableLiveData()
+
+        activityRequest.enqueue(object : Callback<ActivityResponse> {
+
+            override fun onFailure(call: Call<ActivityResponse>, t: Throwable) {
+                Log.d("fetchActivity", "Failed to fetch Product", t)
+            }
+
+            override fun onResponse(
+                call: Call<ActivityResponse>,
+                response: Response<ActivityResponse>
+            ) {
+                Log.d("fetchActivity", "Response received successfully")
+                val ActivityResponse: ActivityResponse? = response.body()
+                val activityItems: List<ActivityItem> = ActivityResponse?.activItem
+                    ?: mutableListOf()
+                responseLiveData.value = activityItems
+                Log.d("fetchActivity", "onResponse: $activityItems")
+                }
+        })
+       return responseLiveData
+    }
+
+          
+
+
     //fetch users
     fun fetchUsers(): LiveData<List<User>> {
         return fetchUserMetaData(RetrofitClient().oshoppingApi.fetchUsers())
@@ -257,10 +286,16 @@ class FetchData {
                 val userItems: List<User> = userResponse?.userItem
                     ?: mutableListOf()
                 responseLiveData.value = userItems
+
             }
         })
 
         return responseLiveData
+    }
+
+
+    fun fetchActivity(): LiveData<List<ActivityItem>> {
+        return fetchActivitiesMetaData(RetrofitClient().oshoppingApi.fetchActivities(2))
     }
 
 }
