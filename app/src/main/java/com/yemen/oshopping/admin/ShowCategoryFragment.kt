@@ -22,12 +22,13 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 class ShowCategoryFragment : Fragment() {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
     private lateinit var categoryViewModel: OshoppingViewModel
     private lateinit var noDataImageView: ImageView
     private lateinit var noDataTextView: TextView
     lateinit var fab: FloatingActionButton
     private lateinit var categoryRecyclerView: RecyclerView
+    private lateinit var delete_button: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,8 @@ class ShowCategoryFragment : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_showCategoryFragment_to_addCategoryFragment)
         }
+
+
         return view
     }
 
@@ -145,3 +148,5 @@ class ShowCategoryFragment : Fragment() {
 
 
 }
+
+

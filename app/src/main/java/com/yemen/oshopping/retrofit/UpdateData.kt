@@ -1,6 +1,11 @@
 package com.yemen.oshopping.retrofit
 
 import android.util.Log
+import com.yemen.oshopping.model.Cart
+import com.yemen.oshopping.model.Category
+import com.yemen.oshopping.model.DefaultResponse
+import com.yemen.oshopping.model.Report
+import com.yemen.oshopping.model.User
 import com.yemen.oshopping.model.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -99,5 +104,13 @@ class UpdateData {
         })
 
 
+    }
+
+    fun updateCart(cart: Cart){
+      //  updateMetaData( RetrofitClient().oshoppingApi
+          //  .updateCart(cart.cart_id,
+             //   cart.fk_product_id,
+             //   cart.fk_user_id,
+              //  cart.cart_statuse))
     }
 }

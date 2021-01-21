@@ -47,7 +47,10 @@
             android:text="@string/PriceProduct"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
-            android:textStyle="bold" />
+
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"/>
+
 
 
         <LinearLayout
