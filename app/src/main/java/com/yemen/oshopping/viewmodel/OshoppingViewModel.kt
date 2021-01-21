@@ -25,15 +25,25 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var reportItemLiveData: LiveData<List<Report>>
     val userLiveData= MutableLiveData <String> ()
     val userItemLiveData:LiveData<List<User>>
-
+    val searchLiveData:LiveData<List<ProductItem>>
+    val searchTerm: String
+        get() = mutableSearchTerm.value ?: ""
 
     init {
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
         reportItemLiveData=FetchData().fetchReport()
-
         activityItemLiveData = FetchData().fetchActivity()
-
+        mutableSearchTerm.value =getQuery()
+        searchLiveData =
+            Transformations.switchMap(mutableSearchTerm) { searchTerm ->
+                if (searchTerm.isBlank()) {
+                    FetchData().fetchProduct()
+                }
+                else {
+                    FetchData().searchProduct(searchTerm)
+                }
+            }
 
        // cartLiveData=FetchData().fetchCart()
 
@@ -91,12 +101,11 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     }
 
 
-    var searchLiveData: LiveData<List<ProductItem>> =
-        Transformations.switchMap(mutableSearchTerm) { query ->
-            FetchData().searchProduct(query)
-        }
+
+
 
     fun search(query: String) {
+        setQuery(query)
         mutableSearchTerm.value = query
     }
 
@@ -159,6 +168,12 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     }
     fun getStoredEmail():String? {
         return UserSharedPreferences.getStoredUserEmail(app)
+    }
+    fun setQuery(query: String="none") {
+        UserSharedPreferences.setStoredQuery(app, query)
+    }
+    fun getQuery():String? {
+        return UserSharedPreferences.getStoredQuery(app)
     }
 
     fun deleteCart(cart: Cart) {
