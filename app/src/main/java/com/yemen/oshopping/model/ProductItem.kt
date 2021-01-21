@@ -16,5 +16,6 @@ data class ProductItem(
     var product_quantity: Int,
     var product_discount: Int,
     var rating_average:Float,
-    var number_of_ratings:Int
+    var number_of_ratings:Int,
+    var color:String ="black"
 )

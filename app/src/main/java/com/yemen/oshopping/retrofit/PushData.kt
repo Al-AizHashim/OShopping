@@ -92,7 +92,8 @@ class PushData {
             p.product_img,
             p.product_date,
             p.product_quantity,
-            p.product_discount
+            p.product_discount,
+            p.color
         )
 
         pushProductRequest.enqueue(object : Callback<DefaultResponse> {

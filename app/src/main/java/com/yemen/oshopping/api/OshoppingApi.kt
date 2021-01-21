@@ -28,7 +28,8 @@ interface OshoppingApi {
         @Field("product_img") product_img: String?,
         @Field("product_date") product_date: String?,
         @Field("product_quantity") product_quantity: Int,
-        @Field("product_discount") product_discount: Int
+        @Field("product_discount") product_discount: Int,
+        @Field("color") color: String
 
     ): Call<DefaultResponse>
 
@@ -125,6 +126,26 @@ interface OshoppingApi {
 
     @DELETE("oshopping_api/api/report_api.php")
     fun deleteReport(@Query("report_id") report_id: Int?
+    ): Call<DefaultResponse>
+
+
+
+    @FormUrlEncoded
+    @PUT("oshopping_api/api/product_api.php")
+    fun updateProduct(
+        @Field("product_id") product_id: Int?,
+        @Field("product_name") product_name: String,
+        @Field("yrial_price") yrial_price: Double,
+        @Field("dollar_price") dollar_price: Double,
+        @Field("vendor_id") vendor_id: Int,
+        @Field("cat_id") cat_id: Int,
+        @Field("product_details") product_details: String,
+        @Field("product_img") product_img: String?,
+       // @Field("product_date") product_date: String?,
+        @Field("product_quantity") product_quantity: Int,
+        @Field("product_discount") product_discount: Int,
+        @Field("color") color: String
+
     ): Call<DefaultResponse>
 
 }

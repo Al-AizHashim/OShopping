@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/add_product_container"
+    tools:context=".vendor.AddProductFragment"
     android:verticalScrollbarPosition="right">
 
     <ScrollView
@@ -261,3 +261,5 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

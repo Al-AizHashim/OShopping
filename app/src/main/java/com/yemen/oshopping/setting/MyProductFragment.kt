@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.LoginScreen
 import com.yemen.oshopping.R
+import com.yemen.oshopping.admin.ShowReportFragmentDirections
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
@@ -30,7 +31,7 @@ class MyProductFragment : Fragment() {
     private lateinit var noDataImageView: ImageView
     private lateinit var noDataTextView: TextView
     lateinit var fab: FloatingActionButton
-
+    lateinit var productsItems:List<ProductItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -68,7 +69,7 @@ class MyProductFragment : Fragment() {
             }
             else
             Navigation.findNavController(view)
-                .navigate(R.id.action_myProductFragment_to_addProduct2)
+                .navigate(R.id.action_myProductFragment_to_addProductFragment)
         }
         return view
     }
@@ -76,19 +77,28 @@ class MyProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         oshoppingViewModel.productItemLiveDataByVendorID.observe(
             viewLifecycleOwner, androidx.lifecycle.Observer
             { productItems ->
                 Log.d("productItemLiveData", "product Item Live Data")
-                updateui(productItems)
+                showProductRecyclerView.adapter = ShowProductAdapter(productItems)
+                this.productsItems=productItems
             })
 
 
+        //updateui()
     }
 
-    private fun updateui(productItems: List<ProductItem>) {
-        showProductRecyclerView.adapter = ShowProductAdapter(productItems)
+
+    private fun updateui() {
+        oshoppingViewModel.productItemLiveDataByVendorID.observe(
+            viewLifecycleOwner, androidx.lifecycle.Observer
+            { productItems ->
+                Log.d("productItemLiveData", "product Item Live Data")
+                this.productsItems=productItems
+            })
+
+        showProductRecyclerView.adapter = ShowProductAdapter(productsItems)
     }
 
     private inner class ShowProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -98,7 +108,7 @@ class MyProductFragment : Fragment() {
 
         }
 
-        private lateinit var productItemss: ProductItem
+        private lateinit var p: ProductItem
 
 
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
@@ -111,7 +121,7 @@ class MyProductFragment : Fragment() {
             var conditionString = "string" + productItems.product_img
             if (!conditionString.equals("stringnull"))
                 Picasso.get().load(compositeProductUrl).into(productImage)
-            productItemss = productItems
+            p = productItems
             productName.text = productItems.product_name
             productDate.text = productItems.product_date
 
@@ -119,12 +129,24 @@ class MyProductFragment : Fragment() {
 
 
         override fun onClick(v: View?) {
-            Toast.makeText(
-                requireContext(),
-                "The id: ${productItemss.product_id} and title ${productItemss.product_name} is clicked",
-                Toast.LENGTH_LONG
-            ).show()
-            // callbacks?.onProductSelected(productItemss.product_id)
+            if (view != null) {
+                val action= MyProductFragmentDirections.actionMyProductFragmentToUpdateProductFragment(
+                        productId = p.product_id,
+                        productName = p.product_name,
+                        productDetails = p.product_details,
+                        productCategory = p.cat_id,
+                        productColor = p.color,
+                        productDiscount = p.product_discount,
+                        productImg = p.product_img,
+                        productQuantity = p.product_quantity,
+                        productVendor = p.vendor_id,
+                        dolarPrice = p.dollar_price.toFloat(),
+                        yemenRialPrice = p.yrial_price.toFloat()
+                    )
+
+                Navigation.findNavController(view!!)
+                    .navigate(action)
+            }
         }
 
 

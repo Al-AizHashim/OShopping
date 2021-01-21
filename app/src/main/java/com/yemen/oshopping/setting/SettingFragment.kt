@@ -1,13 +1,18 @@
 package com.yemen.oshopping.setting
 
+import android.app.PendingIntent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
 import com.yemen.oshopping.R
+import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 class SettingFragment : Fragment() {
@@ -17,8 +22,15 @@ class SettingFragment : Fragment() {
     lateinit var myProductTV: TextView
     lateinit var myAccountTV: TextView
     lateinit var signOutTV: TextView
-
-
+    lateinit var signUpTV: TextView
+    lateinit var oshoppingViewModel: OshoppingViewModel
+    //yemenoshopping@gmail.com
+    private lateinit var mAuth: FirebaseAuth
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mAuth = FirebaseAuth.getInstance()
+        oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,10 +42,27 @@ class SettingFragment : Fragment() {
         aboutUsTV=view.findViewById(R.id.about_us)
         contactUsTV=view.findViewById(R.id.contact_us)
         signOutTV=view.findViewById(R.id.sign_out)
+        signUpTV=view.findViewById(R.id.sign_up)
         adminTV=view.findViewById(R.id.admin_page)
-        adminTV.visibility = View.VISIBLE
+
+        if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
+        {
+            adminTV.visibility = View.VISIBLE
+            myProductTV.visibility = View.GONE
+        }
+        if(oshoppingViewModel.getStoredEmail().equals("none")){
+            myProductTV.visibility = View.GONE
+            adminTV.visibility = View.GONE
+            signOutTV.visibility=View.GONE
+            signUpTV.visibility=View.VISIBLE
+        }
 
         myProductTV.setOnClickListener {
+            if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
+            {
+                Toast.makeText(requireContext(), "You are an admin", Toast.LENGTH_SHORT).show()
+            }
+            else
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_myProductFragment)
         }
         adminTV.setOnClickListener {
@@ -49,8 +78,14 @@ class SettingFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_contactUsFragment)
         }
         signOutTV.setOnClickListener {
+            mAuth.signOut()
+            oshoppingViewModel.setUserId()
+            oshoppingViewModel.setUserEmail()
+            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_loginScreen)
            //write here the sign out code
-
+        }
+        signUpTV.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
         }
 
 
