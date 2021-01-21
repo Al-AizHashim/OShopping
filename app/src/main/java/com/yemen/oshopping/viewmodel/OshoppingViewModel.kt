@@ -22,11 +22,13 @@ class OshoppingViewModel : ViewModel() {
     var productLiveData = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
     val reportItemLiveData: LiveData<List<Report>>
+    val activityItemLiveData: LiveData<List<ActivityItem>>
 
     init {
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
         reportItemLiveData=FetchData().fetchReport()
+        activityItemLiveData = FetchData().fetchActivity()
     }
 
     var productItemLiveDataByCategory: LiveData<List<ProductItem>> =
