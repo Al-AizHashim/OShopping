@@ -13,15 +13,22 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.Window
 import android.widget.*
+import androidx.annotation.MenuRes
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
 import androidx.multidex.BuildConfig
 import com.yemen.oshopping.model.ProductDetails
+import com.yemen.oshopping.setting.MyProductFragment
 import com.yemen.oshopping.uploadImage.UploadImageActivity
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_add_product.*
@@ -35,12 +42,15 @@ class AddProduct : AppCompatActivity(), View.OnClickListener {
     lateinit var productDollarPriceEditText: EditText
     lateinit var productYeRialPriceEditText: EditText
     lateinit var productQuantityEditText: TextView
-    private lateinit var addProductBtn: Button
-    private lateinit var productDetails: String
-    private lateinit var productName: String
-    private var productPriceDollar: Double = 0.0
-    private var productPriceRial: Double = 0.0
-    private lateinit var buttonImage: Button
+    lateinit var chosenCategoryTV: TextView
+    lateinit var chosenColorTV: TextView
+    lateinit var chooseCategoryBtn:Button
+    lateinit var chooseColorBtn:Button
+    lateinit var addProductBtn: Button
+    lateinit var categoryTitle:String
+    var categoryId:Int=0
+    private lateinit var popupMenu:PopupMenu
+    lateinit var buttonImage: Button
     private val OPERATION_CAPTURE_PHOTO = 1
     private val OPERATION_CHOOSE_PHOTO = 2
     lateinit var add_product: ProductDetails
@@ -59,6 +69,11 @@ class AddProduct : AppCompatActivity(), View.OnClickListener {
         productYeRialPriceEditText = findViewById(R.id.PriceInRial)
         productQuantityEditText = findViewById(R.id.Quantity)
         addProductBtn = findViewById(R.id.addProduct)
+        chosenCategoryTV = findViewById(R.id.chosen_category_tv)
+        chosenColorTV = findViewById(R.id.chosen_color_tv)
+        chooseCategoryBtn = findViewById(R.id.category_btn)
+        chooseColorBtn = findViewById(R.id.choose_color_btn)
+        fillCategoryMenu()
         minus.setOnClickListener(this)
         plus.setOnClickListener(this)
         buttonImage = findViewById(R.id.addImage)
@@ -75,17 +90,60 @@ class AddProduct : AppCompatActivity(), View.OnClickListener {
                 dollar_price = productDollarPriceEditText.text.toString().toDouble(),
                 yrial_price = productYeRialPriceEditText.text.toString().toDouble(),
                 product_quantity = productQuantityEditText.text.toString().toInt(),
-                vendor_id = 1,
-                cat_id = 1,
+                vendor_id = oshoppingViewModel.getStoredUserId(),
+                cat_id = categoryId,
                 product_img = imagename,
                 product_discount = 0
             )
             oshoppingViewModel.pushProduct(product)
+            val fragment=MyProductFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.add_product_container,fragment).addToBackStack(null).commit()
 
         }
         supportActionBar?.setTitle(R.string.AddNewProduct)
 
+        val popupColorMenuBtn = findViewById<Button>(R.id.choose_color_btn)
 
+        popupColorMenuBtn.setOnClickListener { v: View ->
+            //popupColorMenuBtn.isSelected=true
+            showMenu(v, R.menu.popup_color_menu)
+        }
+        chooseCategoryBtn.setOnClickListener {
+            popupMenu.show()
+            popupMenu.setOnMenuItemClickListener {menuItem: MenuItem? ->
+                if (menuItem != null) {
+                   categoryTitle= menuItem.title as String
+                    categoryId=menuItem.itemId
+                    chosenCategoryTV.setText(menuItem.title)
+                }
+
+                return@setOnMenuItemClickListener true
+
+            }
+        }
+
+    }
+
+    fun fillCategoryMenu(){
+        popupMenu= PopupMenu(this,chooseCategoryBtn)
+        oshoppingViewModel.categoryItemLiveData.observe(
+            this,
+            Observer { categories ->
+                Log.d("fetchCategoryMenu", "Category fetched successfully ${categories}")
+                var count=0
+                for(i  in categories ){
+
+                    categories[count].cat_id?.let {
+                        popupMenu.menu.add(
+                            Menu.NONE,
+                            it,count,categories[count].cat_name)
+                    }
+
+                    count++
+
+                }
+
+            })
     }
 
     override fun onClick(v: View?) {
@@ -102,6 +160,40 @@ class AddProduct : AppCompatActivity(), View.OnClickListener {
             Quantity.text = counter.toString()
 
         }
+    }
+
+    private fun showMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(this, v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+
+        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+            // Respond to menu item click.
+            when(menuItem.itemId){
+                R.id.option_1 -> {
+                    chosenColorTV.setText(menuItem.title)
+                    Toast.makeText(this,"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
+
+                }
+                R.id.option_2 -> {
+                    chosenColorTV.setText(menuItem.title)
+                    Toast.makeText(this,"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
+
+                }
+                R.id.option_3 -> {
+                    chosenColorTV.setText(menuItem.title)
+                    Toast.makeText(this,"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
+
+                }
+
+            }
+            return@setOnMenuItemClickListener true
+
+        }
+        popup.setOnDismissListener {
+            // Respond to popup being dismissed.
+        }
+        // Show the popup menu.
+        popup.show()
     }
 
     private fun showDialog(title: String) {

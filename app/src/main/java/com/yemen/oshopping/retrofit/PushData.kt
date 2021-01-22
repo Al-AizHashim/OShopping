@@ -92,7 +92,8 @@ class PushData {
             p.product_img,
             p.product_date,
             p.product_quantity,
-            p.product_discount
+            p.product_discount,
+            p.color
         )
 
         pushProductRequest.enqueue(object : Callback<DefaultResponse> {
@@ -124,7 +125,7 @@ class PushData {
             user.phone_number,
             user.details,
             user.address,
-            "default image link"
+            user.image
         )
 
         pushUserRequest.enqueue(object : Callback<DefaultResponse> {

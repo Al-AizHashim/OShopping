@@ -13,6 +13,7 @@ data class  ProductDetails(
     var product_img: String?=null,
     var product_date: String?=null,
     var product_quantity: Int,
-    var product_discount: Int=0
+    var product_discount: Int=0,
+    var color:String ="black"
 
 )

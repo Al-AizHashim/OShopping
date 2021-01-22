@@ -5,12 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.yemen.oshopping.R
-import com.yemen.oshopping.model.Category
-import com.yemen.oshopping.ui.ShowProductFragment
 import kotlinx.android.synthetic.main.activity_upload_image.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -74,7 +69,7 @@ class UploadImageActivity : AppCompatActivity() , UploadRequestBody.UploadCallba
         inputStream.copyTo(outputStream)
 
         progress_bar.progress = 0
-        val body = UploadRequestBody(file, "image", this)
+        val body = UploadRequestBody(file, "image")
         MyAPI().uploadImage(
             MultipartBody.Part.createFormData(
                 "image",

@@ -47,9 +47,7 @@
             android:text="@string/PriceProduct"
             android:textColor="@color/colorAccent"
             android:textSize="16sp"
-
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"/>
+            android:textStyle="bold" />
 
 
 
