@@ -17,6 +17,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.yemen.oshopping.ui.AddUserFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.GoogleAccount
@@ -66,8 +67,15 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
                 if (task.isSuccessful) {
                     Log.e(TAG, "createAccount: Success!")
                     oShoppingViewModel.setUserEmail(email)
-                    val intent = Intent(this, LoginScreen::class.java)
-                    startActivity(intent)
+                    val fragment = AddUserFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.sign_up_container, fragment)
+                        .addToBackStack(null)
+                        .commit()
+                    //val intent = Intent(th
+                    //val intent = Intent(this, LoginScreen::class.java)
+                    //startActivity(intent)
                     Toast.makeText(applicationContext, "Success!", Toast.LENGTH_SHORT).show()
                     val user = mAuth!!.currentUser
 
@@ -128,10 +136,15 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         mAuth!!.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
+                val fragment = AddUserFragment()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.sign_up_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
+                //val intent = Intent(this, LoginScreen::class.java)
 
-                val intent = Intent(this, LoginScreen::class.java)
-
-                startActivity(intent)
+                //startActivity(intent)
             } else {
                 Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
             }
@@ -151,6 +164,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
         if(i==R.id.emailUse)
         {
             createAccount(emailSignUp.text.toString(), passwordSignUp.text.toString())
+
         }
         else if(i==R.id.GoogleAccount)
         {

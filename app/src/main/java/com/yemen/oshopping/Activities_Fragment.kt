@@ -98,17 +98,18 @@ class Activities_Fragment: Fragment() {
             parent: ViewGroup,
             viewType: Int
         ): ShowActivitiesHolder {
-            var activityItem: ActivityItem
-            val view = if(activityItem.activityType =="buy"){
-                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.active_item_buy, parent, false)
-            } else if (activityItem.activityType =="sell"){
-                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.active_item_sell, parent, false)
-            } else {
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.active_item_sell, parent, false)
+            val view =
+            when(viewType){
+                1 ->{
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.active_item_buy, parent, false)
+                }
+                else -> {
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.active_item_sell, parent, false)
+                }
             }
+
             return ShowActivitiesHolder(view)
         }
 
@@ -117,6 +118,14 @@ class Activities_Fragment: Fragment() {
         override fun onBindViewHolder(holder: ShowActivitiesHolder, position: Int) {
             val activityItem = activItem[position]
             holder.bind(activityItem)
+        }
+        override fun getItemViewType(position: Int): Int {
+            val x:Int
+             if (activItem[position].activityType.equals("buy"))
+                x=1
+            else
+                x=0
+            return x
         }
     }
 

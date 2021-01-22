@@ -98,7 +98,7 @@ class FetchData {
 
                 val cartResponse: CartResponse? = response.body()
                 val cart: List<Cart> = cartResponse?.cartItem ?: mutableListOf()
-                responseLiveData.value = cart
+//                responseLiveData.value = cart
 
             }
         })
