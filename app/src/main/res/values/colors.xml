@@ -11,6 +11,12 @@
     <color name="colorAccentSecondaryLight">#E8CCC9</color>
     <color name="colorBrown">#8C877D</color>
     <color name="colorGray">#646464</color>
+
+    <color name="colorTextBackground">#f5f5f5</color>
+    <color name="colorItemLeft">#E6E4E4</color>
+    <color name="colorItemRight">#813fd7</color>
+
     <color name="colorGrey2">#aaa</color>
+
 
 </resources>

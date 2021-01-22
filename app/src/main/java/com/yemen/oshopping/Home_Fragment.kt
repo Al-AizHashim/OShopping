@@ -1,20 +1,12 @@
 package com.yemen.oshopping
 
-import android.annotation.SuppressLint
+import android.R.attr.name
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.*
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
@@ -23,12 +15,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
-import com.yemen.oshopping.ui.ShowProductFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.custom_dialog.view.*
+import java.lang.reflect.Type
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -46,7 +41,6 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     private lateinit var highestRateBtn:Button
     private lateinit var popupMenu:PopupMenu
     private lateinit var   searchView :SearchView
-
 
 
     interface Callbacks {
@@ -69,7 +63,7 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            showProductByCategory = it.getString(com.yemen.oshopping.ARG_PARAM1)
+           // showProductByCategory = it.getString(ARG_PARAM1)
 
         }
 
@@ -93,6 +87,12 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
         searchView = view.findViewById(R.id.search_view)
         //searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
+        searchView.suggestionsAdapter
+        searchView.apply {
+            setOnSearchClickListener {
+                setQuery(oshoppingViewModel.getQuery(),false)
+            }
+        }
         popupMenu= PopupMenu(requireContext(),categoryBtn)
         oshoppingViewModel.categoryItemLiveData.observe(
             viewLifecycleOwner,
@@ -120,7 +120,6 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
             popupColorMenuBtn.isSelected=true
             showMenu(v, R.menu.popup_color_menu)
         }
-
 
 
 
@@ -167,11 +166,11 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        trendBtn.isSelected=true
-        oshoppingViewModel.productItemLiveData.observe(
+        //trendBtn.isSelected=true
+        oshoppingViewModel.searchLiveData.observe(
             viewLifecycleOwner, androidx.lifecycle.Observer
             { productItems ->
-                Log.d("productItemLiveData", "product Item Live Data")
+                Log.d("searchLiveData", "product Item Live Data")
                 updateui(productItems)
             })
         //trend is the default
@@ -350,6 +349,8 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             searchThroughDatabase(query)
         }
        searchView.clearFocus()
+        searchView.close
+        searchView.horizontalFadingEdgeLength
         return true
     }
 
