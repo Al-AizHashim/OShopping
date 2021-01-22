@@ -25,7 +25,7 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 class MyProductFragment : Fragment() {
 
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.1.4/oshopping_api/"
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
     private lateinit var noDataImageView: ImageView

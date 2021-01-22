@@ -125,7 +125,7 @@ class PushData {
             user.phone_number,
             user.details,
             user.address,
-            "default image link"
+            user.image
         )
 
         pushUserRequest.enqueue(object : Callback<DefaultResponse> {

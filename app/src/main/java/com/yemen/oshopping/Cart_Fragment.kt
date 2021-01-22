@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 private const val TAG = "Category"
 
 class Cart_Fragment: Fragment() {
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.1.4/oshopping_api/"
     private lateinit var cartViewModel: OshoppingViewModel
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var back:ImageButton
@@ -52,7 +52,11 @@ class Cart_Fragment: Fragment() {
             viewLifecycleOwner,
             Observer { carts ->
                 Log.d("fetchCart", "Cart fetched successfully ${carts}")
+
               productId= carts[0].fk_product_id
+
+             //  productId= carts[0].fk_product_id
+
             })
        cartViewModel.getProductById(9)
         cartViewModel.productItemLiveDataByID.observe(viewLifecycleOwner,Observer { productItem ->
