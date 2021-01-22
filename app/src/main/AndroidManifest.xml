@@ -18,6 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
+        <activity android:name=".Chat.activity.ChatActivity" />
+        <activity android:name=".Chat.activity.UsersActivity" />
+        <service android:name=".Chat.firebase.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+
+        </service>
         <activity android:name=".setting.SettingActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>

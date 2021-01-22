@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 import com.google.firebase.auth.FirebaseAuth
@@ -37,7 +38,7 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        chatRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        chatRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
 
         var intent = intent
@@ -95,7 +96,7 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun sendMessage(senderId: String, receiverId: String, message: String) {
-        var reference: DatabaseReference? = FirebaseDatabase.getInstance().reference
+        var reference: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
 
         var hashMap: HashMap<String, String> = HashMap()
         hashMap.put("senderId", senderId)
