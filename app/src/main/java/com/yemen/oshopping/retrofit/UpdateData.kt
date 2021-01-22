@@ -105,12 +105,4 @@ class UpdateData {
 
 
     }
-
-    fun updateCart(cart: Cart){
-      //  updateMetaData( RetrofitClient().oshoppingApi
-          //  .updateCart(cart.cart_id,
-             //   cart.fk_product_id,
-             //   cart.fk_user_id,
-              //  cart.cart_statuse))
-    }
 }

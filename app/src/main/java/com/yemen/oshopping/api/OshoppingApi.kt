@@ -151,6 +151,10 @@ interface OshoppingApi {
     fun deleteReport(@Query("report_id") report_id: Int?
     ): Call<DefaultResponse>
 
+    @DELETE("oshopping_api/api/cart_api.php")
+    fun deleteCart(@Query("cart_id") cart_id: Int?
+    ): Call<DefaultResponse>
+
 
 
     @FormUrlEncoded

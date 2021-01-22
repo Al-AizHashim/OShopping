@@ -45,7 +45,7 @@ class ProductDetailsFragment : Fragment() {
     lateinit var submitRatingBTN: Button
 
 
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
     private var param1: Int = 1
     lateinit var oshoppingViewModel: OshoppingViewModel
 
@@ -73,8 +73,14 @@ class ProductDetailsFragment : Fragment() {
         addToCart = view.findViewById(R.id.product_add_btn)
 
         addToCart.setOnClickListener {
-            val cart= Cart(fk_user_id=1,fk_product_id =9,cart_statuse =0)
+            val cart= Cart(fk_user_id= oshoppingViewModel.getStoredUserId(),fk_product_id =productItem.product_id,cart_statuse =0)
+            Log.d("pushtocart","the contint of cart is :$cart")
             oshoppingViewModel.pushCart(cart)
+            Toast.makeText(
+                requireContext(),
+                "Added to cart successfully",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         ratingBar = view.findViewById(R.id.rating_Bar_product_details)
