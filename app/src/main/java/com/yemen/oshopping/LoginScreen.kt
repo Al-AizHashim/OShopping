@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
+import com.yemen.oshopping.Chat.activity.UsersActivity
 import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_login_screen.*
@@ -48,12 +49,6 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
                 sharedPreference.save("rememberMe",false)
             }
         }
-
-    }
-    override fun onStart() {
-        super.onStart()
-
-        //val currentUser = mAuth!!.currentUser
 
     }
 
@@ -99,8 +94,8 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
                     sharedPreference.save("userEmail",email)
                     oShoppingViewModel.setUserEmail(email)
                     //val user = mAuth!!.currentUser
-            val intent = Intent(this, MainScreen::class.java)
-                //    val intent = Intent(this, ChangePassword::class.java)
+           // val intent = Intent(this, MainScreen::class.java)
+                    val intent = Intent(this, UsersActivity::class.java)
 
                     startActivity(intent)
 

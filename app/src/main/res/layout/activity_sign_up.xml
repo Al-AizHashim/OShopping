@@ -46,17 +46,41 @@
             android:textSize="15sp" />
 
 
+
+        <EditText
+
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="170dp"
+            android:layout_marginRight="20dp"
+            android:drawableLeft="@drawable/person"
+            android:drawablePadding="10dp"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+
+            android:padding="10dp"
+            android:paddingBottom="20dp"
+            android:textColor="#000"
+            android:textColorHint="#000">
+
+
+        </EditText>
+
+
         <EditText
 
             android:id="@+id/emailSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:drawableLeft="@drawable/ic_outline_email_24"
             android:drawablePadding="10dp"
             android:hint="@string/email"
+            android:layout_below="@+id/name"
             android:inputType="textEmailAddress"
 
             android:padding="10dp"
@@ -97,7 +121,7 @@
             android:focusableInTouchMode="false"
             android:layout_height="45dp"
             android:layout_below="@+id/forgot_password"
-            android:layout_marginTop="330dp"
+            android:layout_marginTop="350dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:text="@string/SignUP"
