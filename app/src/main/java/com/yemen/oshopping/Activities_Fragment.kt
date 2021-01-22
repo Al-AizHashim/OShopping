@@ -1,17 +1,28 @@
 package com.yemen.oshopping
 
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.itextpdf.kernel.pdf.PdfDocument
+import com.itextpdf.kernel.pdf.PdfWriter
+import com.itextpdf.layout.Document
+import com.itextpdf.layout.element.Paragraph
 import com.yemen.oshopping.model.ActivityItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -21,16 +32,19 @@ class Activities_Fragment: Fragment() {
 
     private lateinit var oShoppingViewModel: OshoppingViewModel
     private lateinit var showActivitiesRecyclerView: RecyclerView
+    private lateinit var saveAsPDF: ImageButton
 
     private var param1: String? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
         oShoppingViewModel =
             ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
     }
@@ -41,11 +55,55 @@ class Activities_Fragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_activities, container, false)
+        saveAsPDF = view.findViewById(R.id.save_pdf)
         showActivitiesRecyclerView = view.findViewById(R.id.recycler_view_activities)
         showActivitiesRecyclerView.layoutManager = GridLayoutManager(context, 1)
 
+        saveAsPDF.setOnClickListener {
+            savePDF()
+        }
+
         return view
 
+    }
+
+    private fun savePDF(){
+
+        val mFile = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
+        val mFilePath = Environment.getExternalStorageDirectory().toString()+"/"+ mFile + ".pdf"
+
+        try {
+            val pdfDocument = PdfDocument(PdfWriter( mFilePath))
+            val document = Document(pdfDocument)
+
+            val text = Paragraph("My Text")
+            document.add(text)
+
+            document.close()
+
+            Toast.makeText(context,"Success"+ mFile+".pdf is saved to "+ mFilePath,Toast.LENGTH_LONG).show()
+
+        }
+        catch ( e: Exception){
+            Toast.makeText(context,"error  "+ e.message ,Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode){
+            1000 ->
+            if (grantResults.size>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                savePDF()
+            }else{
+                Toast.makeText(context,"parmission denied .. ",Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
