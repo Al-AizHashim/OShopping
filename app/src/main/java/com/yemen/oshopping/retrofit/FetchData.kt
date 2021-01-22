@@ -298,4 +298,6 @@ class FetchData {
         return fetchActivitiesMetaData(RetrofitClient().oshoppingApi.fetchActivities(2))
     }
 
+
+
 }

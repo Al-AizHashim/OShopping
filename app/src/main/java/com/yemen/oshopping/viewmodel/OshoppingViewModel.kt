@@ -153,6 +153,13 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         reportItemLiveData=FetchData().fetchReport()
     }
 
+    fun deleteCart(cart: Cart) {
+        DeleteData().deleteCart(cart)
+        // cartItemLiveData=FetchData().fetchCart()
+    }
+
+
+
 
     ////////
     //shared preferences
@@ -176,14 +183,4 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         return UserSharedPreferences.getStoredQuery(app)
     }
 
-    fun deleteCart(cart: Cart) {
-        DeleteData().deleteCart(cart)
-       // cartItemLiveData=FetchData().fetchCart()
-    }
-
-    fun updateCart(cart: Cart){
-        UpdateData().updateCart(cart)
-      //  cartItemLiveData=FetchData().fetchCart()
-
-    }
 }

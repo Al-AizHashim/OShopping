@@ -71,6 +71,8 @@
     <string name="save">save</string>
     <string name="confirm_cart">Confirm</string>
     <string name="delete">delete</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="my_purchases">My purchases</string>
 
 
 </resources>
