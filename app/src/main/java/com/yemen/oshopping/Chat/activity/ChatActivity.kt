@@ -1,6 +1,7 @@
 package com.yemen.oshopping.Chat.activity
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
