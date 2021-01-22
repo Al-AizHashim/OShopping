@@ -79,8 +79,12 @@ class SettingFragment : Fragment() {
         }
         signOutTV.setOnClickListener {
             mAuth.signOut()
-            oshoppingViewModel.setUserId()
-            oshoppingViewModel.setUserEmail()
+            oshoppingViewModel.apply {
+                setUserId()
+                setUserEmail()
+                setQuery()
+            }
+
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_loginScreen)
            //write here the sign out code
         }

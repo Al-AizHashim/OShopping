@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_root"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
@@ -20,9 +21,11 @@
         app:layout_constraintTop_toBottomOf="@+id/skip_text_view">
 
         <ImageView
-            android:id="@+id/imageView111"
+            android:id="@+id/user_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_baseline_person_24" />
     </androidx.cardview.widget.CardView>
 

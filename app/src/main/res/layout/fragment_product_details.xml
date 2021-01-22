@@ -70,7 +70,7 @@
         app:srcCompat="@drawable/back"
         />
 
-    <ImageView
+    <!--     <ImageView
         android:id="@+id/product_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -81,6 +81,26 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        -->
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/product_img"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        app:fillColor="#FFFFFFFF"
+        app:pageColor="#00000000"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="#FF777777"
+        android:layout_marginTop="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logobrown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:strokeWidth="1dp"/>
+
+
 
     <Button
         android:id="@+id/product_add_btn"

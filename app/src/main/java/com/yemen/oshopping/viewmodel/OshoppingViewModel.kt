@@ -169,7 +169,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun getStoredEmail():String? {
         return UserSharedPreferences.getStoredUserEmail(app)
     }
-    fun setQuery(query: String="none") {
+    fun setQuery(query: String="") {
         UserSharedPreferences.setStoredQuery(app, query)
     }
     fun getQuery():String? {

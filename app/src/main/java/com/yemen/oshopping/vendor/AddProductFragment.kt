@@ -37,7 +37,7 @@ import java.io.FileOutputStream
 
 class AddProductFragment : Fragment() {
     private var selectedImageUri: Uri? = null
-    var imageName:String?=null
+    var imageName:String?=""
     private var counter: Int = 0
     lateinit var productNameET: EditText
     lateinit var productDetailsEditText: EditText
@@ -56,10 +56,11 @@ class AddProductFragment : Fragment() {
     lateinit var buttonImage: Button
     lateinit var oshoppingViewModel: OshoppingViewModel
     private var mUri: Uri? = null
+    private var images:ArrayList<Uri?>? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-
+        images= ArrayList()
     }
 
     override fun onCreateView(
@@ -203,11 +204,14 @@ class AddProductFragment : Fragment() {
             })
     }
     private fun openImageChooser() {
-        Intent(Intent.ACTION_PICK).also {
+        Intent(
+            //Intent.ACTION_PICK
+            ).also {
             it.type = "image/*"
             val mimeTypes = arrayOf("image/jpeg", "image/png")
             it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-            it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            it.action=Intent.ACTION_GET_CONTENT
             startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
         }
     }
@@ -216,27 +220,47 @@ class AddProductFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                REQUEST_CODE_PICK_IMAGE -> {
+                   if (data!!.clipData !=null) {
+                       val count = data.clipData!!.itemCount
+                       //Log.d("imageUrl", "${data.clipData} \n ")
+                       for (i in 0 until count){
+                           val imageUri=data.clipData!!.getItemAt(i).uri
+                           //Log.d("imageUrlx", "${imageUri} \n ")
+                           uploadImage(imageUri)
+                           images?.add(imageUri)
+                       }
+                   }
+                   else{
+                       val imageUri=data.data
+                       uploadImage(imageUri)
+                   }
+                   Log.d("imageUrlx", "abc")
+
+/*
+
                     selectedImageUri = data?.data
-                
+
                    Log.d("imageUrl", "the name of image in data of data is: ${data} \n ")
 
                    //Log.d("imageUrl", "the name of image is: ${selectedImageUri}")
                     mImageView.setImageURI(selectedImageUri)
                     uploadImage()
+ */
+
                 }
             }
         }
     }
-    private fun uploadImage() {
-        if (selectedImageUri == null) {
+    private fun uploadImage(imageUrl:Uri?) {
+        if (imageUrl == null) {
             layout_root.snackbar("Select an Image First")
             return
         }
 
-        val parcelFileDescriptor =requireContext().contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
+        val parcelFileDescriptor =requireContext().contentResolver.openFileDescriptor(imageUrl!!, "r", null) ?: return
 
         val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-        val file = File(requireContext().cacheDir, requireContext().contentResolver.getFileName(selectedImageUri!!))
+        val file = File(requireContext().cacheDir, requireContext().contentResolver.getFileName(imageUrl!!))
         val outputStream = FileOutputStream(file)
         inputStream.copyTo(outputStream)
 
@@ -262,7 +286,8 @@ class AddProductFragment : Fragment() {
                 response.body()?.let {
                     layout_root.snackbar(it.message)
                 }
-                imageName=response.body()?.image
+                imageName+=response.body()?.image+":"
+                Log.d("imageUrlx", "${imageName.toString()}")
                 //Toast.makeText(requireContext(), "the image name is $imageName", Toast.LENGTH_SHORT).show()
 
 
