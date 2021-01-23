@@ -155,7 +155,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     fun deleteCart(cart: Cart) {
         DeleteData().deleteCart(cart)
-        // cartItemLiveData=FetchData().fetchCart()
+         cartItemLiveData=FetchData().fetchCart(getStoredUserId())
     }
 
 

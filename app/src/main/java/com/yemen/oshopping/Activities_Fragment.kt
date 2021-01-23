@@ -24,26 +24,19 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 
 class Activities_Fragment: Fragment() {
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.1.4/oshopping_api/"
 
     private lateinit var oShoppingViewModel: OshoppingViewModel
     private lateinit var showActivitiesRecyclerView: RecyclerView
     private lateinit var saveAsPDF: ImageButton
 
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
 
         oShoppingViewModel =
             ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -144,7 +137,7 @@ class Activities_Fragment: Fragment() {
         }
 
         override fun onClick(v: View?) {
-            TODO("Not yet implemented")
+
         }
     }
 
@@ -189,10 +182,6 @@ class Activities_Fragment: Fragment() {
 
 
     companion object {
-        fun newInstance() = Activities_Fragment().apply {
-            arguments = Bundle().apply {
-
-            }
-        }
+        fun newInstance() = Activities_Fragment()
     }
 }

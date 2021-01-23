@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.synnapps.carouselview.CarouselView
+import com.synnapps.carouselview.ImageListener
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -19,12 +21,15 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 
 private const val TAG = "Category"
 
-class Cart_Fragment: Fragment() {
+class Cart_Fragment : Fragment() {
     var url: String = "http://192.168.1.4/oshopping_api/"
     private lateinit var cartViewModel: OshoppingViewModel
     private lateinit var cartRecyclerView: RecyclerView
-    private lateinit var back:ImageButton
-    var productId:Int=-1
+    val delim = ":"
+    var list:List<String> =ArrayList()
+    private lateinit var back: ImageButton
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +44,8 @@ class Cart_Fragment: Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_cart, container, false)
         cartRecyclerView = view.findViewById(R.id.cart_recyclerview)
-        cartRecyclerView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
+        cartRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
 
         return view
@@ -47,53 +53,59 @@ class Cart_Fragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cartViewModel.loadCart(1)
+        cartViewModel.loadCart(cartViewModel.getStoredUserId())
         cartViewModel.cartItemLiveData.observe(
             viewLifecycleOwner,
             Observer { carts ->
-                Log.d("fetchCart", "Cart fetched successfully ${carts}")
 
-              productId= carts[0].fk_product_id
+                Log.d(
+                    "fetchCart2",
+                    "Cart fetched successfullycarts ${carts} \n"
+                )
+                cart_recyclerview.adapter = CartAdapter(carts)
 
-             //  productId= carts[0].fk_product_id
 
             })
-       cartViewModel.getProductById(9)
-        cartViewModel.productItemLiveDataByID.observe(viewLifecycleOwner,Observer { productItem ->
-            Log.d("fetchCart", "Cart fetched successfully ${productItem}")
-            cart_recyclerview.adapter=CartAdapter(productItem)
 
-        })
     }
 
-    private inner  class CartHolder(itemTextView: View)
-        : RecyclerView.ViewHolder(itemTextView),
+    private inner class CartHolder(itemTextView: View) : RecyclerView.ViewHolder(itemTextView),
         View.OnClickListener {
         init {
             itemView.setOnClickListener(this)
 
         }
 
-        private lateinit var productItemss: ProductItem
+        private lateinit var cartItems: Cart
 
 
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
-        private val productImage = itemView.findViewById(R.id.product_img) as ImageView
-        private val cartDelete=itemView.findViewById(R.id.delete) as Button
+        private val productImage = itemView.findViewById(R.id.product_img) as CarouselView
 
-        fun bind(productItems: ProductItem) {
+        private val cartDelete = itemView.findViewById(R.id.delete) as Button
+        private val buyBtn = itemView.findViewById(R.id.buy_btn) as Button
 
-            var compositeProductUrl = url + productItems.product_img
-            var conditionString = "string" + productItems.product_img
-            if (!conditionString.equals("stringnull"))
-                Picasso.get().load(compositeProductUrl).into(productImage)
-            productItemss = productItems
-            productName.text = productItems.product_name
-            productDate.text = productItems.product_date
+        fun bind(cartItem: Cart) {
+            cartItems=cartItem
+            list = cartItem.product_img?.split(delim)!!
+            if (list.size==1)
+                productImage.pageCount = 1
+            else
+                productImage.pageCount = list.size-1
+            var imageListener =
+                ImageListener { position, imageView ->
+                    Picasso.get().load(url+list[position]).into(imageView)
+                }
+            productImage.setImageListener(imageListener)
+
+            cartItems = cartItem
+            productName.text = cartItem.product_name
+            productDate.text = cartItem.product_date
 
             cartDelete.setOnClickListener {
-               // cartViewModel.deleteCart()
+                 cartViewModel.deleteCart(cartItem)
+                cartViewModel.loadCart(cartViewModel.getStoredUserId())
 
             }
 
@@ -102,28 +114,30 @@ class Cart_Fragment: Fragment() {
         override fun onClick(v: View?) {
             Toast.makeText(
                 requireContext(),
-                "The id: ${productItemss.product_id} and title ${productItemss.product_name} is clicked",
+                "The id: ${cartItems.fk_product_id} and title ${cartItems.product_name} is clicked",
                 Toast.LENGTH_LONG
             ).show()
-            // callbacks?.onProductSelected(productItemss.product_id)
+            // callbacks?.onProductSelected(cartItems.product_id)
         }
     }
 
-    private inner class CartAdapter(private val productItems: List<ProductItem>)
+    private inner class CartAdapter(private val cartItem: List<Cart>)
 
         : RecyclerView.Adapter<CartHolder>() {
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
         ): CartHolder {
-            val View = LayoutInflater.from(parent.context).inflate(R.layout.show_product_in_cart_list_item,parent,false)
+            val View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.show_product_in_cart_list_item, parent, false)
             return CartHolder(View)
         }
-        override fun getItemCount(): Int = productItems.size
+
+        override fun getItemCount(): Int = cartItem.size
 
         override fun onBindViewHolder(holder: CartHolder, position: Int) {
-            val productItem = productItems[position]
-            holder.bind(productItem)
+            val cart_Item = cartItem[position]
+            holder.bind(cart_Item)
         }
     }
 

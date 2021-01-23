@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.yemen.oshopping.model.Cart
 
 data class CartResponse(
-    @SerializedName("Cart")
+    @SerializedName("ListOfUserProductsInCart")
     var cartItem: List<Cart>) {
 }

@@ -59,7 +59,18 @@ interface OshoppingApi {
         @Field("cart_id") cart_id: Int?,
         @Field("fk_product_id") product_id: Int,
         @Field("fk_user_id") user_id: Int,
-        @Field("cart_statuse") cart_statuse: Int
+        @Field("cart_statuse") cart_statuse: Int,
+        @Field("product_name") product_name: String,
+        @Field("yrial_price") yrial_price: Double,
+        @Field("dollar_price") dollar_price: Double,
+        @Field("vendor_id") vendor_id: Int,
+        @Field("cat_id") cat_id: Int,
+        @Field("product_details") product_details: String?,
+        @Field("product_img") product_img: String?,
+        @Field("product_date") product_date: String?,
+        @Field("product_quantity") product_quantity: Int,
+        @Field("product_discount") product_discount: Int,
+        @Field("color") color: String
     ): Call<DefaultResponse>
 
     //get
@@ -103,7 +114,7 @@ interface OshoppingApi {
     fun fetchActivities(@Query("fk_user_id") fk_user_id: Int): Call<ActivityResponse>
 
     @GET("oshopping_api/api/cart_api.php")
-    fun fetchCart(@Query("user_id")user_id: Int): Call<CartResponse>
+    fun fetchCart(@Query("user_id") user_id: Int): Call<CartResponse>
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUserByEmail(@Query("email") email: String): Call<UserResponse>

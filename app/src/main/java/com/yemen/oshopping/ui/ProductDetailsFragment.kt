@@ -37,6 +37,7 @@ class ProductDetailsFragment : Fragment() {
     //lateinit var productDiscount: TextView
     //lateinit var productDetails: TextView
     lateinit var productItem: ProductItem
+    lateinit var productItemss: ProductItem
     lateinit var ratingBar: RatingBar
     lateinit var ratingBar2: RatingBar
     lateinit var submitRatingBTN: Button
@@ -44,7 +45,7 @@ class ProductDetailsFragment : Fragment() {
     var list:List<String> =ArrayList()
 
 
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.1.4/oshopping_api/"
     private var param1: Int = 1
     lateinit var oshoppingViewModel: OshoppingViewModel
 
@@ -73,7 +74,21 @@ class ProductDetailsFragment : Fragment() {
         addToCart = view.findViewById(R.id.product_add_btn)
 
         addToCart.setOnClickListener {
-            val cart= Cart(fk_user_id= oshoppingViewModel.getStoredUserId(),fk_product_id =productItem.product_id,cart_statuse =0)
+            val cart= Cart(
+                fk_user_id=oshoppingViewModel.getStoredUserId(),
+                fk_product_id =productItemss.product_id,
+                cart_statuse =0,
+                product_name = productItemss.product_name,
+                product_details = productItemss.product_details,
+                dollar_price = productItemss.dollar_price,
+                yrial_price = productItemss.yrial_price,
+                product_quantity = 1,
+                vendor_id =productItemss.vendor_id,
+                cat_id = productItemss.cat_id,
+                product_img = productItemss.product_img,
+                product_discount = productItemss.product_discount,
+                color = productItemss.color
+            )
             Log.d("pushtocart","the contint of cart is :$cart")
             oshoppingViewModel.pushCart(cart)
             Toast.makeText(
@@ -125,7 +140,11 @@ class ProductDetailsFragment : Fragment() {
                 productDetails?.let {
                     Log.d("FromObserver", "$it")
                     this.productItem = productDetails[0]
+                    productItemss=productItem
                      list = productItem.product_img.split(delim)
+                    if (list.size==1)
+                    productImage.pageCount = 1
+                    else
                     productImage.pageCount = list.size-1
                     Log.d("Urlx", "$url+${list}")
                     updateUI()

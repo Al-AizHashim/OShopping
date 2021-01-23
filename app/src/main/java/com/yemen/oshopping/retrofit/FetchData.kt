@@ -83,22 +83,22 @@ class FetchData {
   
     fun fetchCart(user_id:Int): LiveData<List<Cart>> {
         val responseLiveData: MutableLiveData<List<Cart>> = MutableLiveData()
-        val NewsRequest =
+        val cartRequest =
             RetrofitClient().oshoppingApi.fetchCart(user_id)
-        NewsRequest.enqueue(object : Callback<CartResponse> {
+        cartRequest.enqueue(object : Callback<CartResponse> {
             override fun onFailure(call: Call<CartResponse>, t: Throwable) {
-                Log.e("fetch cart ", "Failed to fetch cart", t)
+                Log.e("retrofit_fetchcart ", "Failed to fetch cart", t)
             }
 
             override fun onResponse(
                 call: Call<CartResponse>,
                 response: Response<CartResponse>
             ) {
-                Log.d(TAG, "Response received successfully")
+                Log.d("retrofit_fetchcart", "Response received successfully")
 
                 val cartResponse: CartResponse? = response.body()
                 val cart: List<Cart> = cartResponse?.cartItem ?: mutableListOf()
-//                responseLiveData.value = cart
+                responseLiveData.value = cart
 
             }
         })
@@ -120,9 +120,9 @@ class FetchData {
     fun fetchUserById(user_id: Int): LiveData<User> {
         Log.d("TAGdd", "fetchUserById: ss")
         val responseLiveData: MutableLiveData<User> = MutableLiveData()
-        val NewsRequest =
+        val userRequest =
             RetrofitClient().oshoppingApi.fetchUserById(user_id)
-        NewsRequest.enqueue(object : Callback<SingleUserResponse> {
+        userRequest.enqueue(object : Callback<SingleUserResponse> {
             override fun onFailure(call: Call<SingleUserResponse>, t: Throwable) {
                 Log.e("fetch user details", "Failed to fetch user details", t)
 

@@ -31,7 +31,7 @@ private const val ARG_PARAM2 = "param2"
 
 
 class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.1.4/oshopping_api/"
 
 
     private lateinit var trendBtn:Button
@@ -275,7 +275,22 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             productName.text = productItems.product_name
           
             addToCart.setOnClickListener {
-                val cart= Cart(fk_user_id=1,fk_product_id =9,cart_statuse =0)
+                val cart= Cart(
+                    fk_user_id=oshoppingViewModel.getStoredUserId(),
+                    fk_product_id =productItemss.product_id,
+                    cart_statuse =0,
+                    product_name = productItemss.product_name,
+                    product_details = productItemss.product_details,
+                    dollar_price = productItemss.dollar_price,
+                    yrial_price = productItemss.yrial_price,
+                    product_quantity = 1,
+                    vendor_id =productItemss.vendor_id,
+                    cat_id = productItemss.cat_id,
+                    product_img = productItemss.product_img,
+                    product_discount = productItemss.product_discount,
+                    color = productItemss.color
+                )
+                Log.d("pushtoCart", "the content of cart is : $cart")
                 oshoppingViewModel.pushCart(cart)
             }
 
