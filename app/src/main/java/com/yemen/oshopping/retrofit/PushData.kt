@@ -146,6 +146,28 @@ class PushData {
 
 
     }
+
+    fun pushReportDetails(postReportDetails: PostReportDetails) {
+        Log.d("pushReportDetails", "pushReportDetails:$postReportDetails ")
+        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.
+        pushReportDetails(
+            postReportDetails.report_id,
+            postReportDetails.sender_id,
+            postReportDetails.against_id
+        )
+        pushUserRequest.enqueue(object : Callback<DefaultResponse> {
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.d("ReportDetails", "Failed to push ReportDetails", t)
+            }
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushReportDetails", "ReportDetails pushed successfully")
+            }
+        })
+    }
+
     fun pushCart(cart: Cart) {
         Log.d("pushCart", "pushCart:${cart.toString()} ")
         val pushCartRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushCart(

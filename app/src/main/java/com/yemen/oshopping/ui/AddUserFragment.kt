@@ -36,6 +36,7 @@ import java.io.FileOutputStream
 
 
 class AddUserFragment : Fragment() {
+
     private var selectedImageUri: Uri? = null
     var imageName:String?=null
     lateinit var fNameEditText: EditText
@@ -47,11 +48,11 @@ class AddUserFragment : Fragment() {
     lateinit var oshoppingViewModel: OshoppingViewModel
     lateinit var userImage:ImageView
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
 
+        oshoppingViewModel.getReportDetailsByUserId(1)
 
     }
 
@@ -84,6 +85,7 @@ class AddUserFragment : Fragment() {
                 details = detailsEditText.text.toString(),
                 image = imageName
             )
+
             oshoppingViewModel.apply {
                 pushUser(user)
 
@@ -102,6 +104,7 @@ class AddUserFragment : Fragment() {
 
 
             startActivity(intent)
+
 
 
 
@@ -186,6 +189,10 @@ class AddUserFragment : Fragment() {
 
 
     companion object {
+
+        fun newInstance() = AddUserFragment()
+
         const val REQUEST_CODE_PICK_IMAGE = 10
+
     }
 }

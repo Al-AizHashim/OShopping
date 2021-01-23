@@ -21,20 +21,15 @@ import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import java.text.SimpleDateFormat
 
-
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
 class ShowProductFragment : Fragment() {
-
-
     interface Callbacks {
         fun onProductSelected(product_id: Int)
     }
 
     private var callbacks: Callbacks? = null
-
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
     private var showProductByCategory: String? = null
@@ -49,7 +44,6 @@ class ShowProductFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             showProductByCategory = it.getString(ARG_PARAM1)
-
         }
 
         oshoppingViewModel =
@@ -70,7 +64,6 @@ class ShowProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         oshoppingViewModel.productItemLiveData.observe(
             viewLifecycleOwner, Observer { productItems ->
                 Log.d("productItemLiveData", "product Item Live Data")
@@ -102,24 +95,20 @@ class ShowProductFragment : Fragment() {
         private val productName = itemView.findViewById(R.id.product_name) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
-        private val productRatingNo = itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
-        private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product)  as RatingBar
+        private val productRatingNo =
+            itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
+        private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product) as RatingBar
 
 
         fun bind(productItems: ProductItem) {
             productItemss = productItems
             productName.text = productItems.product_name
             productDate.text = productItems.product_date
-            productRatingNo.text=productItems.number_of_ratings.toString()
-            productRating.rating=productItems.rating_average
-            Log.d("TTTAG", "bind: $productItems.number_of_ratings.toString() dd$productRating.rating")
-
+            productRatingNo.text = productItems.number_of_ratings.toString()
+            productRating.rating = productItems.rating_average
             productImage.apply {
-
             }
-
         }
-
 
         override fun onClick(v: View?) {
             Toast.makeText(
@@ -129,14 +118,10 @@ class ShowProductFragment : Fragment() {
             ).show()
             callbacks?.onProductSelected(productItemss.product_id)
         }
-
-
     }
 
     private inner class ShowProductAdapter(private val productItems: List<ProductItem>) :
         RecyclerView.Adapter<ShowProductHolder>() {
-
-
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
@@ -161,7 +146,6 @@ class ShowProductFragment : Fragment() {
         callbacks = null
     }
 
-
     companion object {
         fun newInstance(): ShowProductFragment {
             return ShowProductFragment()
@@ -170,8 +154,8 @@ class ShowProductFragment : Fragment() {
         fun newInstance(productCategory: String) = ShowProductFragment().apply {
             arguments = Bundle().apply {
                 putString(ARG_PARAM1, productCategory)
-
             }
+
         }
     }
 }
