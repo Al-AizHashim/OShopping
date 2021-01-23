@@ -111,6 +111,9 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left"/>
+        <action
+            android:id="@+id/action_adminFragment_to_showReportsFragment"
+            app:destination="@id/showReportsFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
@@ -213,4 +216,9 @@
             android:name="categoryNameArg"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/showReportsFragment"
+        android:name="com.yemen.oshopping.ui.ShowReportsFragment"
+        android:label="fragment_show_reports"
+        tools:layout="@layout/fragment_show_reports" />
 </navigation>

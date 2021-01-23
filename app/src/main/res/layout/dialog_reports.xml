@@ -23,11 +23,13 @@
             android:id="@+id/report_dialog_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ff7e22"
+            android:background="@drawable/custom_shape2"
             android:gravity="center"
-            android:text="اختر بلاغا"
+            android:layout_margin="5dp"
+            android:text="@string/repotDialogTilie"
             android:textColor="#fff"
-            android:textSize="30sp" />
+            android:padding="7dp"
+            android:textSize="24sp" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -46,7 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:background="#046907"
+                android:layout_margin="10dp"
+                android:background="@drawable/custom_shape2"
                 android:text="Cancel"
                 android:textColor="#fff" />
 
@@ -55,7 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:background="#046907"
+                android:layout_margin="10dp"
+                android:background="@drawable/custom_shape2"
                 android:text="Submit"
                 android:textColor="#fff" />
 

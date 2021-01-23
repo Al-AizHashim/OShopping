@@ -17,6 +17,7 @@
     <string name="LogIn">Sign In</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="repotDialogTilie">Choose report</string>
     <string name="forgetPass">Forget Password?</string>
     <string name="back">Back</string>
     <string name="RestPass">Reset Password</string>
@@ -65,6 +66,7 @@
     <string name="log_in">Log in</string>
     <string name="show_categories">show categories</string>
     <string name="show_reports">Show reports</string>
+    <string name="show_reports_details">Show reports details</string>
     <string name="admin">Admin</string>
     <string name="save">save</string>
     <string name="confirm_cart">Confirm</string>

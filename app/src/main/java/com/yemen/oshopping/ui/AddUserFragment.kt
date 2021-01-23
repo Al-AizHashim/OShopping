@@ -14,7 +14,6 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 class AddUserFragment : Fragment() {
-
     lateinit var fNameEditText: EditText
     lateinit var lNameEditText: EditText
     lateinit var addressEditText: EditText
@@ -23,11 +22,10 @@ class AddUserFragment : Fragment() {
     lateinit var saveProfileBTN: Button
     lateinit var oshoppingViewModel: OshoppingViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-
+        oshoppingViewModel.getReportDetailsByUserId(1)
     }
 
     override fun onCreateView(
@@ -50,16 +48,12 @@ class AddUserFragment : Fragment() {
                 phone_number = phoneNumberEditText.text.toString(),
                 details = detailsEditText.text.toString()
             )
-            ReportsDialog.newInstance().apply {
-                setTargetFragment(this@AddUserFragment, 0)
-                show(this@AddUserFragment.requireFragmentManager(), "Input")
-            oshoppingViewModel.pushUser(user)}
+            oshoppingViewModel.pushUser(user)
         }
         return view
     }
 
     companion object {
-        fun newInstance() =
-            AddUserFragment()
+        fun newInstance() = AddUserFragment()
     }
 }

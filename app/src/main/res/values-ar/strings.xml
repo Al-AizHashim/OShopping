@@ -66,6 +66,8 @@
     <string name="save">حفظ</string>
     <string name="confirm_cart">تأكيد</string>
     <string name="delete">حذف</string>
+    <string name="show_reports_details">عرض تفاصيل التقارير</string>
+    <string name="repotDialogTilie">حدد نوع البلاغ</string>
 
 
 </resources>
