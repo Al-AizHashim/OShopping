@@ -2,8 +2,11 @@ package com.yemen.oshopping
 
 import android.R.attr.gravity
 import android.R.attr.name
+import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,11 +14,13 @@ import android.widget.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.chrisbanes.photoview.PhotoView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
@@ -23,6 +28,8 @@ import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.custom_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_activities.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.lang.reflect.Type
 
 
@@ -41,8 +48,12 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     private lateinit var vendorBtn:Button
     private lateinit var highestRateBtn:Button
     private lateinit var popupMenu:PopupMenu
-    private lateinit var   searchView :SearchView
-
+    private lateinit var searchView :SearchView
+    val delim = ":"
+    var list:List<String> =ArrayList()
+    private lateinit var productPhotoView:PhotoView
+    private lateinit var productPricedialog:TextView
+    private lateinit var productNamedialog:TextView
 
     interface Callbacks {
         fun onProductSelected(product_id: Int)
@@ -225,6 +236,7 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
 
             }
 
+
         }
 
         highestRateBtn.setOnClickListener {
@@ -259,11 +271,18 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
 
 
 
+
         fun bind(productItems: ProductItem) {
-            var compositeProductUrl = url + productItems.product_img
-            var conditionString = "string" + productItems.product_img
-            if (!conditionString.equals("stringnull"))
-                Picasso.get().load(compositeProductUrl).into(productImage)
+            var imageUri:String
+            list = productItems.product_img.split(delim)
+            if (list.size==1)
+                imageUri = list[0]
+            else
+                imageUri = list[0]
+            imageUri?.let {
+                Picasso.get().load(url+it).into(productImage)
+            }
+
             productItemss = productItems
             productName.text = productItems.product_name
           
@@ -290,8 +309,15 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             productDate.text = productItems.product_date
             productRatingNo.setText(productItems.number_of_ratings.toString()+" votes")
             productRating.rating=productItems.rating_average
+            productImage.setOnClickListener {
+
+                showDialogImageFull(url+imageUri,productItems.dollar_price.toString()+" $",productItems.product_name)
+
+
+            }
 
         }
+
 
 
         override fun onClick(v: View?) {
@@ -379,4 +405,21 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             })
 
     }
+
+    private fun showDialogImageFull(imageUrl:String,price:String,name:String) {
+        val view= activity?.layoutInflater?.inflate(R.layout.dialog_image,null)
+        productPhotoView= view?.findViewById(R.id.product_photo_view_dialog)!!
+        productNamedialog = view.findViewById(R.id.product_name_dialog)
+        productPricedialog = view.findViewById(R.id.product_price_dialog)
+        productPricedialog.setText(price)
+        productNamedialog.setText(name)
+        Picasso.get().load(imageUrl).into(productPhotoView)
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // before
+        dialog.setContentView(view)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+        dialog.show()
+    }
+
 }

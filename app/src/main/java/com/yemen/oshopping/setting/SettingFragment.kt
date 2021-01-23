@@ -23,6 +23,7 @@ class SettingFragment : Fragment() {
     lateinit var myAccountTV: TextView
     lateinit var signOutTV: TextView
     lateinit var signUpTV: TextView
+    lateinit var chatTv: TextView
     lateinit var oshoppingViewModel: OshoppingViewModel
     //yemenoshopping@gmail.com
     private lateinit var mAuth: FirebaseAuth
@@ -44,6 +45,7 @@ class SettingFragment : Fragment() {
         signOutTV=view.findViewById(R.id.sign_out)
         signUpTV=view.findViewById(R.id.sign_up)
         adminTV=view.findViewById(R.id.admin_page)
+        chatTv=view.findViewById(R.id.chat)
 
         if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
         {
@@ -90,6 +92,16 @@ class SettingFragment : Fragment() {
         }
         signUpTV.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
+        }
+
+        chatTv.setOnClickListener {
+            if(oshoppingViewModel.getStoredUserId()==-1) {
+                Toast.makeText(requireContext(), "You must create an account", Toast.LENGTH_SHORT).show()
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
+            }
+            else{
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
+            }
         }
 
 

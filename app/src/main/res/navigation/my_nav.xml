@@ -50,6 +50,13 @@
         <action
             android:id="@+id/action_settingFragment_to_signUp2"
             app:destination="@id/signUp2" />
+        <action
+            android:id="@+id/action_settingFragment_to_usersActivity"
+            app:destination="@id/usersActivity"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -275,4 +282,8 @@
         android:id="@+id/signUp2"
         android:name="com.yemen.oshopping.SignUp"
         android:label="SignUp" />
+    <activity
+        android:id="@+id/usersActivity"
+        android:name="com.yemen.oshopping.Chat.activity.UsersActivity"
+        android:label="UsersActivity" />
 </navigation>

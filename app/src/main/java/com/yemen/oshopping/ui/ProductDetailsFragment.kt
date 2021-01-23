@@ -1,10 +1,14 @@
 package com.yemen.oshopping.ui
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
@@ -12,6 +16,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.github.chrisbanes.photoview.PhotoView
 import com.squareup.picasso.Picasso
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
@@ -41,6 +46,9 @@ class ProductDetailsFragment : Fragment() {
     lateinit var ratingBar: RatingBar
     lateinit var ratingBar2: RatingBar
     lateinit var submitRatingBTN: Button
+    private lateinit var productPhotoView:PhotoView
+    private lateinit var productPricedialog:TextView
+    private lateinit var productNamedialog:TextView
     val delim = ":"
     var list:List<String> =ArrayList()
 
@@ -72,6 +80,7 @@ class ProductDetailsFragment : Fragment() {
         rialProductPrice = view.findViewById(R.id.product_price_r)
         dollarProductPrice = view.findViewById(R.id.product_price_d)
         addToCart = view.findViewById(R.id.product_add_btn)
+
 
         addToCart.setOnClickListener {
             val cart= Cart(
@@ -124,6 +133,7 @@ class ProductDetailsFragment : Fragment() {
         //productDiscount = view.findViewById(R.id.prodcut_discount_text_view)
         // productDetails = view.findViewById(R.id.product_details_text_view)
 
+
         return view
     }
     var imageListener =
@@ -150,6 +160,11 @@ class ProductDetailsFragment : Fragment() {
                     updateUI()
                 }
             })
+
+        productImage.setImageClickListener { position ->
+            showDialogImageFull(url+list[position],productItem.dollar_price.toString()+" $",productItem.product_name)
+        }
+
     }
 
     fun updateUI() {
@@ -186,6 +201,21 @@ class ProductDetailsFragment : Fragment() {
                     putInt(ARG_PARAM1, param1)
                 }
             }
+    }
+    private fun showDialogImageFull(imageUrl:String,price:String,name:String) {
+        val view= activity?.layoutInflater?.inflate(R.layout.dialog_image,null)
+        productPhotoView= view?.findViewById(R.id.product_photo_view_dialog)!!
+        productNamedialog = view.findViewById(R.id.product_name_dialog)
+        productPricedialog = view.findViewById(R.id.product_price_dialog)
+        productPricedialog.setText(price)
+        productNamedialog.setText(name)
+        Picasso.get().load(imageUrl).into(productPhotoView)
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // before
+        dialog.setContentView(view)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+        dialog.show()
     }
 
 
