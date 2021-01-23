@@ -101,12 +101,14 @@ class Activities_Fragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        oShoppingViewModel.apply {
+            loadActivities(getStoredUserId())
+        }
         oShoppingViewModel.activityItemLiveData.observe(
             viewLifecycleOwner, androidx.lifecycle.Observer
-            { activItem ->
-                Log.d("activityItemLiveData", "activity Item Live Data")
-                updateui(activItem)
+            { activityItem ->
+                Log.d("activityItemLiveData", "activity Item Live Data: $activityItem")
+                updateui(activityItem)
             })
 
 
@@ -123,14 +125,14 @@ class Activities_Fragment: Fragment() {
 
         }
 
-        private lateinit var activItem: ActivityItem
+        private lateinit var activItems: ActivityItem
 
         private val itemQuantity = itemView.findViewById(R.id.item_quantity) as TextView
         private val itemName = itemView.findViewById(R.id.item_name) as TextView
         private val itemPrice = itemView.findViewById(R.id.item_price) as TextView
 
         fun bind(activityItem: ActivityItem) {
-            activItem = activityItem
+            activItems = activityItem
             itemQuantity.text = activityItem.quantity.toString()
            // itemName.text = activityItem.
             itemPrice.text = activityItem.totalPrice.toString()
@@ -149,19 +151,21 @@ class Activities_Fragment: Fragment() {
             parent: ViewGroup,
             viewType: Int
         ): ShowActivitiesHolder {
-            val view =
+
             when(viewType){
                 1 ->{
-                    LayoutInflater.from(parent.context)
+                    val view = LayoutInflater.from(parent.context)
                         .inflate(R.layout.active_item_buy, parent, false)
+                    return ShowActivitiesHolder(view)
                 }
                 else -> {
-                    LayoutInflater.from(parent.context)
+                    val view =LayoutInflater.from(parent.context)
                         .inflate(R.layout.active_item_sell, parent, false)
+                    return ShowActivitiesHolder(view)
                 }
             }
 
-            return ShowActivitiesHolder(view)
+
         }
 
         override fun getItemCount(): Int = activItem.size

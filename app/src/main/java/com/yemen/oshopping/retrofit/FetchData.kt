@@ -155,6 +155,9 @@ class FetchData {
     fun searchProduct(query: String): LiveData<List<ProductItem>> {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.searchProduct(query))
     }
+    fun fetchProductByColor(color: String): LiveData<List<ProductItem>> {
+        return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByColor(color))
+    }
 
     fun fetchProductMetaData(productRequest: Call<ProductResponse>): LiveData<List<ProductItem>> {
 
@@ -294,8 +297,8 @@ class FetchData {
     }
 
 
-    fun fetchActivity(): LiveData<List<ActivityItem>> {
-        return fetchActivitiesMetaData(RetrofitClient().oshoppingApi.fetchActivities(2))
+    fun fetchActivity(user_id: Int): LiveData<List<ActivityItem>> {
+        return fetchActivitiesMetaData(RetrofitClient().oshoppingApi.fetchActivities(user_id))
     }
 
 

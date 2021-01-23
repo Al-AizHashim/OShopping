@@ -20,7 +20,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var productLiveData = MutableLiveData<Int>()
     var userLiveDataById = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
-    val activityItemLiveData: LiveData<List<ActivityItem>>
+    val activityLiveData= MutableLiveData<Int>()
     var cartLiveData = MutableLiveData<Int>()
     var reportItemLiveData: LiveData<List<Report>>
     val userLiveData= MutableLiveData <String> ()
@@ -33,7 +33,6 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
         reportItemLiveData=FetchData().fetchReport()
-        activityItemLiveData = FetchData().fetchActivity()
         mutableSearchTerm.value =getQuery()
         searchLiveData =
             Transformations.switchMap(mutableSearchTerm) { searchTerm ->
@@ -55,6 +54,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         Transformations.switchMap(productLiveData) { category_id ->
             FetchData().fetchProductByCategory(category_id)
         }
+    var activityItemLiveData :LiveData<List<ActivityItem>> =
+        Transformations.switchMap(activityLiveData) { user_id ->
+            FetchData().fetchActivity(user_id)
+        }
 
     var cartItemLiveData: LiveData<List<Cart>> =
         Transformations.switchMap(cartLiveData) { user_id ->
@@ -67,6 +70,9 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     fun loadProductByCategory(category_id: Int) {
         productLiveData.value = category_id
+    }
+    fun loadActivities(user_id: Int){
+        activityLiveData.value=user_id
     }
 
     var productItemLiveDataByID: LiveData<List<ProductItem>> =
