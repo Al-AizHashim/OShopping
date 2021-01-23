@@ -68,6 +68,7 @@
     <string name="delete">حذف</string>
     <string name="show_reports_details">عرض تفاصيل التقارير</string>
     <string name="repotDialogTilie">حدد نوع البلاغ</string>
+    <string name="detailsBTN">تفاصيل</string>
 
 
 </resources>

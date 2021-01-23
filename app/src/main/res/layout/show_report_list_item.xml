@@ -51,7 +51,7 @@
         android:drawableLeft="@drawable/ic_baseline_details_24"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="    Details "
+        android:text="@string/detailsBTN"
         android:textColor="@color/colorWhite"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
