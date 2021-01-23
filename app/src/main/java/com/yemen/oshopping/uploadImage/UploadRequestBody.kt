@@ -10,8 +10,7 @@ import java.io.FileInputStream
 
 class UploadRequestBody(
     private val file: File,
-    private val contentType: String,
-    private val callback: UploadCallback
+    private val contentType: String
 ) : RequestBody() {
 
     override fun contentType() = MediaType.parse("$contentType/*")
@@ -43,7 +42,7 @@ class UploadRequestBody(
         private val total: Long
     ) : Runnable {
         override fun run() {
-            callback.onProgressUpdate((100 * uploaded / total).toInt())
+           // callback.onProgressUpdate((100 * uploaded / total).toInt())
         }
     }
 

@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
+import com.yemen.oshopping.Chat.activity.UsersActivity
 import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_login_screen.*
@@ -50,12 +52,6 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
         }
 
     }
-    override fun onStart() {
-        super.onStart()
-
-        //val currentUser = mAuth!!.currentUser
-
-    }
 
     override fun onClick(v: View?) {
         val i = v!!.id
@@ -70,6 +66,15 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
         } else if (i == R.id.login_button) {
 
             signIn(email.text.toString(), password.text.toString())
+            oShoppingViewModel.setUserEmail(email.text.toString())
+            oShoppingViewModel.getUserByEmail(email.text.toString())
+
+            oShoppingViewModel.userItemLiveDataByEmail.observe(
+                this,
+                Observer { userdata ->
+                userdata.get(0).user_id?.let { userId -> oShoppingViewModel.setUserId(userId) }
+
+            })
 
         }
         else if(i==R.id.forgot_password)
@@ -97,10 +102,10 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
                     else
                         sharedPreference.save("userType","Customer")
                     sharedPreference.save("userEmail",email)
-                    oShoppingViewModel.setUserEmail(email)
+
                     //val user = mAuth!!.currentUser
-            val intent = Intent(this, MainScreen::class.java)
-                //    val intent = Intent(this, ChangePassword::class.java)
+           // val intent = Intent(this, MainScreen::class.java)
+                    val intent = Intent(this, UsersActivity::class.java)
 
                     startActivity(intent)
 

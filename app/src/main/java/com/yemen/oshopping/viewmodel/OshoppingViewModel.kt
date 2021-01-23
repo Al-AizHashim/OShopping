@@ -15,28 +15,43 @@ import com.yemen.oshopping.sharedPreferences.UserSharedPreferences
 
 class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) {
 
-    val productItemLiveData: LiveData<List<ProductItem>>
+    var productItemLiveData: LiveData<List<ProductItem>>
     var categoryItemLiveData: LiveData<List<Category>>
     var productLiveData = MutableLiveData<Int>()
     var reportDetailsLiveData = MutableLiveData<Int>()
     var userLiveDataById = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
 
-    var reportItemLiveData: LiveData<List<Report>>
     var reportsDetailsItemLiveData: LiveData<List<ReportsDetails>>
+    val activityLiveData= MutableLiveData<Int>()
     var cartLiveData = MutableLiveData<Int>()
-
-
+    var reportItemLiveData: LiveData<List<Report>>
     val userLiveData= MutableLiveData <String> ()
 
     val userItemLiveData:LiveData<List<User>>
-
+    val searchLiveData:LiveData<List<ProductItem>>
+    var productColorLiveData = MutableLiveData<String>()
+    val searchTerm: String
+        get() = mutableSearchTerm.value ?: ""
 
     init {
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
         reportItemLiveData=FetchData().fetchReport()
+
         reportsDetailsItemLiveData=FetchData().fetchReportsDetails()
+
+        mutableSearchTerm.value =getQuery()
+        searchLiveData =
+            Transformations.switchMap(mutableSearchTerm) { searchTerm ->
+                if (searchTerm.isBlank()) {
+                    FetchData().fetchProduct()
+                }
+                else {
+                    FetchData().searchProduct(searchTerm)
+                }
+            }
+
 
        // cartLiveData=FetchData().fetchCart()
 
@@ -47,6 +62,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var productItemLiveDataByCategory: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { category_id ->
             FetchData().fetchProductByCategory(category_id)
+        }
+    var activityItemLiveData :LiveData<List<ActivityItem>> =
+        Transformations.switchMap(activityLiveData) { user_id ->
+            FetchData().fetchActivity(user_id)
         }
 
     var cartItemLiveData: LiveData<List<Cart>> =
@@ -61,6 +80,15 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun loadProductByCategory(category_id: Int) {
         productLiveData.value = category_id
     }
+
+    fun loadProductByColor(color: String) {
+        productColorLiveData.value = color
+    }
+
+    fun loadActivities(user_id: Int){
+        activityLiveData.value=user_id
+    }
+
 
     var productItemLiveDataByID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { product_id ->
@@ -77,6 +105,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var productItemLiveDataByVendorID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { vendor_id ->
             FetchData().fetchProductByVendorId (vendor_id)
+        }
+    var productItemLiveDataByColor: LiveData<List<ProductItem>> =
+        Transformations.switchMap(productColorLiveData) { color ->
+            FetchData().fetchProductByColor(color)
         }
 
     var userItemLiveDataByEmail: LiveData<List<User>> =
@@ -104,12 +136,11 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     }
 
 
-    var searchLiveData: LiveData<List<ProductItem>> =
-        Transformations.switchMap(mutableSearchTerm) { query ->
-            FetchData().searchProduct(query)
-        }
+
+
 
     fun search(query: String) {
+        setQuery(query)
         mutableSearchTerm.value = query
     }
 
@@ -117,7 +148,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         PushData().pushCategory(category)
         categoryItemLiveData=FetchData().fetchCategory()
     }
-    fun pushProduct(product: ProductDetails) = PushData().pushProduct(product)
+    fun pushProduct(product: ProductDetails){
+        PushData().pushProduct(product)
+        productItemLiveData=FetchData().fetchProduct()
+    }
     fun pushUser(user: User) = PushData().pushUser(user)
 
     fun pushCart(cart: Cart) = PushData().pushCart(cart)
@@ -143,6 +177,11 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         reportItemLiveData=FetchData().fetchReport()
 
     }
+    fun updateProduct(product:ProductDetails){
+        UpdateData().updateProduct(product)
+        Log.d("updateProduct","OshoppingViewModel $product")
+        productItemLiveData=FetchData().fetchProduct()
+    }
     //delete functions
     fun deleteCategory(category: Category) {
         DeleteData().deleteCategory(category)
@@ -152,6 +191,13 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         DeleteData().deleteReport(report)
         reportItemLiveData=FetchData().fetchReport()
     }
+
+    fun deleteCart(cart: Cart) {
+        DeleteData().deleteCart(cart)
+         cartItemLiveData=FetchData().fetchCart(getStoredUserId())
+    }
+
+
 
 
     ////////
@@ -169,15 +215,11 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun getStoredEmail():String? {
         return UserSharedPreferences.getStoredUserEmail(app)
     }
-
-    fun deleteCart(cart: Cart) {
-        DeleteData().deleteCart(cart)
-       // cartItemLiveData=FetchData().fetchCart()
+    fun setQuery(query: String="") {
+        UserSharedPreferences.setStoredQuery(app, query)
+    }
+    fun getQuery():String? {
+        return UserSharedPreferences.getStoredQuery(app)
     }
 
-    fun updateCart(cart: Cart){
-        UpdateData().updateCart(cart)
-      //  cartItemLiveData=FetchData().fetchCart()
-
-    }
 }

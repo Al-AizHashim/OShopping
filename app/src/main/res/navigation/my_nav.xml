@@ -44,6 +44,12 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left"/>
+        <action
+            android:id="@+id/action_settingFragment_to_loginScreen"
+            app:destination="@id/loginScreen" />
+        <action
+            android:id="@+id/action_settingFragment_to_signUp2"
+            app:destination="@id/signUp2" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -76,22 +82,61 @@
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
         <action
-            android:id="@+id/action_myProductFragment_to_addProduct2"
-            app:destination="@id/addProduct2"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"/>
+            android:id="@+id/action_myProductFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateProductFragment"
-        android:name="com.yemen.oshopping.UpdateProductFragment"
+        android:name="com.yemen.oshopping.vendor.UpdateProductFragment"
         android:label="fragment_update_product"
-        tools:layout="@layout/fragment_update_product" />
-    <activity
-        android:id="@+id/addProduct2"
-        android:name="com.yemen.oshopping.AddProduct"
-        android:label="AddProduct" />
+        tools:layout="@layout/fragment_update_product" >
+        <action
+            android:id="@+id/action_updateProductFragment_to_myProductFragment"
+            app:destination="@id/myProductFragment" />
+        <argument
+            android:name="productId"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <argument
+            android:name="productName"
+            app:argType="string"
+            android:defaultValue="Chair" />
+        <argument
+            android:name="productCategory"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <argument
+            android:name="productVendor"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <argument
+            android:name="productImg"
+            app:argType="string"
+            android:defaultValue="uploads/6008519c95c10.jpg" />
+        <argument
+            android:name="productColor"
+            app:argType="string"
+            android:defaultValue="black" />
+        <argument android:name="productQuantity"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <argument
+            android:name="productDiscount"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="productDetails"
+            app:argType="string"
+            android:defaultValue="details" />
+        <argument
+            android:name="dolarPrice"
+            app:argType="float"
+            android:defaultValue="0.0" />
+        <argument
+            android:name="yemenRialPrice"
+            app:argType="float"
+            android:defaultValue="0.0" />
+    </fragment>
     <fragment
         android:id="@+id/adminFragment"
         android:name="com.yemen.oshopping.setting.AdminFragment"
@@ -221,4 +266,21 @@
         android:name="com.yemen.oshopping.ui.ShowReportsFragment"
         android:label="fragment_show_reports"
         tools:layout="@layout/fragment_show_reports" />
+
+        android:id="@+id/addProductFragment"
+        android:name="com.yemen.oshopping.vendor.AddProductFragment"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            android:id="@+id/action_addProductFragment_to_myProductFragment"
+            app:destination="@id/myProductFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/loginScreen"
+        android:name="com.yemen.oshopping.LoginScreen"
+        android:label="LoginScreen" />
+    <activity
+        android:id="@+id/signUp2"
+        android:name="com.yemen.oshopping.SignUp"
+        android:label="SignUp" />
 </navigation>

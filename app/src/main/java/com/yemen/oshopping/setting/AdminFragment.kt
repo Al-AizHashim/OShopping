@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import com.yemen.oshopping.R
 
 class AdminFragment : Fragment() {
+
     lateinit var showCategoryTV: TextView
     lateinit var showReportTV: TextView
     lateinit var showReportsDetailsTV: TextView
@@ -18,6 +19,7 @@ class AdminFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_admin, container, false)
         showCategoryTV = view.findViewById(R.id.show_category_tv)

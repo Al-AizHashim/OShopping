@@ -69,6 +69,8 @@
     <string name="show_reports_details">عرض تفاصيل التقارير</string>
     <string name="repotDialogTilie">حدد نوع البلاغ</string>
     <string name="detailsBTN">تفاصيل</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="my_purchases">My purchases</string>
 
 
 </resources>

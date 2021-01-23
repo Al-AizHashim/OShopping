@@ -21,6 +21,10 @@ class DeleteData {
         return deleteMetaData(RetrofitClient().oshoppingApi.deleteReport(report.report_id))
     }
 
+    fun deleteCart(cart: Cart) {
+         return deleteMetaData(RetrofitClient().oshoppingApi.deleteCart(cart.cart_id))
+    }
+
     fun deleteMetaData(deleteRequest: Call<DefaultResponse>){
 
         deleteRequest.enqueue(object : Callback<DefaultResponse> {
@@ -40,10 +44,4 @@ class DeleteData {
         })
 
     }
-
-
-    fun deleteCart(cart: Cart) {
-       // return deleteMetaData(RetrofitClient().oshoppingApi.deleteCart(cart.cart_id))
-    }
-
 }

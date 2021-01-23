@@ -5,44 +5,44 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import android.widget.Button
-import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
-
-import android.widget.*
-
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.Navigation
 import com.squareup.picasso.Picasso
+import com.synnapps.carouselview.CarouselView
+import com.synnapps.carouselview.ImageListener
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
-import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.model.Rating
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
+
 
 private const val ARG_PARAM1 = "product_id"
 
 class ProductDetailsFragment : Fragment() {
-    lateinit var productImage: ImageView
+    lateinit var productImage: CarouselView
     lateinit var productName: TextView
     lateinit var productVendor: TextView
     lateinit var rialProductPrice: TextView
     lateinit var dollarProductPrice: TextView
     lateinit var addToCart: Button
     lateinit var ratingBarTexView: TextView
-
+    private var imagesUri:Array<String?>? =null
     // lateinit var productQuantity: TextView
     //lateinit var productDiscount: TextView
     //lateinit var productDetails: TextView
     lateinit var productItem: ProductItem
+    lateinit var productItemss: ProductItem
     lateinit var ratingBar: RatingBar
     lateinit var ratingBar2: RatingBar
     lateinit var submitRatingBTN: Button
+    val delim = ":"
+    var list:List<String> =ArrayList()
 
 
     var url: String = "http://192.168.1.4/oshopping_api/"
@@ -56,7 +56,7 @@ class ProductDetailsFragment : Fragment() {
 
         }
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-        oshoppingViewModel.getProductById(param1)
+
 
     }
 
@@ -66,6 +66,7 @@ class ProductDetailsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_product_details, container, false)
         productImage = view.findViewById(R.id.product_img)
+        productImage.setImageListener(imageListener)
         productName = view.findViewById(R.id.product_name)
         productVendor = view.findViewById(R.id.product_vendor)
         rialProductPrice = view.findViewById(R.id.product_price_r)
@@ -73,8 +74,28 @@ class ProductDetailsFragment : Fragment() {
         addToCart = view.findViewById(R.id.product_add_btn)
 
         addToCart.setOnClickListener {
-            val cart= Cart(fk_user_id=1,fk_product_id =9,cart_statuse =0)
+            val cart= Cart(
+                fk_user_id=oshoppingViewModel.getStoredUserId(),
+                fk_product_id =productItemss.product_id,
+                cart_statuse =0,
+                product_name = productItemss.product_name,
+                product_details = productItemss.product_details,
+                dollar_price = productItemss.dollar_price,
+                yrial_price = productItemss.yrial_price,
+                product_quantity = 1,
+                vendor_id =productItemss.vendor_id,
+                cat_id = productItemss.cat_id,
+                product_img = productItemss.product_img,
+                product_discount = productItemss.product_discount,
+                color = productItemss.color
+            )
+            Log.d("pushtocart","the contint of cart is :$cart")
             oshoppingViewModel.pushCart(cart)
+            Toast.makeText(
+                requireContext(),
+                "Added to cart successfully",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         ratingBar = view.findViewById(R.id.rating_Bar_product_details)
@@ -105,15 +126,27 @@ class ProductDetailsFragment : Fragment() {
 
         return view
     }
+    var imageListener =
+        ImageListener { position, imageView ->
+            Picasso.get().load(url+list[position]).into(imageView)
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        oshoppingViewModel.getProductById(param1)
         oshoppingViewModel.productItemLiveDataByID.observe(
             viewLifecycleOwner,
             Observer { productDetails ->
                 productDetails?.let {
                     Log.d("FromObserver", "$it")
                     this.productItem = productDetails[0]
+                    productItemss=productItem
+                     list = productItem.product_img.split(delim)
+                    if (list.size==1)
+                    productImage.pageCount = 1
+                    else
+                    productImage.pageCount = list.size-1
+                    Log.d("Urlx", "$url+${list}")
                     updateUI()
                 }
             })
@@ -125,15 +158,23 @@ class ProductDetailsFragment : Fragment() {
         dollarProductPrice.text = productItem.dollar_price.toString() + "$"
         ratingBar.rating = productItem.rating_average
         ratingBarTexView.text = productItem.number_of_ratings.toString() + " votes"
+
+
+        //var compositeProductUrl = url + productItem.product_img
+       // productImage.setImageListener { position, imageView ->
+          //  Picasso.get().load(url+list[position]).into(imageView)
+
+       // }
         //productQuantity.text = "Quantity: " + productItem.product_quantity.toString()
         //productDiscount.text = "discount: " + productItem.product_discount.toString()
         //productDetails.text = "product details: " + productItem.product_details
-        var compositeProductUrl = url + productItem.product_img
+        //var compositeProductUrl = url + productItem.product_img
         var conditionString = "string" + productItem.product_img
-        if (!conditionString.equals("stringnull"))
-            Picasso.get().load(compositeProductUrl).into(productImage)
-
+        //if (!conditionString.equals("stringnull"))
+        //Picasso.get().load(compositeProductUrl).into(productImage)
     }
+
+
 
     companion object {
         fun newInstance() =

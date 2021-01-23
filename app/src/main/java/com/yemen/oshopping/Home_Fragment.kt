@@ -1,20 +1,13 @@
 package com.yemen.oshopping
 
-import android.annotation.SuppressLint
+import android.R.attr.gravity
+import android.R.attr.name
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.*
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
@@ -23,19 +16,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
-import com.yemen.oshopping.ui.ShowProductFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import java.text.SimpleDateFormat
+import kotlinx.android.synthetic.main.custom_dialog.view.*
+import java.lang.reflect.Type
+
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
+
 class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     var url: String = "http://192.168.1.4/oshopping_api/"
+
 
     private lateinit var trendBtn:Button
     private lateinit var categoryBtn:Button
@@ -44,7 +42,6 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     private lateinit var highestRateBtn:Button
     private lateinit var popupMenu:PopupMenu
     private lateinit var   searchView :SearchView
-
 
 
     interface Callbacks {
@@ -67,7 +64,7 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            showProductByCategory = it.getString(com.yemen.oshopping.ARG_PARAM1)
+           // showProductByCategory = it.getString(ARG_PARAM1)
 
         }
 
@@ -91,6 +88,12 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
         searchView = view.findViewById(R.id.search_view)
         //searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
+        searchView.suggestionsAdapter
+        searchView.apply {
+            setOnSearchClickListener {
+                setQuery(oshoppingViewModel.getQuery(),false)
+            }
+        }
         popupMenu= PopupMenu(requireContext(),categoryBtn)
         oshoppingViewModel.categoryItemLiveData.observe(
             viewLifecycleOwner,
@@ -112,15 +115,16 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
 
 
 
-        val popupColorMenuBtn = view.findViewById<Button>(R.id.menu_button)
+        val popupColorMenuBtn = view.findViewById<Button>(R.id.color_btn)
 
         popupColorMenuBtn.setOnClickListener { v: View ->
+            categoryBtn.isSelected=false
+            vendorBtn.isSelected=false
+            trendBtn.isSelected=false
+            highestRateBtn.isSelected=false
             popupColorMenuBtn.isSelected=true
             showMenu(v, R.menu.popup_color_menu)
         }
-
-
-
 
         return view
     }
@@ -133,23 +137,19 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
     val popup = PopupMenu(requireContext(), v)
     popup.menuInflater.inflate(menuRes, popup.menu)
 
-    popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+    popup.setOnMenuItemClickListener { menuItem: MenuItem? ->
         // Respond to menu item click.
-        when(menuItem.itemId){
-            R.id.option_1 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
-
-            }
-            R.id.option_2 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
-
-            }
-            R.id.option_3 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG)
-
-            }
-
+        if (menuItem != null) {
+            oshoppingViewModel.loadProductByColor(menuItem.title.toString())
         }
+        oshoppingViewModel.productItemLiveDataByColor.observe(
+            viewLifecycleOwner, androidx.lifecycle.Observer
+            { productItemsByColor ->
+                updateui(productItemsByColor)
+            }
+        )
+
+
         return@setOnMenuItemClickListener true
 
     }
@@ -165,11 +165,11 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        trendBtn.isSelected=true
-        oshoppingViewModel.productItemLiveData.observe(
+        //trendBtn.isSelected=true
+        oshoppingViewModel.searchLiveData.observe(
             viewLifecycleOwner, androidx.lifecycle.Observer
             { productItems ->
-                Log.d("productItemLiveData", "product Item Live Data")
+                Log.d("searchLiveData", "product Item Live Data")
                 updateui(productItems)
             })
         //trend is the default
@@ -226,13 +226,7 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             }
 
         }
-        colorBtn.setOnClickListener {
-            categoryBtn.isSelected=false
-            vendorBtn.isSelected=false
-            trendBtn.isSelected=false
-            colorBtn.isSelected=true
-            highestRateBtn.isSelected=false
-        }
+
         highestRateBtn.setOnClickListener {
             categoryBtn.isSelected=false
             vendorBtn.isSelected=false
@@ -274,7 +268,22 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             productName.text = productItems.product_name
           
             addToCart.setOnClickListener {
-                val cart= Cart(fk_user_id=1,fk_product_id =9,cart_statuse =0)
+                val cart= Cart(
+                    fk_user_id=oshoppingViewModel.getStoredUserId(),
+                    fk_product_id =productItemss.product_id,
+                    cart_statuse =0,
+                    product_name = productItemss.product_name,
+                    product_details = productItemss.product_details,
+                    dollar_price = productItemss.dollar_price,
+                    yrial_price = productItemss.yrial_price,
+                    product_quantity = 1,
+                    vendor_id =productItemss.vendor_id,
+                    cat_id = productItemss.cat_id,
+                    product_img = productItemss.product_img,
+                    product_discount = productItemss.product_discount,
+                    color = productItemss.color
+                )
+                Log.d("pushtoCart", "the content of cart is : $cart")
                 oshoppingViewModel.pushCart(cart)
             }
 
@@ -348,6 +357,8 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             searchThroughDatabase(query)
         }
        searchView.clearFocus()
+        searchView.close
+        searchView.horizontalFadingEdgeLength
         return true
     }
 

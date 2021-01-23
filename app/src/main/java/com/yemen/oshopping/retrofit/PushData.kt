@@ -92,7 +92,8 @@ class PushData {
             p.product_img,
             p.product_date,
             p.product_quantity,
-            p.product_discount
+            p.product_discount,
+            p.color
         )
 
         pushProductRequest.enqueue(object : Callback<DefaultResponse> {
@@ -124,7 +125,7 @@ class PushData {
             user.phone_number,
             user.details,
             user.address,
-            "default image link"
+            user.image
         )
 
         pushUserRequest.enqueue(object : Callback<DefaultResponse> {
@@ -173,7 +174,18 @@ class PushData {
             cart.cart_id,
             cart.fk_product_id,
             cart.fk_user_id,
-            cart.cart_statuse
+            cart.cart_statuse,
+            cart.product_name,
+            cart.yrial_price,
+            cart.dollar_price,
+            cart.vendor_id,
+            cart.cat_id,
+            cart.product_details,
+            cart.product_img,
+            cart.product_date,
+            cart.product_quantity,
+            cart.product_discount,
+            cart.color
         )
 
         pushCartRequest.enqueue(object : Callback<DefaultResponse> {

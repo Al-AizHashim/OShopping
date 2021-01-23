@@ -69,8 +69,13 @@
     <string name="show_reports">Show reports</string>
     <string name="show_reports_details">Show reports details</string>
     <string name="admin">Admin</string>
+    <string name="activ">Selling and Purchase Operations</string>
+    <string name="quantity">1</string>
     <string name="save">save</string>
     <string name="confirm_cart">Confirm</string>
     <string name="delete">delete</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="my_purchases">My purchases</string>
+
 
 </resources>

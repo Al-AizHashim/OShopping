@@ -28,7 +28,8 @@ interface OshoppingApi {
         @Field("product_img") product_img: String?,
         @Field("product_date") product_date: String?,
         @Field("product_quantity") product_quantity: Int,
-        @Field("product_discount") product_discount: Int
+        @Field("product_discount") product_discount: Int,
+        @Field("color") color: String
 
     ): Call<DefaultResponse>
 
@@ -66,7 +67,18 @@ interface OshoppingApi {
         @Field("cart_id") cart_id: Int?,
         @Field("fk_product_id") product_id: Int,
         @Field("fk_user_id") user_id: Int,
-        @Field("cart_statuse") cart_statuse: Int
+        @Field("cart_statuse") cart_statuse: Int,
+        @Field("product_name") product_name: String,
+        @Field("yrial_price") yrial_price: Double,
+        @Field("dollar_price") dollar_price: Double,
+        @Field("vendor_id") vendor_id: Int,
+        @Field("cat_id") cat_id: Int,
+        @Field("product_details") product_details: String?,
+        @Field("product_img") product_img: String?,
+        @Field("product_date") product_date: String?,
+        @Field("product_quantity") product_quantity: Int,
+        @Field("product_discount") product_discount: Int,
+        @Field("color") color: String
     ): Call<DefaultResponse>
 
     //get
@@ -99,6 +111,9 @@ interface OshoppingApi {
     @GET("oshopping_api/api/product_api.php")
     fun searchProduct(@Query("query") query: String): Call<ProductResponse>
 
+    @GET("oshopping_api/api/product_api.php")
+    fun fetchProductByColor(@Query("color") color: String): Call<ProductResponse>
+
     @GET("oshopping_api/api/category_api.php")
     fun fetchCategory(): Call<CategoryResponse>
 
@@ -111,9 +126,11 @@ interface OshoppingApi {
     @GET("oshopping_api/api/report_api.php")
     fun fetchReport(): Call<ReportResponse>
 
+    @GET("oshopping_api/api/activity_api.php")
+    fun fetchActivities(@Query("fk_user_id") fk_user_id: Int): Call<ActivityResponse>
 
     @GET("oshopping_api/api/cart_api.php")
-    fun fetchCart(@Query("user_id")user_id: Int): Call<CartResponse>
+    fun fetchCart(@Query("user_id") user_id: Int): Call<CartResponse>
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUserByEmail(@Query("email") email: String): Call<UserResponse>
@@ -166,6 +183,30 @@ interface OshoppingApi {
 
     @DELETE("oshopping_api/api/report_api.php")
     fun deleteReport(@Query("report_id") report_id: Int?
+    ): Call<DefaultResponse>
+
+    @DELETE("oshopping_api/api/cart_api.php")
+    fun deleteCart(@Query("cart_id") cart_id: Int?
+    ): Call<DefaultResponse>
+
+
+
+    @FormUrlEncoded
+    @PUT("oshopping_api/api/product_api.php")
+    fun updateProduct(
+        @Field("product_id") product_id: Int?,
+        @Field("product_name") product_name: String,
+        @Field("yrial_price") yrial_price: Double,
+        @Field("dollar_price") dollar_price: Double,
+        @Field("vendor_id") vendor_id: Int,
+        @Field("cat_id") cat_id: Int,
+        @Field("product_details") product_details: String,
+        @Field("product_img") product_img: String?,
+       // @Field("product_date") product_date: String?,
+        @Field("product_quantity") product_quantity: Int,
+        @Field("product_discount") product_discount: Int,
+        @Field("color") color: String
+
     ): Call<DefaultResponse>
 
 }

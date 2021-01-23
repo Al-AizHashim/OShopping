@@ -5,6 +5,6 @@ import com.yemen.oshopping.model.User
 
 
 data class UserResponse (
-    @SerializedName("listOfUsers")
+    @SerializedName("ListOfUsers")
     var userItem: List<User>
 )
