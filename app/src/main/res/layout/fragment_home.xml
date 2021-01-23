@@ -133,9 +133,7 @@
                 android:textColor="@color/custom_button_text_color"
                 android:text="hot sale"
                 android:textSize="12sp" />
-             -->
-
-            <Button
+                            <Button
                 android:id="@+id/menu_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,6 +143,9 @@
                 android:backgroundTint="@color/custom_button_color"
                 android:textColor="@color/custom_button_text_color"
                 android:text="show color"/>
+             -->
+
+
 
             <Button
                 android:id="@+id/highest_rate_btn"

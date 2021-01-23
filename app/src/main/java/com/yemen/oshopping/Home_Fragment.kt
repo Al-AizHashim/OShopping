@@ -1,5 +1,6 @@
 package com.yemen.oshopping
 
+import android.R.attr.gravity
 import android.R.attr.name
 import android.content.Context
 import android.content.SharedPreferences
@@ -114,14 +115,16 @@ class Home_Fragment: Fragment(), SearchView.OnQueryTextListener{
 
 
 
-        val popupColorMenuBtn = view.findViewById<Button>(R.id.menu_button)
+        val popupColorMenuBtn = view.findViewById<Button>(R.id.color_btn)
 
         popupColorMenuBtn.setOnClickListener { v: View ->
+            categoryBtn.isSelected=false
+            vendorBtn.isSelected=false
+            trendBtn.isSelected=false
+            highestRateBtn.isSelected=false
             popupColorMenuBtn.isSelected=true
             showMenu(v, R.menu.popup_color_menu)
         }
-
-
 
         return view
     }
@@ -134,23 +137,19 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
     val popup = PopupMenu(requireContext(), v)
     popup.menuInflater.inflate(menuRes, popup.menu)
 
-    popup.setOnMenuItemClickListener { menuItem: MenuItem ->
+    popup.setOnMenuItemClickListener { menuItem: MenuItem? ->
         // Respond to menu item click.
-        when(menuItem.itemId){
-            R.id.option_1 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
-
-            }
-            R.id.option_2 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
-
-            }
-            R.id.option_3 -> {
-                Toast.makeText(requireContext(),"Color ${menuItem.title} is clicked",Toast.LENGTH_LONG).show()
-
-            }
-
+        if (menuItem != null) {
+            oshoppingViewModel.loadProductByColor(menuItem.title.toString())
         }
+        oshoppingViewModel.productItemLiveDataByColor.observe(
+            viewLifecycleOwner, androidx.lifecycle.Observer
+            { productItemsByColor ->
+                updateui(productItemsByColor)
+            }
+        )
+
+
         return@setOnMenuItemClickListener true
 
     }
@@ -227,13 +226,7 @@ private fun showMenu(v: View, @MenuRes menuRes: Int) {
             }
 
         }
-        colorBtn.setOnClickListener {
-            categoryBtn.isSelected=false
-            vendorBtn.isSelected=false
-            trendBtn.isSelected=false
-            colorBtn.isSelected=true
-            highestRateBtn.isSelected=false
-        }
+
         highestRateBtn.setOnClickListener {
             categoryBtn.isSelected=false
             vendorBtn.isSelected=false

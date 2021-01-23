@@ -98,6 +98,9 @@ interface OshoppingApi {
     @GET("oshopping_api/api/product_api.php")
     fun searchProduct(@Query("query") query: String): Call<ProductResponse>
 
+    @GET("oshopping_api/api/product_api.php")
+    fun fetchProductByColor(@Query("color") color: String): Call<ProductResponse>
+
     @GET("oshopping_api/api/category_api.php")
     fun fetchCategory(): Call<CategoryResponse>
 

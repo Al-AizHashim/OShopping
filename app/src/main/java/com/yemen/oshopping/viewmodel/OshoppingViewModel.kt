@@ -26,6 +26,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     val userLiveData= MutableLiveData <String> ()
     val userItemLiveData:LiveData<List<User>>
     val searchLiveData:LiveData<List<ProductItem>>
+    var productColorLiveData = MutableLiveData<String>()
     val searchTerm: String
         get() = mutableSearchTerm.value ?: ""
 
@@ -71,9 +72,15 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun loadProductByCategory(category_id: Int) {
         productLiveData.value = category_id
     }
+
+    fun loadProductByColor(color: String) {
+        productColorLiveData.value = color
+    }
+
     fun loadActivities(user_id: Int){
         activityLiveData.value=user_id
     }
+
 
     var productItemLiveDataByID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { product_id ->
@@ -86,6 +93,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var productItemLiveDataByVendorID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { vendor_id ->
             FetchData().fetchProductByVendorId (vendor_id)
+        }
+    var productItemLiveDataByColor: LiveData<List<ProductItem>> =
+        Transformations.switchMap(productColorLiveData) { color ->
+            FetchData().fetchProductByColor(color)
         }
 
     var userItemLiveDataByEmail: LiveData<List<User>> =
