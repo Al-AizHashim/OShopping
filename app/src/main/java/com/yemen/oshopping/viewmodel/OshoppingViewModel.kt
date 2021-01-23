@@ -18,12 +18,16 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var productItemLiveData: LiveData<List<ProductItem>>
     var categoryItemLiveData: LiveData<List<Category>>
     var productLiveData = MutableLiveData<Int>()
+    var reportDetailsLiveData = MutableLiveData<Int>()
     var userLiveDataById = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
+
+    var reportsDetailsItemLiveData: LiveData<List<ReportsDetails>>
     val activityLiveData= MutableLiveData<Int>()
     var cartLiveData = MutableLiveData<Int>()
     var reportItemLiveData: LiveData<List<Report>>
     val userLiveData= MutableLiveData <String> ()
+
     val userItemLiveData:LiveData<List<User>>
     val searchLiveData:LiveData<List<ProductItem>>
     var productColorLiveData = MutableLiveData<String>()
@@ -34,6 +38,9 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
         reportItemLiveData=FetchData().fetchReport()
+
+        reportsDetailsItemLiveData=FetchData().fetchReportsDetails()
+
         mutableSearchTerm.value =getQuery()
         searchLiveData =
             Transformations.switchMap(mutableSearchTerm) { searchTerm ->
@@ -44,6 +51,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
                     FetchData().searchProduct(searchTerm)
                 }
             }
+
 
        // cartLiveData=FetchData().fetchCart()
 
@@ -90,6 +98,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         Transformations.switchMap(userLiveDataById) { user_id ->
             FetchData().fetchUserById(user_id)
         }
+    var fetchReportDetailsByUserId: LiveData<List<ReportDetails>> =
+        Transformations.switchMap(reportDetailsLiveData) { against ->
+            FetchData().fetchReportDetailsByUserId(against )
+        }
     var productItemLiveDataByVendorID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { vendor_id ->
             FetchData().fetchProductByVendorId (vendor_id)
@@ -113,6 +125,12 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun getProductById(product_id: Int) {
         productLiveData.value = product_id
     }
+
+    fun getReportDetailsByUserId(against: Int) {
+        Log.d("TTTAG", "getReportDetailsByUserId: $against")
+        reportDetailsLiveData.value = against
+    }
+
     fun getUserById(user_id: Int) {
         userLiveDataById.value = user_id
     }
@@ -138,6 +156,8 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     fun pushCart(cart: Cart) = PushData().pushCart(cart)
 
+    fun pushReportDetails(reportDetails: PostReportDetails) = PushData().pushReportDetails(reportDetails)
+
 
     fun pushReport(report: Report) { PushData().pushReport(report)
         reportItemLiveData=FetchData().fetchReport()
@@ -148,6 +168,8 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     //update data in database
     fun updateCategory(category: Category) = UpdateData().updateCategory(category)
+
+    fun BlockUser(user: User) = UpdateData().blockUser(user)
 
     fun updateUser(user: User) = UpdateData().updateUser(user)
     fun updateReport(report: Report){

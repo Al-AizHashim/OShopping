@@ -38,7 +38,8 @@ class UpdateCategoryFragment : Fragment() {
         updateCategoryBtn.setOnClickListener {
             val category =
                 Category(cat_id = categoryId, cat_name = updateCategoryTextView.text.toString())
-            categoryViewModel.updateCategory(category)
+            categoryViewModel.
+            updateCategory(category)
             updateCategoryTextView.setText("")
             updateCategoryTextView.clearFocus()
             Navigation.findNavController(view)

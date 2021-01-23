@@ -36,13 +36,21 @@ interface OshoppingApi {
     @FormUrlEncoded
     @POST("oshopping_api/api/user_api.php")
     fun pushUser(
-        @Field("first_name") first_name: String,
-        @Field("last_name") last_name: String,
-        @Field("email") email: String,
-        @Field("phone_number") phone_number: String,
-        @Field("details") details: String,
-        @Field("address") address: String,
+        @Field("first_name") first_name: String?,
+        @Field("last_name") last_name: String?,
+        @Field("email") email: String?,
+        @Field("phone_number") phone_number: String?,
+        @Field("details") details: String?,
+        @Field("address") address: String?,
         @Field("image") image: String?
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @POST("oshopping_api/api/report_details_api.php")
+    fun pushReportDetails(
+        @Field("report_id") report_id: Int?,
+        @Field("sender_id") sender_id: Int,
+        @Field("against_id") against_id: Int
     ): Call<DefaultResponse>
 
     @FormUrlEncoded
@@ -77,6 +85,10 @@ interface OshoppingApi {
     @GET("oshopping_api/api/product_api.php")
     fun fetchProduct(): Call<ProductResponse>
 
+    @GET("oshopping_api/api/report_details_api.php")
+    fun fetchReportsDetails(): Call<ReportsDetailsResponce>
+
+
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUser(): Call<UserResponse>
@@ -87,9 +99,10 @@ interface OshoppingApi {
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByVendorId(@Query("vendor_id") vendor_id: Int): Call<ProductResponse>
     @GET("oshopping_api/api/product_api.php")
-
     fun fetchProductById(@Query("product_id") product_id: Int): Call<ProductResponse>
 
+    @GET("oshopping_api/api/report_details_api.php")
+    fun fetchReportDetailsByUserId(@Query("against") against: Int): Call<ReportDetailsResponce>
 
     //fun fetchProductById(@Query("product_id") product_id: Int): Call<SingleProductResponse>
     @GET("oshopping_api/api/user_api.php")
@@ -140,13 +153,20 @@ interface OshoppingApi {
 
     @FormUrlEncoded
     @PUT("oshopping_api/api/user_api.php")
+    fun BlockUser(
+        @Field("user_id") user_id: Boolean?, @Field("block") block: Boolean
+    ): Call<DefaultResponse>
+
+
+    @FormUrlEncoded
+    @PUT("oshopping_api/api/user_api.php")
     fun updateUser(
         @Field("user_id") user_id: Int?,
-        @Field("first_name") first_name: String,
-        @Field("last_name") last_name: String,
-        @Field("phone_number") phone_number: String,
-        @Field("details") details: String,
-        @Field("address") address: String
+        @Field("first_name") first_name: String?,
+        @Field("last_name") last_name: String?,
+        @Field("phone_number") phone_number: String?,
+        @Field("details") details: String?,
+        @Field("address") address: String?
     ): Call<DefaultResponse>
 
 
