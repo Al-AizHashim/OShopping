@@ -4,12 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.yemen.oshopping.api.*
-import com.yemen.oshopping.model.ActivityItem
-import com.yemen.oshopping.model.Cart
-import com.yemen.oshopping.model.Category
-import com.yemen.oshopping.model.ProductItem
-import com.yemen.oshopping.model.Report
-import com.yemen.oshopping.model.User
+import com.yemen.oshopping.model.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
