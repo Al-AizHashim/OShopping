@@ -294,7 +294,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
 
 
             lyt_parent.setOnClickListener {
-                callbacks?.onProductSelected(20)
+                callbacks?.onProductSelected(productItems.product_id)
             }
 
         }

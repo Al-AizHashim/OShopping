@@ -162,6 +162,9 @@ class ProductDetailsFragment : Fragment() {
                     updateUI()
                 }
             })
+        productImage.setImageClickListener { position ->
+            showDialogImageFull(url+list[position],productItem.dollar_price.toString()+" $",productItem.product_name)
+        }
 
 
 

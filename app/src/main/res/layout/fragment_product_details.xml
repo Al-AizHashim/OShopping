@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -90,7 +91,7 @@
         android:layout_marginTop="16dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="@dimen/spacing_middle"
-        app:cardElevation="2dp"
+        app:cardElevation="1dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
@@ -197,17 +198,7 @@
             android:rating="0"
             android:stepSize="1"
             android:theme="@style/Widget.AppCompat.RatingBar.Small" />
-            <TextView
-        android:id="@+id/product_vendor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/VendorProduct"
-        android:textColor="@color/colorGray"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/product_add_btn"
-        app:layout_constraintStart_toStartOf="parent" />
+
         <Button
             android:id="@+id/submit_rating_button"
             android:layout_width="wrap_content"
