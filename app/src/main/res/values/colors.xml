@@ -16,5 +16,11 @@
     <color name="colorItemLeft">#E6E4E4</color>
     <color name="colorItemRight">#813fd7</color>
     <color name="colorGrey2">#aaa</color>
+    <color name="grey_90">#263238</color>
+    <color name="grey_10">#e6e6e6</color>
+    <color name="grey_40">#999999</color>
+    <color name="grey_60">#666666</color>
+    <color name="yellow_600">#FDD835</color>
+    <color name="blue_10">#1976D2</color>
 
 </resources>

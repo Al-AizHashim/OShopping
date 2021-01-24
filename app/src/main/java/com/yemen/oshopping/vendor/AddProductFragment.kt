@@ -1,22 +1,29 @@
 package com.yemen.oshopping.vendor
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.*
 import androidx.fragment.app.Fragment
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.github.chrisbanes.photoview.PhotoView
+import com.squareup.picasso.Picasso
+import com.synnapps.carouselview.CarouselView
+import com.yemen.oshopping.Cart_Fragment
 import com.yemen.oshopping.R
+import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductDetails
 import com.yemen.oshopping.retrofit.TAG
 import com.yemen.oshopping.uploadImage.*
@@ -29,6 +36,7 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.http.Url
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -37,7 +45,7 @@ import java.io.FileOutputStream
 
 class AddProductFragment : Fragment() {
     private var selectedImageUri: Uri? = null
-    var imageName:String?=""
+    var imageName: String? = ""
     private var counter: Int = 0
     lateinit var productNameET: EditText
     lateinit var productDetailsEditText: EditText
@@ -51,16 +59,21 @@ class AddProductFragment : Fragment() {
     lateinit var addProductBtn: Button
     lateinit var categoryTitle: String
     lateinit var productDiscountET: EditText
+    private lateinit var productPhotoView: PhotoView
+    private lateinit var customImageRecyclerView: RecyclerView
+
+    lateinit var myView: View
+    lateinit var productImageView: ImageView
     var categoryId: Int = 0
     private lateinit var popupMenu: PopupMenu
     lateinit var buttonImage: Button
     lateinit var oshoppingViewModel: OshoppingViewModel
     private var mUri: Uri? = null
-    private var images:ArrayList<Uri?>? =null
+    private var images: ArrayList<Uri?>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-        images= ArrayList()
+        images = ArrayList()
     }
 
     override fun onCreateView(
@@ -80,6 +93,9 @@ class AddProductFragment : Fragment() {
         chooseCategoryBtn = view.findViewById(R.id.category_btn)
         chooseColorBtn = view.findViewById(R.id.choose_color_btn)
         productDiscountET = view.findViewById(R.id.discount)
+        customImageRecyclerView = view.findViewById(R.id.horizontal_recycler_view)
+        customImageRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         fillCategoryMenu()
 
         buttonImage = view.findViewById(R.id.addImage)
@@ -87,8 +103,8 @@ class AddProductFragment : Fragment() {
             openImageChooser()
 
             //  showDialog("Choose Image")
-           // inttent = Intent(this.requireContext(), UploadImageActivity::class.java)
-           // startActivityForResult(inttent, 919)
+            // inttent = Intent(this.requireContext(), UploadImageActivity::class.java)
+            // startActivityForResult(inttent, 919)
 
         }
         addProductBtn.setOnClickListener {
@@ -203,69 +219,68 @@ class AddProductFragment : Fragment() {
 
             })
     }
+
     private fun openImageChooser() {
         Intent(
             //Intent.ACTION_PICK
-            ).also {
+        ).also {
             it.type = "image/*"
             val mimeTypes = arrayOf("image/jpeg", "image/png")
             it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-            it.action=Intent.ACTION_GET_CONTENT
+            it.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-               REQUEST_CODE_PICK_IMAGE -> {
-                   if (data!!.clipData !=null) {
-                       val count = data.clipData!!.itemCount
-                       //Log.d("imageUrl", "${data.clipData} \n ")
-                       for (i in 0 until count){
-                           val imageUri=data.clipData!!.getItemAt(i).uri
-                           //Log.d("imageUrlx", "${imageUri} \n ")
-                           uploadImage(imageUri)
-                           images?.add(imageUri)
-                       }
-                   }
-                   else{
-                       val imageUri=data.data
-                       uploadImage(imageUri)
-                   }
-                   Log.d("imageUrlx", "abc")
+                REQUEST_CODE_PICK_IMAGE -> {
+                    if (data!!.clipData != null) {
+                        val count = data.clipData!!.itemCount
+                        //Log.d("imageUrl", "${data.clipData} \n ")
+                        for (i in 0 until count) {
+                            val imageUri = data.clipData!!.getItemAt(i).uri
+                            uploadImage(imageUri)
+                            images?.add(imageUri)
+                        }
+                      customImageRecyclerView.adapter=  ProductImageAdapter(images)
+                    } else {
+                        val imageUri = data.data
+                        images?.add(imageUri)
+                        customImageRecyclerView.adapter=  ProductImageAdapter(images)
+                        uploadImage(imageUri)
+                        //  mImageView.setImageURI(imageUri)
+                    }
+                    Log.d("imageUrlx", "abc$images")
 
-/*
-
-                    selectedImageUri = data?.data
-
-                   Log.d("imageUrl", "the name of image in data of data is: ${data} \n ")
-
-                   //Log.d("imageUrl", "the name of image is: ${selectedImageUri}")
-                    mImageView.setImageURI(selectedImageUri)
-                    uploadImage()
- */
 
                 }
             }
         }
     }
-    private fun uploadImage(imageUrl:Uri?) {
+
+    private fun uploadImage(imageUrl: Uri?) {
         if (imageUrl == null) {
             layout_root.snackbar("Select an Image First")
             return
         }
 
-        val parcelFileDescriptor =requireContext().contentResolver.openFileDescriptor(imageUrl!!, "r", null) ?: return
+        val parcelFileDescriptor =
+            requireContext().contentResolver.openFileDescriptor(imageUrl!!, "r", null) ?: return
 
         val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-        val file = File(requireContext().cacheDir, requireContext().contentResolver.getFileName(imageUrl!!))
+        val file = File(
+            requireContext().cacheDir,
+            requireContext().contentResolver.getFileName(imageUrl!!)
+        )
         val outputStream = FileOutputStream(file)
         inputStream.copyTo(outputStream)
 
 
-        val body = UploadRequestBody(file, "image" )
+        val body = UploadRequestBody(file, "image")
         MyAPI().uploadImage(
             MultipartBody.Part.createFormData(
                 "image",
@@ -286,7 +301,7 @@ class AddProductFragment : Fragment() {
                 response.body()?.let {
                     layout_root.snackbar(it.message)
                 }
-                imageName+=response.body()?.image+":"
+                imageName += response.body()?.image + ":"
                 Log.d("imageUrlx", "${imageName.toString()}")
                 //Toast.makeText(requireContext(), "the image name is $imageName", Toast.LENGTH_SHORT).show()
 
@@ -301,5 +316,59 @@ class AddProductFragment : Fragment() {
         const val REQUEST_CODE_PICK_IMAGE = 9
     }
 
+    private inner class ProductImageHolder(itemTextView: View) : RecyclerView.ViewHolder(itemTextView),
+        View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+        }
+        lateinit var imageUrl:Uri
+
+        private val productImage = itemView.findViewById(R.id.mImageView) as ImageView
+
+        fun bind(imageUrl: Uri?) {
+            if (imageUrl != null) {
+                this.imageUrl=imageUrl
+            }
+            productImage.setImageURI(imageUrl)
+
+        }
+
+        override fun onClick(p0: View?) {
+            showDialogImageFull(imageUrl)
+        }
+
+    }
+
+    private inner class ProductImageAdapter(private val imageUrlList: ArrayList<Uri?>?)
+
+        : RecyclerView.Adapter<ProductImageHolder>() {
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+        ): ProductImageHolder {
+            val View = LayoutInflater.from(parent.context)
+                .inflate(R.layout.custom_image_view, parent, false)
+            return ProductImageHolder(View)
+        }
+
+        override fun getItemCount(): Int = imageUrlList?.size!!
+
+        override fun onBindViewHolder(holder: ProductImageHolder, position: Int) {
+            val imageUrl = imageUrlList?.get(position)
+            holder.bind(imageUrl)
+        }
+    }
+
+    private fun showDialogImageFull(imageUrl:Uri) {
+        val view= activity?.layoutInflater?.inflate(R.layout.custom_dialog_image,null)
+        productPhotoView= view?.findViewById(R.id.product_photo_view_dialog)!!
+        Picasso.get().load(imageUrl).into(productPhotoView)
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // before
+        dialog.setContentView(view)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+        dialog.show()
+    }
 
 }
