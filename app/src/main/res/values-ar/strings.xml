@@ -71,6 +71,7 @@
     <string name="detailsBTN">تفاصيل</string>
     <string name="shopping_cart">Shopping Cart</string>
     <string name="my_purchases">My purchases</string>
+    <string name="NameUser">user name</string>
 
 
 </resources>
