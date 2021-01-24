@@ -10,7 +10,7 @@ import retrofit2.Response
 class PushData {
     fun pushCategory(category: Category) {
         val pushCategoryRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi
-            .postCategory(category.cat_name)
+            .postCategory(category.cat_name ,category.category_image)
 
         pushCategoryRequest.enqueue(object : Callback<DefaultResponse> {
 

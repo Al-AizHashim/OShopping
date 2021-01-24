@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.custom_dialog.view.*
+
 
 
 private const val ARG_PARAM1 = "param1"
@@ -351,7 +351,6 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             searchThroughDatabase(query)
         }
         searchView.clearFocus()
-        searchView.close
         searchView.horizontalFadingEdgeLength
         return true
     }

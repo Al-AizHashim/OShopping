@@ -37,7 +37,7 @@ class UpdateCategoryFragment : Fragment() {
         val updateCategoryBtn = view.findViewById(R.id.update_cat_btn) as Button
         updateCategoryBtn.setOnClickListener {
             val category =
-                Category(cat_id = categoryId, cat_name = updateCategoryTextView.text.toString())
+                Category(cat_id = categoryId, cat_name = updateCategoryTextView.text.toString(),category_image = null)
             categoryViewModel.
             updateCategory(category)
             updateCategoryTextView.setText("")

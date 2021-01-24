@@ -25,7 +25,7 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.GoogleAccount
 import kotlinx.android.synthetic.main.activity_sign_up.emailUse
-import kotlinx.android.synthetic.main.activity_sign_up_options.*
+
 
 class SignUp : AppCompatActivity(), View.OnClickListener{
     private lateinit var oShoppingViewModel: OshoppingViewModel

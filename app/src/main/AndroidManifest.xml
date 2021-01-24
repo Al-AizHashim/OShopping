@@ -35,7 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".uploadImage.UploadImageActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -47,9 +46,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".AddProduct" />
+
         <activity android:name=".MainActivity" />
-        <activity android:name=".SignUpOptions" />
+
         <activity android:name=".LoginScreen" />
         <activity android:name=".ChangePassword" />
         <activity android:name=".ResetPassword" />

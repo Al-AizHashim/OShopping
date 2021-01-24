@@ -13,7 +13,7 @@ import com.yemen.oshopping.ui.AddUserFragment
 import com.yemen.oshopping.ui.ProductDetailsFragment
 
 
-class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Callbacks {
+class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
     lateinit var navigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,14 +107,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
             .commit()
     }
 
-    override fun onCategorySelected(categoryId: Int?) {
-        val fragment = AddCategoryFragment()
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.nested_scroll_view, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
+
 
     var isNavigationHide = false
 

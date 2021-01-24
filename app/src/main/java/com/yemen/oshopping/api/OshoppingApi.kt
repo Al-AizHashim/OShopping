@@ -10,7 +10,9 @@ interface OshoppingApi {
     //post
     @FormUrlEncoded
     @POST("oshopping_api/api/category_api.php")
-    fun postCategory(@Field("cat_name") cat_name: String): Call<DefaultResponse>
+    fun postCategory(
+        @Field("cat_name") cat_name: String,
+        @Field("category_image") category_image: String?): Call<DefaultResponse>
     @FormUrlEncoded
     @POST("oshopping_api/api/report_api.php")
     fun postReport(@Field("report_name") report_name: String): Call<DefaultResponse>
