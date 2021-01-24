@@ -71,7 +71,7 @@ class SettingFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_adminFragment)
         }
         myAccountTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_myAccountFragment)
+            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_showUserFragment)
         }
         aboutUsTV.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_aboutUsFragment)
