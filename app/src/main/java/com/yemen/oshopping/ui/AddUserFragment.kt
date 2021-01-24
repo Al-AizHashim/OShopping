@@ -15,6 +15,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.yemen.oshopping.LoginScreen
 import com.yemen.oshopping.MainScreen
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.User
@@ -74,7 +75,7 @@ class AddUserFragment : Fragment() {
 
 
         }
-        val intent=Intent(requireContext(),MainScreen::class.java)
+        val intent=Intent(requireContext(),LoginScreen::class.java)
         saveProfileBTN.setOnClickListener {
             val user = User(
                 first_name = fNameEditText.text.toString(),
@@ -91,17 +92,11 @@ class AddUserFragment : Fragment() {
 
 
             }
+            Log.d("pushUserdata", "user data is: ${user} \n ")
             oshoppingViewModel.getUserByEmail(oshoppingViewModel.getStoredEmail().toString())
             oshoppingViewModel.userItemLiveDataByEmail.observe(viewLifecycleOwner, Observer { userdata ->
                 userdata.get(0).user_id?.let { userId -> oshoppingViewModel.setUserId(userId) }
             })
-
-            oshoppingViewModel.userItemLiveDataByEmail.observe(
-                viewLifecycleOwner, Observer { userdata ->
-                    userdata.get(0).user_id?.let { userId -> oshoppingViewModel.setUserId(userId) }
-                })
-
-
 
             startActivity(intent)
 
@@ -122,7 +117,7 @@ class AddUserFragment : Fragment() {
             it.type = "image/*"
             val mimeTypes = arrayOf("image/jpeg", "image/png")
             it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-            it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+            //it.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             startActivityForResult(it, REQUEST_CODE_PICK_IMAGE)
         }
     }

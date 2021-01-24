@@ -39,7 +39,9 @@ class ShowVendorFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-        oshoppingViewModel.getUserById(param1)
+        oshoppingViewModel.apply {
+            getUserById(getStoredUserId())
+        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

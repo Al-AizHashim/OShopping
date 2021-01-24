@@ -72,7 +72,7 @@
         android:text="Sign out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_us" />
+        app:layout_constraintTop_toBottomOf="@+id/admin_page" />
     <TextView
         android:id="@+id/sign_up"
         style="@style/CustomTextView"
@@ -91,11 +91,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_admin"
-        android:text="@string/admin"
         android:visibility="gone"
+        android:text="@string/admin"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up" />
+        app:layout_constraintTop_toBottomOf="@+id/contact_us" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -58,6 +58,7 @@
             android:layout_marginRight="20dp"
             android:drawableLeft="@drawable/person"
             android:drawablePadding="10dp"
+            android:drawableTint="@color/colorBlack"
             android:hint="Name"
             android:inputType="textEmailAddress"
 

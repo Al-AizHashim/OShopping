@@ -222,4 +222,12 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         return UserSharedPreferences.getStoredQuery(app)
     }
 
+    fun setUserBlock(block: Int=0) {
+        UserSharedPreferences.setStoredUserBlock(app, block)
+    }
+
+    fun getStoredUserBlock():Int {
+        return UserSharedPreferences.getStoredUserBlock(app)
+    }
+
 }

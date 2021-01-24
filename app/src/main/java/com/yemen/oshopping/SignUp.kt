@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.yemen.oshopping.ui.AddUserFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.GoogleAccount
@@ -83,8 +84,14 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
                     databaseReference.setValue(hashMap).addOnCompleteListener(this){
                       if(it.isSuccessful)
                       {
-                          val intent = Intent(this, LoginScreen::class.java)
-                          startActivity(intent)
+                          val fragment = AddUserFragment()
+                          supportFragmentManager
+                              .beginTransaction()
+                              .replace(R.id.sign_up_container, fragment)
+                              .addToBackStack(null)
+                              .commit()
+                         // val intent = Intent(this, LoginScreen::class.java)
+                          //startActivity(intent)
                       }
                     }
                 } else {
@@ -144,10 +151,16 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         mAuth!!.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
+                val fragment = AddUserFragment()
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.sign_up_container, fragment)
+                    .addToBackStack(null)
+                    .commit()
 
-                val intent = Intent(this, LoginScreen::class.java)
+                //val intent = Intent(this, LoginScreen::class.java)
 
-                startActivity(intent)
+               // startActivity(intent)
             } else {
                 Toast.makeText(this, "Google sign in failed:(", Toast.LENGTH_LONG).show()
             }

@@ -16,6 +16,7 @@ import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
+import com.yemen.oshopping.model.Rating
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.fragment_cart.*
 
@@ -25,9 +26,11 @@ class Cart_Fragment : Fragment() {
     var url: String = "http://192.168.1.4/oshopping_api/"
     private lateinit var cartViewModel: OshoppingViewModel
     private lateinit var cartRecyclerView: RecyclerView
+    private lateinit var cartItems: Cart
     val delim = ":"
     var list:List<String> =ArrayList()
     private lateinit var back: ImageButton
+    lateinit var ratingBar2: RatingBar
 
 
 
@@ -46,6 +49,12 @@ class Cart_Fragment : Fragment() {
         cartRecyclerView = view.findViewById(R.id.cart_recyclerview)
         cartRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        //submitRatingBTN = view.findViewById(R.id.submit_rating_button)
+
+
+
+
 
 
         return view
@@ -76,13 +85,13 @@ class Cart_Fragment : Fragment() {
 
         }
 
-        private lateinit var cartItems: Cart
+        //private lateinit var cartItems: Cart
 
 
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as CarouselView
-
+        private val ratingBar2 = itemView.findViewById(R.id.rating_Bar_2_product_details) as RatingBar
         private val cartDelete = itemView.findViewById(R.id.delete) as Button
         private val buyBtn = itemView.findViewById(R.id.buy_btn) as Button
 
@@ -106,6 +115,21 @@ class Cart_Fragment : Fragment() {
             cartDelete.setOnClickListener {
                  cartViewModel.deleteCart(cartItem)
                 cartViewModel.loadCart(cartViewModel.getStoredUserId())
+
+            }
+
+            ratingBar2.setOnClickListener {
+                val ratingBarValue = ratingBar2.rating.toString()
+                Toast.makeText(
+                    requireContext(),
+                    "Rating is: " + ratingBarValue, Toast.LENGTH_SHORT
+                ).show()
+                var rating = Rating(
+                    product_id = cartItems.fk_product_id,
+                    user_id = cartViewModel.getStoredUserId(),
+                    rating = ratingBar2.rating.toInt()
+                )
+                cartViewModel.pushRating(rating)
 
             }
 

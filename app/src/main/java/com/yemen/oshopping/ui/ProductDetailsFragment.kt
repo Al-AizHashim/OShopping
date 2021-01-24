@@ -76,7 +76,7 @@ class ProductDetailsFragment : Fragment() {
         productImage = view.findViewById(R.id.product_img)
         productImage.setImageListener(imageListener)
         productName = view.findViewById(R.id.product_name)
-        productVendor = view.findViewById(R.id.product_vendor)
+        //productVendor = view.findViewById(R.id.product_vendor)
         rialProductPrice = view.findViewById(R.id.product_price_r)
         dollarProductPrice = view.findViewById(R.id.product_price_d)
         addToCart = view.findViewById(R.id.product_add_btn)
@@ -109,9 +109,10 @@ class ProductDetailsFragment : Fragment() {
 
         ratingBar = view.findViewById(R.id.rating_Bar_product_details)
         ratingBarTexView = view.findViewById(R.id.rating_bar_text_view_prodcut_details)
-        ratingBar2 = view.findViewById(R.id.rating_Bar_2_product_details)
-        submitRatingBTN = view.findViewById(R.id.submit_rating_button)
-        if (ratingBar2 != null) {
+        //ratingBar2 = view.findViewById(R.id.rating_Bar_2_product_details)
+        //submitRatingBTN = view.findViewById(R.id.submit_rating_button)
+        /*
+                if (ratingBar2 != null) {
             submitRatingBTN.setOnClickListener {
                 val ratingBarValue = ratingBar2.rating.toString()
                 Toast.makeText(
@@ -127,6 +128,7 @@ class ProductDetailsFragment : Fragment() {
 
             }
         }
+         */
 
 
         //productQuantity = view.findViewById(R.id.prodcut_quantity_text_view)
@@ -153,17 +155,15 @@ class ProductDetailsFragment : Fragment() {
                     productItemss=productItem
                      list = productItem.product_img.split(delim)
                     if (list.size==1)
-                    productImage.pageCount = 1
+                    productImage.pageCount =1
                     else
-                    productImage.pageCount = list.size-1
+                    productImage.pageCount = list.size -1
                     Log.d("Urlx", "$url+${list}")
                     updateUI()
                 }
             })
 
-        productImage.setImageClickListener { position ->
-            showDialogImageFull(url+list[position],productItem.dollar_price.toString()+" $",productItem.product_name)
-        }
+
 
     }
 

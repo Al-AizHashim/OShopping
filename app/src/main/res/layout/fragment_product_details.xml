@@ -11,15 +11,16 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="459dp"
-        android:layout_height="93dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/product_add_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_img"
-        app:layout_constraintVertical_bias="0.161">
+        app:layout_constraintTop_toBottomOf="@+id/product_imgCardView"
+        app:layout_constraintVertical_bias="0.241">
 
 
         <RatingBar
@@ -33,7 +34,7 @@
             android:longClickable="false"
             android:numStars="5"
             android:progressTint="@android:color/holo_orange_light"
-            android:rating="0"
+            android:rating="4.3"
             android:stepSize="1"
             android:theme="@style/Widget.AppCompat.RatingBar.Small" />
 
@@ -82,33 +83,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
         -->
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/product_img"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        app:fillColor="#FFFFFFFF"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="3000"
-        app:strokeColor="#FF777777"
-        android:layout_marginTop="70dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/logobrown"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/product_imgCardView"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="@dimen/spacing_middle"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:strokeWidth="1dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
+
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/product_img"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logobrown"
+            app:fillColor="#FFFFFFFF"
+            app:pageColor="#00000000"
+            app:radius="6dp"
+            app:slideInterval="3000"
+            app:strokeColor="#FF777777"
+            app:strokeWidth="1dp" />
+    </androidx.cardview.widget.CardView>
 
 
     <Button
         android:id="@+id/product_add_btn"
-        android:layout_width="288dp"
-        android:layout_height="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/shape_nav"
         android:text="@string/AddToCart"
         android:textColor="@color/colorWhite"
@@ -116,23 +127,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/product_vendor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        android:text="@string/VendorProduct"
-        android:textColor="@color/colorGray"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/product_add_btn"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="44dp"
         android:layout_marginBottom="16dp"
         android:text="@string/NameProduct"
         android:textColor="@color/colorBlack"
@@ -159,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/PriceR"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
@@ -168,7 +169,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-    <LinearLayout
+
+
+
+        <!--
+            <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -192,13 +197,25 @@
             android:rating="0"
             android:stepSize="1"
             android:theme="@style/Widget.AppCompat.RatingBar.Small" />
-
+            <TextView
+        android:id="@+id/product_vendor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/VendorProduct"
+        android:textColor="@color/colorGray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/product_add_btn"
+        app:layout_constraintStart_toStartOf="parent" />
         <Button
             android:id="@+id/submit_rating_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit Rating" />
-    </LinearLayout>
+                </LinearLayout>
+        -->
+
 
 
 
