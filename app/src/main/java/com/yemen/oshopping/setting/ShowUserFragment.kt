@@ -1,20 +1,18 @@
-package com.yemen.oshopping.ui
+package com.yemen.oshopping.setting
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.squareup.picasso.Picasso
 import com.yemen.oshopping.R
-import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.model.User
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.*
 
 class ShowUserFragment : Fragment() {
     lateinit var userName:TextView
@@ -22,6 +20,8 @@ class ShowUserFragment : Fragment() {
     lateinit var userDetails:TextView
     lateinit var userAddress:TextView
     lateinit var userEmail:TextView
+    lateinit var editImageBTN:ImageButton
+    lateinit var chatImageBTN:ImageButton
     lateinit var user: User
     private var param1: Int = 1
     private lateinit var oshoppingViewModel: OshoppingViewModel
@@ -37,11 +37,19 @@ class ShowUserFragment : Fragment() {
 
     ): View? {
         var view =inflater.inflate(R.layout.fragment_show_user, container, false)
-        userName=view.findViewById(R.id.user_name)
-        userEmail=view.findViewById(R.id.user_email)
-        userPhone=view.findViewById(R.id.user_phone)
-        userAddress=view.findViewById(R.id.user_address)
-        userDetails=view.findViewById(R.id.user_details)
+        userName=view.findViewById(R.id.user_name_text_view)
+        userEmail=view.findViewById(R.id.user_email_text_view)
+        userPhone=view.findViewById(R.id.user_phone_text_view)
+        userAddress=view.findViewById(R.id.user_address_text_view)
+        userDetails=view.findViewById(R.id.user_details_text_view)
+        editImageBTN=view.findViewById(R.id.edit_image_button)
+        chatImageBTN=view.findViewById(R.id.chat_image_button)
+        editImageBTN.setOnClickListener {
+
+        }
+        chatImageBTN.setOnClickListener {
+
+        }
         return view
     }
 
