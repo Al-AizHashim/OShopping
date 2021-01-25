@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yemen.oshopping.R
+import com.yemen.oshopping.model.BlockUser
 import com.yemen.oshopping.model.ReportDetails
 import com.yemen.oshopping.model.User
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -51,14 +52,15 @@ class ShowReportDetailsDialog : DialogFragment() {
         ReportRecyclerView = view.findViewById(R.id.report_recycler_view)
         ReportRecyclerView.layoutManager = LinearLayoutManager(context)
         ReportRecyclerView.adapter = adapter
-        blockBTN = view.findViewById(R.id.submit_report_button)
+        blockBTN = view.findViewById(R.id.action_report_button)
         canceltBTN = view.findViewById(R.id.cancel_report_button)
         DialogTiTleTV = view.findViewById(R.id.report_dialog_title)
         DialogTiTleTV.text = param2
+        blockBTN.setText("BLOCK")
         blockBTN.setOnClickListener {
-            var user= User(user_id = 1,block = 1)
-            oshoppingViewModel.BlockUser(user)
-            Toast.makeText(this@ShowReportDetailsDialog.context, "submit", Toast.LENGTH_SHORT).show()
+            var blockUser= BlockUser(user_id = 1,block = 1,admin_id = 2)
+            oshoppingViewModel.BlockUser(blockUser)
+            Toast.makeText(this@ShowReportDetailsDialog.context, "Done", Toast.LENGTH_SHORT).show()
             dialog?.dismiss()
         }
         canceltBTN.setOnClickListener {

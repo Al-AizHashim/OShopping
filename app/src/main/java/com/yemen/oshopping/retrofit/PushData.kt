@@ -10,7 +10,7 @@ import retrofit2.Response
 class PushData {
     fun pushCategory(category: Category) {
         val pushCategoryRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi
-            .postCategory(category.cat_name)
+            .postCategory(category.cat_name ,category.category_image)
 
         pushCategoryRequest.enqueue(object : Callback<DefaultResponse> {
 
@@ -117,8 +117,7 @@ class PushData {
 
     fun pushUser(user: User) {
         Log.d("pushUser", "pushUser:$user ")
-        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.
-        pushUser(
+        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushUser(
             user.first_name,
             user.last_name,
             user.email,
@@ -149,16 +148,17 @@ class PushData {
 
     fun pushReportDetails(postReportDetails: PostReportDetails) {
         Log.d("pushReportDetails", "pushReportDetails:$postReportDetails ")
-        val pushUserRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.
-        pushReportDetails(
-            postReportDetails.report_id,
-            postReportDetails.sender_id,
-            postReportDetails.against_id
-        )
+        val pushUserRequest: Call<DefaultResponse> =
+            RetrofitClient().oshoppingApi.pushReportDetails(
+                postReportDetails.report_id,
+                postReportDetails.sender_id,
+                postReportDetails.against_id
+            )
         pushUserRequest.enqueue(object : Callback<DefaultResponse> {
             override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
                 Log.d("ReportDetails", "Failed to push ReportDetails", t)
             }
+
             override fun onResponse(
                 call: Call<DefaultResponse>,
                 response: Response<DefaultResponse>
@@ -168,8 +168,30 @@ class PushData {
         })
     }
 
+    fun pushProductReportDetails(productReportDetails: ProductReportDetails) {
+        Log.d("pushReportDetails", "pushReportDetails:$productReportDetails ")
+        val pushUserRequest: Call<DefaultResponse> =
+            RetrofitClient().oshoppingApi.pushProductReportDetails(
+                productReportDetails.product_id,
+                productReportDetails.product_r_id,
+                productReportDetails.sender_id
+            )
+        pushUserRequest.enqueue(object : Callback<DefaultResponse> {
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.d("productReportDetails", "Failed to push productReportDetails", t)
+            }
+
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushProductRD", "productReportDetails pushed successfully")
+            }
+        })
+    }
+
     fun pushCart(cart: Cart) {
-        Log.d("pushCart", "pushCart:${cart.toString()} ")
+        Log.d("pushCart", "pushCart:$cart ")
         val pushCartRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushCart(
             cart.cart_id,
             cart.fk_product_id,
@@ -199,6 +221,35 @@ class PushData {
                 response: Response<DefaultResponse>
             ) {
                 Log.d("pushcart", "Cart pushed successfully")
+
+            }
+        })
+
+
+    }
+    fun pushActivity(activ: ActivityItem) {
+        Log.d("pushActivity", "pushActivity:${activ.toString()} ")
+        val pushActivityRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushActivity(
+            activ.productId,
+            activ.productName,
+            activ.yrial_price,
+            activ.dollar_price,
+            activ.quantity,
+            activ.totalPrice,
+            activ.activityType
+        )
+
+        pushActivityRequest.enqueue(object : Callback<DefaultResponse> {
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.d("pushActivity", "Failed to push Activity", t)
+            }
+
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushActivity", "Activity pushed successfully")
 
             }
         })

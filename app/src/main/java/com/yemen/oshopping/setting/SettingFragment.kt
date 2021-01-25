@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +14,7 @@ import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.yemen.oshopping.R
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
+import kotlinx.android.synthetic.main.fragment_add_category.*
 
 
 class SettingFragment : Fragment() {
@@ -24,6 +26,7 @@ class SettingFragment : Fragment() {
     lateinit var signOutTV: TextView
     lateinit var signUpTV: TextView
     lateinit var chatTv: TextView
+    lateinit var close: ImageButton
     lateinit var oshoppingViewModel: OshoppingViewModel
     //yemenoshopping@gmail.com
     private lateinit var mAuth: FirebaseAuth
@@ -46,6 +49,7 @@ class SettingFragment : Fragment() {
         signUpTV=view.findViewById(R.id.sign_up)
         adminTV=view.findViewById(R.id.admin_page)
         chatTv=view.findViewById(R.id.chat)
+        close=view.findViewById(R.id.bt_close)
 
         if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
         {
@@ -103,6 +107,9 @@ class SettingFragment : Fragment() {
                 Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
             }
 
+        }
+        close.setOnClickListener {
+            activity?.onBackPressed()
         }
 
 

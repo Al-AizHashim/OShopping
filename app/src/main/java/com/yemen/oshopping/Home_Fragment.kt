@@ -31,12 +31,13 @@ import kotlinx.android.synthetic.main.activity_reset_password.*
 import kotlinx.android.synthetic.main.custom_dialog.view.*
 
 
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
 class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
 
 
     private lateinit var trendBtn: Button
@@ -207,7 +208,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             colorBtn.isSelected = false
             highestRateBtn.isSelected = false
 
-            oshoppingViewModel.getProductByVendorId(2)
+            oshoppingViewModel.getProductByVendorId(1)
             oshoppingViewModel.productItemLiveDataByVendorID.observe(
                 viewLifecycleOwner, androidx.lifecycle.Observer
                 { productItems ->
@@ -312,7 +313,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
 
 
             lyt_parent.setOnClickListener {
-                callbacks?.onProductSelected(20)
+                callbacks?.onProductSelected(productItems.product_id)
             }
 
         }
@@ -369,7 +370,6 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             searchThroughDatabase(query)
         }
         searchView.clearFocus()
-        searchView.close
         searchView.horizontalFadingEdgeLength
         return true
     }

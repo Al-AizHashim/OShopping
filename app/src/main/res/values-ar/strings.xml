@@ -73,6 +73,14 @@
     <string name="my_purchases">My purchases</string>
     <string name="NameUser">user name</string>
 
+    <string name="add_reports">إضافة تقرير</string>
+    <string name="show_users_reports">عرض بلاغات المتسحدمين</string>
+    <string name="show_products_reports">عرض بلاغات المنتجات</string>
+
+    <string name="categoryName">Category Name</string>
+    <string name="productDetailsText">"product Details Text product Details Text product Details Text product Details Text product Details Text product Details Text product Details Text product Details Text "</string>
+
+
 
 </resources>
 

@@ -3,17 +3,22 @@ package com.yemen.oshopping
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yemen.oshopping.setting.SettingActivity
 import com.yemen.oshopping.admin.AddCategoryFragment
+import com.yemen.oshopping.setting.ShowUserFragment
 import com.yemen.oshopping.ui.AddUserFragment
-import com.yemen.oshopping.ui.ProductDetailsFragment
+import com.yemen.oshopping.ui.ProductReportsDialog
+import com.yemen.oshopping.ui.AddUserFragment
+import com.yemen.oshopping.ui.ProductDetailsActivity
 
 
-class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Callbacks {
+
+class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
     lateinit var navigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +36,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
 
             }
         }
-        supportActionBar?.hide()
+        //supportActionBar?.hide()
 
 
 
@@ -55,7 +60,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
                 R.id.navigation_Category -> {
                     title = resources.getString(R.string.Category)
 
-                    loadFragment(Category_Fragment())
+                    loadFragment(ShowUserFragment.newInstance())
 
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -69,7 +74,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
                 R.id.navigation_Purchases -> {
                     title = resources.getString(R.string.Purchases)
                     loadFragment(Activities_Fragment())
-                    //loadFragment(AddCategoryFragment())
+                    //loadFragment(AddUserFragment())
 
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -98,23 +103,23 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks, AdminScreen.Call
     }
 
     override fun onProductSelected(product_id: Int) {
+        Log.d("PRODUCTID", "PRODUCTID: $product_id")
+        val intent=Intent(applicationContext,ProductDetailsActivity::class.java)
+        intent.putExtra("PRODUCTID",product_id)
+        startActivity(intent)
         //remove the double slash below to show the product details
-        val fragment = ProductDetailsFragment.newInstance(product_id)
+        /*
+                val fragment = ProductDetailsFragment.newInstance(product_id)
         supportFragmentManager
             .beginTransaction()
            .replace(R.id.nested_scroll_view, fragment)
             .addToBackStack(null)
             .commit()
+         */
+
     }
 
-    override fun onCategorySelected(categoryId: Int?) {
-        val fragment = AddCategoryFragment()
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.nested_scroll_view, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
+
 
     var isNavigationHide = false
 

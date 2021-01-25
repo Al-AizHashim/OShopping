@@ -23,7 +23,7 @@ class ShowUserFragment : Fragment() {
     lateinit var editImageBTN:ImageButton
     lateinit var chatImageBTN:ImageButton
     lateinit var user: User
-    private var param1: Int = 1
+    private var param1: Int = 2
     private lateinit var oshoppingViewModel: OshoppingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {

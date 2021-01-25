@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.Observer
@@ -29,7 +30,7 @@ class ShowCategoryFragment : Fragment() {
     lateinit var fab: FloatingActionButton
     private lateinit var categoryRecyclerView: RecyclerView
     private lateinit var delete_button: ImageView
-
+    lateinit var close: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         categoryViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -45,9 +46,13 @@ class ShowCategoryFragment : Fragment() {
         fab = view.findViewById(R.id.add_category_fab)
         noDataImageView=view.findViewById(R.id.no_data_imageView)
         noDataTextView=view.findViewById(R.id.no_data_textView)
+        close=view.findViewById(R.id.bt_close)
         fab.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_showCategoryFragment_to_addCategoryFragment)
+        }
+        close.setOnClickListener {
+            activity?.onBackPressed()
         }
 
 

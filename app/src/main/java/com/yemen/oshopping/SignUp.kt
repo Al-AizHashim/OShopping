@@ -25,11 +25,10 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.GoogleAccount
 import kotlinx.android.synthetic.main.activity_sign_up.emailUse
-import kotlinx.android.synthetic.main.activity_sign_up_options.*
+
 
 class SignUp : AppCompatActivity(), View.OnClickListener{
     private lateinit var oShoppingViewModel: OshoppingViewModel
-    private lateinit var skip: TextView
     private val TAG = "FirebaseEmailPassword"
     val RC_SIGN_IN: Int = 1
     lateinit var signInClient: GoogleSignInClient
@@ -41,7 +40,7 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         oShoppingViewModel= ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-        skip = findViewById(R.id.skip_text_view)
+       // skip = findViewById(R.id.skip_text_view)
         supportActionBar?.hide()
         initializeUI()
         setupGoogleLogin()
@@ -50,10 +49,10 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
         logIn.setOnClickListener(this)
         mAuth = FirebaseAuth.getInstance()
 
-        skip.setOnClickListener {
-            var intent = Intent(this, MainScreen::class.java)
-            startActivity(intent)
-        }
+//        skip.setOnClickListener {
+//            var intent = Intent(this, MainScreen::class.java)
+//            startActivity(intent)
+//        }
 
     }
 

@@ -1,12 +1,6 @@
 package com.yemen.oshopping.retrofit
 
 import android.util.Log
-
-import com.yemen.oshopping.model.Cart
-import com.yemen.oshopping.model.Category
-import com.yemen.oshopping.model.DefaultResponse
-import com.yemen.oshopping.model.Report
-import com.yemen.oshopping.model.User
 import com.yemen.oshopping.model.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,16 +18,24 @@ class UpdateData {
     fun updateCategory(category: Category) {
         updateMetaData(
             RetrofitClient().oshoppingApi
-                .updateCategory(category.cat_id, category.cat_name)
+                .updateCategory(category.cat_id, category.cat_name, category.category_image)
         )
     }
 
-    fun blockUser(user: User) {
+    fun blockUser(blockUser: BlockUser) {
         updateMetaData(
             RetrofitClient().oshoppingApi
-                .blockUser(user.user_id, user.block)
+                .blockUser(blockUser.user_id, blockUser.block, blockUser.admin_id)
         )
     }
+
+    fun hideProduct(product: HideProduct) {
+        updateMetaData(
+            RetrofitClient().oshoppingApi
+                .hideProduct(product.product_id,product.hide,product.user_id)
+        )
+    }
+
 
 
     fun updateMetaData(updateRequest: Call<DefaultResponse>) {
@@ -122,4 +124,6 @@ class UpdateData {
 
 
     }
+
+
 }
