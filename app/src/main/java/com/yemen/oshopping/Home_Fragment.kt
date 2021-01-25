@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.SearchView
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,7 +23,7 @@ import com.squareup.picasso.Picasso
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.custom_dialog.view.*
+
 
 
 private const val ARG_PARAM1 = "param1"
@@ -30,8 +31,8 @@ private const val ARG_PARAM2 = "param2"
 
 
 class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
-    var url: String = "http://192.168.1.4/oshopping_api/"
-    lateinit var mAdapter: ShowProductAdapter
+    var url: String = "http://192.168.1.108/oshopping_api/"
+
 
     private lateinit var trendBtn: Button
     private lateinit var categoryBtn: Button
@@ -42,9 +43,6 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var searchView: SearchView
     val delim = ":"
     var list: List<String> = ArrayList()
-    private lateinit var productPhotoView: PhotoView
-    private lateinit var productPricedialog: TextView
-    private lateinit var productNamedialog: TextView
 
     interface Callbacks {
         fun onProductSelected(product_id: Int)
@@ -191,7 +189,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             colorBtn.isSelected = false
             highestRateBtn.isSelected = false
 
-            oshoppingViewModel.getProductByVendorId(2)
+            oshoppingViewModel.getProductByVendorId(1)
             oshoppingViewModel.productItemLiveDataByVendorID.observe(
                 viewLifecycleOwner, androidx.lifecycle.Observer
                 { productItems ->
@@ -241,24 +239,6 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         showProductRecyclerView.adapter = ShowProductAdapter(productItems)
     }
 
-    fun onMoreButtonClick(view: View, productItem: ProductItem) {
-        val popupMenu =
-            PopupMenu(requireContext(), view)
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_details -> {
-                    callbacks?.onProductSelected(productItem.product_id)
-                }
-                R.id.action_cart -> {
-                    addToCart(productItem)
-                }
-
-            }
-            true
-        }
-        popupMenu.inflate(R.menu.menu_product_more)
-        popupMenu.show()
-    }
 
     fun addToCart(productItemss: ProductItem) {
         val cart = Cart(
@@ -281,27 +261,21 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
 
-    inner class ShowProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
-        init {
-            itemView.setOnClickListener(this)
+    private inner class ShowProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        }
-
-        var more = itemView.findViewById<View>(R.id.more) as ImageButton
         private lateinit var productItemss: ProductItem
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val price = itemView.findViewById(R.id.product_price) as TextView
 
+        private val lyt_parent = itemView.findViewById(R.id.lyt_parent) as LinearLayout
         //private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
 
         //private val addToCart = itemView.findViewById(R.id.product_add_btn) as Button
         //private val productRatingNo = itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
         private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product) as RatingBar
+        var x=33.6
 
-
-        @SuppressLint("SetTextI18n")
         fun bind(productItems: ProductItem) {
             var imageUri: String
             list = productItems.product_img.split(delim)
@@ -316,63 +290,17 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             productItemss = productItems
             productName.text = productItems.product_name
             price.text = "$ " + productItems.dollar_price.toString()
-            more.setOnClickListener(View.OnClickListener { view ->
-
-                onMoreButtonClick(view, productItems)
-            })
-/*
-            addToCart.setOnClickListener {
-                val cart = Cart(
-                    fk_user_id = oshoppingViewModel.getStoredUserId(),
-                    fk_product_id = productItemss.product_id,
-                    cart_statuse = 0,
-                    product_name = productItemss.product_name,
-                    product_details = productItemss.product_details,
-                    dollar_price = productItemss.dollar_price,
-                    yrial_price = productItemss.yrial_price,
-                    product_quantity = 1,
-                    vendor_id = productItemss.vendor_id,
-                    cat_id = productItemss.cat_id,
-                    product_img = productItemss.product_img,
-                    product_discount = productItemss.product_discount,
-                    color = productItemss.color
-                )
-                Log.d("pushtoCart", "the content of cart is : $cart")
-                oshoppingViewModel.pushCart(cart)
-            }
-
-
- */
-            //productDate.text = productItems.product_date
-            //productRatingNo.setText(productItems.number_of_ratings.toString() + " votes")
             productRating.rating = productItems.rating_average
-            productImage.setOnClickListener {
-
-                showDialogImageFull(
-                    url + imageUri,
-                    productItems.dollar_price.toString() + " $",
-                    productItems.product_name
-                )
 
 
+            lyt_parent.setOnClickListener {
+                callbacks?.onProductSelected(productItems.product_id)
             }
 
         }
-
-
-        override fun onClick(v: View?) {
-            Toast.makeText(
-                requireContext(),
-                "The id: ${productItemss.product_id} and title ${productItemss.product_name} is clicked",
-                Toast.LENGTH_LONG
-            ).show()
-            callbacks?.onProductSelected(productItemss.product_id)
-        }
-
-
     }
 
-    inner class ShowProductAdapter(val productItems: List<ProductItem>) :
+    private inner class ShowProductAdapter(private val productItems: List<ProductItem>) :
         RecyclerView.Adapter<ShowProductHolder>() {
 
 
@@ -423,7 +351,6 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             searchThroughDatabase(query)
         }
         searchView.clearFocus()
-        searchView.close
         searchView.horizontalFadingEdgeLength
         return true
     }
@@ -447,20 +374,5 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
 
     }
 
-    private fun showDialogImageFull(imageUrl: String, price: String, name: String) {
-        val view = activity?.layoutInflater?.inflate(R.layout.dialog_image, null)
-        productPhotoView = view?.findViewById(R.id.product_photo_view_dialog)!!
-        productNamedialog = view.findViewById(R.id.product_name_dialog)
-        productPricedialog = view.findViewById(R.id.product_price_dialog)
-        productPricedialog.setText(price)
-        productNamedialog.setText(name)
-        Picasso.get().load(imageUrl).into(productPhotoView)
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE) // before
-        dialog.setContentView(view)
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCancelable(true)
-        dialog.show()
-    }
 
 }

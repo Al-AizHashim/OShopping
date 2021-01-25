@@ -11,7 +11,9 @@ interface OshoppingApi {
     //post
     @FormUrlEncoded
     @POST("oshopping_api/api/category_api.php")
-    fun postCategory(@Field("cat_name") cat_name: String): Call<DefaultResponse>
+    fun postCategory(
+        @Field("cat_name") cat_name: String,
+        @Field("category_image") category_image: String?): Call<DefaultResponse>
     @FormUrlEncoded
     @POST("oshopping_api/api/report_api.php")
     fun postReport(@Field("report_name") report_name: String): Call<DefaultResponse>
@@ -91,6 +93,18 @@ interface OshoppingApi {
         @Field("color") color: String
     ): Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @POST("oshopping_api/api/activity_api.php")
+    fun pushActivity(
+        @Field("productId") fk_product_id: Int?,
+        @Field("productName") product_name: String,
+        @Field("yrial_price") yrial_price: Int,
+        @Field("dollar_price") dollar_price: Int,
+        @Field("quantity") quantity: Int,
+        @Field("totalPrice") total_price: Double,
+        @Field("activityType") activity_type: String
+    ): Call<DefaultResponse>
+
     //get
     @GET("oshopping_api/api/product_api.php")
     fun fetchProduct(): Call<ProductResponse>
@@ -108,7 +122,7 @@ interface OshoppingApi {
     fun fetchProductByCategory(@Query("cat_id") category_id: Int): Call<ProductResponse>
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByVendorId(@Query("vendor_id") vendor_id: Int): Call<ProductResponse>
-    @GET("oshopping_api/api/product_api.php")
+    @GET("/oshopping_api/api/product_api.php")
     fun fetchProductById(@Query("product_id") product_id: Int): Call<ProductResponse>
 
     @GET("oshopping_api/api/report_details_api.php")
@@ -158,7 +172,9 @@ interface OshoppingApi {
     @FormUrlEncoded
     @PUT("oshopping_api/api/category_api.php")
     fun updateCategory(
-        @Field("cat_id") cat_id: Int?, @Field("cat_name") cat_name: String
+        @Field("cat_id") cat_id: Int?,
+        @Field("cat_name") cat_name: String,
+        @Field("category_image") category_image: String?
     ): Call<DefaultResponse>
 
     @FormUrlEncoded

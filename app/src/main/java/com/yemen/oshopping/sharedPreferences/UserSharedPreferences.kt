@@ -8,6 +8,7 @@ import androidx.core.content.edit
 private const val PREF_NAME = "UserId"
 private const val PREF_NAMEEMAIL = "UserEmail"
 private const val PREF_SEARCH_QUERY = "searchQuery"
+private const val USER_BLOCK = "Block"
     object UserSharedPreferences {
 
         fun getStoredUserId(context: Context): Int {
@@ -41,5 +42,16 @@ private const val PREF_SEARCH_QUERY = "searchQuery"
                 .edit()
                 .putString(PREF_SEARCH_QUERY, query)
                 .apply()
+        }
+
+        fun getStoredUserBlock(context: Context): Int {
+            return PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt(USER_BLOCK, -1)
+        }
+
+        fun setStoredUserBlock(context: Context, block:Int) {
+            PreferenceManager.getDefaultSharedPreferences(context)
+                .edit {
+                    putInt(USER_BLOCK, block)}
         }
     }

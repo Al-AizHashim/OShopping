@@ -166,6 +166,8 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     fun pushCart(cart: Cart) = PushData().pushCart(cart)
 
+    fun pushActivity(activity: ActivityItem) = PushData().pushActivity(activity)
+
     fun pushReportDetails(reportDetails: PostReportDetails) = PushData().pushReportDetails(reportDetails)
 
     fun pushProductReportDetails(prodcutReportDetails: ProductReportDetails) =
@@ -235,6 +237,14 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     }
     fun getQuery():String? {
         return UserSharedPreferences.getStoredQuery(app)
+    }
+
+    fun setUserBlock(block: Int=0) {
+        UserSharedPreferences.setStoredUserBlock(app, block)
+    }
+
+    fun getStoredUserBlock():Int {
+        return UserSharedPreferences.getStoredUserBlock(app)
     }
 
 }

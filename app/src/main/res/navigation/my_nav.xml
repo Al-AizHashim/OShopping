@@ -17,6 +17,13 @@
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
         <action
+            android:id="@+id/action_settingFragment_to_myAccountFragment"
+            app:destination="@id/myAccountFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"/>
+        <action
             android:id="@+id/action_settingFragment_to_myProductFragment"
             app:destination="@id/myProductFragment"
             app:enterAnim="@anim/from_left"
@@ -51,8 +58,8 @@
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
         <action
-            android:id="@+id/action_settingFragment_to_showUserFragment"
-            app:destination="@id/showUserFragment" />
+            android:id="@+id/action_settingFragment_to_showVendorFragment"
+            app:destination="@id/showVendorFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -61,6 +68,15 @@
         tools:layout="@layout/fragment_about_us" >
         <action
             android:id="@+id/action_aboutUsFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.yemen.oshopping.setting.MyAccountFragment"
+        android:label="fragment_my_account"
+        tools:layout="@layout/fragment_my_account" >
+        <action
+            android:id="@+id/action_myAccountFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
     </fragment>
     <fragment
@@ -289,6 +305,7 @@
         android:label="fragment_show_reports"
         tools:layout="@layout/fragment_show_reports" />
     <fragment
+
         android:id="@+id/showUserFragment"
         android:name="com.yemen.oshopping.setting.ShowUserFragment"
         android:label="ShowUserFragment" >
@@ -300,4 +317,9 @@
         android:id="@+id/showProductReportsFragment"
         android:name="com.yemen.oshopping.ui.ShowProductReportsFragment"
         android:label="ShowProductReportsFragment" />
+
+        android:id="@+id/showVendorFragment"
+        android:name="com.yemen.oshopping.ui.ShowVendorFragment"
+        android:label="ShowVendorFragment" />
+
 </navigation>

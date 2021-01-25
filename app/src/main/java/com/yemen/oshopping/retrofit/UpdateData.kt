@@ -18,7 +18,7 @@ class UpdateData {
     fun updateCategory(category: Category) {
         updateMetaData(
             RetrofitClient().oshoppingApi
-                .updateCategory(category.cat_id, category.cat_name)
+                .updateCategory(category.cat_id, category.cat_name, category.category_image)
         )
     }
 
