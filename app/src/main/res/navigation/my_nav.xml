@@ -173,9 +173,6 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
-        <action
-            android:id="@+id/action_adminFragment_to_showProductReportsFragment"
-            app:destination="@id/showProductReportsFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
@@ -305,21 +302,7 @@
         android:label="fragment_show_reports"
         tools:layout="@layout/fragment_show_reports" />
     <fragment
-
-        android:id="@+id/showUserFragment"
-        android:name="com.yemen.oshopping.setting.ShowUserFragment"
-        android:label="ShowUserFragment" >
-        <action
-            android:id="@+id/action_showUserFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/showProductReportsFragment"
-        android:name="com.yemen.oshopping.ui.ShowProductReportsFragment"
-        android:label="ShowProductReportsFragment" />
-
         android:id="@+id/showVendorFragment"
         android:name="com.yemen.oshopping.ui.ShowVendorFragment"
         android:label="ShowVendorFragment" />
-
 </navigation>

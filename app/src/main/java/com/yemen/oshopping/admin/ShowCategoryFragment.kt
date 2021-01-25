@@ -23,7 +23,7 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 class ShowCategoryFragment : Fragment() {
-    var url: String = "http://192.168.1.108/oshopping_api/"
+    var url: String = "http://192.168.1.4/oshopping_api/"
     private lateinit var categoryViewModel: OshoppingViewModel
     private lateinit var noDataImageView: ImageView
     private lateinit var noDataTextView: TextView
