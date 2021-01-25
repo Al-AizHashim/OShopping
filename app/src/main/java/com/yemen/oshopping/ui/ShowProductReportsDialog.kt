@@ -13,34 +13,34 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yemen.oshopping.R
-import com.yemen.oshopping.model.BlockUser
-import com.yemen.oshopping.model.ReportDetails
-import com.yemen.oshopping.model.User
+import com.yemen.oshopping.model.*
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 private const val ARG_PARAM1 = "user_id"
 private const val ARG_PARAM2 = "user_name"
 
-class ShowReportDetailsDialog : DialogFragment() {
+class ShowProductReportsDialog : DialogFragment() {
     private var adapter: ReportAdapter = ReportAdapter(emptyList())
     private lateinit var ReportRecyclerView: RecyclerView
     private lateinit var oshoppingViewModel: OshoppingViewModel
-    lateinit var blockBTN: Button
+    lateinit var hideBTN: Button
     lateinit var DialogTiTleTV: TextView
     lateinit var canceltBTN: Button
     private var param1: Int = 0
-    private var param2: String = "Report Types"
+    private var param2: String =""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
         oshoppingViewModel =
             ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-        oshoppingViewModel.getReportDetailsByUserId(param1)
+        oshoppingViewModel.getProductReportByReportId(param1)
     }
 
     override fun onCreateView(
@@ -52,15 +52,16 @@ class ShowReportDetailsDialog : DialogFragment() {
         ReportRecyclerView = view.findViewById(R.id.report_recycler_view)
         ReportRecyclerView.layoutManager = LinearLayoutManager(context)
         ReportRecyclerView.adapter = adapter
-        blockBTN = view.findViewById(R.id.action_report_button)
+        hideBTN = view.findViewById(R.id.action_report_button)
         canceltBTN = view.findViewById(R.id.cancel_report_button)
         DialogTiTleTV = view.findViewById(R.id.report_dialog_title)
         DialogTiTleTV.text = param2
-        blockBTN.setText("BLOCK")
-        blockBTN.setOnClickListener {
-            var blockUser= BlockUser(user_id = 1,block = 1,admin_id = 2)
-            oshoppingViewModel.BlockUser(blockUser)
-            Toast.makeText(this@ShowReportDetailsDialog.context, "Done", Toast.LENGTH_SHORT).show()
+        hideBTN.setText("HIDE")
+        hideBTN.setOnClickListener {
+            var productItem= HideProduct(product_id = param1,hide = 1,user_id = 2)
+            oshoppingViewModel.hideProduct(productItem)
+            Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT)
+                .show()
             dialog?.dismiss()
         }
         canceltBTN.setOnClickListener {
@@ -72,7 +73,7 @@ class ShowReportDetailsDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        oshoppingViewModel.fetchReportDetailsByUserId.observe(
+        oshoppingViewModel.fetchProductReportLiveDataByProductId.observe(
             viewLifecycleOwner,
             Observer { productDetails ->
                 productDetails?.let { reportDetials ->
@@ -82,47 +83,49 @@ class ShowReportDetailsDialog : DialogFragment() {
     }
 
     private inner class ReportHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private lateinit var reportDetails: ReportDetails
-        private var reportType: TextView = itemView.findViewById(R.id.report_type)
-        private var reportSender: TextView = itemView.findViewById(R.id.report_sender_text_view)
-        private var reportCreatDate: TextView =
-            itemView.findViewById(R.id.report_createdAt_text_view)
+        private lateinit var productReportDetails: ProductReportDetailsF
+        private var reportType: TextView = itemView.findViewById(R.id.p_report_type)
+        private var reportSender: TextView = itemView.findViewById(R.id.p_report_sender_text_view)
+        private var productvendor: TextView = itemView.findViewById(R.id.p_report_vendor_text_view)
+        private var reportCreatDate: TextView = itemView.findViewById(R.id.p_report_createdAt_text_view)
 
-        fun bind(reportDetails: ReportDetails) {
-            this.reportDetails = reportDetails
-            reportType.text = this.reportDetails.report_type
-            reportSender.text = this.reportDetails.sender_name
-            reportCreatDate.text = this.reportDetails.created_at
+        fun bind(productReportDetails: ProductReportDetailsF) {
+            this.productReportDetails = productReportDetails
+            reportType.text = this.productReportDetails.report_type
+            reportSender.text = this.productReportDetails.sender_name
+            productvendor.text = this.productReportDetails.vendor_name
+            reportCreatDate.text = this.productReportDetails.created_at
+
         }
     }
 
-    private inner class ReportAdapter(var reports: List<ReportDetails>) :
+    private inner class ReportAdapter(var productReport: List<ProductReportDetailsF>) :
         RecyclerView.Adapter<ReportHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportHolder {
             val layoutInflater = LayoutInflater.from(context)
-            val view = layoutInflater.inflate(R.layout.show_report_item, parent, false)
+            val view = layoutInflater.inflate(R.layout.product_report_list_item, parent, false)
             return ReportHolder(view)
         }
 
         override fun onBindViewHolder(holder: ReportHolder, position: Int) {
-            val reportDetails = reports[position]
-            holder.bind(reportDetails)
+            val productReportDetails = productReport[position]
+            holder.bind(productReportDetails)
         }
 
-        override fun getItemCount() = reports.size
+        override fun getItemCount() = productReport.size
     }
 
 
-    private fun updateUI(reports: List<ReportDetails>) {
+    private fun updateUI(productReport: List<ProductReportDetailsF>) {
         adapter.let {
-            it.reports = reports
+            it.productReport = productReport
         }
         ReportRecyclerView.adapter = adapter
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: Int, param2: String) = ShowReportDetailsDialog().apply {
+        fun newInstance(param1: Int,param2 :String) = ShowProductReportsDialog().apply {
             arguments = Bundle().apply {
                 putInt(ARG_PARAM1, param1)
                 putString(ARG_PARAM2, param2)

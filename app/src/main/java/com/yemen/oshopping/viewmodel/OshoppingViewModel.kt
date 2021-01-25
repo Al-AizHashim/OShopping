@@ -17,7 +17,9 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     var productItemLiveData: LiveData<List<ProductItem>>
     var categoryItemLiveData: LiveData<List<Category>>
+    var ProductReportsDetailsLiveData: LiveData<List<ProductReportsDetailsF>>
     var productLiveData = MutableLiveData<Int>()
+    var productReportLiveData = MutableLiveData<Int>()
     var reportDetailsLiveData = MutableLiveData<Int>()
     var userLiveDataById = MutableLiveData<Int>()
     val mutableSearchTerm = MutableLiveData<String>()
@@ -37,6 +39,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     init {
         productItemLiveData = FetchData().fetchProduct()
         categoryItemLiveData = FetchData().fetchCategory()
+        ProductReportsDetailsLiveData = FetchData().fetchProductReportsDetails()
         reportItemLiveData=FetchData().fetchReport()
 
         reportsDetailsItemLiveData=FetchData().fetchReportsDetails()
@@ -102,6 +105,10 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
         Transformations.switchMap(reportDetailsLiveData) { against ->
             FetchData().fetchReportDetailsByUserId(against )
         }
+    var fetchProductReportLiveDataByProductId: LiveData<List<ProductReportDetailsF>> =
+        Transformations.switchMap(productReportLiveData) { product_id ->
+            FetchData().fetchProductReportDetailsByProductId(product_id )
+        }
     var productItemLiveDataByVendorID: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { vendor_id ->
             FetchData().fetchProductByVendorId (vendor_id)
@@ -125,9 +132,12 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun getProductById(product_id: Int) {
         productLiveData.value = product_id
     }
+    fun getProductReportByReportId(product_id: Int) {
+        Log.d("TAG", "getProductReportByReportId: $product_id")
+        productReportLiveData.value = product_id
+    }
 
     fun getReportDetailsByUserId(against: Int) {
-        Log.d("TTTAG", "getReportDetailsByUserId: $against")
         reportDetailsLiveData.value = against
     }
 
@@ -160,6 +170,9 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     fun pushReportDetails(reportDetails: PostReportDetails) = PushData().pushReportDetails(reportDetails)
 
+    fun pushProductReportDetails(prodcutReportDetails: ProductReportDetails) =
+        PushData().pushProductReportDetails(prodcutReportDetails)
+
 
     fun pushReport(report: Report) { PushData().pushReport(report)
         reportItemLiveData=FetchData().fetchReport()
@@ -171,7 +184,9 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     //update data in database
     fun updateCategory(category: Category) = UpdateData().updateCategory(category)
 
-    fun BlockUser(user: User) = UpdateData().blockUser(user)
+    fun BlockUser(blockUser: BlockUser) = UpdateData().blockUser(blockUser)
+
+    fun hideProduct(product: HideProduct) = UpdateData().hideProduct(product)
 
     fun updateUser(user: User) = UpdateData().updateUser(user)
     fun updateReport(report: Report){

@@ -15,7 +15,11 @@ class AdminFragment : Fragment() {
     lateinit var showCategoryTV: TextView
     lateinit var showReportTV: TextView
     lateinit var showReportsDetailsTV: TextView
+
+    lateinit var showProdcutReportsDetailsTV: TextView
+
     lateinit var close: ImageButton
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +31,11 @@ class AdminFragment : Fragment() {
         showCategoryTV = view.findViewById(R.id.show_category_tv)
         showReportTV = view.findViewById(R.id.show_report_tv)
         showReportsDetailsTV = view.findViewById(R.id.show_report_details_tv)
+
+        showProdcutReportsDetailsTV = view.findViewById(R.id.show_product_report_tv)
+
         close=view.findViewById(R.id.bt_close)
+
 
         showCategoryTV.setOnClickListener {
             Navigation.findNavController(view)
@@ -39,12 +47,17 @@ class AdminFragment : Fragment() {
         }
 
         showReportsDetailsTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_adminFragment_to_showReportsFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_adminFragment_to_showReportsFragment)
         }
         close.setOnClickListener {
             activity?.onBackPressed()
         }
 
+        showProdcutReportsDetailsTV.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_adminFragment_to_showProductReportsFragment)
+        }
         return view
     }
 
