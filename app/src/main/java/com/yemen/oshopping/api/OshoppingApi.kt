@@ -100,7 +100,7 @@ interface OshoppingApi {
     fun fetchProductByCategory(@Query("cat_id") category_id: Int): Call<ProductResponse>
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByVendorId(@Query("vendor_id") vendor_id: Int): Call<ProductResponse>
-    @GET("oshopping_api/api/product_api.php")
+    @GET("/oshopping_api/api/product_api.php")
     fun fetchProductById(@Query("product_id") product_id: Int): Call<ProductResponse>
 
     @GET("oshopping_api/api/report_details_api.php")

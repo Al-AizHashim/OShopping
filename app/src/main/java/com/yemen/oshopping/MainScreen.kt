@@ -3,14 +3,15 @@ package com.yemen.oshopping
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yemen.oshopping.setting.SettingActivity
-import com.yemen.oshopping.admin.AddCategoryFragment
 import com.yemen.oshopping.ui.AddUserFragment
-import com.yemen.oshopping.ui.ProductDetailsFragment
+import com.yemen.oshopping.ui.ProductDetailsActivity
+
 
 
 class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
@@ -31,7 +32,7 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
 
             }
         }
-        supportActionBar?.hide()
+        //supportActionBar?.hide()
 
 
 
@@ -68,8 +69,8 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
                 }
                 R.id.navigation_Purchases -> {
                     title = resources.getString(R.string.Purchases)
-                    //loadFragment(Activities_Fragment())
-                    loadFragment(AddUserFragment())
+                    loadFragment(Activities_Fragment())
+                    //loadFragment(AddUserFragment())
 
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -98,13 +99,20 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
     }
 
     override fun onProductSelected(product_id: Int) {
+        Log.d("PRODUCTID", "PRODUCTID: $product_id")
+        val intent=Intent(applicationContext,ProductDetailsActivity::class.java)
+        intent.putExtra("PRODUCTID",product_id)
+        startActivity(intent)
         //remove the double slash below to show the product details
-        val fragment = ProductDetailsFragment.newInstance(product_id)
+        /*
+                val fragment = ProductDetailsFragment.newInstance(product_id)
         supportFragmentManager
             .beginTransaction()
            .replace(R.id.nested_scroll_view, fragment)
             .addToBackStack(null)
             .commit()
+         */
+
     }
 
 

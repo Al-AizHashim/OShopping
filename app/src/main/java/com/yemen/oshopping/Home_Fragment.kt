@@ -189,7 +189,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             colorBtn.isSelected = false
             highestRateBtn.isSelected = false
 
-            oshoppingViewModel.getProductByVendorId(2)
+            oshoppingViewModel.getProductByVendorId(1)
             oshoppingViewModel.productItemLiveDataByVendorID.observe(
                 viewLifecycleOwner, androidx.lifecycle.Observer
                 { productItems ->

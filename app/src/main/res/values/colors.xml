@@ -27,5 +27,7 @@
     <color name="grey_80">#37474F</color>
     <color name="grey_90">#263238</color>
     <color name="green_500">#4CAF50</color>
+    <color name="deep_orange_500">#FF5722</color>
+    <color name="colorPrimaryDark2">#474135</color>
 
 </resources>
