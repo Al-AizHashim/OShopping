@@ -11,17 +11,20 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.auth.FirebaseAuth
-import com.yemen.oshopping.Chat.activity.UsersActivity
+import com.google.firebase.database.*
+import com.yemen.oshopping.Chat.adapter.UserAdapter
+import com.yemen.oshopping.Chat.model.User
 import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_login_screen.*
+import kotlinx.android.synthetic.main.user_activity.*
 
 class LoginScreen : AppCompatActivity() , View.OnClickListener{
     private val TAG = "FirebaseEmailPassword"
     private lateinit var oShoppingViewModel:OshoppingViewModel
 
     private var mAuth: FirebaseAuth? = null
-
+   private lateinit var userList:User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oShoppingViewModel= ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -81,37 +84,63 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
     }
 
 
-    private fun signIn(email: String, password: String) {
+    private fun signIn(emaill: String, passwordd: String) {
         val sharedPreference: SharedPreference =SharedPreference(this)
-        Log.e(TAG, "signIn:" + email)
-        if (!validateForm(email, password)) {
+        Log.e(TAG, "signIn:" + emaill)
+        if (!validateForm(emaill, passwordd)) {
             return
         }
 
-        mAuth!!.signInWithEmailAndPassword(email, password)
+        mAuth!!.signInWithEmailAndPassword(emaill, passwordd)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.e(TAG, "signIn: Success!")
-                    if(email=="yemenoshopping@gmail.com ")
+                    if(emaill=="yemenoshopping@gmail.com ")
                         sharedPreference.save("userType","Admin")
                     else
                         sharedPreference.save("userType","Customer")
-                    sharedPreference.save("userEmail",email)
+                    sharedPreference.save("userEmail",emaill)
 
+                    var userid =   mAuth!!.uid
+
+                    userid?.let { sharedPreference.save("userId", it) }
+                    Log.e(TAG, "USERID: ${userid}!")
                     //val user = mAuth!!.currentUser
            // val intent = Intent(this, MainScreen::class.java)
-                    val intent = Intent(this, MainScreen::class.java)
+
+                    val databaseReference: DatabaseReference =
+                        FirebaseDatabase.getInstance().getReference("Users")
+
+
+                    databaseReference.addValueEventListener(object : ValueEventListener {
+                        override fun onCancelled(error: DatabaseError) {
+                            Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+
+                            val currentUser = snapshot.getValue(User::class.java)
+                            currentUser?.userName?.let { sharedPreference.save("userName", it) }
+                            Log.e(TAG, "currnet user name ${currentUser?.userName}")
+                        }
+
+                    })
+                            val intent = Intent(this, MainScreen::class.java)
 
                     startActivity(intent)
 
 
                 } else {
-                    Log.e(TAG, "signIn: Fail!", task.exception)
+                    email.error="Email or Password is wrong"
+                    password.error="Email or Password is wrong"
+                   /* Log.e(TAG, "signIn: Fail!", task.exception)
                     Toast.makeText(applicationContext, "Authentication failed!", Toast.LENGTH_SHORT).show()
-
+*/
                 }
 
                 if (!task.isSuccessful) {
+                    email.error="Email or Password is wrong"
+                    password.error="Email or Password is wrong"
                     Toast.makeText(applicationContext, "Authentication failed!", Toast.LENGTH_SHORT).show()
 
                 }

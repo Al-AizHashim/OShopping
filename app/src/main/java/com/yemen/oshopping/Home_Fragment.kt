@@ -3,6 +3,7 @@ package com.yemen.oshopping
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -19,10 +20,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.chrisbanes.photoview.PhotoView
+import com.google.firebase.database.*
+import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Picasso
+import com.yemen.oshopping.Chat.activity.ChatActivity
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
+import kotlinx.android.synthetic.main.activity_reset_password.*
+import kotlinx.android.synthetic.main.custom_dialog.view.*
 
 
 
@@ -41,6 +47,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var highestRateBtn: Button
     private lateinit var popupMenu: PopupMenu
     private lateinit var searchView: SearchView
+    private lateinit var notifications:ImageView
     val delim = ":"
     var list: List<String> = ArrayList()
 
@@ -86,6 +93,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         vendorBtn = view.findViewById(R.id.vendor_btn)
         highestRateBtn = view.findViewById(R.id.highest_rate_btn)
         searchView = view.findViewById(R.id.search_view)
+        notifications=view.findViewById(R.id.notifications)
         //searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
         searchView.suggestionsAdapter
@@ -168,6 +176,17 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
                 Log.d("searchLiveData", "product Item Live Data")
                 updateui(productItems)
             })
+        notifications.setOnClickListener{
+            val intent = Intent(context,
+                ChatActivity::class.java)
+            //vendor id and name from api
+            var userId="5tcYjENPd6TcWIUqkwKZiefmIEo1"
+            var userName="Alaiz Hashim"
+            intent.putExtra("userId",userId)
+            intent.putExtra("userName",userName)
+           startActivity(intent)
+
+        }
         //trend is the default
         trendBtn.setOnClickListener {
             vendorBtn.isSelected = false
@@ -373,6 +392,4 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             })
 
     }
-
-
 }
