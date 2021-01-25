@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_login_screen.*
 class LoginScreen : AppCompatActivity() , View.OnClickListener{
     private val TAG = "FirebaseEmailPassword"
     private lateinit var oShoppingViewModel:OshoppingViewModel
-    private lateinit var skip: TextView
+
     private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,17 +27,12 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
         oShoppingViewModel= ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
         setContentView(R.layout.activity_login_screen)
         val sharedPreference: SharedPreference =SharedPreference(this)
-        skip = findViewById(R.id.skip_text_view)
+
         supportActionBar?.hide()
         login_button.setOnClickListener(this)
         signUp.setOnClickListener(this)
         forgot_password.setOnClickListener(this)
         mAuth = FirebaseAuth.getInstance()
-
-        skip.setOnClickListener {
-            val intent = Intent(this, MainScreen::class.java)
-            startActivity(intent)
-        }
         rememberMe.setOnCheckedChangeListener{buttonView, isChecked ->
             if(isChecked)
             {

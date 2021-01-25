@@ -72,6 +72,8 @@
     <string name="shopping_cart">Shopping Cart</string>
     <string name="my_purchases">My purchases</string>
     <string name="NameUser">user name</string>
+    <string name="categoryName">Category Name</string>
+    <string name="productDetailsText">"product Details Text product Details Text product Details Text product Details Text product Details Text product Details Text product Details Text product Details Text "</string>
 
 
 </resources>

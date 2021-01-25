@@ -20,6 +20,7 @@ import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
 import com.yemen.oshopping.model.ActivityItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
+import kotlinx.android.synthetic.main.fragment_activities.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,7 +28,7 @@ import java.util.*
 
 
 class Activities_Fragment: Fragment() {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
 
     private lateinit var oShoppingViewModel: OshoppingViewModel
     private lateinit var showActivitiesRecyclerView: RecyclerView
@@ -61,24 +62,51 @@ class Activities_Fragment: Fragment() {
     }
 
     private fun savePDF(){
-
+        val activityItem : List<ActivityItem?>? = null
         val mFile = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
         val mFilePath = Environment.getExternalStorageDirectory().toString()+"/"+ mFile + ".pdf"
 
-        try {
-            val pdfDocument = PdfDocument(PdfWriter( mFilePath))
-            val document = Document(pdfDocument)
+        if( activityItem != null)
+        {
+            try {
+                val pdfDocument = PdfDocument(PdfWriter(mFilePath))
+                val document = Document(pdfDocument)
+                for (i in 1..activityItem.size) {
 
-            val text = Paragraph("My Text")
-            document.add(text)
+                    val name = Paragraph(activityItem[i]?.productName)
+                    document.add(name)
 
-            document.close()
+                    val quantity = Paragraph(activityItem[i]?.quantity.toString())
+                    document.add(quantity)
 
-            Toast.makeText(context,"Success"+ mFile+".pdf is saved to "+ mFilePath,Toast.LENGTH_LONG).show()
+                    val price = Paragraph(activityItem[i]?.totalPrice.toString())
+                    document.add(price)
 
+                    val type = Paragraph(activityItem[i]?.activityType)
+                    document.add(type)
+                }
+
+
+                document.close()
+
+                Toast.makeText(
+                    context,
+                    "Success" + mFile + ".pdf is saved to " + mFilePath,
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+            catch ( e: Exception){
+                Toast.makeText(context,"error  "+ e.message ,Toast.LENGTH_LONG).show()
+            }
         }
-        catch ( e: Exception){
-            Toast.makeText(context,"error  "+ e.message ,Toast.LENGTH_LONG).show()
+
+        else{
+            Toast.makeText(
+                context,
+                "no data for save",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
     }
@@ -107,12 +135,11 @@ class Activities_Fragment: Fragment() {
         oShoppingViewModel.activityItemLiveData.observe(
             viewLifecycleOwner, androidx.lifecycle.Observer
             { activityItem ->
-                Log.d("activityItemLiveData", "activity Item Live Data: $activityItem")
+                Log.d("fetchActivity", "activity Item Live Data: $activityItem")
+                showActivitiesRecyclerView.adapter = ShowActivitiesAdapter(activityItem)
                 updateui(activityItem)
             })
-
-
-    }
+        }
 
     private fun updateui(activityItem: List<ActivityItem>) {
         showActivitiesRecyclerView.adapter = ShowActivitiesAdapter(activityItem)
@@ -134,7 +161,7 @@ class Activities_Fragment: Fragment() {
         fun bind(activityItem: ActivityItem) {
             activItems = activityItem
             itemQuantity.text = activityItem.quantity.toString()
-           // itemName.text = activityItem.
+            itemName.text = activityItem.productName
             itemPrice.text = activityItem.totalPrice.toString()
         }
 

@@ -4,51 +4,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/custom_shape"
-    android:layout_margin="12dp">
+    android:layout_height="78dp"
+    android:elevation="8dp"
+    android:background="@drawable/button_shap_white"
+    android:padding="16dp"
+    android:layout_margin="8dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_img"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        app:cardCornerRadius="8dp"
+        android:layout_gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:src="@drawable/login_background"
+            android:scaleType="centerCrop"/>
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/category"
-        android:layout_width="329dp"
-        android:layout_height="82dp"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="living room"
-        android:textColor="#050505"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/categoryName"
+        android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.078" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="66dp"
-        android:layout_height="63dp"
-        android:src="@drawable/sofa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/card_img"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/delete_category_btn"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/ic_baseline_delete_outline_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/category"
         app:layout_constraintTop_toTopOf="parent" />
 
 
