@@ -172,6 +172,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     fun BlockUser(user: User) = UpdateData().blockUser(user)
 
     fun updateUser(user: User) = UpdateData().updateUser(user)
+
     fun updateReport(report: Report){
         UpdateData().updateReport(report)
         reportItemLiveData=FetchData().fetchReport()

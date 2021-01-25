@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 private const val TAG = "Category"
 
 class Cart_Fragment : Fragment() {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
     private lateinit var cartViewModel: OshoppingViewModel
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var cartItems: Cart

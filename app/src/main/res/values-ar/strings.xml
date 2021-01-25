@@ -72,6 +72,10 @@
     <string name="shopping_cart">Shopping Cart</string>
     <string name="my_purchases">My purchases</string>
     <string name="NameUser">user name</string>
+    <string name="MyProfile">My Profile</string>
+    <string name="activ">Selling and Purchase Operations</string>
+    <string name="quantity">1</string>
+    <string name="furniture_store_is_an_e_commerce_application_where_you_can_display_your_products_for_sale_and_through_it_users_can_communicate_with_you_for_purchase_the_application_has_many_advantages_where_you_can_communicate_via_chat_with_the_seller_and_receive_new_offers_you_can_also_evaluate_the_products_through_it_and_add_them_to_the_cart_this_is_with_the_furniture_store_app">Furniture Store is an e-commerce application where you can display your products for sale and through it users can communicate with you for purchase. The application has many advantages where you can communicate via chat with the seller and receive new offers. You can also evaluate the products through it and add them to the cart. This is with the Furniture Store app</string>
 
 
 </resources>

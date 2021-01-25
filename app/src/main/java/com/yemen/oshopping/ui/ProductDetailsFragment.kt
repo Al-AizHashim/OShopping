@@ -53,7 +53,7 @@ class ProductDetailsFragment : Fragment() {
     var list:List<String> =ArrayList()
 
 
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
     private var param1: Int = 1
     lateinit var oshoppingViewModel: OshoppingViewModel
 
