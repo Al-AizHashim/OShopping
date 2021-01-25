@@ -31,7 +31,7 @@ android:orientation="vertical">
         app:fontFamily="sans-serif-medium" />
 
     <ImageButton
-        android:id="@+id/add_cat_btn2"
+        android:id="@+id/update_cat_btn2"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -76,7 +76,7 @@ android:orientation="vertical">
                 android:background="@color/grey_3">
 
                 <ImageView
-                    android:id="@+id/add_category_img"
+                    android:id="@+id/update_category_img"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_centerInParent="true"

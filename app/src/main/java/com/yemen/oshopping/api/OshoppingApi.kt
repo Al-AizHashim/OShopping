@@ -144,7 +144,9 @@ interface OshoppingApi {
     @FormUrlEncoded
     @PUT("oshopping_api/api/category_api.php")
     fun updateCategory(
-        @Field("cat_id") cat_id: Int?, @Field("cat_name") cat_name: String
+        @Field("cat_id") cat_id: Int?,
+        @Field("cat_name") cat_name: String,
+        @Field("category_image") category_image: String?
     ): Call<DefaultResponse>
 
     @FormUrlEncoded

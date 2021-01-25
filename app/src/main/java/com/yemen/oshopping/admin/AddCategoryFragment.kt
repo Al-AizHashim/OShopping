@@ -34,7 +34,7 @@ import java.io.FileOutputStream
 
 
 class AddCategoryFragment : Fragment() {
-    private val settingActivity=SettingActivity()
+
     private var selectedImageUri: Uri? = null
     var imageName:String?=null
     lateinit var addCategoryBtn: Button
@@ -42,6 +42,7 @@ class AddCategoryFragment : Fragment() {
     lateinit var addCategoryEditText: TextInputLayout
     lateinit var oshoppingViewModel: OshoppingViewModel
     lateinit var addCategoryImg:ImageView
+    lateinit var close: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +59,7 @@ class AddCategoryFragment : Fragment() {
         addCategoryBtn2=view.findViewById(R.id.add_cat_btn2)
         addCategoryImg=view.findViewById(R.id.add_category_img)
         addCategoryEditText=view.findViewById(R.id.add_cat_editText)
+        close=view.findViewById(R.id.bt_close)
         addCategoryBtn.setOnClickListener {
             addCategory()
         }
@@ -67,11 +69,14 @@ class AddCategoryFragment : Fragment() {
         addCategoryImg.setOnClickListener {
             openImageChooser()
         }
+        close.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         return view
     }
     fun addCategory(){
-        val cat= Category(cat_name= addCategoryEditText.getEditText()?.getText().toString().trim(),category_image=imageName)
+        val cat= Category(cat_name= addCategoryEditText.editText?.text.toString().trim(),category_image=imageName)
         oshoppingViewModel.pushcat(cat)
         addCategoryEditText.clearFocus()
         view?.let {
@@ -80,6 +85,7 @@ class AddCategoryFragment : Fragment() {
         }
         toastIconSuccess(requireContext())
     }
+
     private fun openImageChooser() {
         Intent(Intent.ACTION_PICK).also {
             it.type = "image/*"
@@ -141,7 +147,6 @@ class AddCategoryFragment : Fragment() {
                     linear_layout_root.snackbar(it.message)
                 }
                 imageName=response.body()?.image
-                Toast.makeText(requireContext(), "the image name is $imageName", Toast.LENGTH_SHORT).show()
 
 
             }

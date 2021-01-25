@@ -5,9 +5,45 @@
     android:id="@+id/setting_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="40dp"
-    tools:context=".setting.SettingActivity">
 
+    tools:context=".setting.SettingActivity">
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/bt_close"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/grey_60"
+            app:srcCompat="@drawable/ic_chevron_left" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Dashboard"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/grey_80"
+            app:fontFamily="sans-serif-medium" />
+
+        <ImageButton
+            android:id="@+id/update_cat_btn2"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/grey_60"
+            />
+
+    </LinearLayout>
     <TextView
         android:id="@+id/my_account"
         style="@style/CustomTextView"
@@ -17,7 +53,8 @@
         android:text="@string/MyAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+        android:paddingTop="100dp"/>
 
     <TextView
         android:id="@+id/my_products"

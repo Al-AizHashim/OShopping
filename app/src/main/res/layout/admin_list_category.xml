@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/custom_shape"
-    android:layout_margin="12dp"
-    tools:context=".AdminScreen">
+    android:layout_margin="12dp">
 
     <!-- TODO: Update blank fragment layout -->
 
