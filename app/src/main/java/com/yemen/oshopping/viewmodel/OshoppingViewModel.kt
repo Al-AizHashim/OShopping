@@ -28,7 +28,7 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
     var reportItemLiveData: LiveData<List<Report>>
     val userLiveData= MutableLiveData <String> ()
 
-    val userItemLiveData:LiveData<List<User>>
+    var userItemLiveData:LiveData<List<User>>
     val searchLiveData:LiveData<List<ProductItem>>
     var productColorLiveData = MutableLiveData<String>()
     val searchTerm: String
@@ -171,7 +171,11 @@ class OshoppingViewModel (private val app: Application) : AndroidViewModel(app) 
 
     fun BlockUser(user: User) = UpdateData().blockUser(user)
 
-    fun updateUser(user: User) = UpdateData().updateUser(user)
+    fun updateUser(user: User){
+        UpdateData().updateUser(user)
+        Log.d("updateUser","OshoppingViewModel $user")
+        userItemLiveData=FetchData().fetchUser()
+    }
 
     fun updateReport(report: Report){
         UpdateData().updateReport(report)
