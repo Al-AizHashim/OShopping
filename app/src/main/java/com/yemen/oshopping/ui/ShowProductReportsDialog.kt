@@ -60,7 +60,7 @@ class ShowProductReportsDialog : DialogFragment() {
         hideBTN.setOnClickListener {
             var productItem= HideProduct(product_id = param1,hide = 1,user_id = 2)
             oshoppingViewModel.hideProduct(productItem)
-            Toast.makeText(this@ShowProductReportsDialog.context, "submit$productItem", Toast.LENGTH_SHORT)
+            Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT)
                 .show()
             dialog?.dismiss()
         }

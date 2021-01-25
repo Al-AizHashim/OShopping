@@ -60,7 +60,7 @@ class ShowReportDetailsDialog : DialogFragment() {
         blockBTN.setOnClickListener {
             var blockUser= BlockUser(user_id = 1,block = 1,admin_id = 2)
             oshoppingViewModel.BlockUser(blockUser)
-            Toast.makeText(this@ShowReportDetailsDialog.context, "submit", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@ShowReportDetailsDialog.context, "Done", Toast.LENGTH_SHORT).show()
             dialog?.dismiss()
         }
         canceltBTN.setOnClickListener {
