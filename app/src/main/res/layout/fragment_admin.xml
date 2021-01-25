@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_report"
-        android:text="@string/show_reports"
+        android:text="@string/add_reports"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_category_tv" />
@@ -35,15 +35,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_report"
-        android:text="@string/show_reports"
+        android:text="@string/show_users_reports"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_report_tv" />
 
 
-
-
-
+    <TextView
+        android:id="@+id/show_product_report_tv"
+        style="@style/CustomTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_report"
+        android:text="@string/show_products_reports"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_report_details_tv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

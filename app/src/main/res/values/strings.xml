@@ -66,9 +66,15 @@
     <string name="remeberMe">remember me</string>
     <string name="log_in">Log in</string>
     <string name="show_categories">show categories</string>
-    <string name="show_reports">Show reports</string>
+    <string name="show_users_reports">Show users reports</string>
+    <string name="show_products_reports">Show products reports</string>
+    <string name="add_reports">Add reports</string>
     <string name="show_reports_details">Show reports details</string>
     <string name="admin">Admin</string>
+    <string name="produt_raidoBtn_first">aaa</string>
+    <string name="produt_raidoBtn_second">bbb</string>
+    <string name="produt_raidoBtn_third">ccc</string>
+
     <string name="activ">Selling and Purchase Operations</string>
     <string name="quantity">1</string>
     <string name="save">save</string>

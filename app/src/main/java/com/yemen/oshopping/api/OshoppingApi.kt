@@ -2,6 +2,7 @@ package com.yemen.oshopping.api
 
 
 import com.yemen.oshopping.model.DefaultResponse
+import com.yemen.oshopping.model.ProductReportsDetailsF
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -54,6 +55,15 @@ interface OshoppingApi {
     ): Call<DefaultResponse>
 
     @FormUrlEncoded
+    @POST("oshopping_api/api/product_report_details_api.php")
+    fun pushProductReportDetails(
+        @Field("product_id") product_id: Int?,
+        @Field("product_r_id") product_r_id: Int,
+        @Field("sender_id") sender_id: Int
+    ): Call<DefaultResponse>
+
+
+    @FormUrlEncoded
     @POST("oshopping_api/api/rating_api.php")
     fun pushRating(
         @Field("product_id") product_id: Int,
@@ -104,6 +114,9 @@ interface OshoppingApi {
     @GET("oshopping_api/api/report_details_api.php")
     fun fetchReportDetailsByUserId(@Query("against") against: Int): Call<ReportDetailsResponce>
 
+    @GET("oshopping_api/api/product_report_details_api.php")
+    fun fetchProductReportByProductId(@Query("product_id") product_id: Int): Call<ProductReportDetailsResponse>
+
     //fun fetchProductById(@Query("product_id") product_id: Int): Call<SingleProductResponse>
     @GET("oshopping_api/api/user_api.php")
     fun fetchUserById(@Query("user_id") user_id: Int): Call<SingleUserResponse>
@@ -114,8 +127,11 @@ interface OshoppingApi {
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByColor(@Query("color") color: String): Call<ProductResponse>
 
-    @GET("oshopping_api/api/category_api.php")
+    @GET("oshopping_api/api/product_report_details_api.php")
     fun fetchCategory(): Call<CategoryResponse>
+
+    @GET("oshopping_api/api/product_report_details_api.php")
+    fun fetchProductReportsDetails(): Call<ProductReportsDetailsResponse>
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUsers(): Call<UserResponse>
@@ -173,7 +189,15 @@ interface OshoppingApi {
     @FormUrlEncoded
     @PUT("oshopping_api/api/user_api.php")
     fun blockUser(
-        @Field("user_id") user_id: Int?, @Field("block") block: Int
+        @Field("user_id") user_id: Int, @Field("block") block: Int,
+        @Field("admin_id") admin_id: Int
+    ): Call<DefaultResponse>
+
+    @FormUrlEncoded
+    @PUT("oshopping_api/api/product_api.php")
+    fun hideProduct(
+        @Field("product_id") product_id: Int, @Field("hide") hide: Int,
+        @Field("user_id") user_id: Int
     ): Call<DefaultResponse>
 
 
