@@ -55,6 +55,7 @@ class UsersActivity : AppCompatActivity() {
         val firebase: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
 
         var userid = firebase.uid
+
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/$userid")
 
 
