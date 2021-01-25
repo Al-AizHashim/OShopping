@@ -81,6 +81,18 @@ interface OshoppingApi {
         @Field("color") color: String
     ): Call<DefaultResponse>
 
+    @FormUrlEncoded
+    @POST("oshopping_api/api/activity_api.php")
+    fun pushActivity(
+        @Field("productId") fk_product_id: Int?,
+        @Field("productName") product_name: String,
+        @Field("yrial_price") yrial_price: Int,
+        @Field("dollar_price") dollar_price: Int,
+        @Field("quantity") quantity: Int,
+        @Field("totalPrice") total_price: Double,
+        @Field("activityType") activity_type: String
+    ): Call<DefaultResponse>
+
     //get
     @GET("oshopping_api/api/product_api.php")
     fun fetchProduct(): Call<ProductResponse>

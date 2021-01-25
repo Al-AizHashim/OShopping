@@ -1,5 +1,6 @@
 package com.yemen.oshopping
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
+import com.yemen.oshopping.model.ActivityItem
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.model.Rating
@@ -23,10 +25,11 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 private const val TAG = "Category"
 
 class Cart_Fragment : Fragment() {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = "http://192.168.1.108/oshopping_api/"
     private lateinit var cartViewModel: OshoppingViewModel
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var cartItems: Cart
+    lateinit var activityItem: ActivityItem
     val delim = ":"
     var list:List<String> =ArrayList()
     private lateinit var back: ImageButton
@@ -132,6 +135,26 @@ class Cart_Fragment : Fragment() {
                 cartViewModel.pushRating(rating)
 
             }
+
+            buyBtn.setOnClickListener {
+                    val activ= ActivityItem(
+                        productId = activityItem.productId,
+                        productName = activityItem.productName,
+                        totalPrice = activityItem.totalPrice,
+                        activityType = activityItem.activityType,
+                        quantity = activityItem.quantity,
+                        yrial_price = activityItem.yrial_price,
+                        dollar_price = activityItem.dollar_price
+                    )
+                    Log.d("pushToActivity","the contint of Activity is :$activ")
+                cartViewModel.pushActivity(activ)
+                    Toast.makeText(
+                        requireContext(),
+                        "Added to Activity successfully",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
 
         }
 

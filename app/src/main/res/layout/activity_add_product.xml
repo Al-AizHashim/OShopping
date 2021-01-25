@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/add_product_container"
+    android:background="@color/colorPrimaryDark"
     android:verticalScrollbarPosition="right">
 
     <ScrollView
@@ -87,7 +88,8 @@
                 android:drawablePadding="10dp"
                 android:paddingStart="12dp"
                 android:hint="@string/NameProduct"
-                android:background="@drawable/custom_shape"
+                android:elevation="2dp"
+                android:background="@drawable/button_shap_white"
                 android:inputType="text"
                 android:textSize="14sp"
                 android:padding="15dp"
@@ -106,7 +108,8 @@
 
                 android:drawablePadding="10dp"
                 android:hint="@string/productDetails"
-                android:background="@drawable/custom_shape"
+                android:elevation="2dp"
+                android:background="@drawable/button_shap_white"
                 android:inputType="text"
                 android:padding="15dp"
                 android:paddingBottom="20dp"
@@ -124,7 +127,8 @@
                 android:textSize="14sp"
                 android:paddingStart="12dp"
                 android:hint="@string/PriceProductDolar"
-                android:background="@drawable/custom_shape"
+                android:elevation="2dp"
+                android:background="@drawable/button_shap_white"
                 android:inputType="numberDecimal"
                 android:padding="15dp"
                 android:paddingBottom="20dp"
@@ -144,7 +148,8 @@
                 android:paddingStart="12dp"
                 android:padding="15dp"
                 android:paddingBottom="20dp"
-                android:background="@drawable/custom_shape"
+                android:elevation="2dp"
+                android:background="@drawable/button_shap_white"
                 android:textColor="@color/colorBlack"
                 android:textColorHint="@color/colorGrey2" />
 
@@ -157,7 +162,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="0dp"
-                android:background="@drawable/custom_shape"
+                android:elevation="2dp"
+                android:background="@drawable/button_shap_white"
                 android:hint="Discount"
                 android:inputType="numberDecimal"
                 android:padding="15dp"

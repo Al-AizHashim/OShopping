@@ -205,5 +205,34 @@ class PushData {
 
 
     }
+    fun pushActivity(activ: ActivityItem) {
+        Log.d("pushActivity", "pushActivity:${activ.toString()} ")
+        val pushActivityRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushActivity(
+            activ.productId,
+            activ.productName,
+            activ.yrial_price,
+            activ.dollar_price,
+            activ.quantity,
+            activ.totalPrice,
+            activ.activityType
+        )
+
+        pushActivityRequest.enqueue(object : Callback<DefaultResponse> {
+
+            override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
+                Log.d("pushActivity", "Failed to push Activity", t)
+            }
+
+            override fun onResponse(
+                call: Call<DefaultResponse>,
+                response: Response<DefaultResponse>
+            ) {
+                Log.d("pushActivity", "Activity pushed successfully")
+
+            }
+        })
+
+
+    }
 
 }
