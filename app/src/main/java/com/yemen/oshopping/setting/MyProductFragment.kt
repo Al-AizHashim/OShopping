@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.LoginScreen
+import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.R
 import com.yemen.oshopping.admin.ShowReportFragmentDirections
 import com.yemen.oshopping.model.ProductItem
@@ -26,7 +27,7 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 class MyProductFragment : Fragment() {
 
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = MainActivity.LOCAL_HOST_URI
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
     private lateinit var noDataImageView: ImageView

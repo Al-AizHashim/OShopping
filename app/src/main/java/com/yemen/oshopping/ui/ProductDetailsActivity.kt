@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
+import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
@@ -65,7 +66,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     var list: List<String> = ArrayList()
 
 
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = MainActivity.LOCAL_HOST_URI
 
     lateinit var oshoppingViewModel: OshoppingViewModel
 
@@ -91,15 +92,13 @@ class ProductDetailsActivity : AppCompatActivity() {
         initComponent()
         frameContainer=findViewById(R.id.fragment_container)
 
-        /*
+
                 productVendor.setOnClickListener {
-            val fragment=ShowVendorFragment()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container,fragment)
-                .addToBackStack(null)
-                .commit()
+                val intent=Intent(this,ShowVendorActivity::class.java)
+                    intent.putExtra("VENDORID",productItemss.vendor_id)
+                    startActivity(intent)
         }
-         */
+
     }
 
     override fun onStart() {
