@@ -21,5 +21,7 @@ data class ProductItem(
     var hide:Int =0,
     var number_of_reports:Int,
     var first_name: String,
-    var last_name: String
+    var last_name: String,
+    var firebase_user_id: String?,
+    var firebase_user_name: String?
 )
