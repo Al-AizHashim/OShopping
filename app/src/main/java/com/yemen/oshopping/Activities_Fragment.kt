@@ -66,24 +66,25 @@ class Activities_Fragment: Fragment() {
         val mFile = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
         val mFilePath = Environment.getExternalStorageDirectory().toString()+"/"+ mFile + ".pdf"
 
-        if( activityItem != null)
-        {
+
             try {
                 val pdfDocument = PdfDocument(PdfWriter(mFilePath))
                 val document = Document(pdfDocument)
-                for (i in 1..activityItem.size) {
+                if (activityItem != null) {
+                    for (i in 1..activityItem.size) {
 
-                    val name = Paragraph(activityItem[i]?.productName)
-                    document.add(name)
+                        val name = Paragraph(activityItem[i]?.productName)
+                        document.add(name)
 
-                    val quantity = Paragraph(activityItem[i]?.quantity.toString())
-                    document.add(quantity)
+                        val quantity = Paragraph(activityItem[i]?.quantity.toString())
+                        document.add(quantity)
 
-                    val price = Paragraph(activityItem[i]?.totalPrice.toString())
-                    document.add(price)
+                        val price = Paragraph(activityItem[i]?.totalPrice.toString())
+                        document.add(price)
 
-                    val type = Paragraph(activityItem[i]?.activityType)
-                    document.add(type)
+                        val type = Paragraph(activityItem[i]?.activityType)
+                        document.add(type)
+                    }
                 }
 
 
@@ -99,8 +100,9 @@ class Activities_Fragment: Fragment() {
             catch ( e: Exception){
                 Toast.makeText(context,"error  "+ e.message ,Toast.LENGTH_LONG).show()
             }
-        }
 
+
+/*
         else{
             Toast.makeText(
                 context,
@@ -108,6 +110,7 @@ class Activities_Fragment: Fragment() {
                 Toast.LENGTH_LONG
             ).show()
         }
+ */
 
     }
 
