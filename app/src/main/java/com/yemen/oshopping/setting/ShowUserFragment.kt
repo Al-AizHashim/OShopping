@@ -23,13 +23,12 @@ class ShowUserFragment : Fragment() {
     lateinit var editImageBTN:ImageButton
     lateinit var chatImageBTN:ImageButton
     lateinit var user: User
-    private var param1: Int = 2
     private lateinit var oshoppingViewModel: OshoppingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-        oshoppingViewModel.getUserById(param1)
+        oshoppingViewModel.getUserById(oshoppingViewModel.getStoredUserId())
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

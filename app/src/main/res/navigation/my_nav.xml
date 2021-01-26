@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_settingFragment_to_showVendorFragment"
             app:destination="@id/showVendorFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_showUserFragment"
+            app:destination="@id/showUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -313,11 +316,11 @@
         android:name="com.yemen.oshopping.ui.ShowVendorFragment"
         android:label="ShowVendorFragment" />
     <fragment
-        android:id="@+id/productReportsDialog"
-        android:name="com.yemen.oshopping.ui.ProductReportsDialog"
-        android:label="ProductReportsDialog" />
-    <fragment
         android:id="@+id/showProductReportsFragment"
         android:name="com.yemen.oshopping.ui.ShowProductReportsFragment"
         android:label="ShowProductReportsFragment" />
+    <fragment
+        android:id="@+id/showUserFragment"
+        android:name="com.yemen.oshopping.setting.ShowUserFragment"
+        android:label="ShowUserFragment" />
 </navigation>
