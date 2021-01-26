@@ -121,7 +121,8 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
 
                             val currentUser = snapshot.getValue(User::class.java)
                             currentUser?.userName?.let { sharedPreference.save("userName", it) }
-                            Log.e(TAG, "currnet user name ${currentUser?.userName}")
+                            Log.e(TAG, "current user name ${currentUser?.userName}")
+
                         }
 
                     })

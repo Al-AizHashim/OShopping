@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso
 import com.yemen.oshopping.Chat.activity.ChatActivity
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
+import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
@@ -93,6 +94,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         highestRateBtn = view.findViewById(R.id.highest_rate_btn)
         searchView = view.findViewById(R.id.search_view)
         notifications=view.findViewById(R.id.notifications)
+
         //searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
         searchView.suggestionsAdapter

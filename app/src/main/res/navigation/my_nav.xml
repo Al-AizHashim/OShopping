@@ -322,5 +322,56 @@
     <fragment
         android:id="@+id/showUserFragment"
         android:name="com.yemen.oshopping.setting.ShowUserFragment"
-        android:label="ShowUserFragment" />
+        android:label="ShowUserFragment" >
+        <action
+            android:id="@+id/action_showUserFragment_to_updateUserFragment"
+            app:destination="@id/updateUserFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateUserFragment"
+        android:name="com.yemen.oshopping.setting.UpdateUserFragment"
+        android:label="UpdateUserFragment" >
+        <action
+            android:id="@+id/action_updateUserFragment_to_showUserFragment"
+            app:destination="@id/showUserFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+        <argument
+            android:name="first_name "
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="last_name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="phone_number"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="details"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_id"
+            app:argType="integer" />
+        <argument
+            android:name="address"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

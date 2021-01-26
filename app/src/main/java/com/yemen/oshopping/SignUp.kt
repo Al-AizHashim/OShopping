@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.ui.AddUserFragment
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -80,6 +81,9 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
                     hashMap.put("userName",name.text.toString())
                     hashMap.put("userEmail",email)
                     hashMap.put("profileImage","")
+                    val sharedPreference = SharedPreference(this)
+                    sharedPreference.save("userId",userId )
+                    sharedPreference.save("userName", name.text.toString())
                     databaseReference.setValue(hashMap).addOnCompleteListener(this){
                       if(it.isSuccessful)
                       {
