@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class ActivityItem(
     @SerializedName("fk_product_id")
-    var productId: Int,
+    var productId: Int?,
     @SerializedName("product_name")
-    var productName: String,
+    var productName: String?,
     @SerializedName("yrial_price")
-    var yrial_price: Int,
+    var yrial_price: Double?,
     @SerializedName("dollar_price")
-    var dollar_price: Int,
+    var dollar_price: Double?,
 
     @SerializedName("quantity")
     var quantity: Int,

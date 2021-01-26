@@ -34,7 +34,7 @@
         android:layout_marginStart="24dp"
         android:text="@string/categoryName"
         android:textColor="@color/colorBlack"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,6 @@
         android:src="@drawable/ic_baseline_delete_outline_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/category"
         app:layout_constraintTop_toTopOf="parent" />
 
 

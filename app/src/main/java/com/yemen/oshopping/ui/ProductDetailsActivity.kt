@@ -38,7 +38,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     private var lyt_expand_warranty: View? = null
     private var lyt_expand_description: View? = null
     private var nested_scroll_view: NestedScrollView? = null
-
+    private lateinit var frameContainer:FrameLayout
     var productId:Int=1
     lateinit var productImage: CarouselView
     lateinit var productName: TextView
@@ -48,6 +48,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     lateinit var addToCartFab: FloatingActionButton
     lateinit var ratingBarTexView: TextView
     private var imagesUri: Array<String?>? = null
+    private lateinit var productDetails:TextView
 
     // lateinit var productQuantity: TextView
     //lateinit var productDiscount: TextView
@@ -84,9 +85,21 @@ class ProductDetailsActivity : AppCompatActivity() {
         ratingBar = findViewById(R.id.rating_Bar_product_details)
         ratingBarTexView = findViewById(R.id.rating_bar_text_view_prodcut_details)
         parent_view = findViewById(R.id.parent_view)
+        productDetails=findViewById(R.id.product_details)
+        productVendor=findViewById(R.id.product_vendor)
         initToolbar()
         initComponent()
+        frameContainer=findViewById(R.id.fragment_container)
 
+        /*
+                productVendor.setOnClickListener {
+            val fragment=ShowVendorFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container,fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+         */
     }
 
     override fun onStart() {
@@ -119,24 +132,12 @@ class ProductDetailsActivity : AppCompatActivity() {
 
     fun updateUI() {
         productName.text = productItem.product_name
-        rialProductPrice.text = productItem.yrial_price.toString() + "RY"
-        dollarProductPrice.text = productItem.dollar_price.toString() + "$"
+        rialProductPrice.text = productItem.yrial_price.toString() + " RY"
+        dollarProductPrice.text = productItem.dollar_price.toString() + " $"
         ratingBar.rating = productItem.rating_average
         ratingBarTexView.text = productItem.number_of_ratings.toString() + " votes"
-
-
-        //var compositeProductUrl = url + productItem.product_img
-        // productImage.setImageListener { position, imageView ->
-        //  Picasso.get().load(url+list[position]).into(imageView)
-
-        // }
-        //productQuantity.text = "Quantity: " + productItem.product_quantity.toString()
-        //productDiscount.text = "discount: " + productItem.product_discount.toString()
-        //productDetails.text = "product details: " + productItem.product_details
-        //var compositeProductUrl = url + productItem.product_img
-        var conditionString = "string" + productItem.product_img
-        //if (!conditionString.equals("stringnull"))
-        //Picasso.get().load(compositeProductUrl).into(productImage)
+        productDetails.text=productItem.product_details
+        productVendor.text=productItem.first_name+" "+productItem.last_name
     }
 
     private fun initToolbar() {

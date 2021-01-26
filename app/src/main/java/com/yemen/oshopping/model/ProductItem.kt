@@ -19,5 +19,7 @@ data class ProductItem(
     var number_of_ratings:Int,
     var color:String ="black",
     var hide:Int =0,
-    var number_of_reports:Int
+    var number_of_reports:Int,
+    var first_name: String,
+    var last_name: String
 )

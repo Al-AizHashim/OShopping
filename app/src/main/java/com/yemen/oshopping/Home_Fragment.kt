@@ -27,8 +27,7 @@ import com.yemen.oshopping.Chat.activity.ChatActivity
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.activity_reset_password.*
-import kotlinx.android.synthetic.main.custom_dialog.view.*
+
 
 
 

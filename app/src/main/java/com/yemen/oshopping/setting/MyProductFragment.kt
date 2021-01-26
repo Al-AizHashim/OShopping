@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -30,6 +31,7 @@ class MyProductFragment : Fragment() {
     private lateinit var showProductRecyclerView: RecyclerView
     private lateinit var noDataImageView: ImageView
     private lateinit var noDataTextView: TextView
+    lateinit var deleteProductBtn:Button
     lateinit var fab: FloatingActionButton
     lateinit var productsItems:List<ProductItem>
     override fun onCreate(savedInstanceState: Bundle?) {

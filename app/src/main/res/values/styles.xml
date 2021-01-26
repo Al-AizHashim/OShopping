@@ -23,6 +23,10 @@
         <item name="colorControlNormal">@color/colorWhite</item>
         <item name="colorControlActivated">@color/yellow_600</item>
     </style>
+    <style name="Yellow.Small.AppCompatRatingBar.Grey" parent="Base.Widget.AppCompat.RatingBar.Small">
+        <item name="colorControlNormal">@color/grey_80</item>
+        <item name="colorControlActivated">@color/yellow_600</item>
+    </style>
     <style name="RippleStyleWhite">
         <item name="mrl_rippleOverlay">true</item>
         <item name="mrl_rippleColor">#80FFFFFF</item>
@@ -34,7 +38,7 @@
     </style>
 
     <style name="Yellow.Small.AppCompatRatingBar.White" parent="Base.Widget.AppCompat.RatingBar.Small">
-        <item name="colorControlNormal">#FAF9F9</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
         <item name="colorControlActivated">@color/yellow_600</item>
     </style>
 

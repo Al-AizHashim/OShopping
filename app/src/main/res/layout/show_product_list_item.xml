@@ -62,10 +62,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_shap"
-                android:drawableLeft="@drawable/ic_shopping_cart"
+                android:drawableLeft="@drawable/ic_baseline_delete_outline_24"
+                android:drawableTint="@color/colorWhite"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:text="    Add "
+                android:text=" Delete "
                 android:textColor="@color/colorWhite"
                 android:textSize="12sp" />
             <LinearLayout

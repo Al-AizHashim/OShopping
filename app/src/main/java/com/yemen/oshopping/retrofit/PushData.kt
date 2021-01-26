@@ -2,12 +2,14 @@ package com.yemen.oshopping.retrofit
 
 import android.util.Log
 import com.yemen.oshopping.model.*
+import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class PushData {
+
     fun pushCategory(category: Category) {
         val pushCategoryRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi
             .postCategory(category.cat_name ,category.category_image)
@@ -227,13 +229,11 @@ class PushData {
 
 
     }
-    fun pushActivity(activ: ActivityItem) {
-        Log.d("pushActivity", "pushActivity:${activ.toString()} ")
+    fun pushActivity(activ: ActivityItem,user_id:Int) {
+        Log.d("pushActivityfun", "pushActivity:${activ.toString()} ")
         val pushActivityRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushActivity(
+            user_id,
             activ.productId,
-            activ.productName,
-            activ.yrial_price,
-            activ.dollar_price,
             activ.quantity,
             activ.totalPrice,
             activ.activityType
