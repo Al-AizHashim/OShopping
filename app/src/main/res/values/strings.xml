@@ -68,6 +68,7 @@
     <string name="show_categories">show categories</string>
     <string name="show_users_reports">Show users reports</string>
     <string name="show_products_reports">Show products reports</string>
+    <string name="show_users">Show users</string>
     <string name="add_reports">Add reports</string>
     <string name="show_reports_details">Show reports details</string>
     <string name="admin">Admin</string>

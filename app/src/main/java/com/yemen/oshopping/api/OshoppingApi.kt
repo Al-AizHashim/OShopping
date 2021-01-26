@@ -146,6 +146,7 @@ interface OshoppingApi {
     @GET("oshopping_api/api/category_api.php")
     fun fetchCategory(): Call<CategoryResponse>
 
+
     @GET("oshopping_api/api/product_report_details_api.php")
     fun fetchProductReportsDetails(): Call<ProductReportsDetailsResponse>
 

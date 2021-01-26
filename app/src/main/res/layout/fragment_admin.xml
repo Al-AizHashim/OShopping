@@ -88,5 +88,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_report_details_tv" />
 
+    <TextView
+        android:id="@+id/show_users_tv"
+        style="@style/CustomTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_baseline_supervised_user_circle_24"
+        android:text="@string/show_users"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_product_report_tv" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -91,8 +91,6 @@ class ProductDetailsActivity : AppCompatActivity() {
         initToolbar()
         initComponent()
         frameContainer=findViewById(R.id.fragment_container)
-
-
                 productVendor.setOnClickListener {
                 val intent=Intent(this,ShowVendorActivity::class.java)
                     intent.putExtra("VENDORID",productItemss.vendor_id)

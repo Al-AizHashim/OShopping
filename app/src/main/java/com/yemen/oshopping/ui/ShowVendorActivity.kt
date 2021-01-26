@@ -43,8 +43,8 @@ class ShowVendorActivity : AppCompatActivity() {
             emailImageBTN = findViewById(R.id.email_vendor_image_button)
             reportImageBTN.setOnClickListener {
                 ReportsDialog.newInstance().apply {
-                    setTargetFragment(this, 0)
-                    show(this.requireFragmentManager(), "Input")
+//                    setTargetFragment(this@ShowVendorActivity, 0)
+//                    show(this.requireFragmentManager(), "Input")
                 }
             }
             chatImageBTN.setOnClickListener {

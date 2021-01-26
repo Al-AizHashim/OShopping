@@ -183,6 +183,9 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_adminFragment_to_showUsersfragment"
+            app:destination="@id/showUsersfragment" />
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
@@ -323,4 +326,8 @@
         android:id="@+id/showUserFragment"
         android:name="com.yemen.oshopping.setting.ShowUserFragment"
         android:label="ShowUserFragment" />
+    <fragment
+        android:id="@+id/showUsersfragment"
+        android:name="com.yemen.oshopping.ShowUsersfragment"
+        android:label="ShowUsersfragment" />
 </navigation>
