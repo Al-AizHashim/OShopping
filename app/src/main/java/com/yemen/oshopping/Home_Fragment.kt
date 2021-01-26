@@ -36,7 +36,7 @@ private const val ARG_PARAM2 = "param2"
 
 
 class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = MainActivity.LOCAL_HOST_URI
 
 
     private lateinit var trendBtn: Button

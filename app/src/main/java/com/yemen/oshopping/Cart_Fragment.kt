@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 private const val TAG = "Category"
 
 class Cart_Fragment : Fragment() {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = MainActivity.LOCAL_HOST_URI
     private lateinit var cartViewModel: OshoppingViewModel
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var cartItems: Cart
@@ -121,11 +121,12 @@ class Cart_Fragment : Fragment() {
 
             }
 
-            ratingBar2.setOnClickListener {
+            ratingBar2.setOnRatingBarChangeListener { ratingBar: RatingBar, fl: Float, b: Boolean ->
+                Log.d("ratingBarlog","ratingBarlog ")
                 val ratingBarValue = ratingBar2.rating.toString()
                 Toast.makeText(
                     requireContext(),
-                    "Rating is: " + ratingBarValue, Toast.LENGTH_SHORT
+                    "Rating is: " + ratingBarValue, Toast.LENGTH_LONG
                 ).show()
                 var rating = Rating(
                     product_id = cartItems.fk_product_id,

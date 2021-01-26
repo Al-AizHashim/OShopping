@@ -20,15 +20,14 @@
         <TextView
             android:id="@+id/report_dialog_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
-            android:background="@drawable/custom_shape2"
+            android:background="@drawable/shape_nav"
             android:gravity="center"
             android:padding="7dp"
             android:text="@string/repotDialogTilie"
             android:textColor="#fff"
-            android:textSize="24sp" />
-
+            android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/report_recycler_view"
@@ -45,22 +44,21 @@
             <Button
                 android:id="@+id/action_report_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/custom_shape3"
-                android:text="Submit"
-                android:textColor="#fff"
-                />
+                android:background="@drawable/shape_nav"
+                android:text="Cancel"
+                android:textColor="#fff" />
 
             <Button
                 android:id="@+id/cancel_report_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/custom_shape"
-                android:text="Cancel"
-                android:textColor="@color/colorPrimaryLight2"
-                 />>
+                android:background="@drawable/shape_nav"
+                android:text="Submit"
+                android:textColor="#fff" />
+
 
         </LinearLayout>
     </LinearLayout>
