@@ -59,7 +59,7 @@ class ShowVendorActivity : AppCompatActivity() {
                 dialog.show()
 
 
-            }
+
             chatImageBTN.setOnClickListener {
                 Toast.makeText(applicationContext, "chatImageBTN", Toast.LENGTH_SHORT).show()
             }

@@ -2,6 +2,30 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="409dp"
+        android:layout_height="657dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/my_nav" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
@@ -33,7 +57,7 @@ android:layout_height="match_parent"
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"
         android:layout_height="180dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="86dp"
         android:backgroundTint="@color/colorBrown"
         app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +98,7 @@ android:layout_height="match_parent"
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"
         android:layout_height="180dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="86dp"
         android:backgroundTint="@color/colorBrown"
         app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +139,7 @@ android:layout_height="match_parent"
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"
         android:layout_height="180dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="282dp"
         android:backgroundTint="@color/colorBrown"
         app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +180,7 @@ android:layout_height="match_parent"
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"
         android:layout_height="180dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginTop="282dp"
         android:backgroundTint="@color/colorBrown"
         app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -197,7 +221,7 @@ android:layout_height="match_parent"
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"
         android:layout_height="180dp"
-        android:layout_marginTop="488dp"
+        android:layout_marginTop="478dp"
         android:backgroundTint="@color/colorBrown"
         app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -238,7 +262,7 @@ android:layout_height="match_parent"
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"
         android:layout_height="180dp"
-        android:layout_marginTop="488dp"
+        android:layout_marginTop="478dp"
         android:backgroundTint="@color/colorBrown"
         app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -276,20 +300,5 @@ android:layout_height="match_parent"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>
 
-    <!--
-
-    <fragment
-        android:id="@+id/fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="409dp"
-        android:layout_height="657dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/my_nav" />
-
-    -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+-->
