@@ -14,7 +14,9 @@ class RetrofitClient {
             .create()
         val retrofit: Retrofit = Retrofit.Builder()
 
+
             .baseUrl("http://192.168.1.3/")
+
 
 
 

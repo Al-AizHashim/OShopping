@@ -97,10 +97,12 @@ class ProductDetailsActivity : AppCompatActivity() {
         initToolbar()
         initComponent()
         frameContainer=findViewById(R.id.fragment_container)
+
         //val userId=sharedPreference.getValueString("userId")
         //val userName=sharedPreference.getValueString("userName")
         vendorProfile=findViewById(R.id.vendor_profile)
         vendorChat=findViewById(R.id.vendor_chat)
+
 
 
     }
