@@ -49,7 +49,11 @@
             app:destination="@id/loginScreen" />
         <action
             android:id="@+id/action_settingFragment_to_signUp2"
-            app:destination="@id/signUp2" />
+            app:destination="@id/signUp2"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_settingFragment_to_usersActivity"
             app:destination="@id/usersActivity"
@@ -59,10 +63,18 @@
             app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_settingFragment_to_showVendorFragment"
-            app:destination="@id/showVendorFragment" />
+            app:destination="@id/showVendorFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_settingFragment_to_showUserFragment"
-            app:destination="@id/showUserFragment" />
+            app:destination="@id/showUserFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"
@@ -71,7 +83,11 @@
         tools:layout="@layout/fragment_about_us" >
         <action
             android:id="@+id/action_aboutUsFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/myAccountFragment"
@@ -80,7 +96,11 @@
         tools:layout="@layout/fragment_my_account" >
         <action
             android:id="@+id/action_myAccountFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/myProductFragment"
@@ -96,7 +116,11 @@
             app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_myProductFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment" />
+            app:destination="@id/addProductFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/updateProductFragment"
@@ -105,7 +129,11 @@
         tools:layout="@layout/fragment_update_product" >
         <action
             android:id="@+id/action_updateProductFragment_to_myProductFragment"
-            app:destination="@id/myProductFragment" />
+            app:destination="@id/myProductFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <argument
             android:name="productId"
             app:argType="integer"
@@ -185,7 +213,12 @@
             app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_adminFragment_to_showUsersfragment"
-            app:destination="@id/showUsersfragment" />
+            app:destination="@id/showUsersfragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
@@ -252,7 +285,11 @@
             app:popExitAnim="@anim/to_left"/>
         <action
             android:id="@+id/action_showReportFragment_to_updateReportFragment"
-            app:destination="@id/updateReportFragment" />
+            app:destination="@id/updateReportFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/updateReportFragment"
@@ -261,7 +298,11 @@
         tools:layout="@layout/fragment_update_report" >
         <action
             android:id="@+id/action_updateReportFragment_to_showReportFragment"
-            app:destination="@id/showReportFragment" />
+            app:destination="@id/showReportFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <argument
             android:name="reportIdArg"
             app:argType="integer" />
@@ -295,7 +336,11 @@
         tools:layout="@layout/fragment_add_product" >
         <action
             android:id="@+id/action_addProductFragment_to_myProductFragment"
-            app:destination="@id/myProductFragment" />
+            app:destination="@id/myProductFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <activity
         android:id="@+id/loginScreen"
@@ -334,7 +379,6 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
-    </fragment>
     <fragment
         android:id="@+id/updateUserFragment"
         android:name="com.yemen.oshopping.setting.UpdateUserFragment"
@@ -378,4 +422,8 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/showUsersfragment"
+        android:name="com.yemen.oshopping.ShowUsersfragment"
+        android:label="ShowUsersfragment" />
 </navigation>
