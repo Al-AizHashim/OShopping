@@ -24,11 +24,11 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
 
         nested_content.setOnScrollChangeListener() { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (scrollY < oldScrollY) { // up
-                animateNavigation(false)
+                //animateNavigation(false)
 
             }
             if (scrollY > oldScrollY) { // down
-                animateNavigation(true)
+                //animateNavigation(true)
 
             }
         }
