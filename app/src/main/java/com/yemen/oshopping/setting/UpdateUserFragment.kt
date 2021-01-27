@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import com.squareup.picasso.Picasso
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.User
 import com.yemen.oshopping.vendor.UpdateProductFragmentArgs
@@ -15,8 +16,8 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 class UpdateUserFragment : Fragment() {
 
-    val args: UpdateProductFragmentArgs by navArgs()
-    private var selectedImageUri: Uri? = null
+  val uargs: UpdateUserFragmentArgs by navArgs()
+    private var uri: String? = null
     var imageName:String?=null
     lateinit var fNameEditText: EditText
     lateinit var lNameEditText: EditText
@@ -47,18 +48,22 @@ class UpdateUserFragment : Fragment() {
         addressEditText = view.findViewById(R.id.address_edit_text)
         phoneNumberEditText = view.findViewById(R.id.phone_edit_text)
         detailsEditText = view.findViewById(R.id.details_edit_text)
-        editImageBTN=view.findViewById(R.id.edit_image_button)
         updateUserBtn=view.findViewById(R.id.updateUserBtn)
+
         userImage = view.findViewById(R.id.user_image)
-        editImageBTN.setOnClickListener {
-        }
+        fNameEditText.setText(uargs.firstName.toString())
+        lNameEditText.setText(uargs.lastName.toString())
+        addressEditText.setText(uargs.address)
+        phoneNumberEditText.setText(uargs.phoneNumber)
+        detailsEditText.setText(uargs.details)
+        Picasso.get().load(uri+uargs.email).into(userImage)
+
 
         updateUserBtn.setOnClickListener {
             val user = User(
                 first_name = fNameEditText.text.toString(),
                 last_name = lNameEditText.text.toString(),
                 email = oshoppingViewModel.getStoredEmail().toString(),
-                address = addressEditText.text.toString(),
                 phone_number = phoneNumberEditText.text.toString(),
                 details = detailsEditText.text.toString(),
                 image = imageName

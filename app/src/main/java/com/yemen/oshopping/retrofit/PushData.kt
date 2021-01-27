@@ -126,7 +126,9 @@ class PushData {
             user.phone_number,
             user.details,
             user.address,
-            user.image
+            user.image,
+            user.firebase_user_id,
+            user.firebase_user_name
         )
 
         pushUserRequest.enqueue(object : Callback<DefaultResponse> {

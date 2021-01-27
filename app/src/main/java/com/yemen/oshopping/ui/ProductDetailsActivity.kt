@@ -21,10 +21,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
+import com.yemen.oshopping.Chat.activity.ChatActivity
 import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
+import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.utils.Tools
 import com.yemen.oshopping.utils.ViewAnimation
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -50,7 +52,9 @@ class ProductDetailsActivity : AppCompatActivity() {
     lateinit var ratingBarTexView: TextView
     private var imagesUri: Array<String?>? = null
     private lateinit var productDetails:TextView
-
+    lateinit var sharedPreference: SharedPreference
+    lateinit var vendorProfile:TextView
+    lateinit var vendorChat:TextView
     // lateinit var productQuantity: TextView
     //lateinit var productDiscount: TextView
     //lateinit var productDetails: TextView
@@ -64,7 +68,8 @@ class ProductDetailsActivity : AppCompatActivity() {
     private lateinit var productNamedialog: TextView
     val delim = ":"
     var list: List<String> = ArrayList()
-
+    private lateinit var productToastImageView: ImageView
+    private lateinit var productToastName: TextView
 
     var url: String = MainActivity.LOCAL_HOST_URI
 
@@ -73,6 +78,7 @@ class ProductDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPreference = SharedPreference(applicationContext)
         productId= intent.getIntExtra("PRODUCTID",2)
         Log.d("PRODUCTID", "PRODUCTID in details: $productId")
         setContentView(R.layout.activity_product_details)
@@ -92,21 +98,37 @@ class ProductDetailsActivity : AppCompatActivity() {
         initComponent()
         frameContainer=findViewById(R.id.fragment_container)
 
+        //val userId=sharedPreference.getValueString("userId")
+        //val userName=sharedPreference.getValueString("userName")
+        vendorProfile=findViewById(R.id.vendor_profile)
+        vendorChat=findViewById(R.id.vendor_chat)
 
-                productVendor.setOnClickListener {
-                val intent=Intent(this,ShowVendorActivity::class.java)
-                    intent.putExtra("VENDORID",productItemss.vendor_id)
-                    startActivity(intent)
-        }
+
 
     }
 
     override fun onStart() {
         super.onStart()
         getProductData()
+
+        vendorChat.setOnClickListener {
+            val intent = Intent(this,
+                ChatActivity::class.java)
+            //vendor id and name from api
+            val userId=productItemss.firebase_user_id
+            val userName=productItemss.firebase_user_name
+            intent.putExtra("userId",userId)
+            intent.putExtra("userName",userName)
+            startActivity(intent)
+
+            vendorProfile.setOnClickListener {
+                val intent2=Intent(this,ShowVendorActivity::class.java)
+                intent2.putExtra("VENDORID",productItemss.vendor_id)
+                startActivity(intent2)
+            }
+        }
     }
     fun getProductData(){
-
         oshoppingViewModel.getProductById(productId)
         oshoppingViewModel.productItemLiveDataByID.observe(
             this,
@@ -199,12 +221,15 @@ class ProductDetailsActivity : AppCompatActivity() {
                 color = productItemss.color
             )
             Log.d("pushtocart", "the contint of cart is :$cart")
-            oshoppingViewModel.pushCart(cart)
-            Toast.makeText(
-                this,
-                "Added to cart successfully",
-                Toast.LENGTH_LONG
-            ).show()
+            var imageUri: String
+            list = productItemss.product_img.split(delim)
+            if (list.size == 1)
+                imageUri = list[0]
+            else
+                imageUri = list[0]
+
+            toastFloatingImage(url+imageUri,productItemss.product_name)
+
 
         }
     }
@@ -255,5 +280,20 @@ class ProductDetailsActivity : AppCompatActivity() {
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(true)
         dialog.show()
+    }
+
+    private fun toastFloatingImage(imageUrl:String,name:String) {
+        val toast = Toast(getApplicationContext())
+        toast.duration = Toast.LENGTH_LONG
+
+        //inflate view
+        val custom_view: View =
+            layoutInflater.inflate(R.layout.floating_image_custim_toast, null)
+        productToastImageView=custom_view.findViewById(R.id.toast_img)
+        productToastName=custom_view.findViewById(R.id.toast_title)
+        Picasso.get().load(imageUrl).into(productToastImageView)
+        productToastName.text=name
+        toast.view = custom_view
+        toast.show()
     }
 }

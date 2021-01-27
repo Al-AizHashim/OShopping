@@ -17,6 +17,7 @@ class AdminFragment : Fragment() {
     lateinit var showReportsDetailsTV: TextView
 
     lateinit var showProdcutReportsDetailsTV: TextView
+    lateinit var showUsersTV: TextView
 
     lateinit var close: ImageButton
 
@@ -31,6 +32,7 @@ class AdminFragment : Fragment() {
         showCategoryTV = view.findViewById(R.id.show_category_tv)
         showReportTV = view.findViewById(R.id.show_report_tv)
         showReportsDetailsTV = view.findViewById(R.id.show_report_details_tv)
+        showUsersTV = view.findViewById(R.id.show_users_tv)
 
         showProdcutReportsDetailsTV = view.findViewById(R.id.show_product_report_tv)
 
@@ -56,6 +58,9 @@ class AdminFragment : Fragment() {
 
         showProdcutReportsDetailsTV.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_adminFragment_to_showProductReportsFragment)
+        }
+        showUsersTV.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_adminFragment_to_showUsersfragment)
         }
         return view
     }
