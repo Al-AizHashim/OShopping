@@ -1,6 +1,9 @@
 package com.yemen.oshopping.ui
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -42,10 +45,13 @@ class ShowVendorActivity : AppCompatActivity() {
             callImageBTN = findViewById(R.id.call_vendor_image_button)
             emailImageBTN = findViewById(R.id.email_vendor_image_button)
             reportImageBTN.setOnClickListener {
-                ReportsDialog.newInstance().apply {
-                    setTargetFragment(this, 0)
-                    show(this.requireFragmentManager(), "Input")
-                }
+                val view= layoutInflater.inflate(R.layout.dialog_reports,null)
+                val dialog=Dialog(this)
+                dialog.setContentView(view)
+                //dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialog.setCancelable(true)
+                dialog.show()
+
             }
             chatImageBTN.setOnClickListener {
                 Toast.makeText(applicationContext, "chatImageBTN", Toast.LENGTH_SHORT).show()

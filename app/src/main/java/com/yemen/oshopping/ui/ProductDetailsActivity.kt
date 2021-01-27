@@ -53,6 +53,8 @@ class ProductDetailsActivity : AppCompatActivity() {
     private var imagesUri: Array<String?>? = null
     private lateinit var productDetails:TextView
     lateinit var sharedPreference: SharedPreference
+    lateinit var vendorProfile:TextView
+    lateinit var vendorChat:TextView
     // lateinit var productQuantity: TextView
     //lateinit var productDiscount: TextView
     //lateinit var productDetails: TextView
@@ -96,30 +98,34 @@ class ProductDetailsActivity : AppCompatActivity() {
         frameContainer=findViewById(R.id.fragment_container)
         //val userId=sharedPreference.getValueString("userId")
         //val userName=sharedPreference.getValueString("userName")
+        vendorProfile=findViewById(R.id.vendor_profile)
+        vendorChat=findViewById(R.id.vendor_chat)
 
-                productVendor.setOnClickListener {
-
-                    val intent = Intent(this,
-                        ChatActivity::class.java)
-                    //vendor id and name from api
-                    var userId="5tcYjENPd6TcWIUqkwKZiefmIEo1"
-                    var userName="Alaiz Hashim"
-                    intent.putExtra("userId",userId)
-                    intent.putExtra("userName",userName)
-                    startActivity(intent)
-                  //  val intent=Intent(this,ShowVendorActivity::class.java)
-                   // intent.putExtra("VENDORID",productItemss.vendor_id)
-                   // startActivity(intent)
-        }
 
     }
 
     override fun onStart() {
         super.onStart()
         getProductData()
+
+        vendorChat.setOnClickListener {
+            val intent = Intent(this,
+                ChatActivity::class.java)
+            //vendor id and name from api
+            val userId=productItemss.firebase_user_id
+            val userName=productItemss.firebase_user_name
+            intent.putExtra("userId",userId)
+            intent.putExtra("userName",userName)
+            startActivity(intent)
+
+            vendorProfile.setOnClickListener {
+                val intent2=Intent(this,ShowVendorActivity::class.java)
+                intent2.putExtra("VENDORID",productItemss.vendor_id)
+                startActivity(intent2)
+            }
+        }
     }
     fun getProductData(){
-
         oshoppingViewModel.getProductById(productId)
         oshoppingViewModel.productItemLiveDataByID.observe(
             this,
