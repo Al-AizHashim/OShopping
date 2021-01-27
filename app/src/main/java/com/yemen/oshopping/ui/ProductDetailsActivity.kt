@@ -68,7 +68,8 @@ class ProductDetailsActivity : AppCompatActivity() {
     private lateinit var productNamedialog: TextView
     val delim = ":"
     var list: List<String> = ArrayList()
-
+    private lateinit var productToastImageView: ImageView
+    private lateinit var productToastName: TextView
 
     var url: String = MainActivity.LOCAL_HOST_URI
 
@@ -218,12 +219,15 @@ class ProductDetailsActivity : AppCompatActivity() {
                 color = productItemss.color
             )
             Log.d("pushtocart", "the contint of cart is :$cart")
-            oshoppingViewModel.pushCart(cart)
-            Toast.makeText(
-                this,
-                "Added to cart successfully",
-                Toast.LENGTH_LONG
-            ).show()
+            var imageUri: String
+            list = productItemss.product_img.split(delim)
+            if (list.size == 1)
+                imageUri = list[0]
+            else
+                imageUri = list[0]
+
+            toastFloatingImage(url+imageUri,productItemss.product_name)
+
 
         }
     }
@@ -274,5 +278,20 @@ class ProductDetailsActivity : AppCompatActivity() {
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(true)
         dialog.show()
+    }
+
+    private fun toastFloatingImage(imageUrl:String,name:String) {
+        val toast = Toast(getApplicationContext())
+        toast.duration = Toast.LENGTH_LONG
+
+        //inflate view
+        val custom_view: View =
+            layoutInflater.inflate(R.layout.floating_image_custim_toast, null)
+        productToastImageView=custom_view.findViewById(R.id.toast_img)
+        productToastName=custom_view.findViewById(R.id.toast_title)
+        Picasso.get().load(imageUrl).into(productToastImageView)
+        productToastName.text=name
+        toast.view = custom_view
+        toast.show()
     }
 }
