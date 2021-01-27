@@ -30,4 +30,7 @@
     <color name="deep_orange_500">#FF5722</color>
     <color name="colorPrimaryDark2">#474135</color>
 
+    <color name="overlay_dark_10">#1A000000</color>
+    <color name="overlay_dark_20">#33000000</color>
+
 </resources>

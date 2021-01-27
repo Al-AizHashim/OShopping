@@ -308,7 +308,7 @@
                                 android:layout_marginStart="@dimen/spacing_xxxlarge"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="Chat"
+                                android:text="  Chat"
                                 android:drawableStart="@drawable/ic_chat"
                                 android:drawableTint="@color/grey_60"
                                 android:drawablePadding="16dp"
