@@ -14,9 +14,12 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import com.yemen.oshopping.Home_Fragment
 import com.yemen.oshopping.LoginScreen
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.User
+import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.uploadImage.*
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.fragment_add_user.*
@@ -70,6 +73,7 @@ class AddUserFragment : Fragment() {
 
 
         }
+        val sharedPreference = SharedPreference(requireContext())
         val intent=Intent(requireContext(),LoginScreen::class.java)
         saveProfileBTN.setOnClickListener {
             val user = User(
@@ -79,8 +83,11 @@ class AddUserFragment : Fragment() {
                 address = addressEditText.text.toString(),
                 phone_number = phoneNumberEditText.text.toString(),
                 details = detailsEditText.text.toString(),
-                image = imageName
+                image = imageName,
+                firebase_user_id = sharedPreference.getValueString("userId"),
+                firebase_user_name =sharedPreference.getValueString("userName")
             )
+
 
             oshoppingViewModel.apply {
                 pushUser(user)
@@ -92,6 +99,8 @@ class AddUserFragment : Fragment() {
             oshoppingViewModel.userItemLiveDataByEmail.observe(viewLifecycleOwner, Observer { userdata ->
                 userdata.get(0).user_id?.let { userId -> oshoppingViewModel.setUserId(userId) }
             })
+
+
 
             startActivity(intent)
 

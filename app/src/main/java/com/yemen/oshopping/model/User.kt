@@ -12,5 +12,7 @@ data class User(
     val block: Int =0, // ( 0 -> active ) ( 1 -> blocked)
     val admin: Int=0,
     val image: String?=null,
-    val created_at: String?=null
+    val created_at: String?=null,
+    val firebase_user_id:String?=null,
+    val firebase_user_name:String?=null
 )

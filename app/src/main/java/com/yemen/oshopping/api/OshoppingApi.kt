@@ -45,7 +45,9 @@ interface OshoppingApi {
         @Field("phone_number") phone_number: String?,
         @Field("details") details: String?,
         @Field("address") address: String?,
-        @Field("image") image: String?
+        @Field("image") image: String?,
+        @Field("firebase_user_id") firebase_user_id: String?,
+        @Field("firebase_user_name") firebase_user_name: String?
     ): Call<DefaultResponse>
 
     @FormUrlEncoded
