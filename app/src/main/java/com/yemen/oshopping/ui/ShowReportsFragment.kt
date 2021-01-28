@@ -1,6 +1,5 @@
 package com.yemen.oshopping.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,15 +20,34 @@ import com.yemen.oshopping.R
 import com.yemen.oshopping.model.ReportsDetails
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
+private const val ARG_PARAM1 = "option_id"
 
 class ShowReportsFragment : Fragment() {
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
 
+    private var param1: Int? = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        param1 = arguments?.getInt(ARG_PARAM1)
+        var arg1 = 0
+        var arg2 = 0
+
+        if (param1 == 0) {
+            arg1 = 0
+            arg2 = 0
+        } else if (param1 == 1) {
+            arg1 = 1
+            arg2 = 0
+        } else if (param1 == 2) {
+            arg1 = 0
+            arg2 = 1
+        }
         oshoppingViewModel =
             ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
+        oshoppingViewModel.getReportsDetails(listOf(arg1, arg2))
+        Log.d("ATAG", "onCreate: $param1")
     }
 
     override fun onCreateView(
@@ -43,9 +61,10 @@ class ShowReportsFragment : Fragment() {
         return view
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        oshoppingViewModel.reportsDetailsItemLiveData.observe(
+
+    override fun onStart() {
+        super.onStart()
+        oshoppingViewModel.reportsDetailsLiveData.observe(
             viewLifecycleOwner, Observer { reportsDetails ->
                 updateUI(reportsDetails)
             })
@@ -53,28 +72,42 @@ class ShowReportsFragment : Fragment() {
 
     private fun updateUI(reportsDetails: List<ReportsDetails>) {
         showProductRecyclerView.adapter = ShowProductAdapter(reportsDetails)
+        Log.d("fetchUser", "User fetched successfully ${reportsDetails}")
     }
 
     private inner class ShowReportHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private lateinit var reportsDetails: ReportsDetails
         private val againstTextView = itemView.findViewById(R.id.against_text_view) as TextView
-        private val NoOfReportsTV = itemView.findViewById(R.id.number_of_report_text_view) as TextView
+        private val NoOfReportsTV =
+            itemView.findViewById(R.id.number_of_report_text_view) as TextView
         private val reportDetailsBTN = itemView.findViewById(R.id.report_details_btn) as Button
-        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+
+        private lateinit var reportsDetails: ReportsDetails
+
+  var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
         val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
+      
+        fun bind(reportsDetailsItem: ReportsDetails) {
+            reportsDetails = reportsDetailsItem
         fun bind(reportsDetails: ReportsDetails) {
             mainLayout.startAnimation(translateAnimation)
             this.reportsDetails = reportsDetails
+
             againstTextView.text = reportsDetails.report_against
             NoOfReportsTV.text = reportsDetails.number_of_reports.toString()
             reportDetailsBTN.setOnClickListener {
-                ShowReportDetailsDialog.newInstance(reportsDetails.against,reportsDetails.report_against).apply {
+                ShowReportDetailsDialog.newInstance(
+                    reportsDetails.against,
+                    reportsDetails.report_against,
+                    param1
+                ).apply {
                     setTargetFragment(this@ShowReportsFragment, 0)
                     show(this@ShowReportsFragment.requireFragmentManager(), "Input")
-                  }
+                }
+
             }
         }
     }
+
 
     private inner class ShowProductAdapter(private val reportsDetails: List<ReportsDetails>) :
         RecyclerView.Adapter<ShowReportHolder>() {
@@ -97,8 +130,12 @@ class ShowReportsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): ShowReportsFragment {
-            return ShowReportsFragment()
+        fun newInstance(param1: Int): ShowReportsFragment {
+            return ShowReportsFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_PARAM1, param1)
+                }
+            }
         }
     }
 }

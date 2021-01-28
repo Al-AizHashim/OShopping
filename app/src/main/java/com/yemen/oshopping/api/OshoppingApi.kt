@@ -2,7 +2,6 @@ package com.yemen.oshopping.api
 
 
 import com.yemen.oshopping.model.DefaultResponse
-import com.yemen.oshopping.model.ProductReportsDetailsF
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -13,7 +12,9 @@ interface OshoppingApi {
     @POST("oshopping_api/api/category_api.php")
     fun postCategory(
         @Field("cat_name") cat_name: String,
-        @Field("category_image") category_image: String?): Call<DefaultResponse>
+        @Field("category_image") category_image: String?
+    ): Call<DefaultResponse>
+
     @FormUrlEncoded
     @POST("oshopping_api/api/report_api.php")
     fun postReport(@Field("report_name") report_name: String): Call<DefaultResponse>
@@ -111,18 +112,23 @@ interface OshoppingApi {
     fun fetchProduct(): Call<ProductResponse>
 
     @GET("oshopping_api/api/report_details_api.php")
-    fun fetchReportsDetails(): Call<ReportsDetailsResponce>
-
-
+    fun fetchReportsDetails(
+        @Query("block") block: Int,
+        @Query("checked") checked: Int
+    ): Call<ReportsDetailsResponce>
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUser(): Call<UserResponse>
 
-
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByCategory(@Query("cat_id") category_id: Int): Call<ProductResponse>
+
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByVendorId(@Query("vendor_id") vendor_id: Int): Call<ProductResponse>
+
+    @GET("/oshopping_api/api/product_api.php")
+    fun fetchProductByHide(@Query("hide") hied: Int): Call<ProductResponse>
+
     @GET("/oshopping_api/api/product_api.php")
     fun fetchProductById(@Query("product_id") product_id: Int): Call<ProductResponse>
 
@@ -132,7 +138,6 @@ interface OshoppingApi {
     @GET("oshopping_api/api/product_report_details_api.php")
     fun fetchProductReportByProductId(@Query("product_id") product_id: Int): Call<ProductReportDetailsResponse>
 
-    //fun fetchProductById(@Query("product_id") product_id: Int): Call<SingleProductResponse>
     @GET("oshopping_api/api/user_api.php")
     fun fetchUserById(@Query("user_id") user_id: Int): Call<SingleUserResponse>
 
@@ -142,18 +147,17 @@ interface OshoppingApi {
     @GET("oshopping_api/api/product_api.php")
     fun fetchProductByColor(@Query("color") color: String): Call<ProductResponse>
 
-   // @GET("oshopping_api/api/product_report_details_api.php")
-    //fun fetchCategory(): Call<CategoryResponse>
-
     @GET("oshopping_api/api/category_api.php")
     fun fetchCategory(): Call<CategoryResponse>
 
-
     @GET("oshopping_api/api/product_report_details_api.php")
-    fun fetchProductReportsDetails(): Call<ProductReportsDetailsResponse>
+    fun fetchProductReportsDetails(
+        @Query("hide") hide: Int,
+        @Query("checked") checked: Int
+    ): Call<ProductReportsDetailsResponse>
 
     @GET("oshopping_api/api/user_api.php")
-    fun fetchUsers(): Call<UserResponse>
+    fun fetchUsers(@Query("block") block: Int): Call<UserResponse>
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUser(@Query("user_id") user_id: Int): Call<UserResponse>
@@ -169,8 +173,6 @@ interface OshoppingApi {
 
     @GET("oshopping_api/api/user_api.php")
     fun fetchUserByEmail(@Query("email") email: String): Call<UserResponse>
-
-
 
 
     //put
@@ -211,30 +213,15 @@ interface OshoppingApi {
     @PUT("oshopping_api/api/user_api.php")
     fun blockUser(
         @Field("user_id") user_id: Int, @Field("block") block: Int,
-        @Field("admin_id") admin_id: Int
+        @Field("admin_id") admin_id: Int, @Field("checked") checked: Int
     ): Call<DefaultResponse>
 
     @FormUrlEncoded
     @PUT("oshopping_api/api/product_api.php")
     fun hideProduct(
         @Field("product_id") product_id: Int, @Field("hide") hide: Int,
-        @Field("user_id") user_id: Int
+        @Field("user_id") user_id: Int, @Field("checked") checked: Int
     ): Call<DefaultResponse>
-
-
-    @DELETE("oshopping_api/api/category_api.php")
-    fun deleteCategory(@Query("cat_id") cat_id: Int?
-    ): Call<DefaultResponse>
-
-    @DELETE("oshopping_api/api/report_api.php")
-    fun deleteReport(@Query("report_id") report_id: Int?
-    ): Call<DefaultResponse>
-
-    @DELETE("oshopping_api/api/cart_api.php")
-    fun deleteCart(@Query("cart_id") cart_id: Int?
-    ): Call<DefaultResponse>
-
-
 
     @FormUrlEncoded
     @PUT("oshopping_api/api/product_api.php")
@@ -247,11 +234,27 @@ interface OshoppingApi {
         @Field("cat_id") cat_id: Int,
         @Field("product_details") product_details: String,
         @Field("product_img") product_img: String?,
-       // @Field("product_date") product_date: String?,
+        // @Field("product_date") product_date: String?,
         @Field("product_quantity") product_quantity: Int,
         @Field("product_discount") product_discount: Int,
         @Field("color") color: String
 
+    ): Call<DefaultResponse>
+
+    //delete
+    @DELETE("oshopping_api/api/category_api.php")
+    fun deleteCategory(
+        @Query("cat_id") cat_id: Int?
+    ): Call<DefaultResponse>
+
+    @DELETE("oshopping_api/api/report_api.php")
+    fun deleteReport(
+        @Query("report_id") report_id: Int?
+    ): Call<DefaultResponse>
+
+    @DELETE("oshopping_api/api/cart_api.php")
+    fun deleteCart(
+        @Query("cart_id") cart_id: Int?
     ): Call<DefaultResponse>
 
 }

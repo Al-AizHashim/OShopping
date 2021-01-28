@@ -9,7 +9,9 @@
     android:layout_gravity="center"
     android:layout_margin="30dp">
 
+
     <androidx.cardview.widget.CardView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
@@ -43,6 +45,8 @@
 
 
 
+
+
                 <Button
                     android:id="@+id/action_report_button"
                     android:layout_width="match_parent"
@@ -53,18 +57,23 @@
                     android:text="Submit"
                     android:textColor="@color/colorWhite" />
 
-                <Button
-                    android:id="@+id/ignore_report_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
-                    android:text="checked"
-                    android:background="@drawable/button_shap_white_stroke"
-                    android:textColor="@color/colorGray" />
             <Button
                 android:id="@+id/cancel_report_button"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_nav"
+                android:text="cancel"
+                android:textColor="#fff" />
+            <Button
+                android:id="@+id/ignore_report_button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_nav"
+                android:text="cancel"
+                android:textColor="#fff" />
+
                 android:layout_margin="8dp"
                 android:text="Cancel"
                 android:background="@drawable/button_shap_white_stroke"

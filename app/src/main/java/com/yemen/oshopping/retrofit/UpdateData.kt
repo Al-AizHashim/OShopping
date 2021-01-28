@@ -25,17 +25,22 @@ class UpdateData {
     fun blockUser(blockUser: BlockUser) {
         updateMetaData(
             RetrofitClient().oshoppingApi
-                .blockUser(blockUser.user_id, blockUser.block, blockUser.admin_id)
+                .blockUser(
+                    blockUser.user_id,
+                    blockUser.block,
+                    blockUser.admin_id,
+                    blockUser.checked
+                )
         )
     }
 
     fun hideProduct(product: HideProduct) {
+        Log.d("TTT", "hideProduct:$product ")
         updateMetaData(
             RetrofitClient().oshoppingApi
-                .hideProduct(product.product_id,product.hide,product.user_id)
+                .hideProduct(product.product_id, product.hide, product.user_id, product.checked)
         )
     }
-
 
 
     fun updateMetaData(updateRequest: Call<DefaultResponse>) {
@@ -91,20 +96,21 @@ class UpdateData {
     }
 
     fun updateProduct(p: ProductDetails) {
-        val updateProductRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.updateProduct(
-            p.product_id,
-            p.product_name,
-            p.yrial_price,
-            p.dollar_price,
-            p.vendor_id,
-            p.cat_id,
-            p.product_details,
-            p.product_img,
-           // p.product_date,
-            p.product_quantity,
-            p.product_discount,
-            p.color
-        )
+        val updateProductRequest: Call<DefaultResponse> =
+            RetrofitClient().oshoppingApi.updateProduct(
+                p.product_id,
+                p.product_name,
+                p.yrial_price,
+                p.dollar_price,
+                p.vendor_id,
+                p.cat_id,
+                p.product_details,
+                p.product_img,
+                // p.product_date,
+                p.product_quantity,
+                p.product_discount,
+                p.color
+            )
 
         updateProductRequest.enqueue(object : Callback<DefaultResponse> {
 

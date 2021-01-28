@@ -36,7 +36,7 @@ class AdminFragment : Fragment() {
 
         showProdcutReportsDetailsTV = view.findViewById(R.id.show_product_report_tv)
 
-        close=view.findViewById(R.id.bt_close)
+        close = view.findViewById(R.id.bt_close)
 
 
         showCategoryTV.setOnClickListener {
@@ -50,17 +50,19 @@ class AdminFragment : Fragment() {
 
         showReportsDetailsTV.setOnClickListener {
             Navigation.findNavController(view)
-                .navigate(R.id.action_adminFragment_to_showReportsFragment)
+                .navigate(R.id.action_adminFragment_to_showUsersReportsActivity)
         }
         close.setOnClickListener {
             activity?.onBackPressed()
         }
 
         showProdcutReportsDetailsTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_adminFragment_to_showProductReportsFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_adminFragment_to_showProductsReportsActivity)
         }
         showUsersTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_adminFragment_to_showUsersfragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_adminFragment_to_showUsersActivity)
         }
         return view
     }
