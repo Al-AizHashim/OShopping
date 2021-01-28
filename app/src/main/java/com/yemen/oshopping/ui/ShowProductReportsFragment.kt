@@ -15,15 +15,33 @@ import com.yemen.oshopping.R
 import com.yemen.oshopping.model.ProductReportsDetailsF
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
-
+private const val ARG_PARAM1="option"
 class ShowProductReportsFragment : Fragment() {
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
-
+    private var param1:Int? =0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        param1 = arguments?.getInt(ARG_PARAM1)
+        var arg1=0
+        var arg2=0
+
+        if(param1==0){
+            arg1=0
+            arg2=0
+        }
+        else if(param1==1){
+            arg1=1
+            arg2=0
+        }
+        else if (param1==2)
+        {
+            arg1=0
+            arg2=1
+        }
         oshoppingViewModel =
             ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
+                    oshoppingViewModel.getProductReportsDetails(listOf(arg1,arg2))
     }
 
     override fun onCreateView(
@@ -63,7 +81,7 @@ class ShowProductReportsFragment : Fragment() {
             productTV.text = productReportsDetails.product_name
             NoOfReportsTV.text = productReportsDetails.number_of_reports.toString()
             reportDetailsBTN.setOnClickListener {
-                ShowProductReportsDialog.newInstance(productReportsDetails.product_id,productReportsDetails.product_name).apply {
+                ShowProductReportsDialog.newInstance(productReportsDetails.product_id,productReportsDetails.product_name,param1).apply {
                     setTargetFragment(this@ShowProductReportsFragment, 0)
                     show(this@ShowProductReportsFragment.requireFragmentManager(), "Input")
                 }
@@ -92,8 +110,12 @@ class ShowProductReportsFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): ShowReportsFragment {
-            return ShowReportsFragment()
+        fun newInstance(param1 :Int): ShowProductReportsFragment{
+            return ShowProductReportsFragment().apply {
+                arguments=Bundle().apply {
+                    putInt(ARG_PARAM1,param1)
+                }
+            }
         }
     }
 }

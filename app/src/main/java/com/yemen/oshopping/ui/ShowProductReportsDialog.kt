@@ -19,6 +19,7 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 private const val ARG_PARAM1 = "user_id"
 private const val ARG_PARAM2 = "user_name"
+private const val ARG_PARAM3 = "option"
 
 class ShowProductReportsDialog : DialogFragment() {
     private var adapter: ReportAdapter = ReportAdapter(emptyList())
@@ -27,8 +28,10 @@ class ShowProductReportsDialog : DialogFragment() {
     lateinit var hideBTN: Button
     lateinit var DialogTiTleTV: TextView
     lateinit var canceltBTN: Button
+    lateinit var ignoreBTN: Button
     private var param1: Int = 0
     private var param2: String =""
+    private var param3: Int =0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +39,8 @@ class ShowProductReportsDialog : DialogFragment() {
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+            param3 = it.getInt(ARG_PARAM3)
+
 
         }
         oshoppingViewModel =
@@ -54,14 +59,56 @@ class ShowProductReportsDialog : DialogFragment() {
         ReportRecyclerView.adapter = adapter
         hideBTN = view.findViewById(R.id.action_report_button)
         canceltBTN = view.findViewById(R.id.cancel_report_button)
+        ignoreBTN = view.findViewById(R.id.ignore_report_button)
         DialogTiTleTV = view.findViewById(R.id.report_dialog_title)
         DialogTiTleTV.text = param2
-        hideBTN.setText("HIDE")
+        if (param3==0){
+            hideBTN.text = "HIDE PRODUCT"
+            ignoreBTN.text="Checked"
+        }
+        else if (param3==1)
+        {
+            hideBTN.text = "UNHIDE PRODUCT"
+            ignoreBTN.visibility=View.GONE
+
+        }
+        else if (param3==2)
+        {
+            hideBTN.text = "HIDE PRODUCT"
+            ignoreBTN.text="UNCHECKED"
+
+        }
         hideBTN.setOnClickListener {
-            var productItem= HideProduct(product_id = param1,hide = 1,user_id = 2)
-            oshoppingViewModel.hideProduct(productItem)
-            Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT)
-                .show()
+            if (param3==0){
+                var hideProduct = HideProduct(product_id = param1, hide = 1, user_id = 2,checked = 0)
+                oshoppingViewModel.hideProduct(hideProduct)
+            }
+            else if (param3==1)
+            {
+                var hideProduct = HideProduct(product_id = param1, hide = 0, user_id = 2,checked = 0)
+                oshoppingViewModel.hideProduct(hideProduct)
+            }
+            else if (param3==2) {
+                var hideProduct = HideProduct(product_id = param1, hide = 1, user_id = 2,checked = 0)
+                oshoppingViewModel.hideProduct(hideProduct)
+            }
+            Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT).show()
+            dialog?.dismiss()
+        }
+        ignoreBTN.setOnClickListener{
+            if (param3==0){
+                var hideProduct = HideProduct(product_id = param1, hide = 0, user_id = 2,checked = 1)
+                oshoppingViewModel.hideProduct(hideProduct)
+                Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT).show()
+            }
+            else if (param3==1)
+            {
+            }
+            else if (param3==2) {
+                var hideProduct = HideProduct(product_id = param1, hide = 0, user_id = 2,checked = 0)
+                oshoppingViewModel.hideProduct(hideProduct)
+                Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT).show()
+            }
             dialog?.dismiss()
         }
         canceltBTN.setOnClickListener {
@@ -125,10 +172,11 @@ class ShowProductReportsDialog : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: Int,param2 :String) = ShowProductReportsDialog().apply {
+        fun newInstance(param1: Int,param2 :String,param3 :Int?) = ShowProductReportsDialog().apply {
             arguments = Bundle().apply {
                 putInt(ARG_PARAM1, param1)
                 putString(ARG_PARAM2, param2)
+                putInt(ARG_PARAM3, param3!!)
             }
         }
     }
