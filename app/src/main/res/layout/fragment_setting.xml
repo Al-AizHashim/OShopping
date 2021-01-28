@@ -96,7 +96,7 @@
             app:cardCornerRadius="24dp">
 
             <ImageView
-                android:id="@+id/my_products"
+                android:id="@+id/my_productss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -138,7 +138,7 @@
             app:cardCornerRadius="24dp">
 
             <ImageView
-                android:id="@+id/about_us"
+                android:id="@+id/about_uss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -180,7 +180,7 @@
             app:cardCornerRadius="24dp">
 
             <ImageView
-                android:id="@+id/contact_us"
+                android:id="@+id/contact_uss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -222,7 +222,7 @@
             app:cardCornerRadius="24dp">
 
             <ImageView
-                android:id="@+id/chat"
+                android:id="@+id/chats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -247,6 +247,7 @@
         android:layout_height="160dp"
         android:layout_marginTop="416dp"
         android:backgroundTint="@color/colorPrimary"
+        android:visibility="gone"
         app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.736"
@@ -264,7 +265,7 @@
             app:cardCornerRadius="24dp">
 
             <ImageView
-                android:id="@+id/sign_out"
+                android:id="@+id/sign_outxx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -273,7 +274,7 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/sign_out_tv"
+            android:id="@+id/sign_out_tvx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -293,6 +294,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_shape2"
         android:text="Sign up"
+        android:visibility="gone"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -305,7 +307,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/custom_shape3"
         android:gravity="center"
         android:text="Sign Out"

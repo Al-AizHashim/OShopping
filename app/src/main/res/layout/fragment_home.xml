@@ -84,7 +84,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/Trend"
                 android:textColor="@color/colorWhite"
-                android:background="@drawable/button_shap_white"
+                android:backgroundTint="@color/custom_button_color"
+
+                android:background="@drawable/shape_nav"
                 android:textSize="12sp" />
 
             <Button
@@ -94,7 +96,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
                 android:textColor="@color/colorWhite"
-                android:background="@drawable/button_shap_white"
+                android:background="@drawable/shape_nav"
+                android:backgroundTint="@color/custom_button_color"
                 android:text="@string/category"
                 android:textSize="12sp" />
 
@@ -105,7 +108,8 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:textColor="@color/colorWhite"
-                android:background="@drawable/button_shap_white"
+                android:background="@drawable/shape_nav"
+                android:backgroundTint="@color/custom_button_color"
                 android:text="@string/color"
                 android:textSize="12sp" />
 
@@ -117,6 +121,7 @@
                 android:textColor="@color/colorWhite"
                 android:background="@drawable/button_shap_white"
                 android:text="@string/vendor"
+                android:visibility="gone"
                 android:textSize="12sp" />
 
             <!--
@@ -150,7 +155,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
                 android:textColor="@color/colorWhite"
-                android:background="@drawable/button_shap_white"
+                android:background="@drawable/shape_nav"
+                android:backgroundTint="@color/custom_button_color"
                 android:text="Highest rate"
                 android:textSize="12sp" />
         </LinearLayout>
