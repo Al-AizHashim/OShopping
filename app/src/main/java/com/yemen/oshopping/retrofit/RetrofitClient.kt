@@ -1,6 +1,7 @@
 package com.yemen.oshopping.retrofit
 
 import com.google.gson.GsonBuilder
+import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.api.OshoppingApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,7 +17,7 @@ class RetrofitClient {
 
 
 
-            .baseUrl("http://192.168.1.3/")
+            .baseUrl(MainActivity.BASE_LOCAL_HOST_URI)
 
 
 

@@ -220,6 +220,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                 product_discount = productItemss.product_discount,
                 color = productItemss.color
             )
+            oshoppingViewModel.pushCart(cart)
             Log.d("pushtocart", "the contint of cart is :$cart")
             var imageUri: String
             list = productItemss.product_img.split(delim)
