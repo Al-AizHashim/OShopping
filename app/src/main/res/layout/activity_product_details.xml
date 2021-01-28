@@ -86,6 +86,7 @@
                             android:layout_marginTop="@dimen/spacing_medium"
                             android:layout_marginBottom="3dp"
                             android:text="YShop"
+                            android:textStyle="italic"
                             android:textAppearance="@style/TextAppearance.AppCompat.Small"
                             android:textColor="@color/colorWhite" />
                         <View
@@ -243,13 +244,13 @@
                             android:layout_height="?attr/actionBarSize"
                             android:background="@android:color/transparent"
                             android:tint="@color/grey_60"
-                            app:srcCompat="@drawable/ic_chat" />
+                            app:srcCompat="@drawable/ic_address_card_regular" />
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Reviews"
+                            android:text="Vendor Info"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/grey_80" />
 
@@ -276,170 +277,51 @@
                         android:orientation="vertical"
                         android:visibility="gone">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_smlarge"
-                            android:layout_marginLeft="?attr/actionBarSize"
-                            android:layout_marginRight="@dimen/spacing_smlarge"
-                            android:layout_marginStart="?attr/actionBarSize"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_mxlarge"
-                            android:orientation="horizontal">
 
-                            <RatingBar
-                                style="@style/Yellow.Small.AppCompatRatingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:numStars="5"
-                                android:rating="4.0"
-                                android:stepSize="1"
-                                android:theme="@style/Yellow.Small.AppCompatRatingBar" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/vendor_profile"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_middle"
-                                android:layout_marginStart="@dimen/spacing_middle"
+                                android:layout_marginLeft="@dimen/spacing_xxxlarge"
+                                android:layout_marginStart="@dimen/spacing_xxxlarge"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="Adams Green"
+                                android:text="Vendor Profile"
+                                android:drawableStart="@drawable/ic_baseline_person_24"
+                                android:drawableTint="@color/grey_60"
+                                android:drawablePadding="16dp"
+                                android:padding="@dimen/spacing_large"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-                        </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_smlarge"
-                            android:layout_marginLeft="?attr/actionBarSize"
-                            android:layout_marginRight="@dimen/spacing_smlarge"
-                            android:layout_marginStart="?attr/actionBarSize"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_mxlarge"
-                            android:orientation="horizontal">
 
-                            <androidx.appcompat.widget.AppCompatRatingBar
-                                style="@style/Yellow.Small.AppCompatRatingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:numStars="5"
-                                android:rating="5.0"
-                                android:stepSize="1"
-                                android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+
+
+
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/vendor_chat"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_middle"
-                                android:layout_marginStart="@dimen/spacing_middle"
+                                android:layout_marginLeft="@dimen/spacing_xxxlarge"
+                                android:layout_marginStart="@dimen/spacing_xxxlarge"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="Anderson Thomas"
+                                android:text="  Chat"
+                                android:drawableStart="@drawable/ic_chat"
+                                android:drawableTint="@color/grey_60"
+                                android:drawablePadding="16dp"
+                                android:padding="@dimen/spacing_large"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-                        </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_smlarge"
-                            android:layout_marginLeft="?attr/actionBarSize"
-                            android:layout_marginRight="@dimen/spacing_smlarge"
-                            android:layout_marginStart="?attr/actionBarSize"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_mxlarge"
-                            android:orientation="horizontal">
 
-                            <androidx.appcompat.widget.AppCompatRatingBar
-                                style="@style/Yellow.Small.AppCompatRatingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:numStars="5"
-                                android:rating="5.0"
-                                android:stepSize="1"
-                                android:theme="@style/Yellow.Small.AppCompatRatingBar" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_middle"
-                                android:layout_marginStart="@dimen/spacing_middle"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Roberts Turner"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
-                        </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_smlarge"
-                            android:layout_marginLeft="?attr/actionBarSize"
-                            android:layout_marginRight="@dimen/spacing_smlarge"
-                            android:layout_marginStart="?attr/actionBarSize"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_mxlarge"
-                            android:orientation="horizontal">
 
-                            <androidx.appcompat.widget.AppCompatRatingBar
-                                style="@style/Yellow.Small.AppCompatRatingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:numStars="5"
-                                android:rating="4.5"
-                                android:stepSize="0.5"
-                                android:theme="@style/Yellow.Small.AppCompatRatingBar" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_middle"
-                                android:layout_marginStart="@dimen/spacing_middle"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Evans Collins"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/spacing_smlarge"
-                            android:layout_marginLeft="?attr/actionBarSize"
-                            android:layout_marginRight="@dimen/spacing_smlarge"
-                            android:layout_marginStart="?attr/actionBarSize"
-                            android:gravity="center_vertical"
-                            android:minHeight="@dimen/spacing_mxlarge"
-                            android:orientation="horizontal">
-
-                            <androidx.appcompat.widget.AppCompatRatingBar
-                                style="@style/Yellow.Small.AppCompatRatingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:clickable="false"
-                                android:numStars="5"
-                                android:rating="5.0"
-                                android:stepSize="1"
-                                android:theme="@style/Yellow.Small.AppCompatRatingBar" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_middle"
-                                android:layout_marginStart="@dimen/spacing_middle"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="Garcia Lewis"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
-
-                        </LinearLayout>
 
                     </LinearLayout>
 
