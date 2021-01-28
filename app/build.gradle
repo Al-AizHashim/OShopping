@@ -78,6 +78,7 @@ dependencies {
     implementation 'com.synnapps:carouselview:0.1.5'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation 'com.balysv:material-ripple:1.0.2'
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'
 
 
 }

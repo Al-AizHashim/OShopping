@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Profile"
+        android:text="Update Profile"
         android:textColor="#fff"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -51,7 +51,6 @@
         android:layout_height="500dp"
         android:background="@drawable/layoutback_ground"
         android:padding="12dp"
-
         android:paddingBottom="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,25 +134,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/address_edit_text" />
 
+
         <Button
             android:id="@+id/updateUserBtn"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/shape_nav"
-            android:clickable="true"
-            android:enabled="true"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:background="@drawable/btn_rounded_primary"
             android:text="Update"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/details_edit_text" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

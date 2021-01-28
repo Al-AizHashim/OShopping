@@ -68,7 +68,6 @@
         android:id="@+id/horizontalScrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
@@ -76,12 +75,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingStart="14dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/trend_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/spacing_large"
                 android:backgroundTint="@color/custom_button_color"
                 android:text="@string/Trend"
                 android:textColor="@color/custom_button_text_color"
@@ -90,10 +91,10 @@
 
             <Button
                 android:id="@+id/category_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="4dp"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/spacing_large"
+
                 android:background="@drawable/button_shap_white"
                 android:backgroundTint="@color/custom_button_color"
                 android:textColor="@color/custom_button_text_color"
@@ -102,10 +103,9 @@
 
             <Button
                 android:id="@+id/color_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="@dimen/spacing_large"
                 android:background="@drawable/button_shap_white"
                 android:backgroundTint="@color/custom_button_color"
                 android:textColor="@color/custom_button_text_color"
@@ -117,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
+                android:visibility="gone"
                 android:background="@drawable/button_shap_white"
                 android:backgroundTint="@color/custom_button_color"
                 android:textColor="@color/custom_button_text_color"
@@ -153,6 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
+                android:visibility="gone"
                 android:background="@drawable/button_shap_white"
                 android:backgroundTint="@color/custom_button_color"
                 android:textColor="@color/custom_button_text_color"
@@ -164,7 +166,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/show_product_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="510dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

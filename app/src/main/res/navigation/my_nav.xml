@@ -58,6 +58,9 @@
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
         <action
+            android:id="@+id/action_settingFragment_to_showVendorFragment"
+            app:destination="@id/showVendorFragment" />
+        <action
             android:id="@+id/action_settingFragment_to_showUserFragment"
             app:destination="@id/showUserFragment" />
     </fragment>
@@ -167,14 +170,22 @@
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left"/>
         <action
-            android:id="@+id/action_adminFragment_to_showUsersReportsActivity"
-            app:destination="@id/showUsersReports" />
+            android:id="@+id/action_adminFragment_to_showReportsFragment"
+            app:destination="@id/showReportsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
-            android:id="@+id/action_adminFragment_to_showUsersActivity"
-            app:destination="@id/showUsersActivity" />
+            android:id="@+id/action_adminFragment_to_showProductReportsFragment"
+            app:destination="@id/showProductReportsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
-            android:id="@+id/action_adminFragment_to_showProductsReportsActivity"
-            app:destination="@id/showProductsReportsActivity" />
+            android:id="@+id/action_adminFragment_to_showUsersfragment"
+            app:destination="@id/showUsersfragment" />
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
@@ -299,19 +310,72 @@
         android:name="com.yemen.oshopping.Chat.activity.UsersActivity"
         android:label="UsersActivity" />
     <fragment
+        android:id="@+id/showReportsFragment"
+        android:name="com.yemen.oshopping.ui.ShowReportsFragment"
+        android:label="fragment_show_reports"
+        tools:layout="@layout/fragment_show_reports" />
+    <fragment
+        android:id="@+id/showVendorFragment"
+        android:name="com.yemen.oshopping.ui.ShowVendorFragment"
+        android:label="ShowVendorFragment" />
+    <fragment
+        android:id="@+id/showProductReportsFragment"
+        android:name="com.yemen.oshopping.ui.ShowProductReportsFragment"
+        android:label="ShowProductReportsFragment" />
+    <fragment
         android:id="@+id/showUserFragment"
         android:name="com.yemen.oshopping.setting.ShowUserFragment"
         android:label="ShowUserFragment" />
-    <activity
-        android:id="@+id/showUsersReports"
-        android:name="com.yemen.oshopping.ui.ShowUsersReportsActivity"
-        android:label="ShowUsersReports" />
-    <activity
-        android:id="@+id/showUsersActivity"
-        android:name="com.yemen.oshopping.ui.ShowUsersActivity"
-        android:label="ShowUsersActivity" />
-    <activity
-        android:id="@+id/showProductsReportsActivity"
-        android:name="com.yemen.oshopping.ui.ShowProductsReportsActivity"
-        android:label="ShowProductsReportsActivity" />
+
+        <action
+            android:id="@+id/action_showUserFragment_to_updateUserFragment"
+            app:destination="@id/updateUserFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateUserFragment"
+        android:name="com.yemen.oshopping.setting.UpdateUserFragment"
+        android:label="UpdateUserFragment" >
+        <action
+            android:id="@+id/action_updateUserFragment_to_showUserFragment"
+            app:destination="@id/showUserFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+        <argument
+            android:name="first_name "
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="last_name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="phone_number"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="details"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="user_id"
+            app:argType="integer" />
+        <argument
+            android:name="address"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>
