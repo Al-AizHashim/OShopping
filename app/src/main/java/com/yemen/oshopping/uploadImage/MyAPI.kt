@@ -1,5 +1,6 @@
 package com.yemen.oshopping.uploadImage
 
+import com.yemen.oshopping.MainActivity
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -21,7 +22,7 @@ interface MyAPI {
     companion object {
         operator fun invoke(): MyAPI {
             return Retrofit.Builder()
-                .baseUrl("http://192.168.1.4/")
+                .baseUrl(MainActivity.BASE_LOCAL_HOST_URI)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyAPI::class.java)

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainScreen">
+    tools:context=".MainScreen"
+    android:background="@color/colorBackground">
 
 
 
@@ -30,7 +31,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/button_shape_no_stroke"
+        android:background="@drawable/shape_nav"
         app:itemIconTint="@color/colorWhite"
         app:itemTextColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"

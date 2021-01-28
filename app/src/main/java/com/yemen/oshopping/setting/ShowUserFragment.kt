@@ -10,7 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.yemen.oshopping.R
+import com.yemen.oshopping.admin.ShowReportFragmentDirections
 import com.yemen.oshopping.model.User
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
@@ -23,13 +25,12 @@ class ShowUserFragment : Fragment() {
     lateinit var editImageBTN:ImageButton
     lateinit var chatImageBTN:ImageButton
     lateinit var user: User
-    private var param1: Int = 1
     private lateinit var oshoppingViewModel: OshoppingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
-        oshoppingViewModel.getUserById(param1)
+        oshoppingViewModel.getUserById(oshoppingViewModel.getStoredUserId())
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +46,19 @@ class ShowUserFragment : Fragment() {
         editImageBTN=view.findViewById(R.id.edit_image_button)
         chatImageBTN=view.findViewById(R.id.chat_image_button)
         editImageBTN.setOnClickListener {
+            val action=
+                user.user_id?.let { it1 ->
+                    ShowUserFragmentDirections.actionShowUserFragmentToUpdateUserFragment(userId = it1,firstName =user.first_name,
+                        lastName = user.last_name,email = user.email,phoneNumber = user.phone_number,
+                        image = user.image,details =  user.details,address=user.address)
 
-        }
+                }
+                if (action != null) {
+                    Navigation.findNavController(view)
+                        .navigate(action)
+                }
+            }
+
         chatImageBTN.setOnClickListener {
 
         }

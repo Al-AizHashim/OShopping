@@ -3,7 +3,7 @@
 
     <string name="hello">Hello</string>
     <string name="welcome">What would you like to buy?</string>
-    <string name="Trend">Trend</string>
+    <string name="Trend">All</string>
     <string name="category">Category</string>
     <string name="color">Color</string>
     <string name="vendor">Vendor</string>
@@ -66,9 +66,16 @@
     <string name="remeberMe">remember me</string>
     <string name="log_in">Log in</string>
     <string name="show_categories">show categories</string>
-    <string name="show_reports">Show reports</string>
+    <string name="show_users_reports">Show users reports</string>
+    <string name="show_products_reports">Show products reports</string>
+    <string name="show_users">Show users</string>
+    <string name="add_reports">Add reports</string>
     <string name="show_reports_details">Show reports details</string>
     <string name="admin">Admin</string>
+    <string name="produt_raidoBtn_first">aaa</string>
+    <string name="produt_raidoBtn_second">bbb</string>
+    <string name="produt_raidoBtn_third">ccc</string>
+
     <string name="activ">Selling and Purchase Operations</string>
     <string name="quantity">1</string>
     <string name="save">save</string>
@@ -79,5 +86,14 @@
     <string name="NameUser">user name</string>
     <string name="MyProfile">My Profile</string>
 
+    <string name="categoryName">Category Name</string>
+    <string name="productDetailsText">"product Details Text Text Text product Details Text product Details Text product Details Text product Details   "</string>
+
+
+    <string name="furniture_store_is_an_e_commerce_application_where_you_can_display_your_products_for_sale_and_through_it_users_can_communicate_with_you_for_purchase_the_application_has_many_advantages_where_you_can_communicate_via_chat_with_the_seller_and_receive_new_offers_you_can_also_evaluate_the_products_through_it_and_add_them_to_the_cart_this_is_with_the_furniture_store_app">Furniture Store is an e-commerce application where you can display your products for sale and through it users can communicate with you for purchase. The application has many advantages where you can communicate via chat with the seller and receive new offers. You can also evaluate the products through it and add them to the cart. This is with the Furniture Store app</string>
+
+
+    <string name="description">Handcrafted for beauty and strength. - Natural, handcrafted CASTLECREEK Cedar Log Twin Bed is made from Northern White Cedar logs. Sturdy. Handsome. Distinctive. Just what you need to add natural warmth to your bedroom, at home, or at the cabin. All pieces are sanded smooth to provide enduring beauty, ready to finish or left to age naturally and gracefully. When it all comes together, </string>
+    <string name="find_furn">Find the best Furniture!</string>
 
 </resources>

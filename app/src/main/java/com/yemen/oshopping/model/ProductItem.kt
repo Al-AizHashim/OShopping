@@ -17,5 +17,11 @@ data class ProductItem(
     var product_discount: Int,
     var rating_average:Float,
     var number_of_ratings:Int,
-    var color:String ="black"
+    var color:String ="black",
+    var hide:Int =0,
+    var number_of_reports:Int,
+    var first_name: String,
+    var last_name: String,
+    var firebase_user_id: String?,
+    var firebase_user_name: String?
 )

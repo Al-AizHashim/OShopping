@@ -19,9 +19,10 @@ class FetchData {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProduct())
     }
 
-    fun fetchReportsDetails(): LiveData<List<ReportsDetails>> {
+    fun fetchReportsDetails(block :Int ,checked:Int): LiveData<List<ReportsDetails>> {
+        Log.d("RRTAG", "fetchReportsDetails: $block and $checked")
         val responseLiveData: MutableLiveData<List<ReportsDetails>> = MutableLiveData()
-        var categoryRequest: Call<ReportsDetailsResponce> = RetrofitClient().oshoppingApi.fetchReportsDetails()
+        var categoryRequest: Call<ReportsDetailsResponce> = RetrofitClient().oshoppingApi.fetchReportsDetails(block,checked)
         categoryRequest.enqueue(object : Callback<ReportsDetailsResponce> {
 
             override fun onFailure(call: Call<ReportsDetailsResponce>, t: Throwable) {
@@ -161,7 +162,7 @@ class FetchData {
         return responseLiveData
     }
     fun fetchReportDetailsByUserId(against: Int): LiveData<List<ReportDetails>> {
-        Log.d("TAGdd", "fetchUserById: ss")
+        Log.d("TAGdd", "fetchUserById: ss $against")
         val responseLiveData: MutableLiveData<List<ReportDetails>> = MutableLiveData()
         val NewsRequest =
             RetrofitClient().oshoppingApi.fetchReportDetailsByUserId(against)
@@ -186,12 +187,39 @@ class FetchData {
         return responseLiveData
     }
 
+    fun fetchProductReportDetailsByProductId(product_id: Int): LiveData<List<ProductReportDetailsF>> {
+        val responseLiveData: MutableLiveData<List<ProductReportDetailsF>> = MutableLiveData()
+        val NewsRequest =
+            RetrofitClient().oshoppingApi.fetchProductReportByProductId(product_id)
+        NewsRequest.enqueue(object : Callback<ProductReportDetailsResponse> {
+            override fun onFailure(call: Call<ProductReportDetailsResponse>, t: Throwable) {
+                Log.e("fetch product reports", "Failed to fetch product report Details", t)
+
+            }
+
+            override fun onResponse(
+                call: Call<ProductReportDetailsResponse>,
+                response: Response<ProductReportDetailsResponse>
+            ) {
+                val productReportDetailsResponce: ProductReportDetailsResponse? = response.body()
+                val productReportDetails: List<ProductReportDetailsF>? = productReportDetailsResponce?.productReportItem
+                responseLiveData.value = productReportDetails
+                Log.d("onResponse", "onResponse:gfgfgfg $productReportDetails")
+
+            }
+        })
+
+        return responseLiveData
+    }
     fun fetchProductByCategory(category_id: Int): LiveData<List<ProductItem>> {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByCategory(category_id))
     }
 
     fun fetchProductByVendorId(vendorId: Int): LiveData<List<ProductItem>> {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByVendorId(vendorId))
+    }
+    fun fetchProductByHide(hide: Int): LiveData<List<ProductItem>> {
+        return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByVendorId(hide))
     }
 
     fun searchProduct(query: String): LiveData<List<ProductItem>> {
@@ -249,102 +277,124 @@ class FetchData {
                 responseLiveData.value = categoryItems
             }
         })
-
         return responseLiveData
     }
+        fun fetchProductReportsDetails(hide:Int ,checked:Int): LiveData<List<ProductReportsDetailsF>> {
+            val responseLiveData: MutableLiveData<List<ProductReportsDetailsF>> = MutableLiveData()
+            var categoryRequest: Call<ProductReportsDetailsResponse> =
+                RetrofitClient().oshoppingApi.fetchProductReportsDetails(hide,checked)
+            categoryRequest.enqueue(object : Callback<ProductReportsDetailsResponse> {
 
-    fun fetchReport(): LiveData<List<Report>> {
-        val responseLiveData: MutableLiveData<List<Report>> = MutableLiveData()
-        val reportRequest: Call<ReportResponse> = RetrofitClient().oshoppingApi.fetchReport()
-        reportRequest.enqueue(object : Callback<ReportResponse> {
-
-            override fun onFailure(call: Call<ReportResponse>, t: Throwable) {
-                Log.d("fetchReport", "Failed to fetch Reports", t)
-            }
-
-            override fun onResponse(
-                call: Call<ReportResponse>,
-                response: Response<ReportResponse>
-            ) {
-                Log.d("fetchReport", "Reports received successfully")
-                val reportResponse: ReportResponse? = response.body()
-                val reportItems: List<Report> = reportResponse?.reportItem
-                    ?: mutableListOf()
-                responseLiveData.value = reportItems
-            }
-        })
-
-        return responseLiveData
-    }
-
-
-    fun fetchActivitiesMetaData(activityRequest: Call<ActivityResponse>): LiveData<List<ActivityItem>> {
-
-        val responseLiveData: MutableLiveData<List<ActivityItem>> = MutableLiveData()
-
-        activityRequest.enqueue(object : Callback<ActivityResponse> {
-
-            override fun onFailure(call: Call<ActivityResponse>, t: Throwable) {
-                Log.d("fetchActivity", "Failed to fetch Product", t)
-            }
-
-            override fun onResponse(
-                call: Call<ActivityResponse>,
-                response: Response<ActivityResponse>
-            ) {
-                Log.d("fetchActivity", "Response received successfully")
-                val ActivityResponse: ActivityResponse? = response.body()
-                val activityItems: List<ActivityItem> = ActivityResponse?.activItem
-                    ?: mutableListOf()
-                responseLiveData.value = activityItems
-                Log.d("fetchActivity", "onResponse: $activityItems")
+                override fun onFailure(call: Call<ProductReportsDetailsResponse>, t: Throwable) {
+                    Log.d(TAG, "Failed to fetch Category", t)
                 }
-        })
-       return responseLiveData
+
+                override fun onResponse(
+                    call: Call<ProductReportsDetailsResponse>,
+                    response: Response<ProductReportsDetailsResponse>
+                ) {
+                    Log.d(TAG, "Response received successfully")
+                    val productReportsDetails: ProductReportsDetailsResponse? = response.body()
+                    val productReports: List<ProductReportsDetailsF> =
+                        productReportsDetails?.productReportsItem
+                            ?: mutableListOf()
+                    Log.d("HHH", "Response received successfully$productReports")
+                    responseLiveData.value = productReports
+                }
+            })
+
+            return responseLiveData
+        }
+
+        fun fetchReport(): LiveData<List<Report>> {
+            val responseLiveData: MutableLiveData<List<Report>> = MutableLiveData()
+            val reportRequest: Call<ReportResponse> = RetrofitClient().oshoppingApi.fetchReport()
+            reportRequest.enqueue(object : Callback<ReportResponse> {
+
+                override fun onFailure(call: Call<ReportResponse>, t: Throwable) {
+                    Log.d("fetchReport", "Failed to fetch Reports", t)
+                }
+
+                override fun onResponse(
+                    call: Call<ReportResponse>,
+                    response: Response<ReportResponse>
+                ) {
+                    Log.d("fetchReport", "Reports received successfully")
+                    val reportResponse: ReportResponse? = response.body()
+                    val reportItems: List<Report> = reportResponse?.reportItem
+                        ?: mutableListOf()
+                    responseLiveData.value = reportItems
+                }
+            })
+
+            return responseLiveData
+        }
+
+
+        fun fetchActivitiesMetaData(activityRequest: Call<ActivityResponse>): LiveData<List<ActivityItem>> {
+
+            val responseLiveData: MutableLiveData<List<ActivityItem>> = MutableLiveData()
+
+            activityRequest.enqueue(object : Callback<ActivityResponse> {
+
+                override fun onFailure(call: Call<ActivityResponse>, t: Throwable) {
+                    Log.d("fetchActivity", "Failed to fetch Product", t)
+                }
+
+                override fun onResponse(
+                    call: Call<ActivityResponse>,
+                    response: Response<ActivityResponse>
+                ) {
+                    Log.d("fetchActivity", "Response received successfully")
+                    val ActivityResponse: ActivityResponse? = response.body()
+                    val activityItems: List<ActivityItem> = ActivityResponse?.activItem
+                        ?: mutableListOf()
+                    responseLiveData.value = activityItems
+                    Log.d("fetchActivity", "onResponse: $activityItems")
+                }
+            })
+            return responseLiveData
+        }
+
+
+        //fetch users
+        fun fetchUsers(block:Int): LiveData<List<User>> {
+            return fetchUserMetaData(RetrofitClient().oshoppingApi.fetchUsers(block))
+        }
+
+        fun fetchUserByEmail(email: String): LiveData<List<User>> {
+            return fetchUserMetaData(RetrofitClient().oshoppingApi.fetchUserByEmail(email))
+        }
+
+        fun fetchUserMetaData(userRequest: Call<UserResponse>): LiveData<List<User>> {
+            val responseLiveData: MutableLiveData<List<User>> = MutableLiveData()
+
+            userRequest.enqueue(object : Callback<UserResponse> {
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    Log.d("fetchReport", "Failed to fetch Reports", t)
+                }
+
+                override fun onResponse(
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
+                ) {
+                    Log.d("fetchReport", "Reports received successfully")
+                    val userResponse: UserResponse? = response.body()
+                    val userItems: List<User> = userResponse?.userItem
+                        ?: mutableListOf()
+                    responseLiveData.value = userItems
+
+                }
+            })
+
+            return responseLiveData
+        }
+
+
+        fun fetchActivity(user_id: Int): LiveData<List<ActivityItem>> {
+            return fetchActivitiesMetaData(RetrofitClient().oshoppingApi.fetchActivities(user_id))
+        }
+
+
     }
-
-          
-
-
-    //fetch users
-    fun fetchUsers(): LiveData<List<User>> {
-        return fetchUserMetaData(RetrofitClient().oshoppingApi.fetchUsers())
-    }
-
-    fun fetchUserByEmail(email: String): LiveData<List<User>> {
-        return fetchUserMetaData(RetrofitClient().oshoppingApi.fetchUserByEmail(email))
-    }
-
-    fun fetchUserMetaData(userRequest: Call<UserResponse>): LiveData<List<User>> {
-        val responseLiveData: MutableLiveData<List<User>> = MutableLiveData()
-
-        userRequest.enqueue(object : Callback<UserResponse> {
-
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                Log.d("fetchReport", "Failed to fetch Reports", t)
-            }
-
-            override fun onResponse(
-                call: Call<UserResponse>,
-                response: Response<UserResponse>
-            ) {
-                Log.d("fetchReport", "Reports received successfully")
-                val userResponse: UserResponse? = response.body()
-                val userItems: List<User> = userResponse?.userItem
-                    ?: mutableListOf()
-                responseLiveData.value = userItems
-
-            }
-        })
-
-        return responseLiveData
-    }
-
-
-    fun fetchActivity(user_id: Int): LiveData<List<ActivityItem>> {
-        return fetchActivitiesMetaData(RetrofitClient().oshoppingApi.fetchActivities(user_id))
-    }
-
-
-
-}

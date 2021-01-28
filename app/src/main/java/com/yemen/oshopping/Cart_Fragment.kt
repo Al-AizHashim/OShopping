@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
+import com.yemen.oshopping.model.ActivityItem
 import com.yemen.oshopping.model.Cart
-import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.model.Rating
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 import kotlinx.android.synthetic.main.fragment_cart.*
@@ -23,10 +23,11 @@ import kotlinx.android.synthetic.main.fragment_cart.*
 private const val TAG = "Category"
 
 class Cart_Fragment : Fragment() {
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = MainActivity.LOCAL_HOST_URI
     private lateinit var cartViewModel: OshoppingViewModel
     private lateinit var cartRecyclerView: RecyclerView
     private lateinit var cartItems: Cart
+    lateinit var activityItem: ActivityItem
     val delim = ":"
     var list:List<String> =ArrayList()
     private lateinit var back: ImageButton
@@ -94,6 +95,7 @@ class Cart_Fragment : Fragment() {
         private val ratingBar2 = itemView.findViewById(R.id.rating_Bar_2_product_details) as RatingBar
         private val cartDelete = itemView.findViewById(R.id.delete) as Button
         private val buyBtn = itemView.findViewById(R.id.buy_btn) as Button
+        private val productPrice=itemView.findViewById(R.id.product_price) as TextView
 
         fun bind(cartItem: Cart) {
             cartItems=cartItem
@@ -111,6 +113,7 @@ class Cart_Fragment : Fragment() {
             cartItems = cartItem
             productName.text = cartItem.product_name
             productDate.text = cartItem.product_date
+            productPrice.text=cartItem.dollar_price.toString()+" $"
 
             cartDelete.setOnClickListener {
                  cartViewModel.deleteCart(cartItem)
@@ -118,11 +121,12 @@ class Cart_Fragment : Fragment() {
 
             }
 
-            ratingBar2.setOnClickListener {
+            ratingBar2.setOnRatingBarChangeListener { ratingBar: RatingBar, fl: Float, b: Boolean ->
+                Log.d("ratingBarlog","ratingBarlog ")
                 val ratingBarValue = ratingBar2.rating.toString()
                 Toast.makeText(
                     requireContext(),
-                    "Rating is: " + ratingBarValue, Toast.LENGTH_SHORT
+                    "Rating is: " + ratingBarValue, Toast.LENGTH_LONG
                 ).show()
                 var rating = Rating(
                     product_id = cartItems.fk_product_id,
@@ -132,6 +136,26 @@ class Cart_Fragment : Fragment() {
                 cartViewModel.pushRating(rating)
 
             }
+
+            buyBtn.setOnClickListener {
+                    val activ= ActivityItem(
+                        productId = cartItems.fk_product_id,
+                        productName = cartItems.product_name,
+                        totalPrice = cartItems.dollar_price ,
+                        activityType = "buy",
+                        quantity = 1,
+                        yrial_price = cartItems.yrial_price,
+                        dollar_price = cartItems.dollar_price
+                    )
+                    Log.d("pushToActivity","the contint of Activity is :$activ")
+                cartViewModel.pushActivity(activ)
+                    Toast.makeText(
+                        requireContext(),
+                        "Added to Activity successfully",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
 
         }
 

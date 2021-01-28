@@ -5,99 +5,319 @@
     android:id="@+id/setting_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="40dp"
+
     tools:context=".setting.SettingActivity">
 
     <TextView
-        android:id="@+id/my_account"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_account_circle"
-        android:text="@string/MyAccount"
+        android:layout_marginTop="24dp"
+        android:text="Dashboard"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <ImageButton
+        android:id="@+id/bt_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/my_account"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/colorPrimaryLight3"
+            android:elevation="4dp"
+            app:cardCornerRadius="24dp">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="24dp"
+                android:src="@drawable/account" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:text="My Account"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/my_products"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_baseline_shop_24"
-        android:text="@string/my_products"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_account" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateIds,MissingConstraints">
 
-    <TextView
-        android:id="@+id/chat"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_chat"
-        android:text="Chat"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_products" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/colorPrimaryLight3"
+            android:elevation="4dp"
+            app:cardCornerRadius="24dp">
 
-    <TextView
+            <ImageView
+                android:id="@+id/my_productss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="24dp"
+                android:src="@drawable/product" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/my_products_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:text="My Products"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/about_us"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_address_card_regular"
-        android:text="@string/about_us"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="244dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chat" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateIds,MissingConstraints">
 
-    <TextView
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/colorPrimaryLight3"
+            android:elevation="4dp"
+            app:cardCornerRadius="24dp">
+
+            <ImageView
+                android:id="@+id/about_uss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="24dp"
+                android:src="@drawable/aboutus" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/about_us_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:text="About Us"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/contact_us"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_contact_us"
-        android:text="@string/contact_us"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="244dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_us" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateIds,MissingConstraints">
 
-    <TextView
-        android:id="@+id/sign_out"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_sign_out"
-        android:text="Sign out"
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/colorPrimaryLight3"
+            android:elevation="4dp"
+            app:cardCornerRadius="24dp">
+
+            <ImageView
+                android:id="@+id/contact_uss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="24dp"
+                android:src="@drawable/contactus" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/contact_us_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:text="Contact Us"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chat"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="416dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:cardCornerRadius="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admin_page" />
-    <TextView
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateIds,MissingConstraints">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/colorPrimaryLight3"
+            android:elevation="4dp"
+            app:cardCornerRadius="24dp">
+
+            <ImageView
+                android:id="@+id/chats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="24dp"
+                android:src="@drawable/chat" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/chat_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:text="Chat"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/admin_page"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="416dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:cardCornerRadius="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="DuplicateIds,MissingConstraints">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/colorPrimaryLight3"
+            android:elevation="4dp"
+            app:cardCornerRadius="24dp">
+
+            <ImageView
+                android:id="@+id/sign_outxx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="24dp"
+                android:src="@drawable/admin" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/sign_out_tvx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="120dp"
+            android:text="Admin"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+
+    <Button
         android:id="@+id/sign_up"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_sign_out"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_shape2"
         android:text="Sign up"
         android:visibility="gone"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_out" />
+        app:layout_constraintTop_toBottomOf="@+id/chat"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/admin_page"
-        style="@style/CustomTextView"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/sign_out"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_admin"
-        android:visibility="gone"
-        android:text="@string/admin"
-
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_shape3"
+        android:gravity="center"
+        android:text="Sign Out"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_us" />
-
+        app:layout_constraintTop_toBottomOf="@+id/chat"
+        tools:ignore="DuplicateIds,MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -16,11 +16,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.yemen.oshopping.R
-import com.yemen.oshopping.admin.UpdateReportFragmentArgs
 import com.yemen.oshopping.model.ProductDetails
-import com.yemen.oshopping.uploadImage.UploadImageActivity
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.activity_add_product.*
 
 
 class UpdateProductFragment : Fragment() {
@@ -86,9 +83,8 @@ class UpdateProductFragment : Fragment() {
 
         buttonImage = view.findViewById(R.id.addImage)
         buttonImage.setOnClickListener {
-            //  showDialog("Choose Image")
-            inttent = Intent(this.requireContext(), UploadImageActivity::class.java)
-            startActivityForResult(inttent, 919)
+
+
 
         }
         updateProductBtn.setOnClickListener {

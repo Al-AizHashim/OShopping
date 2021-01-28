@@ -13,29 +13,35 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yemen.oshopping.R
+import com.yemen.oshopping.model.BlockUser
 import com.yemen.oshopping.model.ReportDetails
-import com.yemen.oshopping.model.User
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 private const val ARG_PARAM1 = "user_id"
 private const val ARG_PARAM2 = "user_name"
+private const val ARG_PARAM3 = "option_id"
 
 class ShowReportDetailsDialog : DialogFragment() {
     private var adapter: ReportAdapter = ReportAdapter(emptyList())
     private lateinit var ReportRecyclerView: RecyclerView
     private lateinit var oshoppingViewModel: OshoppingViewModel
     lateinit var blockBTN: Button
+    lateinit var ignoreBTN: Button
     lateinit var DialogTiTleTV: TextView
     lateinit var canceltBTN: Button
     private var param1: Int = 0
+    private var param3: Int = 0
     private var param2: String = "Report Types"
+    private lateinit var reportDetailsItem: ReportDetails
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getInt(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+            param3 = it.getInt(ARG_PARAM3)
         }
         oshoppingViewModel =
             ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -51,14 +57,46 @@ class ShowReportDetailsDialog : DialogFragment() {
         ReportRecyclerView = view.findViewById(R.id.report_recycler_view)
         ReportRecyclerView.layoutManager = LinearLayoutManager(context)
         ReportRecyclerView.adapter = adapter
-        blockBTN = view.findViewById(R.id.submit_report_button)
+        blockBTN = view.findViewById(R.id.action_report_button)
         canceltBTN = view.findViewById(R.id.cancel_report_button)
+        ignoreBTN = view.findViewById(R.id.ignore_report_button)
         DialogTiTleTV = view.findViewById(R.id.report_dialog_title)
         DialogTiTleTV.text = param2
+        if (param3 == 0) {
+            blockBTN.text = "BLOCK UESR"
+            ignoreBTN.text = "Checked"
+        } else if (param3 == 1) {
+            blockBTN.text = "UNBLOCK UESR"
+            ignoreBTN.visibility = View.GONE
+
+        } else if (param3 == 2) {
+            blockBTN.text = "BLOCK UESR"
+            ignoreBTN.text = "UNCHECKED"
+
+        }
         blockBTN.setOnClickListener {
-            var user= User(user_id = 1,block = 1)
-            oshoppingViewModel.BlockUser(user)
-            Toast.makeText(this@ShowReportDetailsDialog.context, "submit", Toast.LENGTH_SHORT).show()
+            if (param3 == 0) {
+                var blockUser = BlockUser(user_id = param1, block = 1, admin_id = 2, checked = 0)
+                oshoppingViewModel.blockUser(blockUser)
+            } else if (param3 == 1) {
+                var blockUser = BlockUser(user_id = param1, block = 0, admin_id = 2, checked = 0)
+                oshoppingViewModel.blockUser(blockUser)
+            } else if (param3 == 2) {
+                var blockUser = BlockUser(user_id = param1, block = 1, admin_id = 2, checked = 0)
+                oshoppingViewModel.blockUser(blockUser)
+            }
+            Toast.makeText(this@ShowReportDetailsDialog.context, "Done", Toast.LENGTH_SHORT).show()
+            dialog?.dismiss()
+        }
+        ignoreBTN.setOnClickListener {
+            if (param3 == 0) {
+                var blockUser = BlockUser(user_id = param1, block = 0, admin_id = 2, checked = 1)
+                oshoppingViewModel.blockUser(blockUser)
+            } else if (param3 == 1) {
+            } else if (param3 == 2) {
+                var blockUser = BlockUser(user_id = param1, block = 0, admin_id = 2, checked = 0)
+                oshoppingViewModel.blockUser(blockUser)
+            }
             dialog?.dismiss()
         }
         canceltBTN.setOnClickListener {
@@ -79,18 +117,17 @@ class ShowReportDetailsDialog : DialogFragment() {
             })
     }
 
-    private inner class ReportHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private lateinit var reportDetails: ReportDetails
+    inner class ReportHolder(view: View) : RecyclerView.ViewHolder(view) {
         private var reportType: TextView = itemView.findViewById(R.id.report_type)
         private var reportSender: TextView = itemView.findViewById(R.id.report_sender_text_view)
         private var reportCreatDate: TextView =
             itemView.findViewById(R.id.report_createdAt_text_view)
 
-        fun bind(reportDetails: ReportDetails) {
-            this.reportDetails = reportDetails
-            reportType.text = this.reportDetails.report_type
-            reportSender.text = this.reportDetails.sender_name
-            reportCreatDate.text = this.reportDetails.created_at
+        fun bind(reportDetailsArg: ReportDetails) {
+            reportDetailsItem = reportDetailsArg
+            reportType.text = reportDetailsItem.report_type
+            reportSender.text = reportDetailsItem.sender_name
+            reportCreatDate.text = reportDetailsItem.created_at
         }
     }
 
@@ -120,12 +157,14 @@ class ShowReportDetailsDialog : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: Int, param2: String) = ShowReportDetailsDialog().apply {
-            arguments = Bundle().apply {
-                putInt(ARG_PARAM1, param1)
-                putString(ARG_PARAM2, param2)
+        fun newInstance(param1: Int, param2: String, param3: Int?) =
+            ShowReportDetailsDialog().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                    putInt(ARG_PARAM3, param3!!)
+                }
             }
-        }
     }
 }
 

@@ -89,7 +89,7 @@
 
                     <RatingBar
                         android:id="@+id/rating_Bar_Show_product"
-                        style="@style/Yellow.Small.AppCompatRatingBar"
+                        style="@style/Yellow.Small.AppCompatRatingBar.Grey"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:isIndicator="true"
@@ -97,7 +97,7 @@
                         android:numStars="5"
                         android:rating="3.5"
                         android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar" />
+                        android:theme="@style/Yellow.Small.AppCompatRatingBar.Grey" />
 
                     <View
                         android:layout_width="0dp"

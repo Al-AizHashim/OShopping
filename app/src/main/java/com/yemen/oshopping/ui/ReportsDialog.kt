@@ -41,7 +41,7 @@ class ReportsDialog : DialogFragment() {
         ReportRecyclerView = view.findViewById(R.id.report_recycler_view)
         ReportRecyclerView.layoutManager = LinearLayoutManager(context)
         ReportRecyclerView.adapter = adapter
-        submitBTN = view.findViewById(R.id.submit_report_button)
+        submitBTN = view.findViewById(R.id.action_report_button)
         canceltBTN = view.findViewById(R.id.cancel_report_button)
         submitBTN.setOnClickListener {
             if(reportIdViewHodler!=0){

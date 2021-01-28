@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -15,6 +16,12 @@ class AdminFragment : Fragment() {
     lateinit var showReportTV: TextView
     lateinit var showReportsDetailsTV: TextView
 
+    lateinit var showProdcutReportsDetailsTV: TextView
+    lateinit var showUsersTV: TextView
+
+    lateinit var close: ImageButton
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,6 +32,11 @@ class AdminFragment : Fragment() {
         showCategoryTV = view.findViewById(R.id.show_category_tv)
         showReportTV = view.findViewById(R.id.show_report_tv)
         showReportsDetailsTV = view.findViewById(R.id.show_report_details_tv)
+        showUsersTV = view.findViewById(R.id.show_users_tv)
+
+        showProdcutReportsDetailsTV = view.findViewById(R.id.show_product_report_tv)
+
+        close = view.findViewById(R.id.bt_close)
 
 
         showCategoryTV.setOnClickListener {
@@ -37,9 +49,21 @@ class AdminFragment : Fragment() {
         }
 
         showReportsDetailsTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_adminFragment_to_showReportsFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_adminFragment_to_showUsersReportsActivity)
+        }
+        close.setOnClickListener {
+            activity?.onBackPressed()
         }
 
+        showProdcutReportsDetailsTV.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_adminFragment_to_showProductsReportsActivity)
+        }
+        showUsersTV.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_adminFragment_to_showUsersActivity)
+        }
         return view
     }
 

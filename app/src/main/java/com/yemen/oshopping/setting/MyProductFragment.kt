@@ -7,9 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.LoginScreen
+import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.R
 import com.yemen.oshopping.admin.ShowReportFragmentDirections
 import com.yemen.oshopping.model.ProductItem
@@ -25,11 +31,12 @@ import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 class MyProductFragment : Fragment() {
 
-    var url: String = "http://192.168.1.4/oshopping_api/"
+    var url: String = MainActivity.LOCAL_HOST_URI
     private lateinit var oshoppingViewModel: OshoppingViewModel
     private lateinit var showProductRecyclerView: RecyclerView
     private lateinit var noDataImageView: ImageView
     private lateinit var noDataTextView: TextView
+    lateinit var deleteProductBtn:Button
     lateinit var fab: FloatingActionButton
     lateinit var productsItems:List<ProductItem>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,11 +117,11 @@ class MyProductFragment : Fragment() {
 
         private lateinit var p: ProductItem
 
-
+        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
-
+        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
 
         fun bind(productItems: ProductItem) {
             var compositeProductUrl = url + productItems.product_img
@@ -124,6 +131,7 @@ class MyProductFragment : Fragment() {
             p = productItems
             productName.text = productItems.product_name
             productDate.text = productItems.product_date
+            mainLayout.startAnimation(translateAnimation)
 
         }
 

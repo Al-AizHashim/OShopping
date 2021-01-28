@@ -3,11 +3,14 @@ package com.yemen.oshopping
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
@@ -19,11 +22,16 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.chrisbanes.photoview.PhotoView
+import com.google.firebase.database.*
+import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Picasso
+import com.yemen.oshopping.Chat.activity.ChatActivity
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.ProductItem
+import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.custom_dialog.view.*
+
+
 
 
 private const val ARG_PARAM1 = "param1"
@@ -31,8 +39,7 @@ private const val ARG_PARAM2 = "param2"
 
 
 class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
-    var url: String = "http://192.168.1.4/oshopping_api/"
-
+    var url: String = MainActivity.LOCAL_HOST_URI
 
     private lateinit var trendBtn: Button
     private lateinit var categoryBtn: Button
@@ -41,6 +48,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var highestRateBtn: Button
     private lateinit var popupMenu: PopupMenu
     private lateinit var searchView: SearchView
+    private lateinit var notifications:ImageView
     val delim = ":"
     var list: List<String> = ArrayList()
 
@@ -86,6 +94,8 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         vendorBtn = view.findViewById(R.id.vendor_btn)
         highestRateBtn = view.findViewById(R.id.highest_rate_btn)
         searchView = view.findViewById(R.id.search_view)
+        notifications=view.findViewById(R.id.notifications)
+
         //searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
         searchView.suggestionsAdapter
@@ -168,6 +178,19 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
                 Log.d("searchLiveData", "product Item Live Data")
                 updateui(productItems)
             })
+        /*
+        notifications.setOnClickListener{
+            val intent = Intent(context,
+                ChatActivity::class.java)
+            //vendor id and name from api
+            var userId="5tcYjENPd6TcWIUqkwKZiefmIEo1"
+            var userName="Alaiz Hashim"
+            intent.putExtra("userId",userId)
+            intent.putExtra("userName",userName)
+           startActivity(intent)
+
+        }
+       */
         //trend is the default
         trendBtn.setOnClickListener {
             vendorBtn.isSelected = false
@@ -189,7 +212,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             colorBtn.isSelected = false
             highestRateBtn.isSelected = false
 
-            oshoppingViewModel.getProductByVendorId(2)
+            oshoppingViewModel.getProductByVendorId(1)
             oshoppingViewModel.productItemLiveDataByVendorID.observe(
                 viewLifecycleOwner, androidx.lifecycle.Observer
                 { productItems ->
@@ -262,7 +285,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
 
 
     private inner class ShowProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+        val translateAnimation:Animation=AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
         private lateinit var productItemss: ProductItem
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val price = itemView.findViewById(R.id.product_price) as TextView
@@ -270,11 +293,11 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         private val lyt_parent = itemView.findViewById(R.id.lyt_parent) as LinearLayout
         //private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
-
+        var rootCardView= itemView.findViewById(R.id.rootCardView) as CardView
         //private val addToCart = itemView.findViewById(R.id.product_add_btn) as Button
         //private val productRatingNo = itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
         private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product) as RatingBar
-        var x=33.6
+
 
         fun bind(productItems: ProductItem) {
             var imageUri: String
@@ -286,7 +309,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             imageUri?.let {
                 Picasso.get().load(url + it).into(productImage)
             }
-
+            rootCardView.startAnimation(translateAnimation)
             productItemss = productItems
             productName.text = productItems.product_name
             price.text = "$ " + productItems.dollar_price.toString()
@@ -294,7 +317,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
 
 
             lyt_parent.setOnClickListener {
-                callbacks?.onProductSelected(20)
+                callbacks?.onProductSelected(productItems.product_id)
             }
 
         }
@@ -311,6 +334,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             val view =
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_shop_product_card, parent, false)
+
             return ShowProductHolder(view)
 
 
@@ -351,7 +375,6 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             searchThroughDatabase(query)
         }
         searchView.clearFocus()
-        searchView.close
         searchView.horizontalFadingEdgeLength
         return true
     }
@@ -375,5 +398,5 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
 
     }
 
-
 }
+
