@@ -40,7 +40,6 @@ private const val ARG_PARAM2 = "param2"
 
 class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
     var url: String = MainActivity.LOCAL_HOST_URI
-    lateinit var rootCardView:CardView
 
     private lateinit var trendBtn: Button
     private lateinit var categoryBtn: Button

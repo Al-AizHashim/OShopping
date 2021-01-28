@@ -76,7 +76,7 @@ class Activities_Fragment: Fragment() {
                 val document = Document(pdfDocument)
 
                 val header=Paragraph("No----|-------- Product name---------|--Quantity--|--Total price--|---Activity type--|")
-                val title =Paragraph("------------------------------List of Your activities------------------------------").setMarginLeft(30.0F)
+                val title =Paragraph("------------------------------------List of Your activities---------------------------------").setMarginLeft(30.0F)
                 document.add(title)
                 document.add(Paragraph())
                 document.add(header)
@@ -86,7 +86,7 @@ class Activities_Fragment: Fragment() {
                         val number="      $i"
                         var name = activityItemList[i].productName.toString()
                         var length= name.length
-                        for (j in 23 downTo length)
+                        for (j in 14 downTo length)
                         {
                             name+="_"
                         }
@@ -109,12 +109,12 @@ class Activities_Fragment: Fragment() {
                             type+="_"
                         }
 
-                        val item=Paragraph("$number        |               $name|        $quantity   |        $price |       $type  ")
+                        val item=Paragraph("$number        |               $name|        $quantity        |    $price |       $type  ")
                         document.add(item)
                     }
                     document.close()
                     val muri=mFilePath
-                    openFile(Uri.parse(muri))
+             //   openFile(Uri.parse(muri))
                     Toast.makeText(
                         context,
                         "File Successfully saved",
@@ -259,15 +259,19 @@ class Activities_Fragment: Fragment() {
         }
     }
     fun openFile(pickerInitialUri: Uri) {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/pdf"
 
 
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+        }.also {intent->
+            val chooserIntent =
+                Intent.createChooser(intent, "choose pdf reader ")
+            startActivityForResult(chooserIntent, PICK_PDF_FILE)
         }
 
-        startActivity(intent)
+       // startActivity(intent)
     }
 
     companion object {

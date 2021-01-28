@@ -5,7 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -52,17 +56,19 @@ class Category_Fragment: Fragment()  {
             })
     }
 
-    private class CategoryHolder(itemTextView: View)
+    private inner class CategoryHolder(itemTextView: View)
         : RecyclerView.ViewHolder(itemTextView) {
 
         val catrgoryTextView = itemTextView.findViewById(R.id.category) as TextView
-
+        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
         fun bind(cate: Category){
             catrgoryTextView.text=cate.cat_name
+            mainLayout.startAnimation(translateAnimation)
         }
     }
 
-    private class CategoryAdapter(private val categorys: List<Category>)
+    private inner class CategoryAdapter(private val categorys: List<Category>)
 
         : RecyclerView.Adapter<CategoryHolder>() {
         override fun onCreateViewHolder(
