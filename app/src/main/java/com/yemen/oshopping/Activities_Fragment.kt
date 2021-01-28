@@ -12,9 +12,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -200,6 +203,8 @@ class Activities_Fragment: Fragment() {
         }
 
         private lateinit var activItems: ActivityItem
+        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
 
         private val itemQuantity = itemView.findViewById(R.id.item_quantity) as TextView
         private val itemName = itemView.findViewById(R.id.item_name) as TextView
@@ -210,6 +215,7 @@ class Activities_Fragment: Fragment() {
             itemQuantity.text = activityItem.quantity.toString()
             itemName.text = activityItem.productName
             itemPrice.text = activityItem.totalPrice.toString()
+            mainLayout.startAnimation(translateAnimation)
         }
 
 

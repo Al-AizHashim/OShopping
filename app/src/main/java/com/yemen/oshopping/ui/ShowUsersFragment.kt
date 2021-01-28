@@ -6,7 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -56,8 +60,10 @@ class ShowUsersfragment: Fragment()  {
             })
     }
 
-    private class UserHolder(itemTextView: View)
+    private inner class UserHolder(itemTextView: View)
         : RecyclerView.ViewHolder(itemTextView),View.OnClickListener{
+        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
 
         val userNameTV = itemTextView.findViewById(R.id.user_full_name) as TextView
         val userStatusTV = itemTextView.findViewById(R.id.user_type) as TextView
@@ -70,6 +76,7 @@ class ShowUsersfragment: Fragment()  {
                 userStatus="Vendor"
             }
             userStatusTV.text=userStatus
+            mainLayout.startAnimation(translateAnimation)
         }
 
         init {
@@ -85,7 +92,7 @@ class ShowUsersfragment: Fragment()  {
         }
 
 
-    private class UserAdapter(private val users: List<User>)
+    private inner class UserAdapter(private val users: List<User>)
 
         : RecyclerView.Adapter<UserHolder>() {
         override fun onCreateViewHolder(
