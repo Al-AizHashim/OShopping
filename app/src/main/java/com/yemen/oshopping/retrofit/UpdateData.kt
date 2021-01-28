@@ -65,7 +65,7 @@ class UpdateData {
         updateUserRequest.enqueue(object : Callback<DefaultResponse> {
 
             override fun onFailure(call: Call<DefaultResponse>, t: Throwable) {
-                Log.e("updateCategory", "Failed to update Category", t)
+                Log.e("updateUser", "Failed to update user", t)
 
             }
 
@@ -73,20 +73,14 @@ class UpdateData {
                 call: Call<DefaultResponse>,
                 response: Response<DefaultResponse>
             ) {
-                Log.d("updateCategory", "Category updated successfully")
+                Log.d("updateUser", "Update updated successfully")
 
             }
         })
     }
 
 
-    fun updateCart(cart: Cart) {
-        //  updateMetaData( RetrofitClient().oshoppingApi
-        //  .updateCart(cart.cart_id,
-        //   cart.fk_product_id,
-        //   cart.fk_user_id,
-        //  cart.cart_statuse))
-    }
+
 
     fun updateProduct(p: ProductDetails) {
         val updateProductRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.updateProduct(
