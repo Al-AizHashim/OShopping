@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorBackground">
 
     <fragment
         android:id="@+id/fragment"
@@ -19,28 +19,8 @@ android:layout_height="match_parent"
         app:navGraph="@navigation/my_nav" />
 <!--
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Dashboard"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="140dp"
@@ -291,5 +271,6 @@ android:layout_height="match_parent"
 
 
     -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
