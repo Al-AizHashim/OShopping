@@ -9,6 +9,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
@@ -38,7 +40,7 @@ private const val ARG_PARAM2 = "param2"
 
 class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
     var url: String = MainActivity.LOCAL_HOST_URI
-
+    lateinit var rootCardView:CardView
 
     private lateinit var trendBtn: Button
     private lateinit var categoryBtn: Button
@@ -284,7 +286,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
 
 
     private inner class ShowProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+        val translateAnimation:Animation=AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
         private lateinit var productItemss: ProductItem
         private val productName = itemView.findViewById(R.id.product_nameTv) as TextView
         private val price = itemView.findViewById(R.id.product_price) as TextView
@@ -292,11 +294,11 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         private val lyt_parent = itemView.findViewById(R.id.lyt_parent) as LinearLayout
         //private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
-
+        var rootCardView= itemView.findViewById(R.id.rootCardView) as CardView
         //private val addToCart = itemView.findViewById(R.id.product_add_btn) as Button
         //private val productRatingNo = itemView.findViewById(R.id.rating_bar_text_view_show_prodcut) as TextView
         private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product) as RatingBar
-        var x=33.6
+
 
         fun bind(productItems: ProductItem) {
             var imageUri: String
@@ -308,7 +310,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             imageUri?.let {
                 Picasso.get().load(url + it).into(productImage)
             }
-
+            rootCardView.startAnimation(translateAnimation)
             productItemss = productItems
             productName.text = productItems.product_name
             price.text = "$ " + productItems.dollar_price.toString()
@@ -333,6 +335,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             val view =
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_shop_product_card, parent, false)
+
             return ShowProductHolder(view)
 
 

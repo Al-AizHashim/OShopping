@@ -13,7 +13,7 @@ private const val USER_BLOCK = "Block"
 
         fun getStoredUserId(context: Context): Int {
             return PreferenceManager.getDefaultSharedPreferences(context)
-                .getInt(PREF_NAME, 1)
+                .getInt(PREF_NAME, -1)
         }
 
         fun setStoredUserId(context: Context, userId:Int) {
