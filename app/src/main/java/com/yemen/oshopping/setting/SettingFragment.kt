@@ -6,9 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
@@ -18,14 +17,14 @@ import kotlinx.android.synthetic.main.fragment_add_category.*
 
 
 class SettingFragment : Fragment() {
-    lateinit var adminTV: TextView
-    lateinit var contactUsTV: TextView
-    lateinit var aboutUsTV: TextView
-    lateinit var myProductTV: TextView
-    lateinit var myAccountTV: TextView
-    lateinit var signOutTV: TextView
-    lateinit var signUpTV: TextView
-    lateinit var chatTv: TextView
+    lateinit var adminTV: CardView
+    lateinit var contactUsTV: CardView
+    lateinit var aboutUsTV: CardView
+    lateinit var myProductTV: CardView
+    lateinit var myAccountTV: CardView
+    lateinit var signOutTV: Button
+    lateinit var signUpTV: Button
+    lateinit var chatTv: CardView
     lateinit var close: ImageButton
     lateinit var oshoppingViewModel: OshoppingViewModel
     //yemenoshopping@gmail.com
@@ -54,10 +53,10 @@ class SettingFragment : Fragment() {
         if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
         {
             adminTV.visibility = View.VISIBLE
-            myProductTV.visibility = View.GONE
+           // myProductTV.visibility = View.GONE
         }
         if(oshoppingViewModel.getStoredEmail().equals("none")){
-            myProductTV.visibility = View.GONE
+            //myProductTV.visibility = View.GONE
             adminTV.visibility = View.GONE
             signOutTV.visibility=View.GONE
             signUpTV.visibility=View.VISIBLE
@@ -67,6 +66,10 @@ class SettingFragment : Fragment() {
             if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
             {
                 Toast.makeText(requireContext(), "You are an admin", Toast.LENGTH_SHORT).show()
+            }
+            else if (oshoppingViewModel.getStoredEmail().equals("none"))
+            {
+                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
             }
             else
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_myProductFragment)

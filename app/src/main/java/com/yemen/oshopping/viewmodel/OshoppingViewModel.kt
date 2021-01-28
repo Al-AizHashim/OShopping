@@ -199,6 +199,7 @@ class OshoppingViewModel(private val app: Application) : AndroidViewModel(app) {
 
     //update data in database
     fun updateCategory(category: Category) = UpdateData().updateCategory(category)
+
     fun blockUser(blockUser: BlockUser) {
         UpdateData().blockUser(blockUser)
     }

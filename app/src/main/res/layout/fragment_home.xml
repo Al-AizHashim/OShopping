@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorBackground"
     android:layout_margin="12dp"
     tools:context=".Home_Fragment">
 
@@ -68,6 +68,7 @@
         android:id="@+id/horizontalScrollView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
@@ -75,40 +76,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="14dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/trend_btn"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="@dimen/spacing_large"
-                android:backgroundTint="@color/custom_button_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/Trend"
-                android:textColor="@color/custom_button_text_color"
-                android:background="@drawable/button_shap_white"
+                android:textColor="@color/colorWhite"
+                android:backgroundTint="@color/custom_button_color"
+
+                android:background="@drawable/shape_nav"
                 android:textSize="12sp" />
 
             <Button
                 android:id="@+id/category_btn"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="@dimen/spacing_large"
-
-                android:background="@drawable/button_shap_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/shape_nav"
                 android:backgroundTint="@color/custom_button_color"
-                android:textColor="@color/custom_button_text_color"
                 android:text="@string/category"
                 android:textSize="12sp" />
 
             <Button
                 android:id="@+id/color_btn"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="@dimen/spacing_large"
-                android:background="@drawable/button_shap_white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/shape_nav"
                 android:backgroundTint="@color/custom_button_color"
-                android:textColor="@color/custom_button_text_color"
                 android:text="@string/color"
                 android:textSize="12sp" />
 
@@ -117,11 +118,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:visibility="gone"
+                android:textColor="@color/colorWhite"
                 android:background="@drawable/button_shap_white"
-                android:backgroundTint="@color/custom_button_color"
-                android:textColor="@color/custom_button_text_color"
                 android:text="@string/vendor"
+                android:visibility="gone"
                 android:textSize="12sp" />
 
             <!--
@@ -154,10 +154,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:visibility="gone"
-                android:background="@drawable/button_shap_white"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/shape_nav"
                 android:backgroundTint="@color/custom_button_color"
-                android:textColor="@color/custom_button_text_color"
                 android:text="Highest rate"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -166,7 +165,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/show_product_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

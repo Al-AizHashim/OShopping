@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryLight">#995F40</color>
+    <color name="colorPrimaryDark">#403B58</color>
+    <color name="colorPrimary">#403B58</color>
+    <color name="colorAccent">#FA543B</color>
+    <color name="colorPrimaryLight">#908C9F</color>
+    <color name="colorPrimaryLight2">#BAB6C9</color>
+    <color name="colorPrimaryLight3">#D5D1E5</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBackgroundItem">#F2EEED</color>
+    <color name="colorBackground">#F5F5F5</color>
+    <color name="colorGrayLight">#CCCCCC</color>
+    <color name="colorGray">#999999</color>
+    <color name="colorGrayDark">#666666</color>
+    <color name="colorGrayBlack">#333333</color>
+    <color name="colorBlack">#000000</color>
+
+
+
+
+
     <color name="colorTransparent">#00FFFFFF</color>
-    <color name="colorBlack">#000</color>
-    <color name="colorWhite">#FFF</color>
-    <color name="colorPrimaryDark">#F8F8F9</color>
-    <color name="colorPrimary">#736C5F</color>
-    <color name="colorAccent">#D93425</color>
     <color name="colorAccentSecondary">#F27D72</color>
     <color name="colorAccentSecondaryLight">#E8CCC9</color>
     <color name="colorBrown">#8C877D</color>
-    <color name="colorGray">#646464</color>
-    <color name="colorPrimaryLight2">#511C00</color>
+    <color name="brown">#DAD8D5</color>
     <color name="colorTextBackground">#f5f5f5</color>
     <color name="colorItemLeft">#E6E4E4</color>
     <color name="colorItemRight">#813fd7</color>

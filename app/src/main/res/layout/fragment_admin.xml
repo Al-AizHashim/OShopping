@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".setting.AdminFragment">
 
     <LinearLayout
@@ -65,13 +65,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_category_tv" />
+
+
     <TextView
         android:id="@+id/show_report_details_tv"
         style="@style/CustomTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_report"
         android:text="@string/show_users_reports"
+        android:drawableLeft="@drawable/ic_supervisor_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_report_tv" />
@@ -82,9 +84,12 @@
         style="@style/CustomTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_report"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_widgets"
         android:text="@string/show_products_reports"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_report_details_tv" />
 

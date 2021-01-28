@@ -1,15 +1,23 @@
 package com.yemen.oshopping
 
+import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.DocumentsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,12 +28,13 @@ import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
 import com.yemen.oshopping.model.ActivityItem
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.fragment_activities.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 
+const val PICK_PDF_FILE = 2
+private val STORAGE_CODE: Int = 99
 
 class Activities_Fragment: Fragment() {
     var url: String = MainActivity.LOCAL_HOST_URI
@@ -33,6 +42,7 @@ class Activities_Fragment: Fragment() {
     private lateinit var oShoppingViewModel: OshoppingViewModel
     private lateinit var showActivitiesRecyclerView: RecyclerView
     private lateinit var saveAsPDF: ImageButton
+    private lateinit var activityItemList:List<ActivityItem>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,16 +63,13 @@ class Activities_Fragment: Fragment() {
         showActivitiesRecyclerView = view.findViewById(R.id.recycler_view_activities)
         showActivitiesRecyclerView.layoutManager = GridLayoutManager(context, 1)
 
-        saveAsPDF.setOnClickListener {
-            savePDF()
-        }
 
         return view
 
     }
 
     private fun savePDF(){
-        val activityItem : List<ActivityItem?>? = null
+
         val mFile = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(System.currentTimeMillis())
         val mFilePath = Environment.getExternalStorageDirectory().toString()+"/"+ mFile + ".pdf"
 
@@ -70,31 +77,58 @@ class Activities_Fragment: Fragment() {
             try {
                 val pdfDocument = PdfDocument(PdfWriter(mFilePath))
                 val document = Document(pdfDocument)
-                if (activityItem != null) {
-                    for (i in 1..activityItem.size) {
 
-                        val name = Paragraph(activityItem[i]?.productName)
-                        document.add(name)
+                val header=Paragraph("No----|-------- Product name---------|--Quantity--|--Total price--|---Activity type--|")
+                val title =Paragraph("------------------------------------List of Your activities---------------------------------").setMarginLeft(30.0F)
+                document.add(title)
+                document.add(Paragraph())
+                document.add(header)
 
-                        val quantity = Paragraph(activityItem[i]?.quantity.toString())
-                        document.add(quantity)
+                    for (i in 0 until  activityItemList.size) {
 
-                        val price = Paragraph(activityItem[i]?.totalPrice.toString())
-                        document.add(price)
+                        val number="      $i"
+                        var name = activityItemList[i].productName.toString()
+                        var length= name.length
+                        for (j in 14 downTo length)
+                        {
+                            name+="_"
+                        }
 
-                        val type = Paragraph(activityItem[i]?.activityType)
-                        document.add(type)
+
+                        var quantity = activityItemList[i].quantity.toString()
+
+
+                        var price =activityItemList[i].totalPrice.toString()
+                        length= price.length
+                        for (j in 14 downTo length)
+                        {
+                            price+="_"
+                        }
+
+                        var type = activityItemList[i].activityType
+                        length= type.length
+                        for (j in 10 downTo length)
+                        {
+                            type+="_"
+                        }
+
+                        val item=Paragraph("$number        |               $name|        $quantity        |    $price |       $type  ")
+                        document.add(item)
                     }
-                }
+                    document.close()
+                    val muri=mFilePath
+             //   openFile(Uri.parse(muri))
+                    Toast.makeText(
+                        context,
+                        "File Successfully saved",
+                        Toast.LENGTH_LONG
+                    ).show()
 
 
-                document.close()
 
-                Toast.makeText(
-                    context,
-                    "Success" + mFile + ".pdf is saved to " + mFilePath,
-                    Toast.LENGTH_LONG
-                ).show()
+
+
+
 
             }
             catch ( e: Exception){
@@ -102,33 +136,9 @@ class Activities_Fragment: Fragment() {
             }
 
 
-/*
-        else{
-            Toast.makeText(
-                context,
-                "no data for save",
-                Toast.LENGTH_LONG
-            ).show()
-        }
- */
-
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
-            1000 ->
-            if (grantResults.size>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                savePDF()
-            }else{
-                Toast.makeText(context,"parmission denied .. ",Toast.LENGTH_LONG).show()
-            }
-        }
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -139,6 +149,7 @@ class Activities_Fragment: Fragment() {
             viewLifecycleOwner, androidx.lifecycle.Observer
             { activityItem ->
                 Log.d("fetchActivity", "activity Item Live Data: $activityItem")
+                activityItemList=activityItem
                 showActivitiesRecyclerView.adapter = ShowActivitiesAdapter(activityItem)
                 updateui(activityItem)
             })
@@ -148,6 +159,42 @@ class Activities_Fragment: Fragment() {
         showActivitiesRecyclerView.adapter = ShowActivitiesAdapter(activityItem)
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        saveAsPDF.setOnClickListener {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+
+                if (activity?.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)   == PackageManager.PERMISSION_DENIED) {
+                    val permission = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    requestPermissions(permission, STORAGE_CODE)
+                } else {
+                    savePDF()
+                }
+            } else {
+                savePDF()
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            STORAGE_CODE -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    savePDF()
+                } else {
+                    Toast.makeText(requireContext(), "Permission is denied", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+
+
     private inner class ShowActivitiesHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         init {
@@ -156,17 +203,22 @@ class Activities_Fragment: Fragment() {
         }
 
         private lateinit var activItems: ActivityItem
+        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
 
         private val itemQuantity = itemView.findViewById(R.id.item_quantity) as TextView
         private val itemName = itemView.findViewById(R.id.item_name) as TextView
         private val itemPrice = itemView.findViewById(R.id.item_price) as TextView
 
         fun bind(activityItem: ActivityItem) {
+            mainLayout.startAnimation(translateAnimation)
             activItems = activityItem
             itemQuantity.text = activityItem.quantity.toString()
             itemName.text = activityItem.productName
             itemPrice.text = activityItem.totalPrice.toString()
+
         }
+
 
         override fun onClick(v: View?) {
 
@@ -213,7 +265,21 @@ class Activities_Fragment: Fragment() {
             return x
         }
     }
+    fun openFile(pickerInitialUri: Uri) {
+        Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/pdf"
 
+
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, pickerInitialUri)
+        }.also {intent->
+            val chooserIntent =
+                Intent.createChooser(intent, "choose pdf reader ")
+            startActivityForResult(chooserIntent, PICK_PDF_FILE)
+        }
+
+       // startActivity(intent)
+    }
 
     companion object {
         fun newInstance() = Activities_Fragment()

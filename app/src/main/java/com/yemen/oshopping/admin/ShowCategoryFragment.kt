@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -81,12 +84,16 @@ class ShowCategoryFragment : Fragment() {
             itemView.setOnClickListener(this)
 
         }
+        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
+
         lateinit var catergoryInstance: Category
         val catrgoryTextView = itemTextView.findViewById(R.id.category) as TextView
         val catrgoryDeleteBtn = itemTextView.findViewById(R.id.delete_category_btn) as ImageView
         fun bind(cate: Category){
             catergoryInstance=cate
             catrgoryTextView.text=cate.cat_name
+            mainLayout.startAnimation(translateAnimation)
             catrgoryDeleteBtn.setOnClickListener {
 
                 categoryViewModel.deleteCategory(cate)
