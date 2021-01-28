@@ -421,7 +421,7 @@
             android:layout_margin="@dimen/spacing_large"
             android:clickable="true"
             android:tint="@android:color/white"
-            app:backgroundTint="@color/deep_orange_500"
+            app:backgroundTint="@color/colorAccent"
             app:fabSize="normal"
             app:layout_anchor="@id/app_bar_layout"
             app:layout_anchorGravity="bottom|right|end"
