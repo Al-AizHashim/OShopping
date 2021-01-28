@@ -211,11 +211,12 @@ class Activities_Fragment: Fragment() {
         private val itemPrice = itemView.findViewById(R.id.item_price) as TextView
 
         fun bind(activityItem: ActivityItem) {
+            mainLayout.startAnimation(translateAnimation)
             activItems = activityItem
             itemQuantity.text = activityItem.quantity.toString()
             itemName.text = activityItem.productName
             itemPrice.text = activityItem.totalPrice.toString()
-            mainLayout.startAnimation(translateAnimation)
+
         }
 
 

@@ -6,9 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -57,8 +60,10 @@ class ShowReportsFragment : Fragment() {
         private val againstTextView = itemView.findViewById(R.id.against_text_view) as TextView
         private val NoOfReportsTV = itemView.findViewById(R.id.number_of_report_text_view) as TextView
         private val reportDetailsBTN = itemView.findViewById(R.id.report_details_btn) as Button
-
+        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
         fun bind(reportsDetails: ReportsDetails) {
+            mainLayout.startAnimation(translateAnimation)
             this.reportsDetails = reportsDetails
             againstTextView.text = reportsDetails.report_against
             NoOfReportsTV.text = reportsDetails.number_of_reports.toString()

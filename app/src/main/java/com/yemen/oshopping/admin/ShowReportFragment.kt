@@ -98,9 +98,10 @@ class ShowReportFragment : Fragment() {
 
         fun bind(report: Report){
             reportIns=report
+            mainLayout.startAnimation(translateAnimation)
             reportTextView.text=report.report_name
             reportDeleteBtn.setOnClickListener {
-              mainLayout.startAnimation(translateAnimation)
+
                 reportViewModel.deleteReport(report)
                 updateUi()
                 restoreDeletedData(ReportHolder(requireView()).itemView,report)
