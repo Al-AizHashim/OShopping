@@ -316,6 +316,21 @@
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 
+                        <TextView
+                            android:id="@+id/report_product"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_xxxlarge"
+                            android:layout_marginStart="@dimen/spacing_xxxlarge"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="  Report this product"
+                            android:drawableLeft="@drawable/ic_widgets"
+                            android:drawableTint="@color/grey_60"
+                            android:drawablePadding="16dp"
+                            android:padding="@dimen/spacing_large"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
 
 
 

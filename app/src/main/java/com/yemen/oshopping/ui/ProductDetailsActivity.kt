@@ -74,7 +74,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     var url: String = MainActivity.LOCAL_HOST_URI
 
     lateinit var oshoppingViewModel: OshoppingViewModel
-
+    lateinit var reportProduct:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,7 +97,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         initToolbar()
         initComponent()
         frameContainer=findViewById(R.id.fragment_container)
-
+        reportProduct=findViewById(R.id.report_product)
         //val userId=sharedPreference.getValueString("userId")
         //val userName=sharedPreference.getValueString("userName")
         vendorProfile=findViewById(R.id.vendor_profile)
@@ -121,11 +121,14 @@ class ProductDetailsActivity : AppCompatActivity() {
             intent.putExtra("userName",userName)
             startActivity(intent)
 
-            vendorProfile.setOnClickListener {
-                val intent2=Intent(this,ShowVendorActivity::class.java)
-                intent2.putExtra("VENDORID",productItemss.vendor_id)
-                startActivity(intent2)
-            }
+        }
+        vendorProfile.setOnClickListener {
+            val intent2=Intent(this,ShowVendorActivity::class.java)
+            intent2.putExtra("VENDORID",productItemss.vendor_id)
+            startActivity(intent2)
+        }
+        reportProduct.setOnClickListener {
+            ReportsDialog.newInstance().show((supportFragmentManager),"a")
         }
     }
     fun getProductData(){
