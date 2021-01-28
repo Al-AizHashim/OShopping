@@ -88,10 +88,7 @@ class ShowReportsFragment : Fragment() {
       
         fun bind(reportsDetailsItem: ReportsDetails) {
             reportsDetails = reportsDetailsItem
-        fun bind(reportsDetails: ReportsDetails) {
             mainLayout.startAnimation(translateAnimation)
-            this.reportsDetails = reportsDetails
-
             againstTextView.text = reportsDetails.report_against
             NoOfReportsTV.text = reportsDetails.number_of_reports.toString()
             reportDetailsBTN.setOnClickListener {

@@ -198,26 +198,14 @@
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left"/>
         <action
-            android:id="@+id/action_adminFragment_to_showReportsFragment"
-            app:destination="@id/showReportsFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            android:id="@+id/action_adminFragment_to_showProductsReportsActivity"
+            app:destination="@id/showProductsReportsActivity" />
         <action
-            android:id="@+id/action_adminFragment_to_showProductReportsFragment"
-            app:destination="@id/showProductReportsFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            android:id="@+id/action_adminFragment_to_showUsersReportsActivity"
+            app:destination="@id/showUsersReportsActivity" />
         <action
-            android:id="@+id/action_adminFragment_to_showUsersfragment"
-            app:destination="@id/showUsersfragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            android:id="@+id/action_adminFragment_to_showUsersActivity"
+            app:destination="@id/showUsersActivity" />
 
     </fragment>
     <fragment
@@ -355,18 +343,9 @@
         android:name="com.yemen.oshopping.Chat.activity.UsersActivity"
         android:label="UsersActivity" />
     <fragment
-        android:id="@+id/showReportsFragment"
-        android:name="com.yemen.oshopping.ui.ShowReportsFragment"
-        android:label="fragment_show_reports"
-        tools:layout="@layout/fragment_show_reports" />
-    <fragment
         android:id="@+id/showVendorFragment"
         android:name="com.yemen.oshopping.ui.ShowVendorFragment"
         android:label="ShowVendorFragment" />
-    <fragment
-        android:id="@+id/showProductReportsFragment"
-        android:name="com.yemen.oshopping.ui.ShowProductReportsFragment"
-        android:label="ShowProductReportsFragment" />
     <fragment
         android:id="@+id/showUserFragment"
         android:name="com.yemen.oshopping.setting.ShowUserFragment"
@@ -422,8 +401,17 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
-    <fragment
-        android:id="@+id/showUsersfragment"
-        android:name="com.yemen.oshopping.ShowUsersfragment"
-        android:label="ShowUsersfragment" />
+    <activity
+        android:id="@+id/showUsersReportsActivity"
+        android:name="com.yemen.oshopping.ui.ShowUsersReportsActivity"
+        android:label="ShowUsersReportsActivity" />
+    <activity
+        android:id="@+id/showProductsReportsActivity"
+        android:name="com.yemen.oshopping.ui.ShowProductsReportsActivity"
+        android:label="ShowProductsReportsActivity" />
+    <activity
+        android:id="@+id/showUsersActivity"
+        android:name="com.yemen.oshopping.ui.ShowUsersActivity"
+        android:label="ShowUsersActivity" />
+
 </navigation>
