@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.yemen.oshopping.R
-import com.yemen.oshopping.admin.ShowReportFragmentDirections
 import com.yemen.oshopping.model.User
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
@@ -78,8 +78,9 @@ class ShowUserFragment : Fragment() {
             })
     }
 
+
     fun updateUI() {
-        userName.text = user.first_name+user.last_name
+        userName.text = user.first_name+" "+user.last_name
         userEmail.text = user.email
         userPhone.text = user.phone_number
         userAddress.text= user.address
