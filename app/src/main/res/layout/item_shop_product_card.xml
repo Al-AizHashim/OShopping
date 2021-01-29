@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-    <androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,9 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -26,105 +23,57 @@
             <LinearLayout
                 android:id="@+id/lyt_parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
+
+
 
                 <ImageView
                     android:id="@+id/product_img"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/image_shop_2" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/spacing_medium" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:background="@color/colorBackgroundItem"/>
+                <RatingBar
+                    android:id="@+id/rating_Bar_Show_product"
+                    style="@style/Yellow.Small.AppCompatRatingBar.Grey"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:isIndicator="true"
+                    android:longClickable="false"
+                    android:numStars="5"
+                    android:rating="3.5"
+                    android:stepSize="1"
+                    android:theme="@style/Yellow.Small.AppCompatRatingBar.Grey" />
 
-                    <View
-                        android:layout_width="@dimen/spacing_middle"
-                        android:layout_height="0dp" />
-
-                    <TextView
-                        android:id="@+id/product_nameTv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_xmedium"
-                        android:layout_weight="2"
-                        android:text="Product Name"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_90" />
-
-                    <ImageButton
-                        android:id="@+id/more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/spacing_xlarge"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:tint="@color/grey_40"
-                        app:srcCompat="@drawable/ic_more_vert" />
-
-                    <View
-                        android:layout_width="@dimen/spacing_small"
-                        android:layout_height="0dp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/spacing_medium" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/product_nameTv"
+                    android:text="Product Name"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    />
 
-                    <View
-                        android:layout_width="@dimen/spacing_middle"
-                        android:layout_height="0dp" />
-
-                    <RatingBar
-                        android:id="@+id/rating_Bar_Show_product"
-                        style="@style/Yellow.Small.AppCompatRatingBar.Grey"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:isIndicator="true"
-                        android:longClickable="false"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="1"
-                        android:theme="@style/Yellow.Small.AppCompatRatingBar.Grey" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/product_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$ 80.00"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/blue_10"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="@dimen/spacing_middle"
-                        android:layout_height="0dp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/spacing_middle" />
-
+                <TextView
+                    android:id="@+id/product_price"
+                    android:text="$ 00.00"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp"
+                    />
             </LinearLayout>
 
         </com.balysv.materialripple.MaterialRippleLayout>
 
-    </androidx.cardview.widget.CardView>
+
+
+
+</androidx.cardview.widget.CardView>
