@@ -1,6 +1,7 @@
 package com.yemen.oshopping.setting
 
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.User
 import com.yemen.oshopping.sharedPreferences.UserSharedPreferences
+import com.yemen.oshopping.ui.ShowUsersReportsActivity
 import com.yemen.oshopping.vendor.UpdateProductFragmentArgs
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
@@ -77,4 +79,5 @@ class UpdateUserFragment : Fragment() {
         }
         return view
     }
+
 }

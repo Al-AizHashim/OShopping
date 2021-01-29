@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
     companion object{
 
 
-        var LOCAL_HOST_URI="http://10.0.2.2/oshopping_api/"
-        var BASE_LOCAL_HOST_URI="http://10.0.2.2/"
+        var LOCAL_HOST_URI="http://192.168.191.1/oshopping_api/"
+        var BASE_LOCAL_HOST_URI="http://192.168.191.1/"
 
     }
 

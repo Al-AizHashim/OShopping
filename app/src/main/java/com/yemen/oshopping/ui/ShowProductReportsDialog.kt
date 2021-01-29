@@ -1,5 +1,6 @@
 package com.yemen.oshopping.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -93,6 +94,8 @@ class ShowProductReportsDialog : DialogFragment() {
                 oshoppingViewModel.hideProduct(hideProduct)
             }
             Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT).show()
+            restartActivity()
+
             dialog?.dismiss()
         }
         ignoreBTN.setOnClickListener{
@@ -109,6 +112,7 @@ class ShowProductReportsDialog : DialogFragment() {
                 oshoppingViewModel.hideProduct(hideProduct)
                 Toast.makeText(this@ShowProductReportsDialog.context, "Done", Toast.LENGTH_SHORT).show()
             }
+            restartActivity()
             dialog?.dismiss()
         }
         canceltBTN.setOnClickListener {
@@ -127,6 +131,13 @@ class ShowProductReportsDialog : DialogFragment() {
                     updateUI(reportDetials)
                 }
             })
+    }
+    private fun restartActivity() {
+        val intent = Intent(this@ShowProductReportsDialog.context, ShowUsersReportsActivity::class.java)
+        startActivity(intent)
+        if (activity != null) {
+            requireActivity().finish()
+        }
     }
 
     private inner class ReportHolder(view: View) : RecyclerView.ViewHolder(view) {
