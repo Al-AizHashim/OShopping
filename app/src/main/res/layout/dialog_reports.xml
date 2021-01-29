@@ -57,22 +57,23 @@
                     android:text="Submit"
                     android:textColor="@color/colorWhite" />
 
-            <Button
-                android:id="@+id/cancel_report_button"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/shape_nav"
-                android:text="cancel"
-                android:textColor="#fff" />
+
             <Button
                 android:id="@+id/ignore_report_button"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/shape_nav"
+                android:background="@drawable/button_shap_white_stroke"
+                android:text="ignore"
+                android:textColor="@color/colorBlack" />
+            <Button
+                android:id="@+id/cancel_report_button"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/button_shap_white"
                 android:text="cancel"
-                android:textColor="#fff" />
+                android:textColor="@color/colorBlack" />
 
 
 
