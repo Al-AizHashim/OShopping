@@ -206,6 +206,9 @@
         <action
             android:id="@+id/action_adminFragment_to_showUsersActivity"
             app:destination="@id/showUsersActivity" />
+        <action
+            android:id="@+id/action_adminFragment_to_showProductReportsFragment"
+            app:destination="@id/showProductReportsFragment" />
 
     </fragment>
     <fragment
@@ -413,5 +416,9 @@
         android:id="@+id/showUsersActivity"
         android:name="com.yemen.oshopping.ui.ShowUsersActivity"
         android:label="ShowUsersActivity" />
+    <fragment
+        android:id="@+id/showProductReportsFragment"
+        android:name="com.yemen.oshopping.ui.ShowProductReportsFragment"
+        android:label="ShowProductReportsFragment" />
 
 </navigation>

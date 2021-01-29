@@ -1,19 +1,28 @@
 package com.yemen.oshopping.setting
 
-import android.app.PendingIntent
+import android.app.Activity
+import android.app.Dialog
+import android.content.Intent
+import android.database.Cursor
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.view.Window
+import android.widget.Button
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.yemen.oshopping.R
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
-import kotlinx.android.synthetic.main.fragment_add_category.*
 
 
 class SettingFragment : Fragment() {
@@ -27,6 +36,8 @@ class SettingFragment : Fragment() {
     lateinit var chatTv: CardView
     lateinit var close: ImageButton
     lateinit var oshoppingViewModel: OshoppingViewModel
+
+
     //yemenoshopping@gmail.com
     private lateinit var mAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +95,8 @@ class SettingFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_aboutUsFragment)
         }
         contactUsTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_contactUsFragment)
+            showContactUsDialog()
+           // Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_contactUsFragment)
         }
         signOutTV.setOnClickListener {
             mAuth.signOut()
@@ -119,5 +131,60 @@ class SettingFragment : Fragment() {
     return view
     }
 
+    private fun showContactUsDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_contact_project)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+        dialog.findViewById<View>(R.id.bt_close).setOnClickListener { dialog.dismiss() }
+        dialog.findViewById<View>(R.id.email_fab).setOnClickListener {
+            sendEmail()
+        }
+        dialog.findViewById<View>(R.id.call_fab).setOnClickListener {
+                callme()
 
+        }
+        dialog.show()
+    }
+
+    fun sendEmail(){
+        val sendIntent= Intent().apply {
+            action= Intent.ACTION_SEND
+            type="text/plain"
+            putExtra(Intent.EXTRA_EMAIL,arrayOf("alaiz.hashim@gmail.com") )
+            putExtra(Intent.EXTRA_SUBJECT,"Email subject")
+            putExtra(Intent.EXTRA_TEXT,"Email message text")
+        }
+        if (sendIntent.resolveActivity(requireActivity().packageManager)!=null){
+            startActivity(sendIntent)
+        }
+    }
+
+
+
+    private fun callme() {
+        val callIntent = Intent().apply {
+            action = Intent.ACTION_DIAL
+            data = Uri.parse("tel:+967775301780")
+
+        }
+        if (callIntent.resolveActivity(requireActivity().packageManager) != null) {
+            startActivity(callIntent)
+        }
+    }
+
+    fun addContact() {
+        val addContactIntent = Intent().apply {
+            action = Intent.ACTION_INSERT
+            setType(ContactsContract.Contacts.CONTENT_TYPE)
+            putExtra(ContactsContract.Intents.Insert.NAME, "Al-Aiz Hashim")
+            putExtra(ContactsContract.Intents.Insert.PHONE, "tel:+967775301780")
+            putExtra(ContactsContract.Intents.Insert.EMAIL, "alaiz.hashim@gmail.com")
+
+        }
+        if (addContactIntent.resolveActivity(requireActivity().packageManager) != null) {
+            startActivity(addContactIntent)
+        }
+    }
 }
