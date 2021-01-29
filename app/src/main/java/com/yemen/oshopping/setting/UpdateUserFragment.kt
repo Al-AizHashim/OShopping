@@ -7,10 +7,12 @@ import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.User
+import com.yemen.oshopping.sharedPreferences.UserSharedPreferences
 import com.yemen.oshopping.vendor.UpdateProductFragmentArgs
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
@@ -61,14 +63,17 @@ class UpdateUserFragment : Fragment() {
 
         updateUserBtn.setOnClickListener {
             val user = User(
+                user_id = oshoppingViewModel.getStoredUserId(),
                 first_name = fNameEditText.text.toString(),
                 last_name = lNameEditText.text.toString(),
-                email = oshoppingViewModel.getStoredEmail().toString(),
                 phone_number = phoneNumberEditText.text.toString(),
-                details = detailsEditText.text.toString(),
-                image = imageName
+                address = addressEditText.text.toString(),
+                details = detailsEditText.text.toString()
+//                ,image = imageName
             )
             oshoppingViewModel.updateUser(user)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_updateUserFragment_to_showUserFragment)
         }
         return view
     }

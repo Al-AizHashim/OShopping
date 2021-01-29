@@ -79,7 +79,7 @@ class ShowUserFragment : Fragment() {
     }
 
     fun updateUI() {
-        userName.text = user.first_name+user.last_name
+        userName.text = user.first_name+" "+user.last_name
         userEmail.text = user.email
         userPhone.text = user.phone_number
         userAddress.text= user.address
