@@ -49,6 +49,7 @@
                     android:layout_height="@dimen/spacing_xlarge"
                     android:gravity="center"
                     android:text="product name"
+                    android:visibility="gone"
                     android:textColor="@color/colorPrimary"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                      />
@@ -79,6 +80,7 @@
                 android:paddingLeft="@dimen/spacing_large"
                 android:paddingRight="@dimen/spacing_large"
                 android:text="product price"
+                android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 />
 

@@ -46,4 +46,7 @@
     <color name="overlay_dark_10">#1A000000</color>
     <color name="overlay_dark_20">#33000000</color>
 
+    <color name="light_green_800">#558B2F</color>
+    <color name="green">#43A047</color>
+
 </resources>

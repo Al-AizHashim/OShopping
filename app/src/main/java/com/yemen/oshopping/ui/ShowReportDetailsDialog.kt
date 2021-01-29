@@ -1,5 +1,6 @@
 package com.yemen.oshopping.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -86,6 +87,7 @@ class ShowReportDetailsDialog : DialogFragment() {
                 oshoppingViewModel.blockUser(blockUser)
             }
             Toast.makeText(this@ShowReportDetailsDialog.context, "Done", Toast.LENGTH_SHORT).show()
+            restartActivity()
             dialog?.dismiss()
         }
         ignoreBTN.setOnClickListener {
@@ -97,15 +99,21 @@ class ShowReportDetailsDialog : DialogFragment() {
                 var blockUser = BlockUser(user_id = param1, block = 0, admin_id = 2, checked = 0)
                 oshoppingViewModel.blockUser(blockUser)
             }
+            restartActivity()
             dialog?.dismiss()
         }
         canceltBTN.setOnClickListener {
-
             dialog?.cancel()
         }
         return view
     }
-
+    private fun restartActivity() {
+        val intent = Intent(this@ShowReportDetailsDialog.context, ShowUsersReportsActivity::class.java)
+        startActivity(intent)
+        if (activity != null) {
+            requireActivity().finish()
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         oshoppingViewModel.fetchReportDetailsByUserId.observe(
