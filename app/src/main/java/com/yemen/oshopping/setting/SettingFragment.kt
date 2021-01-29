@@ -102,14 +102,14 @@ class SettingFragment : Fragment() {
         }
 
         chatTv.setOnClickListener {
-            if(oshoppingViewModel.getStoredUserId()==-1) {
+        /*    if(oshoppingViewModel.getStoredUserId()==-1) {
                 Toast.makeText(requireContext(), "You must create an account", Toast.LENGTH_SHORT).show()
                 Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
             }
             else{
                 Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
-            }
-
+            }*/
+            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
         }
         close.setOnClickListener {
             activity?.onBackPressed()

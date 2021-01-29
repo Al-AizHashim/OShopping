@@ -16,11 +16,15 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
+import com.yemen.oshopping.Chat.adapter.ChatAdapter
 import com.yemen.oshopping.Chat.adapter.UserAdapter
 import com.yemen.oshopping.Chat.firebase.FirebaseService
+import com.yemen.oshopping.Chat.model.Chat
 import com.yemen.oshopping.Chat.model.User
 import com.yemen.oshopping.R
+import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.user_activity.*
+import kotlinx.android.synthetic.main.user_activity.imgBack
 
 /*import kotlinx.android.synthetic.main.activity_users.**/
 
@@ -63,30 +67,74 @@ class UsersActivity : AppCompatActivity() {
             FirebaseDatabase.getInstance().getReference("Users")
 
 
-        databaseReference.addValueEventListener(object : ValueEventListener {
+
+        val databaseReference1: DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("Chat")
+
+        databaseReference1.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show()
+
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                userList.clear()
-                val currentUser = snapshot.getValue(User::class.java)
-
 
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
-                    val user = dataSnapShot.getValue(User::class.java)
+                    val chat = dataSnapShot.getValue(Chat::class.java)
 
-                    if (!user!!.userId.equals(firebase.uid)) {
 
-                        userList.add(user)
-                    }
+
+
+
+                        databaseReference.addValueEventListener(object : ValueEventListener {
+                            override fun onCancelled(error: DatabaseError) {
+                                Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show()
+                            }
+
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                userList.clear()
+                                val currentUser = snapshot.getValue(User::class.java)
+
+
+                                for (dataSnapShot: DataSnapshot in snapshot.children) {
+                                    val user = dataSnapShot.getValue(User::class.java)
+
+                                    if (!user!!.userId.equals(firebase.uid)&&chat!!.senderId.equals(userid) || chat!!.receiverId.equals(userid))
+
+                                    {
+
+                                        userList.add(user)
+                                    }
+                                }
+
+                                val userAdapter = UserAdapter(this@UsersActivity, userList)
+
+                                userRecyclerView.adapter = userAdapter
+                            }
+
+                        })
+
+
+
+
+
+
+
+
+
+
+
+
+
                 }
 
-                val userAdapter = UserAdapter(this@UsersActivity, userList)
-
-                userRecyclerView.adapter = userAdapter
             }
-
         })
+
+
+
+
+
+
+
     }
 }

@@ -171,11 +171,11 @@ class SignUp : AppCompatActivity(), View.OnClickListener{
     }
 
     private fun setupGoogleLogin() {
-      /*  signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        signInClient = GoogleSignIn.getClient(this, signInOptions)*/
+        signInClient = GoogleSignIn.getClient(this, signInOptions)
     }
 
     override fun onClick(v: View?) {
