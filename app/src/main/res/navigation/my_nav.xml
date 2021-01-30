@@ -46,7 +46,11 @@
             app:popExitAnim="@anim/to_left"/>
         <action
             android:id="@+id/action_settingFragment_to_loginScreen"
-            app:destination="@id/loginScreen" />
+            app:destination="@id/loginScreen"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_settingFragment_to_signUp2"
             app:destination="@id/signUp2"
@@ -199,16 +203,32 @@
             app:popExitAnim="@anim/to_left"/>
         <action
             android:id="@+id/action_adminFragment_to_showProductsReportsActivity"
-            app:destination="@id/showProductsReportsActivity" />
+            app:destination="@id/showProductsReportsActivity"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_adminFragment_to_showUsersReportsActivity"
-            app:destination="@id/showUsersReportsActivity" />
+            app:destination="@id/showUsersReportsActivity"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_adminFragment_to_showUsersActivity"
-            app:destination="@id/showUsersActivity" />
+            app:destination="@id/showUsersActivity"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
         <action
             android:id="@+id/action_adminFragment_to_showProductReportsFragment"
-            app:destination="@id/showProductReportsFragment" />
+            app:destination="@id/showProductReportsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
 
     </fragment>
     <fragment
@@ -241,7 +261,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/showCategoryFragment"
@@ -294,7 +315,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/adminFragment" />
         <argument
             android:name="reportIdArg"
             app:argType="integer" />
@@ -313,7 +335,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/adminFragment" />
         <argument
             android:name="categoryIdArg"
             app:argType="integer" />
@@ -358,7 +381,9 @@
             android:id="@+id/action_showUserFragment_to_updateUserFragment2"
             app:destination="@id/updateUserFragment"
             app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right" />
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
 
     <fragment
@@ -371,7 +396,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/adminFragment" />
         <argument
             android:name="first_name "
             app:argType="string"
