@@ -247,6 +247,7 @@
         android:layout_marginTop="416dp"
         android:backgroundTint="@color/colorPrimaryLight3"
         app:cardCornerRadius="32sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.736"
         app:layout_constraintStart_toStartOf="parent"
@@ -293,20 +294,21 @@
         android:background="@drawable/custom_shape2"
         android:gravity="center"
         android:text="@string/SignUP"
+        android:visibility="gone"
         android:textColor="@color/colorWhite"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chat"
-        tools:ignore="DuplicateIds,MissingConstraints" />
+         />
 
     <Button
         android:id="@+id/sign_out"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/custom_shape3"
         android:gravity="center"
         android:text="Sign Out"
@@ -315,8 +317,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chat"
-        tools:ignore="DuplicateIds,MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/chat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
