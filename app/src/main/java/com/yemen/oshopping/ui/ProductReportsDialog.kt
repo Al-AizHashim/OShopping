@@ -14,7 +14,7 @@ import com.yemen.oshopping.R
 import com.yemen.oshopping.model.ProductReportDetails
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
-private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM1 = "product_id"
 class ProductReportsDialog : DialogFragment() {
     private lateinit var oshoppingViewModel: OshoppingViewModel
     lateinit var submitBTN: Button
@@ -41,7 +41,7 @@ class ProductReportsDialog : DialogFragment() {
         submitBTN = view.findViewById(R.id.submit_report_button)
         canceltBTN = view.findViewById(R.id.cancel_report_button)
         radioGroup = view.findViewById(R.id.product_report_radio_group)
-
+        var user_id = oshoppingViewModel.getStoredUserId()
         submitBTN.setOnClickListener {
             // get selected radio button from radioGroup
             val selectedId: Int = radioGroup.checkedRadioButtonId
@@ -57,7 +57,7 @@ class ProductReportsDialog : DialogFragment() {
                     x = 3
                 }
                 val productReportDetails =
-                    ProductReportDetails(product_id = this.productId, product_r_id = x, sender_id = 1)
+                    ProductReportDetails(product_id = this.productId, product_r_id = x, sender_id =user_id )
                 oshoppingViewModel.pushProductReportDetails(productReportDetails)
                 Toast.makeText(
                     this@ProductReportsDialog.context,
