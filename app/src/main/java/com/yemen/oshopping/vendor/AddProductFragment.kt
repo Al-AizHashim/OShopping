@@ -293,7 +293,7 @@ class AddProductFragment : Fragment() {
                 response: Response<UploadResponse>
             ) {
                 response.body()?.let {
-                    layout_root.snackbar(it.message)
+                   // layout_root.snackbar(it.message)
                 }
                 imageName += response.body()?.image + ":"
                 Log.d("imageUrlx", "${imageName.toString()}")

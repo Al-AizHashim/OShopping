@@ -9,10 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
@@ -39,6 +36,9 @@ class MyProductFragment : Fragment() {
     lateinit var deleteProductBtn:Button
     lateinit var fab: FloatingActionButton
     lateinit var productsItems:List<ProductItem>
+    val delim = ":"
+    var list: List<String> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -122,16 +122,24 @@ class MyProductFragment : Fragment() {
         private val productDate = itemView.findViewById(R.id.product_category) as TextView
         private val productImage = itemView.findViewById(R.id.product_img) as ImageView
         var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        private val productRating = itemView.findViewById(R.id.rating_Bar_Show_product) as RatingBar
 
         fun bind(productItems: ProductItem) {
-            var compositeProductUrl = url + productItems.product_img
-            var conditionString = "string" + productItems.product_img
-            if (!conditionString.equals("stringnull"))
-                Picasso.get().load(compositeProductUrl).into(productImage)
+
+            var imageUri: String
+            list = productItems.product_img.split(delim)
+            if (list.size == 1)
+                imageUri = list[0]
+            else
+                imageUri = list[0]
+            imageUri?.let {
+                Picasso.get().load(url + it).into(productImage)
+            }
             p = productItems
             productName.text = productItems.product_name
             productDate.text = productItems.product_date
             mainLayout.startAnimation(translateAnimation)
+            productRating.rating = productItems.rating_average
 
         }
 
