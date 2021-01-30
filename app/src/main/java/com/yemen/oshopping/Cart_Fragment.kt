@@ -145,7 +145,8 @@ class Cart_Fragment : Fragment() {
                         activityType = "buy",
                         quantity = 1,
                         yrial_price = cartItems.yrial_price,
-                        dollar_price = cartItems.dollar_price
+                        dollar_price = cartItems.dollar_price,
+                        fk_user_id = cartViewModel.getStoredUserId()
                     )
                     Log.d("pushToActivity","the contint of Activity is :$activ")
                 cartViewModel.pushActivity(activ)
@@ -154,7 +155,19 @@ class Cart_Fragment : Fragment() {
                         "Added to Activity successfully",
                         Toast.LENGTH_LONG
                     ).show()
+                val activ2= ActivityItem(
+                    productId = cartItems.fk_product_id,
+                    productName = cartItems.product_name,
+                    totalPrice = cartItems.dollar_price ,
+                    activityType = "sell",
+                    quantity = 1,
+                    yrial_price = cartItems.yrial_price,
+                    dollar_price = cartItems.dollar_price,
+                    fk_user_id = cartItem.vendor_id
+                )
+                cartViewModel.pushActivity(activ2)
                 }
+
 
 
         }

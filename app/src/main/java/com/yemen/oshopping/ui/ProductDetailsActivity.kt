@@ -62,6 +62,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     //lateinit var productDiscount: TextView
     //lateinit var productDetails: TextView
     lateinit var productItem: ProductItem
+    lateinit var productItem2: ProductItem
     lateinit var productItemss: ProductItem
     lateinit var ratingBar: RatingBar
     lateinit var ratingBar2: RatingBar
@@ -106,12 +107,12 @@ class ProductDetailsActivity : AppCompatActivity() {
         //val userName=sharedPreference.getValueString("userName")
         vendorProfile=findViewById(R.id.vendor_profile)
         vendorChat=findViewById(R.id.vendor_chat)
-       // reportsNoTV=findViewById(R.id.number_of_product_reports)
-       // if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
-         //   addToCartFab.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_baseline_block_24))
+       reportsNoTV=findViewById(R.id.number_of_product_reports)
+       if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
+            addToCartFab.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_baseline_block_24))
 
 
-      //  }
+        }
 
 
     }
@@ -148,6 +149,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                 productDetails?.let {
                     Log.d("FromObserver", "$it")
                     this.productItem = productDetails[0]
+                    this.productItem2=productDetails[1]
                     productItemss=productItem
                     list = productItem.product_img.split(delim)
                     if (list.size==1)
@@ -171,7 +173,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         ratingBarTexView.text = productItem.number_of_ratings.toString() + " votes"
         productDetails.text=productItem.product_details
         productVendor.text=productItem.first_name+" "+productItem.last_name
-       // reportsNoTV.text=productItem.number_of_reports.toString()
+        reportsNoTV.text=productItem2.number_of_reports.toString()
     }
 
     private fun initToolbar() {
@@ -218,14 +220,14 @@ class ProductDetailsActivity : AppCompatActivity() {
         lyt_expand_description!!.visibility = View.VISIBLE
         addToCartFab = findViewById(R.id.add_to_cart_fab)
         addToCartFab.setOnClickListener {
-            /*
+
             if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
                 var hideProduct=HideProduct(productItemss.product_id,1,oshoppingViewModel.getStoredUserId(),0)
                 oshoppingViewModel.hideProduct(hideProduct)
             }
             else {
 
-             */
+
 
                 val cart = Cart(
                     fk_user_id = oshoppingViewModel.getStoredUserId(),
@@ -254,7 +256,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                 toastFloatingImage(url + imageUri, productItemss.product_name)
 
 
-            // }
+             }
         }
     }
 

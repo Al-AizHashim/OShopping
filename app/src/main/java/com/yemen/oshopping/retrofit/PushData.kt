@@ -231,10 +231,10 @@ class PushData {
 
 
     }
-    fun pushActivity(activ: ActivityItem,user_id:Int) {
+    fun pushActivity(activ: ActivityItem) {
         Log.d("pushActivityfun", "pushActivity:${activ.toString()} ")
         val pushActivityRequest: Call<DefaultResponse> = RetrofitClient().oshoppingApi.pushActivity(
-            user_id,
+            activ.fk_user_id,
             activ.productId,
             activ.quantity,
             activ.totalPrice,

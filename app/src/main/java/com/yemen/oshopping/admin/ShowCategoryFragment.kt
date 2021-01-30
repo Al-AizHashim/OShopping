@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -53,7 +54,7 @@ class ShowCategoryFragment : Fragment() {
         noDataTextView=view.findViewById(R.id.no_data_textView)
         close=view.findViewById(R.id.bt_close)
         fab.setOnClickListener {
-            Navigation.findNavController(view)
+            findNavController()
                 .navigate(R.id.action_showCategoryFragment_to_addCategoryFragment)
         }
         close.setOnClickListener {

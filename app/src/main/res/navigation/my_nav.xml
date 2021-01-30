@@ -227,7 +227,8 @@
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            app:popExitAnim="@anim/to_right"
+            app:popUpTo="@id/adminFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReportFragment"
@@ -352,15 +353,14 @@
     <fragment
         android:id="@+id/showUserFragment"
         android:name="com.yemen.oshopping.setting.ShowUserFragment"
-        android:label="ShowUserFragment" />
-
+        android:label="ShowUserFragment" >
         <action
-            android:id="@+id/action_showUserFragment_to_updateUserFragment"
+            android:id="@+id/action_showUserFragment_to_updateUserFragment2"
             app:destination="@id/updateUserFragment"
             app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:exitAnim="@anim/to_right" />
+    </fragment>
+
     <fragment
         android:id="@+id/updateUserFragment"
         android:name="com.yemen.oshopping.setting.UpdateUserFragment"
@@ -370,8 +370,6 @@
             app:destination="@id/showUserFragment"
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
-            app:popUpTo="@id/contactUsFragment"
-            app:popUpToInclusive="true"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
         <argument

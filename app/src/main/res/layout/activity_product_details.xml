@@ -148,7 +148,7 @@
 
                     </LinearLayout>
                     <LinearLayout
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
@@ -160,7 +160,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="  Reports:"
-                            android:drawableLeft="@drawable/ic_widgets"
+                            android:drawableLeft="@drawable/ic_baseline_block_26"
                             android:drawableTint="@color/colorAccent"
                             android:textColor="@color/colorWhite"
                             android:drawablePadding="16dp"

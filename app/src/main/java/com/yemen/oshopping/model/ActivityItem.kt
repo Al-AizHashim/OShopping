@@ -17,6 +17,7 @@ data class ActivityItem(
     @SerializedName("total_price")
     var totalPrice: Double,
     @SerializedName("activity_type")
-    var activityType: String
+    var activityType: String,
+    var fk_user_id:Int
 
 )

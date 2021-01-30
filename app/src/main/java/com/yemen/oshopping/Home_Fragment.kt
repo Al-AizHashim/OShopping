@@ -49,6 +49,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var popupMenu: PopupMenu
     private lateinit var searchView: SearchView
     private lateinit var notifications:ImageView
+    lateinit var welcomeTV:TextView
     val delim = ":"
     var list: List<String> = ArrayList()
 
@@ -95,15 +96,20 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         highestRateBtn = view.findViewById(R.id.highest_rate_btn)
         searchView = view.findViewById(R.id.search_view)
         notifications=view.findViewById(R.id.notifications)
+        welcomeTV=view.findViewById(R.id.welcomeTV)
 
         //searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
         searchView.suggestionsAdapter
         searchView.apply {
             setOnSearchClickListener {
+                welcomeTV.visibility=View.GONE
+                searchView.layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT
                 setQuery(oshoppingViewModel.getQuery(), false)
             }
         }
+
+
         popupMenu = PopupMenu(requireContext(), categoryBtn)
         oshoppingViewModel.categoryItemLiveData.observe(
             viewLifecycleOwner,
@@ -140,7 +146,15 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
 
+        searchView.setOnCloseListener{
+            welcomeTV.visibility=View.VISIBLE
+            searchView.layoutParams.width=ViewGroup.LayoutParams.WRAP_CONTENT
+            return@setOnCloseListener false
+        }
+    }
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
         val popup = PopupMenu(requireContext(), v)
         popup.menuInflater.inflate(menuRes, popup.menu)
@@ -375,6 +389,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             searchThroughDatabase(query)
         }
         searchView.clearFocus()
+        welcomeTV.visibility=View.VISIBLE
         searchView.horizontalFadingEdgeLength
         return true
     }
@@ -387,6 +402,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
         return true
     }
 
+
     private fun searchThroughDatabase(query: String) {
         oshoppingViewModel.search(query)
         oshoppingViewModel.searchLiveData.observe(
@@ -397,6 +413,7 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             })
 
     }
+
 
 }
 
