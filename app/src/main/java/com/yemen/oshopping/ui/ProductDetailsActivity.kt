@@ -1,5 +1,6 @@
 package com.yemen.oshopping.ui
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -56,6 +57,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     lateinit var sharedPreference: SharedPreference
     lateinit var vendorProfile:TextView
     lateinit var vendorChat:TextView
+    lateinit var reportsNoTV: TextView
     // lateinit var productQuantity: TextView
     //lateinit var productDiscount: TextView
     //lateinit var productDetails: TextView
@@ -77,6 +79,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     lateinit var oshoppingViewModel: OshoppingViewModel
     lateinit var reportProduct:TextView
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedPreference = SharedPreference(applicationContext)
@@ -103,7 +106,12 @@ class ProductDetailsActivity : AppCompatActivity() {
         //val userName=sharedPreference.getValueString("userName")
         vendorProfile=findViewById(R.id.vendor_profile)
         vendorChat=findViewById(R.id.vendor_chat)
+       // reportsNoTV=findViewById(R.id.number_of_product_reports)
+       // if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
+         //   addToCartFab.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_baseline_block_24))
 
+
+      //  }
 
 
     }
@@ -163,13 +171,14 @@ class ProductDetailsActivity : AppCompatActivity() {
         ratingBarTexView.text = productItem.number_of_ratings.toString() + " votes"
         productDetails.text=productItem.product_details
         productVendor.text=productItem.first_name+" "+productItem.last_name
+       // reportsNoTV.text=productItem.number_of_reports.toString()
     }
 
     private fun initToolbar() {
         val toolbar =
             findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        supportActionBar!!.setTitle("Fashion")
+        supportActionBar!!.setTitle(" ")
 
         Tools().setSystemBarColor(this)
     }
@@ -209,7 +218,15 @@ class ProductDetailsActivity : AppCompatActivity() {
         lyt_expand_description!!.visibility = View.VISIBLE
         addToCartFab = findViewById(R.id.add_to_cart_fab)
         addToCartFab.setOnClickListener {
-            if(true) {
+            /*
+            if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
+                var hideProduct=HideProduct(productItemss.product_id,1,oshoppingViewModel.getStoredUserId(),0)
+                oshoppingViewModel.hideProduct(hideProduct)
+            }
+            else {
+
+             */
+
                 val cart = Cart(
                     fk_user_id = oshoppingViewModel.getStoredUserId(),
                     fk_product_id = productItemss.product_id,
@@ -236,11 +253,8 @@ class ProductDetailsActivity : AppCompatActivity() {
 
                 toastFloatingImage(url + imageUri, productItemss.product_name)
 
-            }
-            else {
-                var hideProduct=HideProduct(productItemss.product_id,1,oshoppingViewModel.getStoredUserId(),0)
-                oshoppingViewModel.hideProduct(hideProduct)
-            }
+
+            // }
         }
     }
 

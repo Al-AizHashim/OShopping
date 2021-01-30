@@ -163,7 +163,7 @@
             android:gravity="start"
             android:text="Info"
             android:textAlignment="textStart"
-            android:textColor="@color/colorPrimaryLight2"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -200,8 +200,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:textColor="@color/colorPrimaryLight2"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
             app:layout_constraintStart_toEndOf="@+id/textView6" />
 
@@ -215,7 +216,6 @@
             android:background="@drawable/ic_baseline_email_20"
             android:textColor="@color/colorPrimaryLight2"
             android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -225,8 +225,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:textColor="@color/colorPrimaryLight2"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
             app:layout_constraintStart_toEndOf="@+id/textView8" />
 
@@ -250,7 +251,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:textColor="@color/colorPrimaryLight2"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
@@ -261,6 +262,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="@+id/email_vendor_image_button"
             app:layout_constraintEnd_toStartOf="@+id/email_vendor_image_button"
@@ -276,6 +278,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="172dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/vendor_products_image_button"
             app:layout_constraintHorizontal_bias="0.5"
@@ -290,6 +293,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
+
             app:layout_constraintBottom_toBottomOf="@+id/email_vendor_image_button"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintHorizontal_bias="0.5"
