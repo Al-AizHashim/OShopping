@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
+import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
@@ -84,6 +86,7 @@ class ShowCategoryFragment : Fragment() {
             itemView.setOnClickListener(this)
 
         }
+        val catrgoryImageView = itemTextView.findViewById(R.id.imageView2) as ImageView
         var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
         val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
 
@@ -92,6 +95,7 @@ class ShowCategoryFragment : Fragment() {
         val catrgoryDeleteBtn = itemTextView.findViewById(R.id.delete_category_btn) as ImageView
         fun bind(cate: Category){
             catergoryInstance=cate
+            Picasso.get().load(MainActivity.LOCAL_HOST_URI+cate.category_image).into(catrgoryImageView)
             catrgoryTextView.text=cate.cat_name
             mainLayout.startAnimation(translateAnimation)
             catrgoryDeleteBtn.setOnClickListener {

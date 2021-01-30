@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.yemen.oshopping.model.Category
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
@@ -58,11 +60,12 @@ class Category_Fragment: Fragment()  {
 
     private inner class CategoryHolder(itemTextView: View)
         : RecyclerView.ViewHolder(itemTextView) {
-
+         val catrgoryImageView = itemTextView.findViewById(R.id.imageView2) as ImageView
         val catrgoryTextView = itemTextView.findViewById(R.id.category) as TextView
         var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
         val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
         fun bind(cate: Category){
+            Picasso.get().load(MainActivity.LOCAL_HOST_URI+cate.category_image).into(catrgoryImageView)
             catrgoryTextView.text=cate.cat_name
             mainLayout.startAnimation(translateAnimation)
         }
