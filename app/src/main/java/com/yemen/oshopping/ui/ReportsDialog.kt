@@ -16,20 +16,28 @@ import com.yemen.oshopping.model.PostReportDetails
 import com.yemen.oshopping.model.Report
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
-
+private const val PARAM1 ="vendor_id"
 class ReportsDialog : DialogFragment() {
     private var adapter: ReportAdapter = ReportAdapter(emptyList())
     private lateinit var ReportRecyclerView: RecyclerView
     private lateinit var oshoppingViewModel: OshoppingViewModel
     lateinit var submitBTN: Button
     lateinit var canceltBTN: Button
+    lateinit var ignoretBTN: Button
     var lastCheckedRB: RadioButton? = null
     var reportIdViewHodler: Int? = 0
+    var user_id :Int=0
+    var vendor_id :Int?=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments.let {
+            vendor_id=it?.getInt(PARAM1)
+        }
+        Log.d("qqTAG", "onCreate: $vendor_id")
         oshoppingViewModel =
             ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
+        user_id=oshoppingViewModel.getStoredUserId()
     }
 
     override fun onCreateView(
@@ -43,9 +51,11 @@ class ReportsDialog : DialogFragment() {
         ReportRecyclerView.adapter = adapter
         submitBTN = view.findViewById(R.id.action_report_button)
         canceltBTN = view.findViewById(R.id.cancel_report_button)
+        ignoretBTN = view.findViewById(R.id.ignore_report_button)
+        ignoretBTN.visibility=View.GONE
         submitBTN.setOnClickListener {
             if(reportIdViewHodler!=0){
-            val postReportDetails = PostReportDetails(reportIdViewHodler, 1, 2)
+            val postReportDetails = PostReportDetails(reportIdViewHodler,user_id ,vendor_id!!)
             Toast.makeText(
                 this@ReportsDialog.context,
                 "Done",
@@ -118,7 +128,13 @@ class ReportsDialog : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = ReportsDialog()
+        fun newInstance(param1:Int) :ReportsDialog{
+            return ReportsDialog().apply {
+                arguments=Bundle().apply {
+                    putInt(PARAM1,param1)
+                }
+            }
+        }
     }
 }
 

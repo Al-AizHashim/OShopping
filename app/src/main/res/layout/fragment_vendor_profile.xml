@@ -114,6 +114,18 @@
             app:srcCompat="@drawable/ic_baseline_report_24"
             android:layout_marginLeft="16dp"
             tools:ignore="VectorDrawableCompat" />
+        <ImageButton
+            android:id="@+id/block_image_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="52dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toEndOf="@+id/vendor_image"
+            app:layout_constraintTop_toTopOf="@+id/vendor_image"
+            app:srcCompat="@drawable/ic_baseline_block_24"
+            android:layout_marginLeft="16dp"
+            tools:ignore="VectorDrawableCompat" />
 
         <TextView
             android:id="@+id/textView4"

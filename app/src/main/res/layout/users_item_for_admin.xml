@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="78dp"
-    android:elevation="8dp"
-    android:id="@+id/main_layout"
-    android:background="@drawable/button_shap_white"
-    android:padding="16dp"
-
     android:layout_margin="8dp"
-    >
+    android:background="@drawable/button_shap_white"
+    android:elevation="8dp"
+
+    android:padding="16dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_img"
         android:layout_width="46dp"
         android:layout_height="46dp"
-        app:cardCornerRadius="250dp"
         android:layout_gravity="center"
+        app:cardCornerRadius="250dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,8 +23,8 @@
             android:id="@+id/mag_view"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:src="@drawable/user_img"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/user_img" />
 
     </androidx.cardview.widget.CardView>
 
@@ -35,9 +34,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="@string/NameUser"
+        android:textColor="@color/colorBlack"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toTopOf="@+id/user_detail"
         app:layout_constraintEnd_toEndOf="@+id/user_detail"
         app:layout_constraintHorizontal_bias="0.0"
@@ -50,14 +49,27 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="user type "
-        android:textSize="16dp"
         android:textColor="@color/colorGray"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/card_img"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/card_img"
         app:layout_constraintTop_toTopOf="@+id/card_img"
         app:layout_constraintVertical_bias="1.0" />
 
+    <Button
+        android:id="@+id/block_user_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shap"
+        android:drawableLeft="@drawable/ic_baseline_block_26"
+        android:paddingLeft="8dp"
+        android:text="Block"
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

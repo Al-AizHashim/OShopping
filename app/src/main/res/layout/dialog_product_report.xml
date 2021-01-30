@@ -39,7 +39,7 @@
 
             <RadioGroup
                 android:id="@+id/product_report_radio_group"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,36 +49,45 @@
 
                 <RadioButton
                     android:id="@+id/product_report_radio_button_1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_marginEnd="20dp"
                     android:checked="false"
+                    android:layoutDirection="rtl"
+                    android:background="@drawable/custom_shape"
                     android:clickable="true"
+                    android:padding="10dp"
                     android:text="@string/produt_raidoBtn_first"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <RadioButton
                     android:id="@+id/product_report_radio_button_2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_marginEnd="20dp"
                     android:checked="false"
+                    android:padding="10dp"
+                    android:layoutDirection="rtl"
+                    android:background="@drawable/custom_shape"
                     android:clickable="true"
                     android:text="@string/produt_raidoBtn_second"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
 
                 <RadioButton
                     android:id="@+id/product_report_radio_button_3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_marginEnd="20dp"
                     android:checked="false"
+                    android:padding="10dp"
                     android:clickable="true"
+                    android:layoutDirection="rtl"
+                    android:background="@drawable/custom_shape"
                     android:text="@string/produt_raidoBtn_third"
-                    android:textSize="24sp" />
+                    android:textSize="22sp" />
             </RadioGroup>
 
 
@@ -88,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/custom_shape3"
+                android:background="@drawable/button_shap"
                 android:text="Submit"
                 android:textColor="#fff" />
             <Button

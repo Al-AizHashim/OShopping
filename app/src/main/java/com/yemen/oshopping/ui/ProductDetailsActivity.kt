@@ -25,6 +25,7 @@ import com.yemen.oshopping.Chat.activity.ChatActivity
 import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.R
 import com.yemen.oshopping.model.Cart
+import com.yemen.oshopping.model.HideProduct
 import com.yemen.oshopping.model.ProductItem
 import com.yemen.oshopping.sharedPreferences.SharedPreference
 import com.yemen.oshopping.utils.Tools
@@ -128,7 +129,7 @@ class ProductDetailsActivity : AppCompatActivity() {
             startActivity(intent2)
         }
         reportProduct.setOnClickListener {
-            ReportsDialog.newInstance().show((supportFragmentManager),"a")
+            ProductReportsDialog.newInstance(productItemss.product_id).show((supportFragmentManager),"b")
         }
     }
     fun getProductData(){
@@ -208,33 +209,38 @@ class ProductDetailsActivity : AppCompatActivity() {
         lyt_expand_description!!.visibility = View.VISIBLE
         addToCartFab = findViewById(R.id.add_to_cart_fab)
         addToCartFab.setOnClickListener {
-            val cart = Cart(
-                fk_user_id = oshoppingViewModel.getStoredUserId(),
-                fk_product_id = productItemss.product_id,
-                cart_statuse = 0,
-                product_name = productItemss.product_name,
-                product_details = productItemss.product_details,
-                dollar_price = productItemss.dollar_price,
-                yrial_price = productItemss.yrial_price,
-                product_quantity = 1,
-                vendor_id = productItemss.vendor_id,
-                cat_id = productItemss.cat_id,
-                product_img = productItemss.product_img,
-                product_discount = productItemss.product_discount,
-                color = productItemss.color
-            )
-            oshoppingViewModel.pushCart(cart)
-            Log.d("pushtocart", "the contint of cart is :$cart")
-            var imageUri: String
-            list = productItemss.product_img.split(delim)
-            if (list.size == 1)
-                imageUri = list[0]
-            else
-                imageUri = list[0]
+            if(true) {
+                val cart = Cart(
+                    fk_user_id = oshoppingViewModel.getStoredUserId(),
+                    fk_product_id = productItemss.product_id,
+                    cart_statuse = 0,
+                    product_name = productItemss.product_name,
+                    product_details = productItemss.product_details,
+                    dollar_price = productItemss.dollar_price,
+                    yrial_price = productItemss.yrial_price,
+                    product_quantity = 1,
+                    vendor_id = productItemss.vendor_id,
+                    cat_id = productItemss.cat_id,
+                    product_img = productItemss.product_img,
+                    product_discount = productItemss.product_discount,
+                    color = productItemss.color
+                )
+                oshoppingViewModel.pushCart(cart)
+                Log.d("pushtocart", "the contint of cart is :$cart")
+                var imageUri: String
+                list = productItemss.product_img.split(delim)
+                if (list.size == 1)
+                    imageUri = list[0]
+                else
+                    imageUri = list[0]
 
-            toastFloatingImage(url+imageUri,productItemss.product_name)
+                toastFloatingImage(url + imageUri, productItemss.product_name)
 
-
+            }
+            else {
+                var hideProduct=HideProduct(productItemss.product_id,1,oshoppingViewModel.getStoredUserId(),0)
+                oshoppingViewModel.hideProduct(hideProduct)
+            }
         }
     }
 

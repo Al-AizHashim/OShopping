@@ -7,16 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.Observer
 import androidx.fragment.app.Fragment
-
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yemen.oshopping.R
+import com.yemen.oshopping.model.BlockUser
 import com.yemen.oshopping.model.User
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
@@ -59,17 +60,18 @@ class ShowUsersFragment : Fragment() {
     }
 
 
-    private inner class UserHolder(itemTextView: View)
-        : RecyclerView.ViewHolder(itemTextView),View.OnClickListener{
-        var mainLayout= itemView.findViewById(R.id.main_layout) as ConstraintLayout
-        val translateAnimation: Animation = AnimationUtils.loadAnimation(requireContext(),R.anim.translate_anim)
-
-
+    private inner class UserHolder(itemTextView: View) : RecyclerView.ViewHolder(itemTextView),
+        View.OnClickListener {
+        var mainLayout = itemView.findViewById(R.id.main_layout) as ConstraintLayout
+        val translateAnimation: Animation =
+            AnimationUtils.loadAnimation(requireContext(), R.anim.translate_anim)
         val userNameTV = itemTextView.findViewById(R.id.user_full_name) as TextView
         val userStatusTV = itemTextView.findViewById(R.id.user_type) as TextView
+        var blockBTN = itemTextView.findViewById(R.id.block_user_btn) as Button
         lateinit var user: User
         fun bind(user: User) {
-           mainLayout.startAnimation(translateAnimation)
+
+            mainLayout.startAnimation(translateAnimation)
             this.user = user
             var userStatus = "purchaer"
             userNameTV.text = user.first_name + " " + user.last_name
@@ -77,8 +79,42 @@ class ShowUsersFragment : Fragment() {
                 userStatus = "Vendor"
             }
 
-            userStatusTV.text=userStatus
-           
+            userStatusTV.text = userStatus
+            if (user.block == 0) {
+                blockBTN.text = "BLOCK"
+                blockBTN.setOnClickListener {
+                    var blockUser =
+                        BlockUser(user.user_id!!, 1, userViewModel.getStoredUserId(), 0)
+                    userViewModel.blockUser(blockUser)
+                    Toast.makeText(
+                        this@ShowUsersFragment.context,
+                        "user blocked successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    restartActivity()
+                }
+            } else if (user.block == 1) {
+                blockBTN.text = "UNBLOCK"
+                blockBTN.setOnClickListener {
+                    var blockUser =
+                        BlockUser(user.user_id!!, 0, userViewModel.getStoredUserId(), 0)
+                    userViewModel.blockUser(blockUser)
+                    Toast.makeText(
+                        this@ShowUsersFragment.context,
+                        "user unblocked successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    restartActivity()
+                }
+            }
+        }
+
+        private fun restartActivity() {
+            val intent = Intent(this@ShowUsersFragment.context, ShowUsersActivity::class.java)
+            startActivity(intent)
+            if (activity != null) {
+                requireActivity().finish()
+            }
         }
 
         init {
