@@ -48,7 +48,7 @@ class ShowUserFragment : Fragment() {
         editImageBTN.setOnClickListener {
             val action=
                 user.user_id?.let { it1 ->
-                    ShowUserFragmentDirections.actionShowUserFragmentToUpdateUserFragment(userId = it1,firstName =user.first_name,
+                    ShowUserFragmentDirections.actionShowUserFragmentToUpdateUserFragment2(userId = it1,firstName =user.first_name,
                         lastName = user.last_name,email = user.email,phoneNumber = user.phone_number,
                         image = user.image,details =  user.details,address=user.address)
 

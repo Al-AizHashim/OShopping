@@ -48,5 +48,6 @@
 
     <color name="light_green_800">#558B2F</color>
     <color name="green">#43A047</color>
+    <color name="red">#E53935</color>
 
 </resources>

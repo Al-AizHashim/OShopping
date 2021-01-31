@@ -5,26 +5,26 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.cardview.widget.CardView
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
 import com.yemen.oshopping.Chat.activity.ChatActivity
 import com.yemen.oshopping.MainActivity
 import com.yemen.oshopping.R
+import com.yemen.oshopping.SignUp
 import com.yemen.oshopping.model.Cart
 import com.yemen.oshopping.model.HideProduct
 import com.yemen.oshopping.model.ProductItem
@@ -122,14 +122,22 @@ class ProductDetailsActivity : AppCompatActivity() {
         getProductData()
 
         vendorChat.setOnClickListener {
-            val intent = Intent(this,
-                ChatActivity::class.java)
-            //vendor id and name from api
-            val userId=productItemss.firebase_user_id
-            val userName=productItemss.firebase_user_name
-            intent.putExtra("userId",userId)
-            intent.putExtra("userName",userName)
-            startActivity(intent)
+             if(oshoppingViewModel.getStoredEmail().equals("none")){
+                toastIconError()
+            }
+            else {
+
+                 val intent = Intent(
+                     this,
+                     ChatActivity::class.java
+                 )
+                 //vendor id and name from api
+                 val userId = productItemss.firebase_user_id
+                 val userName = productItemss.firebase_user_name
+                 intent.putExtra("userId", userId)
+                 intent.putExtra("userName", userName)
+                 startActivity(intent)
+             }
 
         }
         vendorProfile.setOnClickListener {
@@ -138,7 +146,13 @@ class ProductDetailsActivity : AppCompatActivity() {
             startActivity(intent2)
         }
         reportProduct.setOnClickListener {
-            ProductReportsDialog.newInstance(productItemss.product_id).show((supportFragmentManager),"b")
+            if (oshoppingViewModel.getStoredEmail().equals("none")) {
+                toastIconError()
+
+            } else {
+                ProductReportsDialog.newInstance(productItemss.product_id)
+                    .show((supportFragmentManager), "b")
+            }
         }
     }
     fun getProductData(){
@@ -224,6 +238,11 @@ class ProductDetailsActivity : AppCompatActivity() {
             if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
                 var hideProduct=HideProduct(productItemss.product_id,1,oshoppingViewModel.getStoredUserId(),0)
                 oshoppingViewModel.hideProduct(hideProduct)
+            }
+
+            else if(oshoppingViewModel.getStoredEmail().equals("none")){
+                 toastIconError()
+
             }
             else {
 
@@ -321,5 +340,25 @@ class ProductDetailsActivity : AppCompatActivity() {
         productToastName.text=name
         toast.view = custom_view
         toast.show()
+    }
+
+    private fun toastIconError() {
+        val toast = Toast(applicationContext)
+        toast.duration = Toast.LENGTH_LONG
+
+        //inflate view
+        val custom_view =
+            layoutInflater.inflate(R.layout.toast_icon_text, null)
+        (custom_view.findViewById<View>(R.id.message) as TextView).text = "You should create an account"
+        (custom_view.findViewById<View>(R.id.icon) as ImageView).setImageResource(
+            R.drawable.ic_close
+        )
+        (custom_view.findViewById<View>(R.id.parent_view) as CardView).setCardBackgroundColor(
+            resources.getColor(R.color.red)
+        )
+        toast.view = custom_view
+        toast.show()
+        val intent=Intent(this,SignUp::class.java)
+        startActivity(intent)
     }
 }
