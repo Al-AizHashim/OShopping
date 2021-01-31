@@ -13,15 +13,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.yemen.oshopping.R
+import com.yemen.oshopping.SignUp
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
@@ -45,58 +44,62 @@ class SettingFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view= inflater.inflate(R.layout.fragment_setting, container, false)
-        myAccountTV=view.findViewById(R.id.my_account)
-        myProductTV=view.findViewById(R.id.my_products)
-        aboutUsTV=view.findViewById(R.id.about_us)
-        contactUsTV=view.findViewById(R.id.contact_us)
-        signOutTV=view.findViewById(R.id.sign_out)
-        signUpTV=view.findViewById(R.id.sign_up)
-        adminTV=view.findViewById(R.id.admin_page)
-        chatTv=view.findViewById(R.id.chat)
-        close=view.findViewById(R.id.bt_close)
+        val view = inflater.inflate(R.layout.fragment_setting, container, false)
+        myAccountTV = view.findViewById(R.id.my_account)
+        myProductTV = view.findViewById(R.id.my_products)
+        aboutUsTV = view.findViewById(R.id.about_us)
+        contactUsTV = view.findViewById(R.id.contact_us)
+        signOutTV = view.findViewById(R.id.sign_out)
+        signUpTV = view.findViewById(R.id.sign_up)
+        adminTV = view.findViewById(R.id.admin_page)
+        chatTv = view.findViewById(R.id.chat)
+        close = view.findViewById(R.id.bt_close)
 
-        if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
-        {
+        if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")) {
             adminTV.visibility = View.VISIBLE
-           // myProductTV.visibility = View.GONE
+            // myProductTV.visibility = View.GONE
         }
-        if(oshoppingViewModel.getStoredEmail().equals("none")){
+        if (oshoppingViewModel.getStoredEmail().equals("none")) {
             //myProductTV.visibility = View.GONE
             adminTV.visibility = View.GONE
-            signOutTV.visibility=View.GONE
-            signUpTV.visibility=View.VISIBLE
+            signOutTV.visibility = View.GONE
+            signUpTV.visibility = View.VISIBLE
         }
 
         myProductTV.setOnClickListener {
-            if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com"))
-            {
+            if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")) {
                 Toast.makeText(requireContext(), "You are an admin", Toast.LENGTH_SHORT).show()
-            }
-            else if (oshoppingViewModel.getStoredEmail().equals("none"))
-            {
-                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
-            }
-            else
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_myProductFragment)
+            } else if (oshoppingViewModel.getStoredEmail().equals("none")) {
+                toastIconError()
+            } else
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_settingFragment_to_myProductFragment)
         }
         adminTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_adminFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_settingFragment_to_adminFragment)
         }
         myAccountTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_showUserFragment)
+            if (oshoppingViewModel.getStoredEmail().equals("none"))
+        {
+            toastIconError()
+        }
+            Navigation.findNavController(view)
+                .navigate(R.id.action_settingFragment_to_showUserFragment)
         }
         aboutUsTV.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_aboutUsFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_settingFragment_to_aboutUsFragment)
         }
         contactUsTV.setOnClickListener {
             showContactUsDialog()
-           // Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_contactUsFragment)
+            // Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_contactUsFragment)
         }
         signOutTV.setOnClickListener {
             mAuth.signOut()
@@ -107,28 +110,32 @@ class SettingFragment : Fragment() {
             }
 
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_loginScreen)
-           //write here the sign out code
+            //write here the sign out code
         }
         signUpTV.setOnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
         }
 
         chatTv.setOnClickListener {
-        /*    if(oshoppingViewModel.getStoredUserId()==-1) {
-                Toast.makeText(requireContext(), "You must create an account", Toast.LENGTH_SHORT).show()
-                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
+            /*    if(oshoppingViewModel.getStoredUserId()==-1) {
+                    Toast.makeText(requireContext(), "You must create an account", Toast.LENGTH_SHORT).show()
+                    Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_signUp2)
+                }
+                else{
+                    Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
+                }*/
+            if (oshoppingViewModel.getStoredEmail().equals("none")) {
+                toastIconError()
             }
-            else{
-                Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
-            }*/
-            Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_settingFragment_to_usersActivity)
         }
         close.setOnClickListener {
             activity?.onBackPressed()
         }
 
 
-    return view
+        return view
     }
 
     private fun showContactUsDialog() {
@@ -142,25 +149,24 @@ class SettingFragment : Fragment() {
             sendEmail()
         }
         dialog.findViewById<View>(R.id.call_fab).setOnClickListener {
-                callme()
+            callme()
 
         }
         dialog.show()
     }
 
-    fun sendEmail(){
-        val sendIntent= Intent().apply {
-            action= Intent.ACTION_SEND
-            type="text/plain"
-            putExtra(Intent.EXTRA_EMAIL,arrayOf("alaiz.hashim@gmail.com") )
-            putExtra(Intent.EXTRA_SUBJECT,"Email subject")
-            putExtra(Intent.EXTRA_TEXT,"Email message text")
+    fun sendEmail() {
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("alaiz.hashim@gmail.com"))
+            putExtra(Intent.EXTRA_SUBJECT, "Email subject")
+            putExtra(Intent.EXTRA_TEXT, "Email message text")
         }
-        if (sendIntent.resolveActivity(requireActivity().packageManager)!=null){
+        if (sendIntent.resolveActivity(requireActivity().packageManager) != null) {
             startActivity(sendIntent)
         }
     }
-
 
 
     private fun callme() {
@@ -185,6 +191,28 @@ class SettingFragment : Fragment() {
         }
         if (addContactIntent.resolveActivity(requireActivity().packageManager) != null) {
             startActivity(addContactIntent)
+        }
+    }
+
+    private fun toastIconError() {
+        val toast = Toast(activity?.applicationContext)
+        toast.duration = Toast.LENGTH_LONG
+
+        //inflate view
+        val custom_view =
+            layoutInflater.inflate(R.layout.toast_icon_text, null)
+        (custom_view.findViewById<View>(R.id.message) as TextView).text =
+            "You should create an account"
+        (custom_view.findViewById<View>(R.id.icon) as ImageView).setImageResource(
+            R.drawable.ic_close
+        )
+        (custom_view.findViewById<View>(R.id.parent_view) as CardView).setCardBackgroundColor(
+            resources.getColor(R.color.red)
+        )
+        toast.view = custom_view
+        toast.show()
+        view?.let {
+            Navigation.findNavController(it).navigate(R.id.action_settingFragment_to_signUp2)
         }
     }
 }
