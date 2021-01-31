@@ -90,8 +90,10 @@ class SettingFragment : Fragment() {
         {
             toastIconError()
         }
-            Navigation.findNavController(view)
-                .navigate(R.id.action_settingFragment_to_showUserFragment)
+            else {
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_settingFragment_to_showUserFragment)
+            }
         }
         aboutUsTV.setOnClickListener {
             Navigation.findNavController(view)
