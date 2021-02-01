@@ -9,19 +9,18 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.yemen.oshopping.R
 import com.yemen.oshopping.SignUp
 import com.yemen.oshopping.viewmodel.OshoppingViewModel
+import kotlin.concurrent.thread
 
 
 class SettingFragment : Fragment() {
@@ -35,7 +34,6 @@ class SettingFragment : Fragment() {
     lateinit var chatTv: CardView
     lateinit var close: ImageButton
     lateinit var oshoppingViewModel: OshoppingViewModel
-
 
     //yemenoshopping@gmail.com
     private lateinit var mAuth: FirebaseAuth
@@ -73,24 +71,33 @@ class SettingFragment : Fragment() {
         }
 
         myProductTV.setOnClickListener {
+
+
             if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")) {
                 Toast.makeText(requireContext(), "You are an admin", Toast.LENGTH_SHORT).show()
             } else if (oshoppingViewModel.getStoredEmail().equals("none")) {
-                toastIconError()
-            } else
-                Navigation.findNavController(view)
-                    .navigate(R.id.action_settingFragment_to_myProductFragment)
+                toastIconError("You should create an account")
+            } else {
+
+
+
+                if (oshoppingViewModel.getStoredUserBlock()==1){
+                    toastIconError2("YOU ARE BLOCKED")
+                }
+                else {
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_settingFragment_to_myProductFragment)
+                }
+            }
         }
         adminTV.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_settingFragment_to_adminFragment)
         }
         myAccountTV.setOnClickListener {
-            if (oshoppingViewModel.getStoredEmail().equals("none"))
-        {
-            toastIconError()
-        }
-            else {
+            if (oshoppingViewModel.getStoredEmail().equals("none")) {
+                toastIconError("You should create an account")
+            } else {
                 Navigation.findNavController(view)
                     .navigate(R.id.action_settingFragment_to_showUserFragment)
             }
@@ -127,7 +134,7 @@ class SettingFragment : Fragment() {
                     Navigation.findNavController(view).navigate(R.id.action_settingFragment_to_usersActivity)
                 }*/
             if (oshoppingViewModel.getStoredEmail().equals("none")) {
-                toastIconError()
+                toastIconError("You should create an account")
             } else {
                 Navigation.findNavController(view)
                     .navigate(R.id.action_settingFragment_to_usersActivity)
@@ -139,6 +146,18 @@ class SettingFragment : Fragment() {
 
 
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        oshoppingViewModel.apply { getUserById(getStoredUserId()) }
+        oshoppingViewModel.userLiveDataByID.observe(
+            requireActivity(),
+            Observer { userdata ->
+                oshoppingViewModel.setUserBlock(userdata.block)
+
+
+            })
     }
 
     private fun showContactUsDialog() {
@@ -197,15 +216,15 @@ class SettingFragment : Fragment() {
         }
     }
 
-    private fun toastIconError() {
+    private fun toastIconError(message:String) {
         val toast = Toast(activity?.applicationContext)
         toast.duration = Toast.LENGTH_LONG
 
         //inflate view
         val custom_view =
             layoutInflater.inflate(R.layout.toast_icon_text, null)
-        (custom_view.findViewById<View>(R.id.message) as TextView).text =
-            "You should create an account"
+        (custom_view.findViewById<View>(R.id.message) as TextView).text =message
+
         (custom_view.findViewById<View>(R.id.icon) as ImageView).setImageResource(
             R.drawable.ic_close
         )
@@ -215,7 +234,28 @@ class SettingFragment : Fragment() {
         toast.view = custom_view
         toast.show()
         view?.let {
+
             Navigation.findNavController(it).navigate(R.id.action_settingFragment_to_signUp2)
         }
+    }
+
+    private fun toastIconError2(message:String) {
+        val toast = Toast(activity?.applicationContext)
+        toast.duration = Toast.LENGTH_LONG
+        toast.setGravity(Gravity.BOTTOM,0,200)
+
+        //inflate view
+        val custom_view =
+            layoutInflater.inflate(R.layout.toast_icon_text, null)
+        (custom_view.findViewById<View>(R.id.message) as TextView).text =message
+
+        (custom_view.findViewById<View>(R.id.icon) as ImageView).setImageResource(
+            R.drawable.ic_close
+        )
+        (custom_view.findViewById<View>(R.id.parent_view) as CardView).setCardBackgroundColor(
+            resources.getColor(R.color.red)
+        )
+        toast.view = custom_view
+        toast.show()
     }
 }

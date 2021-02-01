@@ -70,7 +70,9 @@ class LoginScreen : AppCompatActivity() , View.OnClickListener{
             oShoppingViewModel.userItemLiveDataByEmail.observe(
                 this,
                 Observer { userdata ->
-                userdata.get(0).user_id?.let { userId -> oShoppingViewModel.setUserId(userId) }
+                userdata.get(0).user_id?.let { userId -> oShoppingViewModel.setUserId(userId)
+                userdata.get(0).block?.let { oShoppingViewModel.setUserBlock(it) }
+                }
 
             })
 

@@ -2,6 +2,7 @@ package com.yemen.oshopping.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -109,7 +110,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         vendorChat=findViewById(R.id.vendor_chat)
        reportsNoTV=findViewById(R.id.number_of_product_reports)
        if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
-            addToCartFab.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_baseline_block_24))
+            addToCartFab.setImageDrawable(applicationContext.getDrawable(R.drawable.ic_visibility))
 
 
         }
@@ -188,6 +189,8 @@ class ProductDetailsActivity : AppCompatActivity() {
         productDetails.text=productItem.product_details
         productVendor.text=productItem.first_name+" "+productItem.last_name
         reportsNoTV.text=productItem2.number_of_reports.toString()
+
+
     }
 
     private fun initToolbar() {
@@ -238,6 +241,8 @@ class ProductDetailsActivity : AppCompatActivity() {
             if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")){
                 var hideProduct=HideProduct(productItemss.product_id,1,oshoppingViewModel.getStoredUserId(),0)
                 oshoppingViewModel.hideProduct(hideProduct)
+                toastIconSuccess("product hidden successfully")
+
             }
 
             else if(oshoppingViewModel.getStoredEmail().equals("none")){
@@ -360,5 +365,19 @@ class ProductDetailsActivity : AppCompatActivity() {
         toast.show()
         val intent=Intent(this,SignUp::class.java)
         startActivity(intent)
+    }
+
+    fun toastIconSuccess(message:String) {
+        val toast = Toast(this)
+        toast.duration = Toast.LENGTH_LONG
+        val custom_view: View =
+            layoutInflater.inflate(R.layout.toast_icon_text, null)
+        (custom_view.findViewById<View>(R.id.message) as TextView).text = message
+        (custom_view.findViewById<View>(R.id.icon) as ImageView).setImageResource(R.drawable.ic_done)
+        (custom_view.findViewById<View>(R.id.parent_view) as CardView).setCardBackgroundColor(
+            resources.getColor(R.color.green_500)
+        )
+        toast.view = custom_view
+        toast.show()
     }
 }
