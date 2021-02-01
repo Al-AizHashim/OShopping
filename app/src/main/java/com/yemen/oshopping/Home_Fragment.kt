@@ -389,8 +389,8 @@ class Home_Fragment : Fragment(), SearchView.OnQueryTextListener {
             searchThroughDatabase(query)
         }
         searchView.clearFocus()
+
         welcomeTV.visibility=View.VISIBLE
-        searchView.horizontalFadingEdgeLength
         return true
     }
 

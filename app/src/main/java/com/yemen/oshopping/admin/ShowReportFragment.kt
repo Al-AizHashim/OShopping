@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +30,7 @@ class ShowReportFragment : Fragment() {
     private lateinit var noDataTextView: TextView
     lateinit var fab: FloatingActionButton
     private lateinit var reportRecyclerView: RecyclerView
-
+    lateinit var closeBtn: ImageButton
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         reportViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
@@ -46,10 +47,14 @@ class ShowReportFragment : Fragment() {
         fab = view.findViewById(R.id.add_report_fab)
         noDataImageView=view.findViewById(R.id.report_no_data_imageView)
         noDataTextView=view.findViewById(R.id.no_data_textView)
+        closeBtn=view.findViewById(R.id.bt_close)
         fab.setOnClickListener {
 
             Navigation.findNavController(view)
                 .navigate(R.id.action_showReportFragment_to_addReportFragment)
+        }
+        closeBtn.setOnClickListener {
+            activity?.onBackPressed()
         }
         return view
     }

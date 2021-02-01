@@ -7,9 +7,11 @@
     tools:context=".admin.ShowReportFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout7"
+
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="?attr/actionBarSize"
+
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -34,6 +36,14 @@
             android:textColor="@color/grey_80"
             app:fontFamily="sans-serif-medium" />
 
+
+        <ImageButton
+            android:id="@+id/add_report_btn2"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/grey_60" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +58,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+        app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_report_fab"
@@ -73,7 +84,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/report_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/report_recycler_view"
-        app:layout_constraintTop_toTopOf="@+id/report_recycler_view"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.37" />
 
     <TextView

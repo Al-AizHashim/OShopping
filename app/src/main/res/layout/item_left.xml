@@ -27,10 +27,11 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorBlack"
             android:padding="5dp"
+            android:layout_marginEnd="@dimen/spacing_xxxxxlarge"
             android:layout_marginTop="5dp"
             android:background="@drawable/left_side_bk"
             android:textSize="16sp"
-            tools:text="farhan" />
+            tools:text="Alaiz " />
 
 
 

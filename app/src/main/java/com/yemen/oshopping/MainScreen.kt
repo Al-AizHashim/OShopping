@@ -7,21 +7,26 @@ import android.util.Log
 import android.view.View
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.yemen.oshopping.setting.SettingActivity
 import com.yemen.oshopping.setting.ShowUserFragment
 import com.yemen.oshopping.ui.ProductDetailsActivity
-
+import com.yemen.oshopping.viewmodel.OshoppingViewModel
 
 
 class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
     lateinit var navigation: BottomNavigationView
+    lateinit var oshoppingViewModel: OshoppingViewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
         val nested_content =findViewById<View>(R.id.nested_scroll_view) as NestedScrollView
         navigation = findViewById<View>(R.id.navigationView) as BottomNavigationView
-
+        oshoppingViewModel = ViewModelProviders.of(this).get(OshoppingViewModel::class.java)
         nested_content.setOnScrollChangeListener() { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (scrollY < oldScrollY) { // up
                 animateNavigation(false)
@@ -45,6 +50,11 @@ class MainScreen : AppCompatActivity(),Home_Fragment.Callbacks {
             .commit()
         title = resources.getString(R.string.add_category)
         //loadFragment(Category_Fragment())
+        if (oshoppingViewModel.getStoredEmail().equals("yemenoshopping@gmail.com")) {
+            navigation.menu.findItem(R.id.navigation_Purchases).setVisible(false)
+            navigation.menu.findItem(R.id.navigation_Cart).setVisible(false)
+        }
+
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_Home -> {
