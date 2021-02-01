@@ -128,9 +128,10 @@ class SettingFragment : Fragment() {
                 }*/
             if (oshoppingViewModel.getStoredEmail().equals("none")) {
                 toastIconError()
+            } else {
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_settingFragment_to_usersActivity)
             }
-            Navigation.findNavController(view)
-                .navigate(R.id.action_settingFragment_to_usersActivity)
         }
         close.setOnClickListener {
             activity?.onBackPressed()
