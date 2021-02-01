@@ -51,6 +51,7 @@
         android:drawableStart="@drawable/ic_outline_storage_24"
         android:drawableTint="@color/colorBlack"
         android:text="Product categories"
+        android:background="@drawable/custom_shape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
@@ -58,10 +59,11 @@
     <TextView
         android:id="@+id/show_report_tv"
         style="@style/CustomTextView"
+        android:background="@drawable/custom_shape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_report"
-        android:text="Reports Category"
+        android:text="Report Categories"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_category_tv" />
@@ -70,10 +72,11 @@
     <TextView
         android:id="@+id/show_report_details_tv"
         style="@style/CustomTextView"
+        android:background="@drawable/custom_shape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_users_reports"
         android:drawableLeft="@drawable/ic_supervisor_account"
+        android:text="@string/show_users_reports"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_report_tv" />
@@ -82,6 +85,7 @@
     <TextView
         android:id="@+id/show_product_report_tv"
         style="@style/CustomTextView"
+        android:background="@drawable/custom_shape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -96,6 +100,7 @@
     <TextView
         android:id="@+id/show_users_tv"
         style="@style/CustomTextView"
+        android:background="@drawable/custom_shape"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_baseline_supervised_user_circle_24"
@@ -104,5 +109,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_product_report_tv" />
 
+    <TextView
+        android:id="@+id/show_hidden_products_tv"
+        style="@style/CustomTextView"
+        android:background="@drawable/custom_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_baseline_visibility_off_24"
+        android:text="Hidden products"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_users_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

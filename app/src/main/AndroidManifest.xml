@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.yemen.oshopping">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <activity android:name=".ui.ShowProductsReportsActivity"></activity>
+        <activity android:name=".ui.ShowProductsActivity"></activity>
+        <activity android:name=".ui.ShowProductsReportsActivity" />
         <activity android:name=".ui.ShowUsersReportsActivity" />
         <activity android:name=".ui.ShowUsersActivity" />
         <activity android:name=".ui.ShowVendorActivity" />

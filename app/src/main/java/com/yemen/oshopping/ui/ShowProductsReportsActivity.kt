@@ -15,7 +15,7 @@ class ShowProductsReportsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_show_users_reports)
+        setContentView(R.layout.activity_show_products_reports)
         tabLayout = findViewById(R.id.taps)
         tabViewPager = findViewById(R.id.pager)
 

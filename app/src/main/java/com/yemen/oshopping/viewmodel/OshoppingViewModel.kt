@@ -96,7 +96,7 @@ class OshoppingViewModel(private val app: Application) : AndroidViewModel(app) {
         }
     var productItemLiveDataByHide: LiveData<List<ProductItem>> =
         Transformations.switchMap(productLiveData) { hide ->
-            FetchData().fetchProductByVendorId(hide)
+            FetchData().fetchProductByHide(hide)
         }
     var productItemLiveDataByColor: LiveData<List<ProductItem>> =
         Transformations.switchMap(productColorLiveData) { color ->

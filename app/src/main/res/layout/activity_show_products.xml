@@ -26,25 +26,15 @@
             android:layout_height="match_parent"
             android:layout_marginTop="14dp"
             android:id="@+id/title_tv"
-            android:text="Products Reports"
+            android:text="Hidden Products"
             android:textSize="20sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textColor="@color/colorWhite"
             app:fontFamily="sans-serif-medium" />
     </LinearLayout>
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/taps"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorColor="#ffffff"
-        app:tabTextColor="#ffffff"
-        />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/hidden_products_container"></FrameLayout>
 </LinearLayout>
