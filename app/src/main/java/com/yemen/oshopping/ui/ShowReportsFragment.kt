@@ -1,5 +1,6 @@
 package com.yemen.oshopping.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -75,7 +76,7 @@ class ShowReportsFragment : Fragment() {
         Log.d("fetchUser", "User fetched successfully ${reportsDetails}")
     }
 
-    private inner class ShowReportHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private inner class ShowReportHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
         private val againstTextView = itemView.findViewById(R.id.against_text_view) as TextView
         private val NoOfReportsTV =
             itemView.findViewById(R.id.number_of_report_text_view) as TextView
@@ -102,6 +103,16 @@ class ShowReportsFragment : Fragment() {
                 }
 
             }
+        }
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+
+        override fun onClick(v: View?) {
+            var intent= Intent(this@ShowReportsFragment.context,ShowVendorActivity::class.java)
+            intent.putExtra("VENDORID",reportsDetails.against)
+            startActivity(intent)
         }
     }
 

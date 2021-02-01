@@ -2,6 +2,7 @@ package com.yemen.oshopping.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -123,7 +124,7 @@ class ShowUsersFragment : Fragment() {
 
         override fun onClick(v: View?) {
             val intent = Intent(itemView.context, ShowVendorActivity::class.java)
-            intent.putExtra("VENDORID", user.vendor)
+            intent.putExtra("VENDORID", user.user_id)
             itemView.context.startActivity(intent)
         }
 

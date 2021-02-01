@@ -1,5 +1,6 @@
 package com.yemen.oshopping.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -72,7 +73,7 @@ class ShowProductReportsFragment : Fragment() {
         showProductRecyclerView.adapter = ShowProductAdapter(productReportsDetails)
     }
 
-    private inner class ShowReportHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private inner class ShowReportHolder(itemView: View) : RecyclerView.ViewHolder(itemView),View.OnClickListener {
         private lateinit var productReportsDetails: ProductReportsDetailsF
         private val productTV = itemView.findViewById(R.id.against_text_view) as TextView
         private val NoOfReportsTV =
@@ -92,6 +93,15 @@ class ShowProductReportsFragment : Fragment() {
                 }
             }
         }
+       init {
+           itemView.setOnClickListener(this)
+       }
+
+        override fun onClick(v: View?) {
+            var intent = Intent(this@ShowProductReportsFragment.context,ProductDetailsActivity::class.java)
+            intent.putExtra("PRODUCTID",productReportsDetails.product_id)
+            startActivity(intent)
+        }
     }
 
     private inner class ShowProductAdapter(private val productReportsDetails: List<ProductReportsDetailsF>) :
@@ -102,7 +112,7 @@ class ShowProductReportsFragment : Fragment() {
         ): ShowReportHolder {
             val view =
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.show_report_list_item, parent, false)
+                    .inflate(R.layout.show_product_report_list_item, parent, false)
             return ShowReportHolder(view)
         }
 

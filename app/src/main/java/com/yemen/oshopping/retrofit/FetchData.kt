@@ -219,7 +219,7 @@ class FetchData {
         return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByVendorId(vendorId))
     }
     fun fetchProductByHide(hide: Int): LiveData<List<ProductItem>> {
-        return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByVendorId(hide))
+        return fetchProductMetaData(RetrofitClient().oshoppingApi.fetchProductByHide(hide))
     }
 
     fun searchProduct(query: String): LiveData<List<ProductItem>> {

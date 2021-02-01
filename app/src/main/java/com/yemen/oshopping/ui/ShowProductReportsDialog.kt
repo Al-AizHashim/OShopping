@@ -133,7 +133,7 @@ class ShowProductReportsDialog : DialogFragment() {
             })
     }
     private fun restartActivity() {
-        val intent = Intent(this@ShowProductReportsDialog.context, ShowUsersReportsActivity::class.java)
+        val intent = Intent(this@ShowProductReportsDialog.context, ShowProductsReportsActivity::class.java)
         startActivity(intent)
         if (activity != null) {
             requireActivity().finish()

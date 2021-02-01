@@ -229,6 +229,9 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_adminFragment_to_showProductsActivity"
+            app:destination="@id/showProductsActivity" />
 
     </fragment>
     <fragment
@@ -446,5 +449,10 @@
         android:id="@+id/showProductReportsFragment"
         android:name="com.yemen.oshopping.ui.ShowProductReportsFragment"
         android:label="ShowProductReportsFragment" />
+    <activity
+        android:id="@+id/showProductsActivity"
+        android:name="com.yemen.oshopping.ui.ShowProductsActivity"
+        android:label="activity_show_products"
+        tools:layout="@layout/activity_show_products" />
 
 </navigation>
