@@ -30,6 +30,7 @@ class splashScreen2 : AppCompatActivity() {
 
         skip.setOnClickListener {
             oshoppingViewModel.setUserId(-1)
+            oshoppingViewModel.setUserEmail("none")
             var intent = Intent(this, MainScreen::class.java)
             startActivity(intent)
         }
