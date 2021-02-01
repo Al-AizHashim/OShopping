@@ -65,13 +65,7 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
-        <action
-            android:id="@+id/action_settingFragment_to_showVendorFragment"
-            app:destination="@id/showVendorFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+
         <action
             android:id="@+id/action_settingFragment_to_showUserFragment"
             app:destination="@id/showUserFragment"
@@ -137,7 +131,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/settingFragment" />
         <argument
             android:name="productId"
             app:argType="integer"
@@ -248,7 +243,7 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right"
-            app:popUpTo="@id/adminFragment" />
+            app:popUpTo="@id/settingFragment" />
     </fragment>
     <fragment
         android:id="@+id/addReportFragment"
@@ -355,7 +350,8 @@
             app:enterAnim="@anim/from_left"
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/settingFragment" />
     </fragment>
     <activity
         android:id="@+id/loginScreen"
@@ -369,10 +365,7 @@
         android:id="@+id/usersActivity"
         android:name="com.yemen.oshopping.Chat.activity.UsersActivity"
         android:label="UsersActivity" />
-    <fragment
-        android:id="@+id/showVendorFragment"
-        android:name="com.yemen.oshopping.ui.ShowVendorFragment"
-        android:label="ShowVendorFragment" />
+
     <fragment
         android:id="@+id/showUserFragment"
         android:name="com.yemen.oshopping.setting.ShowUserFragment"
@@ -390,14 +383,6 @@
         android:id="@+id/updateUserFragment"
         android:name="com.yemen.oshopping.setting.UpdateUserFragment"
         android:label="UpdateUserFragment" >
-        <action
-            android:id="@+id/action_updateUserFragment_to_showUserFragment"
-            app:destination="@id/showUserFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left"
-            app:popUpTo="@id/adminFragment" />
         <argument
             android:name="first_name "
             app:argType="string"
@@ -429,6 +414,10 @@
             android:name="address"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_updateUserFragment_to_showUserFragment"
+            app:destination="@id/showUserFragment"
+            app:popUpTo="@id/settingFragment" />
     </fragment>
     <activity
         android:id="@+id/showUsersReportsActivity"

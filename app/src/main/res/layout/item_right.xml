@@ -20,7 +20,7 @@
             android:id="@+id/tvMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_marginStart="@dimen/spacing_xxxxxlarge"
             android:padding="5dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/colorWhite"
